@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Log In" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true"
+﻿<%@ Page Title="Log In" Language="C#" MasterPageFile="~/SiteLogon.master" AutoEventWireup="true"
     CodeFile="Login.aspx.cs" Inherits="Account_Login" %>
 
 <asp:Content ID="HeaderContent" runat="server" ContentPlaceHolderID="HeadContent">
@@ -41,7 +41,7 @@
                     </p>
                 </fieldset>
                 <p class="submitButton">
-                    <asp:Button ID="LoginButton" runat="server" CommandName="Login" Text="Acessar Painel" ValidationGroup="LoginUserValidationGroup"/>
+                    <asp:Button ID="LoginButton" runat="server" OnClick="btnOK_Click" CommandName="Login" Text="Acessar Painel" ValidationGroup="LoginUserValidationGroup"/>
                 </p>
             </div>
         </LayoutTemplate>

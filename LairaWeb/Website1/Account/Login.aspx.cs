@@ -11,4 +11,10 @@ public partial class Account_Login : System.Web.UI.Page
     {
         RegisterHyperLink.NavigateUrl = "Register.aspx?ReturnUrl=" + HttpUtility.UrlEncode(Request.QueryString["ReturnUrl"]);
     }
+
+    protected void btnOK_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("../Default.aspx"); 
+
+    }
 }
