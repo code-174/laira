@@ -8,22 +8,23 @@
         }
         .style2
         {
-            width: 250px;
+        }
+        .style3
+        {
+            width: 125px;
         }
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" Runat="Server">
     <table class="style1">
         <tr>
-            <td class="style2">
+            <td class="style2" colspan="2">
                 <asp:Label ID="Label1" runat="server" Font-Bold="True" Font-Size="Large" 
                     Text="Cadastrar Status"></asp:Label>
             </td>
-            <td>
-                &nbsp;</td>
         </tr>
         <tr>
-            <td class="style2">
+            <td class="style3">
                 <asp:Label ID="Label2" runat="server" Text="Status"></asp:Label>
             </td>
             <td>
@@ -31,7 +32,7 @@
             </td>
         </tr>
         <tr>
-            <td class="style2">
+            <td class="style3">
                 &nbsp;</td>
             <td>
                 <asp:Button ID="btnAdStatus" runat="server" Text="Adicionar Status" />
