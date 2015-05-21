@@ -5,16 +5,10 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-
-public partial class Fichas : System.Web.UI.Page
+public partial class CADASTRAR_STATUS : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-
-        //Aeroportos c = new Aeroportos();
-
-        //grvData.DataSource = c.GetAeroportos ();
-        //grvData.DataBind();
 
     }
 }
