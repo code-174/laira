@@ -10,25 +10,30 @@ using System.Web;
 
 public class Aeroportos
 {
- 
-   public string CODIGO {get; set;}
-    public string NOME {get; set;}
 
-	public Aeroportos()
+    #region Propriedades
+    public string CODIGO {get; set;}
+    public string NOME {get; set;}
+    #endregion
+
+    public Aeroportos()
 	{
 		//
 		// TODO: Add constructor logic here
 		//
 	}
-
+/// <summary>
+/// Retornar Lista de Aeroportos
+/// </summary>
+/// <returns></returns>
       public List<Aeroportos> GetAeroportos()
     {
            List<Aeroportos> xList = new List<Aeroportos>();
-            Aeroportos account = new Aeroportos();
-            account.CODIGO = "SBGL";
-            account.NOME = "GALEAO";
-                       
-          xList.Add(account);
+            Aeroportos Aeroporto = new Aeroportos();
+            Aeroporto.CODIGO = "SBGL";
+            Aeroporto.NOME = "GALEAO";
+
+            xList.Add(Aeroporto);
 
           return xList;
      }

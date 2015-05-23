@@ -1,0 +1,318 @@
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPages/PageExt.master" AutoEventWireup="true"
+    CodeFile="ReConciliation.aspx.cs" Inherits="AVIATION_ReConciliation" meta:resourcekey="PageResource1" %>
+
+<%@ Register Assembly="MetraTech.UI.Controls" Namespace="MetraTech.UI.Controls" TagPrefix="MT" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
+    <script type="text/javascript">
+
+        //        function ResizeDiv(maxSize) {
+        //            e = document.getElementById("grvDataDiv");
+
+        //            if (maxSize == true) {
+        //                e.style.height = 300 + 'px';
+        //            }
+        //            else {
+        //                e.style.height = 133 + 'px';
+        //            }
+        //        }
+
+
+        function SelectAll(CheckBoxControl) {
+            if (CheckBoxControl.checked == true) {
+                var i;
+                for (i = 0; i < document.forms[0].elements.length; i++) {
+                    if ((document.forms[0].elements[i].type == 'checkbox') &&
+(document.forms[0].elements[i].name.indexOf('grvData') > -1)) {
+                        if (document.forms[0].elements[i].disabled) {
+                            document.forms[0].elements[i].checked = false;
+                        }
+                        else {
+                            document.forms[0].elements[i].checked = true;
+                        }
+                    }
+                }
+            }
+            else {
+                var i;
+                for (i = 0; i < document.forms[0].elements.length; i++) {
+                    if ((document.forms[0].elements[i].type == 'checkbox') &&
+(document.forms[0].elements[i].name.indexOf('grvData') > -1)) {
+                        document.forms[0].elements[i].checked = false;
+                    }
+                }
+            }
+        }
+
+        function isNumberKey(evt) {
+            var charCode = (evt.which) ? evt.which : event.keyCode
+            if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+                //alert("Digite somente números");
+                return false;
+            }
+
+            return true;
+        }
+
+    </script>
+    <style>
+        /* Grids */
+        .mGrid
+        {
+            width: 100%;
+            background-color: #fff;
+            margin: 5px 0 10px 0;
+            border: solid 1px #525252;
+            border-collapse: collapse;
+            font-family: Verdana;
+            font-size: 12px;
+        }
+        
+        .mGrid td
+        {
+            padding: 2px;
+            border: solid 1px #c1c1c1;
+            color: #003366;
+        }
+        
+        .mGrid th
+        {
+            padding: 4px 2px;
+            color: #000000;
+            filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FFFFFF', endColorstr='#99CCFF'); /* for IE */
+            background: -webkit-gradient(linear, left top, left bottom, from(#FFF), to(#9CF)); /* for webkit browsers */
+            background: -moz-linear-gradient(top,  #FFF,  #9CF); /* for firefox 3.6+ */
+            background: #99CCFF;
+            font-size: 0.9em;
+            border: solid 2px #c1c1c1;
+        }
+        
+        .mGrid .alt
+        {
+            background: #fcfcfc;
+        }
+        
+        .mGrid .pgr
+        {
+            background: #FFFFFF;
+        }
+        
+        .mGrid .pgr table
+        {
+            margin: 5px 0;
+        }
+        
+        .mGrid .pgr td
+        {
+            border-width: 0px;
+            padding: 0 6px;
+            border-left: solid 1px #666;
+            font-weight: bold;
+            color: #fff;
+            line-height: 12px;
+        }
+        
+        .mGrid .pgr a
+        {
+            color: #666;
+            text-decoration: none;
+        }
+        
+        .mGrid .pgr a:hover
+        {
+            color: #000;
+            text-decoration: none;
+        }
+        
+        .mGrid tr:hover
+        {
+            background-color: #FFFFCC;
+            color: white;
+        }
+        
+        /* End Grids */
+    </style>
+    <mt:mtpanel id="MTPanel1" runat="server" collapsed="False" collapsible="True" enablechrome="True"
+        text="Conciliação" meta:resourcekey="MTPanel1Resource1" font-overline="False"
+        width="990px" horizontalalign="Center">
+      &nbsp; 
+      <center>
+      <TABLE BORDER="0" cellpadding="2" CELLSPACING="1">
+      <TBODY>
+        <TR>
+            <TD style="width: 980px" align="left">
+                <fieldset >
+                    <legend> <asp:Localize runat="server" meta:resourcekey="legendText" /></legend>
+                            <table>
+                                <TR>
+                                    <TD>
+                                        <MT:MTLabel meta:resourcekey="lblStartDate" runat="server" />
+                                    </TD>
+	                               <TD>
+                                    <MT:MTDatePicker ID="mtdpStartDate" runat="server" AllowBlank="False" ControlHeight="18" 
+                                       ControlWidth="100" HideLabel="true" LabelWidth="160" Listeners="{}" 
+                                       OptionalExtConfig="format:DATE_FORMAT,&#13;&#10;altFormats:DATE_TIME_FORMAT" ReadOnly="False" 
+                                       TabIndex="0" XType="DateField" XTypeNameSpace="form" />
+                                    </TD>    
+                                    <TD>
+                                        <MT:MTLabel meta:resourcekey="lblEndtDate" runat="server" />
+                                    </TD>
+	                               <TD>
+                                        <MT:MTDatePicker ID="mtdpEndDate" runat="server" AllowBlank="False" ControlHeight="18" 
+                                            ControlWidth="100" HideLabel="true" LabelWidth="160" Listeners="{}" 
+                                            OptionalExtConfig="format:DATE_FORMAT,&#13;&#10;altFormats:DATE_TIME_FORMAT" ReadOnly="False" 
+                                            TabIndex="0" XType="DateField" XTypeNameSpace="form" />
+                                     </TD>	 
+                                </TR>   
+	                           <TR>
+                                <TD>
+                                        <MT:MTLabel meta:resourcekey="lblSelectAirline" runat="server" />
+                                    </TD>
+	                               <TD>            
+                                        <asp:DropDownList ID="ddlAirlines" runat="server"></asp:DropDownList>                                
+                                     </TD>
+                                     <TR>
+                                <td>
+                                    <MT:MTLabel meta:resourcekey="lblShowDIFF" runat="server" />
+                                </td>
+                                <td><asp:DropDownList ID="ddlDIFF" runat="server"></asp:DropDownList></td>
+                                </TR>
+                                <TR>
+                                <td>
+                                    <MT:MTLabel meta:resourcekey="lblShowConciliados" runat="server" />
+                                </td>
+	                              <td><asp:DropDownList ID="ddlConciliados" runat="server"></asp:DropDownList></td>
+	                           </TR>
+
+                            </table>                    
+                </fieldset>
+            </TD>
+        </TR>                  
+      </TBODY>
+      </TABLE>
+      </center>
+	    
+ <!-- Finish here -->
+      <div  class="x-panel-btns-ct">
+    <div style="width:630px" class="x-panel-btns x-panel-btns-center"> 
+    <center>  
+      <table cellspacing="10">
+        <tr>
+          <td  class="x-panel-btn-td">
+ <MT:MTButton ID="btnOK"  OnClientClick="return ValidateForm();" runat="server" 
+              Text="Filtrar" OnClick="btnOK_Click" TabIndex="150" 
+              meta:resourcekey="btnOKResource1" />  
+
+            
+          </td>
+          <td  class="x-panel-btn-td">
+ <MT:MTButton ID="submit"  runat="server" 
+              Text="Submeter" OnClick="submit_Click" TabIndex="150" 
+              />  
+          </td>          
+        </tr>
+      </table> 
+      </center>    
+    </div>
+  </div>
+
+  <table  style="padding: 0 0 0 350px;font-weight:bold;">
+  <tr>
+  <td>
+     <asp:Label id="col_erro" runat="server"></asp:Label>
+  </td>
+  </tr>
+  </table>
+  <div id="grvDataDiv" style="overflow-x:hidden; overflow:auto; position:relative;" runat="server"> 
+  
+ <asp:GridView ID="grvData" AllowPaging="True" Width="100%" ShowFooterWhenEmpty="False" RowStyle-Wrap="True"  AutoGenerateColumns="False"
+      CssClass="mGrid"  PagerStyle-CssClass="pgr"  AlternatingRowStyle-CssClass="alt" OnRowCommand="grvData_RowCommand" OnRowCreated="RowCreated"
+      runat="server">
+      <Columns>
+        <asp:TemplateField HeaderText="Select">
+            <ItemTemplate>
+                <asp:CheckBox ID="chkSelect" runat="server" />
+            </ItemTemplate>
+            <HeaderTemplate>
+                <input id="chkAll" onclick="SelectAll(this);" 
+                runat="server" type="checkbox" />
+            </HeaderTemplate>							  
+	   </asp:TemplateField>
+        <asp:BoundField HeaderText="No. Voo" DataField="_voo" ReadOnly="true" />
+        <asp:BoundField HeaderText="Data" DataField="_data" dataformatstring="{0:dd/MM/yyyy}" htmlencode="false"  />
+        <asp:BoundField HeaderText="Cia. Aerea" visible="false" DataField="_aerea" />                  
+        <asp:TemplateField HeaderText="Dom.">
+          <ItemTemplate>
+            <asp:LinkButton runat="server" ID="RPE_D" CommandArgument='<%# Container.DataItemIndex %>'
+                CommandName="RPE_D"><%#Eval("_embarque_d") %></asp:LinkButton>
+         </ItemTemplate>
+       </asp:TemplateField>
+       <asp:TemplateField HeaderText="Int.">
+          <ItemTemplate>
+       <asp:LinkButton runat="server" ID="RPE_I" CommandArgument='<%# Container.DataItemIndex %>'
+         CommandName="RPE_I"><%#Eval("_embarque_i") %></asp:LinkButton>
+         </ItemTemplate>
+       </asp:TemplateField>
+       <asp:TemplateField HeaderText="Dom.">
+          <ItemTemplate>
+       <asp:LinkButton runat="server" ID="CE_D" CommandArgument='<%# Container.DataItemIndex %>'
+         CommandName="CE_D"><%#Eval("_ce_d") %></asp:LinkButton>
+         </ItemTemplate>
+       </asp:TemplateField>
+       <asp:TemplateField HeaderText="Int.">
+          <ItemTemplate>
+       <asp:LinkButton runat="server" ID="CE_I" CommandArgument='<%# Container.DataItemIndex %>'
+         CommandName="CE_I"><%#Eval("_ce_i") %></asp:LinkButton>
+         </ItemTemplate>
+       </asp:TemplateField>
+        <asp:BoundField  HeaderText="Dom."  DataField="_DIFF_d" /> 
+        <asp:BoundField  HeaderText="Int."  DataField="_DIFF_i" />  
+        <asp:TemplateField HeaderText="#Dom.">
+            <ItemTemplate>
+                <asp:Label ID="Total_D" style="width:20px;" readOnly="true"  ItemStyle-VerticalAlign="Center" MaxLengith="4"  
+                    runat="server">
+                </asp:Label>
+            </ItemTemplate>
+        </asp:TemplateField>                    
+<asp:TemplateField HeaderText="#Int.">
+        <ItemTemplate>
+            <asp:Label ID="Total_I" style="width:20px;" readOnly="true" ItemStyle-VerticalAlign="Center" MaxLengith="4"  
+                runat="server">
+            </asp:Label>
+        </ItemTemplate>
+        </asp:TemplateField> 
+<asp:TemplateField HeaderText="#Dom.">
+            <ItemTemplate>
+                <asp:Label ID="Total_FD" style="width:20px;" readOnly="true"  ItemStyle-VerticalAlign="Center" MaxLengith="4"  
+                    runat="server">
+                </asp:Label>
+            </ItemTemplate>
+        </asp:TemplateField>                    
+<asp:TemplateField HeaderText="#Int.">
+        <ItemTemplate>
+            <asp:Label ID="Total_FI" style="width:20px;" readOnly="true" ItemStyle-VerticalAlign="Center" MaxLengith="4"  
+                runat="server">
+            </asp:Label>
+        </ItemTemplate>
+        </asp:TemplateField>         
+               
+        <asp:BoundField HeaderText="Embarques" visible="false" DataField="_embarque" />
+        <asp:BoundField HeaderText="Conf. Elet" visible="false" DataField="_ce" />
+        <asp:BoundField HeaderText="Total Diff."   visible="false"  DataField="_DIFF" />
+         <asp:TemplateField HeaderText="Conciliado?">
+			<ItemTemplate>
+				<asp:ImageButton ID="imgconciliado" runat="server" 
+					AlternateText="Conciliado" ImageAlign="Right" style="width:25%"
+					ImageUrl="Images\ok.png" />
+			</ItemTemplate>
+		</asp:TemplateField>  
+      </Columns>
+<rowstyle backcolor="LightCyan"  
+           forecolor="DarkBlue"
+           font-italic="false"/>
+        <alternatingrowstyle backcolor="PaleTurquoise"  
+          forecolor="DarkBlue"
+          font-italic="false"/>
+    </asp:GridView>
+  </div>  
+  </mt:mtpanel>
+</asp:Content>

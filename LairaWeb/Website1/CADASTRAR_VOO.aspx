@@ -51,8 +51,7 @@
                 <asp:Label ID="Label6" runat="server" Text="Aeroporto"></asp:Label>
             </td>
             <td>
-                <asp:DropDownList ID="ddlAeroporto" runat="server">
-                </asp:DropDownList>
+                <asp:TextBox ID="txtAeroporto" runat="server"></asp:TextBox>
             </td>
         </tr>
         <tr>
@@ -60,15 +59,15 @@
                 <asp:Label ID="Label7" runat="server" Text="Tipo"></asp:Label>
             </td>
             <td>
-                <asp:DropDownList ID="ddlTipo" runat="server">
-                </asp:DropDownList>
+                <asp:TextBox ID="txtTipo" runat="server"></asp:TextBox>
             </td>
         </tr>
         <tr>
             <td class="style2">
                 &nbsp;</td>
             <td>
-                <asp:Button ID="btnAdVoo" runat="server" Text="Adicionar Voo" />
+                <asp:Button ID="btnAdVoo" runat="server" Text="Adicionar Voo" 
+                    onclick="btnAdVoo_Click" />
             </td>
         </tr>
     </table>

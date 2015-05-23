@@ -38,6 +38,22 @@
         </tr>
         <tr>
             <td class="style2">
+                <asp:Label runat="server" Text="Código da Ficha"></asp:Label>
+            </td>
+            <td class="style3">
+                <asp:TextBox ID="txtCodFicha" runat="server"></asp:TextBox>
+            </td>
+            <td class="style7">
+                &nbsp;</td>
+            <td class="style5">
+                &nbsp;</td>
+            <td class="style6">
+                &nbsp;</td>
+            <td>
+                &nbsp;</td>
+        </tr>
+        <tr>
+            <td class="style2">
                 <asp:Label ID="Label2" runat="server" Text="Data Chegada"></asp:Label>
             </td>
             <td class="style3">
@@ -59,21 +75,19 @@
                 <asp:Label ID="Label3" runat="server" Text="Voo Chegada / Hora"></asp:Label>
             </td>
             <td class="style3">
-                <asp:DropDownList ID="ddlVooChegada" runat="server">
-                </asp:DropDownList>
+                <asp:TextBox ID="txtVooChegada" runat="server"></asp:TextBox>
             </td>
             <td class="style7">
-                <asp:TextBox ID="txtChegadaHora" runat="server" Width="75px"></asp:TextBox>
+                <asp:TextBox ID="txtVooHoraChegada" runat="server" Width="75px"></asp:TextBox>
             </td>
             <td class="style5">
                 <asp:Label ID="Label9" runat="server" Text="Voo Saída / Hora"></asp:Label>
             </td>
             <td class="style6">
-                <asp:DropDownList ID="ddlVooSaida" runat="server">
-                </asp:DropDownList>
+                <asp:TextBox ID="txtVooSaida" runat="server"></asp:TextBox>
             </td>
-            <td>
-                <asp:TextBox ID="txtSaidaHora" runat="server" Width="75px"></asp:TextBox>
+            <td style="margin-left: 40px">
+                <asp:TextBox ID="txtVooHoraSaida" runat="server" Width="75px"></asp:TextBox>
             </td>
         </tr>
         <tr>
@@ -107,8 +121,7 @@
                 <asp:Label ID="Label11" runat="server" Text="Agência"></asp:Label>
             </td>
             <td class="style6">
-                <asp:DropDownList ID="ddlAgencia" runat="server">
-                </asp:DropDownList>
+                <asp:TextBox ID="txtAgencia" runat="server"></asp:TextBox>
             </td>
             <td>
                 &nbsp;</td>
@@ -126,8 +139,7 @@
                 <asp:Label ID="Label12" runat="server" Text="Hotel"></asp:Label>
             </td>
             <td class="style6">
-                <asp:DropDownList ID="ddlHotel" runat="server">
-                </asp:DropDownList>
+                <asp:TextBox ID="txtHotel" runat="server"></asp:TextBox>
             </td>
             <td>
                 &nbsp;</td>
@@ -146,6 +158,22 @@
             </td>
             <td class="style6">
                 <asp:TextBox ID="txtSaidaHotel" runat="server"></asp:TextBox>
+            </td>
+            <td>
+                &nbsp;</td>
+        </tr>
+        <tr>
+            <td class="style2">
+                &nbsp;</td>
+            <td class="style3">
+                &nbsp;</td>
+            <td class="style7">
+                &nbsp;</td>
+            <td class="style5">
+                &nbsp;</td>
+            <td class="style6">
+                <asp:Button ID="btnAdFicha" runat="server" onclick="btnAdFicha_Click" 
+                    Text="Adicionar Ficha" />
             </td>
             <td>
                 &nbsp;</td>

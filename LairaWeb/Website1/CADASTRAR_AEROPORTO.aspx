@@ -8,22 +8,23 @@
         }
         .style2
         {
-            width: 344px;
-        }
+    }
+    .style3
+    {
+        width: 150px;
+    }
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" Runat="Server">
     <table class="style1">
         <tr>
-            <td class="style2">
+            <td class="style2" colspan="2">
                 <asp:Label ID="Label1" runat="server" Font-Size="Large" 
                     Text="Cadastrar Aeroporto"></asp:Label>
             </td>
-            <td>
-                &nbsp;</td>
         </tr>
         <tr>
-            <td class="style2">
+            <td class="style3">
                 <asp:Label ID="Label2" runat="server" Text="Nome"></asp:Label>
             </td>
             <td>
@@ -31,7 +32,7 @@
             </td>
         </tr>
         <tr>
-            <td class="style2">
+            <td class="style3">
                 <asp:Label ID="Label3" runat="server" Text="Sigla"></asp:Label>
             </td>
             <td>
@@ -39,10 +40,11 @@
             </td>
         </tr>
         <tr>
-            <td class="style2">
+            <td class="style3">
                 &nbsp;</td>
             <td>
-                <asp:Button ID="btnAdAeroporto" runat="server" Text="Adicionar Aeroporto" />
+                <asp:Button ID="btnAdAeroporto" runat="server" Text="Adicionar Aeroporto" 
+                    onclick="btnAdAeroporto_Click" />
             </td>
         </tr>
     </table>

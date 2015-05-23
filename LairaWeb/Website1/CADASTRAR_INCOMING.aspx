@@ -8,22 +8,31 @@
         }
         .style2
         {
-            width: 344px;
-        }
+    }
+    .style3
+    {
+        width: 150px;
+    }
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" Runat="Server">
     <table class="style1">
         <tr>
-            <td class="style2">
+            <td class="style2" colspan="2">
                 <asp:Label ID="Label1" runat="server" Font-Bold="True" Font-Size="Large" 
                     Text="Cadastrar Incoming"></asp:Label>
             </td>
-            <td>
-                &nbsp;</td>
         </tr>
         <tr>
-            <td class="style2">
+            <td class="style3">
+                <asp:Label ID="Label17" runat="server" Text="Código do Incoming"></asp:Label>
+            </td>
+            <td>
+                <asp:TextBox ID="txtCodIncoming" runat="server"></asp:TextBox>
+            </td>
+        </tr>
+        <tr>
+            <td class="style3">
                 <asp:Label ID="Label2" runat="server" Text="Empresa"></asp:Label>
             </td>
             <td>
@@ -31,7 +40,7 @@
             </td>
         </tr>
         <tr>
-            <td class="style2">
+            <td class="style3">
                 <asp:Label ID="Label3" runat="server" Text="Nome"></asp:Label>
             </td>
             <td>
@@ -39,7 +48,7 @@
             </td>
         </tr>
         <tr>
-            <td class="style2">
+            <td class="style3">
                 <asp:Label ID="Label16" runat="server" Text="Endereço"></asp:Label>
             </td>
             <td>
@@ -47,7 +56,7 @@
             </td>
         </tr>
         <tr>
-            <td class="style2">
+            <td class="style3">
                 <asp:Label ID="Label4" runat="server" Text="País"></asp:Label>
             </td>
             <td>
@@ -55,7 +64,7 @@
             </td>
         </tr>
         <tr>
-            <td class="style2">
+            <td class="style3">
                 <asp:Label ID="Label12" runat="server" Text="Telefone"></asp:Label>
             </td>
             <td>
@@ -63,7 +72,7 @@
             </td>
         </tr>
         <tr>
-            <td class="style2">
+            <td class="style3">
                 <asp:Label ID="Label13" runat="server" Text="Email"></asp:Label>
             </td>
             <td>
@@ -71,7 +80,7 @@
             </td>
         </tr>
         <tr>
-            <td class="style2">
+            <td class="style3">
                 <asp:Label ID="Label14" runat="server" Text="Site"></asp:Label>
             </td>
             <td>
@@ -79,7 +88,7 @@
             </td>
         </tr>
         <tr>
-            <td class="style2">
+            <td class="style3">
                 <asp:Label ID="Label15" runat="server" Text="Atuação"></asp:Label>
             </td>
             <td>
@@ -87,10 +96,11 @@
             </td>
         </tr>
         <tr>
-            <td class="style2">
+            <td class="style3">
                 &nbsp;</td>
             <td>
-                <asp:Button ID="btnAdIncoming" runat="server" Text="Adicionar Incoming" />
+                <asp:Button ID="btnAdIncoming" runat="server" Text="Adicionar Incoming" 
+                    onclick="btnAdIncoming_Click" />
             </td>
         </tr>
     </table>

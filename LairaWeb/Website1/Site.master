@@ -3,7 +3,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head runat="server">
-    <title>Laira</title>
+    <title>Laira Tours</title>
     <link href="~/Styles/Site.css" rel="stylesheet" type="text/css" />
 
     <link id="Link1" runat="server" rel="shortcut icon" href="~/favicon.ico" type="image/x-icon" />
@@ -35,12 +35,14 @@
             <div class="clear hideSkiplink">
                 <asp:Menu ID="NavigationMenu" runat="server" CssClass="menu" EnableViewState="false" IncludeStyleBlock="false" Orientation="Horizontal">
                     <Items>
-                        <asp:MenuItem NavigateUrl="~/Fichas.aspx" Text="Fichas"/>
-                        <asp:MenuItem NavigateUrl="~/Default.aspx" Text="Ordem de Serviço"/>
-                        <asp:MenuItem NavigateUrl="~/Default.aspx" Text="Ordem de Serviço Adicional"/>
-                        <asp:MenuItem NavigateUrl="~/About.aspx" Text="Comumicados"/>
-                        <asp:MenuItem NavigateUrl="~/About.aspx" Text="Financeiro"/>
-                        <asp:MenuItem NavigateUrl="~/About.aspx" Text="Administração"/>
+                        <asp:MenuItem NavigateUrl="~/MENU_FICHAS.aspx" Text="Fichas"/>
+                        <asp:MenuItem NavigateUrl="~/MENU_ORD_SERV.aspx" Text="Ordem de Serviço"/>
+                        <asp:MenuItem NavigateUrl="~/MENU_ORD_SERV_ADC.aspx" 
+                            Text="Ordem de Serviço Adicional"/>
+                        <asp:MenuItem NavigateUrl="~/MENU_COMUNICADOS.aspx" Text="Comunicados" 
+                            Value="Comunicados"/>
+                        <asp:MenuItem NavigateUrl="~/MENU_FINANCEIRO.aspx" Text="Financeiro"/>
+                        <asp:MenuItem NavigateUrl="~/MENU_ADMINISTRACAO.aspx" Text="Administração"/>
                     </Items>
                 </asp:Menu>
             </div>

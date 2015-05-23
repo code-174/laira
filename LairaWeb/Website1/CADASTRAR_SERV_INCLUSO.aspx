@@ -32,10 +32,10 @@
         </tr>
         <tr>
             <td class="style2">
-                <asp:Label ID="Label3" runat="server" Text="Local"></asp:Label>
+                <asp:Label ID="Label3" runat="server" Text="Serviço"></asp:Label>
             </td>
             <td>
-                <asp:TextBox ID="txtLocal" runat="server"></asp:TextBox>
+                <asp:TextBox ID="txtServico" runat="server"></asp:TextBox>
             </td>
         </tr>
         <tr>
@@ -50,7 +50,8 @@
             <td class="style2">
                 &nbsp;</td>
             <td>
-                <asp:Button ID="btnAdServ" runat="server" Text="Adicionar Serviço" />
+                <asp:Button ID="btnAdServ" runat="server" Text="Adicionar Serviço" 
+                    onclick="btnAdServ_Click" />
             </td>
         </tr>
     </table>

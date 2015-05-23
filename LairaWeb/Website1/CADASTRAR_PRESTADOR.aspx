@@ -24,6 +24,14 @@
         </tr>
         <tr>
             <td class="style2">
+                <asp:Label ID="Label14" runat="server" Text="Código do Prestador"></asp:Label>
+            </td>
+            <td>
+                <asp:TextBox ID="txtCodPrestador" runat="server"></asp:TextBox>
+            </td>
+        </tr>
+        <tr>
+            <td class="style2">
                 <asp:Label ID="Label3" runat="server" Text="Nome"></asp:Label>
             </td>
             <td>
@@ -58,7 +66,8 @@
             <td class="style2">
                 &nbsp;</td>
             <td>
-                <asp:Button ID="btnAdPrestador" runat="server" Text="Adicionar Prestador" />
+                <asp:Button ID="btnAdPrestador" runat="server" Text="Adicionar Prestador" 
+                    onclick="btnAdPrestador_Click" />
             </td>
         </tr>
     </table>
