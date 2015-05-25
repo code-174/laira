@@ -5,13 +5,12 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-public partial class LISTAR_VENDEDOR : System.Web.UI.Page
+public partial class LISTAR_SERV_ADV : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        Vendedores c = new Vendedores();
-        grvData.DataSource = c.GetVendedores();
+        ServAdc c = new ServAdc();
+        grvData.DataSource = c.GetServAdc();
         grvData.DataBind();
-
     }
 }

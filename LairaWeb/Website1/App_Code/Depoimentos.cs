@@ -8,54 +8,55 @@ using System.Configuration;
 using System.Text;
 
 /// <summary>
-/// Summary description for Aeroportos
+/// Summary description for Depoimentos
 /// </summary>
-/// 
-
-public class Aeroportos
+public class Depoimentos
 {
-
     #region Propriedades
-    public string CODIGO {get; set;}
-    public string NOME {get; set;}
+    public string CODIGO { get; set; }
+    public string NOME { get; set; }
+    public string CIDADE { get; set; }
+    public string DEPOIMENTO { get; set; }
     #endregion
 
-    public Aeroportos()
+	public Depoimentos()
 	{
 		//
 		// TODO: Add constructor logic here
 		//
 	}
 
-/// <summary>
-/// Retornar Lista de Aeroportos
-/// </summary>
-/// <returns></returns>
-      public List<Aeroportos> GetAeroportos()
+    /// <summary>
+    /// Retornar Lista de Depoimentos
+    /// </summary>
+    /// <returns></returns>
+    public List<Depoimentos> GetDepoimentos()
     {
-        List<Aeroportos> xList = new List<Aeroportos>();
+        List<Depoimentos> xList = new List<Depoimentos>();
 
         SqlCommand cmd = new SqlCommand();
         SqlConnection conn = new SqlConnection();
         conn.ConnectionString = ConfigurationManager.ConnectionStrings["LairaWebDB"].ConnectionString;
         cmd.Connection = conn;
         StringBuilder str = new StringBuilder();
-        str.AppendLine(" select CODIGO_AEROPORTO, NOME_AEROPORTO from AEROPORTOS ");
+        str.AppendLine(" select CODIGO_DEPOIMENTO, NOME_DEPOIMENTO, CIDADE_DEPOIMENTO,  DEPOIMENTO_DEPOIMENTO from DEPOIMENTOS ");
         cmd.CommandText = str.ToString();
         conn.Open();
         SqlDataReader reader = cmd.ExecuteReader();
 
         while (reader.Read())
         {
-            Aeroportos Aeroporto = new Aeroportos
+            Depoimentos Depoimento = new Depoimentos
             {
                 CODIGO = reader.GetString(0),
-                NOME = reader.GetString(1)
+                NOME = reader.GetString(1),
+                CIDADE = reader.GetString(2),
+                DEPOIMENTO = reader.GetString(3)
             };
 
-            xList.Add(Aeroporto);
+            xList.Add(Depoimento);
         }
 
         return xList;
-     }
+    }
 }

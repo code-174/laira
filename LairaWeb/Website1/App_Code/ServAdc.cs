@@ -8,54 +8,53 @@ using System.Configuration;
 using System.Text;
 
 /// <summary>
-/// Summary description for Aeroportos
+/// Summary description for ServAdc
 /// </summary>
-/// 
-
-public class Aeroportos
+public class ServAdc
 {
-
     #region Propriedades
-    public string CODIGO {get; set;}
-    public string NOME {get; set;}
+    public string CODIGO { get; set; }
+    public string PASSEIO { get; set; }
+    public string PRECO { get; set; }
     #endregion
 
-    public Aeroportos()
+	public ServAdc()
 	{
 		//
 		// TODO: Add constructor logic here
 		//
 	}
 
-/// <summary>
-/// Retornar Lista de Aeroportos
-/// </summary>
-/// <returns></returns>
-      public List<Aeroportos> GetAeroportos()
+    /// <summary>
+    /// Retornar Lista de Servicos Adicionais
+    /// </summary>
+    /// <returns></returns>
+    public List<ServAdc> GetServAdc()
     {
-        List<Aeroportos> xList = new List<Aeroportos>();
+        List<ServAdc> xList = new List<ServAdc>();
 
         SqlCommand cmd = new SqlCommand();
         SqlConnection conn = new SqlConnection();
         conn.ConnectionString = ConfigurationManager.ConnectionStrings["LairaWebDB"].ConnectionString;
         cmd.Connection = conn;
         StringBuilder str = new StringBuilder();
-        str.AppendLine(" select CODIGO_AEROPORTO, NOME_AEROPORTO from AEROPORTOS ");
+        str.AppendLine(" select COD_SERV_ADC, PASSEIO_SERV_ADC, PRECO_SERV_ADC from SERV_ADC ");
         cmd.CommandText = str.ToString();
         conn.Open();
         SqlDataReader reader = cmd.ExecuteReader();
 
         while (reader.Read())
         {
-            Aeroportos Aeroporto = new Aeroportos
+            ServAdc ServicoAdicional = new ServAdc
             {
                 CODIGO = reader.GetString(0),
-                NOME = reader.GetString(1)
+                PASSEIO = reader.GetString(1),
+                PRECO = reader.GetString(2)
             };
 
-            xList.Add(Aeroporto);
+            xList.Add(ServicoAdicional);
         }
 
         return xList;
-     }
+    }
 }

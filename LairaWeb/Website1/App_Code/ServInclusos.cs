@@ -8,54 +8,53 @@ using System.Configuration;
 using System.Text;
 
 /// <summary>
-/// Summary description for Aeroportos
+/// Summary description for ServInclusos
 /// </summary>
-/// 
-
-public class Aeroportos
+public class ServInclusos
 {
-
     #region Propriedades
-    public string CODIGO {get; set;}
-    public string NOME {get; set;}
+    public string CODIGO { get; set; }
+    public string SERVICO { get; set; }
+    public string PRECO { get; set; }
     #endregion
 
-    public Aeroportos()
+	public ServInclusos()
 	{
 		//
 		// TODO: Add constructor logic here
 		//
 	}
 
-/// <summary>
-/// Retornar Lista de Aeroportos
-/// </summary>
-/// <returns></returns>
-      public List<Aeroportos> GetAeroportos()
+    /// <summary>
+    /// Retornar Lista de Servicos Inclusos
+    /// </summary>
+    /// <returns></returns>
+    public List<ServInclusos> GetServInclusos()
     {
-        List<Aeroportos> xList = new List<Aeroportos>();
+        List<ServInclusos> xList = new List<ServInclusos>();
 
         SqlCommand cmd = new SqlCommand();
         SqlConnection conn = new SqlConnection();
         conn.ConnectionString = ConfigurationManager.ConnectionStrings["LairaWebDB"].ConnectionString;
         cmd.Connection = conn;
         StringBuilder str = new StringBuilder();
-        str.AppendLine(" select CODIGO_AEROPORTO, NOME_AEROPORTO from AEROPORTOS ");
+        str.AppendLine(" select COD_SERV_INCLUSO, SERVICO_SERV_INCLUSO, PRECO_SERV_INCLUSO from SERV_INCLUSO ");
         cmd.CommandText = str.ToString();
         conn.Open();
         SqlDataReader reader = cmd.ExecuteReader();
 
         while (reader.Read())
         {
-            Aeroportos Aeroporto = new Aeroportos
+            ServInclusos ServicoInclusos = new ServInclusos
             {
                 CODIGO = reader.GetString(0),
-                NOME = reader.GetString(1)
+                SERVICO = reader.GetString(1),
+                PRECO = reader.GetString(2)
             };
 
-            xList.Add(Aeroporto);
+            xList.Add(ServicoInclusos);
         }
 
         return xList;
-     }
+    }
 }

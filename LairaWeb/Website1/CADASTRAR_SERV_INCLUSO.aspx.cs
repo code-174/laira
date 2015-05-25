@@ -43,7 +43,7 @@ public partial class CADASTRAR_SERV_INCLUSO : System.Web.UI.Page
                 StringBuilder str = new StringBuilder();
                 str.AppendLine(" INSERT INTO [SERV_INCLUSO] ");
                 str.AppendLine(" ([COD_SERV_INCLUSO] ");
-                str.AppendLine(" ,[LOCAL_SERV_INCLUSO ] ");
+                str.AppendLine(" ,[SERVICO_SERV_INCLUSO ] ");
                 str.AppendLine(" ,[PRECO_SERV_INCLUSO] ");
                 str.AppendLine(" )");
                 str.AppendLine(" VALUES ");

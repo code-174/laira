@@ -8,54 +8,53 @@ using System.Configuration;
 using System.Text;
 
 /// <summary>
-/// Summary description for Aeroportos
+/// Summary description for FormasPagamento
 /// </summary>
-/// 
-
-public class Aeroportos
+public class FormasPagamento
 {
-
     #region Propriedades
-    public string CODIGO {get; set;}
-    public string NOME {get; set;}
+    public string CODIGO { get; set; }
+    public string FORMA_PAG { get; set; }
+    public string TIPO { get; set; }    
     #endregion
 
-    public Aeroportos()
+	public FormasPagamento()
 	{
 		//
 		// TODO: Add constructor logic here
 		//
 	}
 
-/// <summary>
-/// Retornar Lista de Aeroportos
-/// </summary>
-/// <returns></returns>
-      public List<Aeroportos> GetAeroportos()
+    /// <summary>
+    /// Retornar Lista de Formas de Pagamento
+    /// </summary>
+    /// <returns></returns>
+    public List<FormasPagamento> GetFormasPagamento()
     {
-        List<Aeroportos> xList = new List<Aeroportos>();
+        List<FormasPagamento> xList = new List<FormasPagamento>();
 
         SqlCommand cmd = new SqlCommand();
         SqlConnection conn = new SqlConnection();
         conn.ConnectionString = ConfigurationManager.ConnectionStrings["LairaWebDB"].ConnectionString;
         cmd.Connection = conn;
         StringBuilder str = new StringBuilder();
-        str.AppendLine(" select CODIGO_AEROPORTO, NOME_AEROPORTO from AEROPORTOS ");
+        str.AppendLine(" select COD_FORMA_DE_PAGAMENTO, FORMA_DE_PAGAMENTO, TIPO_FORMA_DE_PAGAMENTO from FORMA_DE_PAGAMENTO ");
         cmd.CommandText = str.ToString();
         conn.Open();
         SqlDataReader reader = cmd.ExecuteReader();
 
         while (reader.Read())
         {
-            Aeroportos Aeroporto = new Aeroportos
+            FormasPagamento FormaPag = new FormasPagamento
             {
                 CODIGO = reader.GetString(0),
-                NOME = reader.GetString(1)
+                FORMA_PAG = reader.GetString(1),
+                TIPO = reader.GetString(2),                
             };
 
-            xList.Add(Aeroporto);
+            xList.Add(FormaPag);
         }
 
         return xList;
-     }
+    }
 }

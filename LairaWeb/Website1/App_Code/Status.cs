@@ -8,54 +8,51 @@ using System.Configuration;
 using System.Text;
 
 /// <summary>
-/// Summary description for Aeroportos
+/// Summary description for Status
 /// </summary>
-/// 
-
-public class Aeroportos
+public class Status
 {
-
     #region Propriedades
-    public string CODIGO {get; set;}
-    public string NOME {get; set;}
+    public string CODIGO { get; set; }
+    public string STATUS { get; set; }
     #endregion
 
-    public Aeroportos()
+	public Status()
 	{
 		//
 		// TODO: Add constructor logic here
 		//
 	}
 
-/// <summary>
-/// Retornar Lista de Aeroportos
-/// </summary>
-/// <returns></returns>
-      public List<Aeroportos> GetAeroportos()
+    /// <summary>
+    /// Retornar Lista de Status
+    /// </summary>
+    /// <returns></returns>
+    public List<Status> GetStatus()
     {
-        List<Aeroportos> xList = new List<Aeroportos>();
+        List<Status> xList = new List<Status>();
 
         SqlCommand cmd = new SqlCommand();
         SqlConnection conn = new SqlConnection();
         conn.ConnectionString = ConfigurationManager.ConnectionStrings["LairaWebDB"].ConnectionString;
         cmd.Connection = conn;
         StringBuilder str = new StringBuilder();
-        str.AppendLine(" select CODIGO_AEROPORTO, NOME_AEROPORTO from AEROPORTOS ");
+        str.AppendLine(" select CODIGO_STATUS, STATUS_STATUS from STATUS ");
         cmd.CommandText = str.ToString();
         conn.Open();
         SqlDataReader reader = cmd.ExecuteReader();
 
         while (reader.Read())
         {
-            Aeroportos Aeroporto = new Aeroportos
+            Status Stat = new Status
             {
                 CODIGO = reader.GetString(0),
-                NOME = reader.GetString(1)
+                STATUS = reader.GetString(1)
             };
 
-            xList.Add(Aeroporto);
+            xList.Add(Stat);
         }
 
         return xList;
-     }
+    }
 }
