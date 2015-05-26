@@ -6,7 +6,10 @@
 </div>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" Runat="Server">
-    <div id="div2">
+<asp:LinkButton ID="lnkImprimir" runat="server" OnClientClick="javascript:CallPrint('divPrint');">[Imprimir]</asp:LinkButton>
+
+    <div id="divPrint">
+    <asp:TextBox ID="test" Text="HAHAHHA" runat="server"></asp:TextBox>
 
     <asp:GridView ID="grvData" runat="server" AutoGenerateColumns="True" >
         

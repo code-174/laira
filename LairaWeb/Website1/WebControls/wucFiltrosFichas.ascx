@@ -29,7 +29,8 @@
             <asp:Label ID="Label2" runat="server" Text="Cadastrar Ficha"></asp:Label>
         </td>
         <td>
-            <asp:Button ID="btnCadastrarFicha" runat="server" Text="Ok" />
+            <asp:Button ID="btnCadastrarFicha" runat="server" Text="Ok" 
+                onclick="btnCadastrarFicha_Click" />
         </td>
     </tr>
 </table>
