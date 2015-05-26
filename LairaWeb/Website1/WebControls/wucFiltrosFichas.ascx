@@ -30,7 +30,7 @@
         </td>
         <td>
             <asp:Button ID="btnCadastrarFicha" runat="server" Text="Ok" 
-                onclick="btnCadastrarFicha_Click" />
+                onclick="btnListarFicha1_Click" />
         </td>
     </tr>
 </table>
