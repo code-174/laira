@@ -7,9 +7,17 @@ using System.Web.UI.WebControls;
 
 public partial class WebControls_wucFiltrosFichas : System.Web.UI.UserControl
 {
-    protected void Page_Load(object sender, EventArgs e)
+   
+    public string txtListarFicha_Text
     {
-
+        get
+        {
+            return txtListarFicha.Text;
+        }
+        set
+        {
+            txtListarFicha.Text = value;
+        }
     }
     /// <summary>
     /// Navega para página de Cadastro
@@ -20,4 +28,8 @@ public partial class WebControls_wucFiltrosFichas : System.Web.UI.UserControl
     {
         Response.Redirect("CADASTRAR_FICHA.aspx");
     }
+
+
+
+
 }
