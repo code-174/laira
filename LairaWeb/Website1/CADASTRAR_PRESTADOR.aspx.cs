@@ -76,7 +76,7 @@ public partial class CADASTRAR_PRESTADOR : System.Web.UI.Page
                 conn.Close();
                 conn.Dispose();
 
-                Response.Write("<script type='text/javascript'>alert('Registro salvo com sucesso!');</script>");
+                Page.ClientScript.RegisterClientScriptBlock(this.Page.GetType(), "Alerta", "<script language='javascript'>window.alert('Registro salvo com sucesso!');</script>", false);
             }
 
             catch (Exception ex)
@@ -89,7 +89,7 @@ public partial class CADASTRAR_PRESTADOR : System.Web.UI.Page
 
         else
         {
-            Response.Write("<script type='text/javascript'>alert('Favor preencher os campos!');</script>");
+            Page.ClientScript.RegisterClientScriptBlock(this.Page.GetType(), "Alerta", "<script language='javascript'>window.alert('Favor preencher os campos!');</script>", false);
         }
     }
     

@@ -4,6 +4,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="Server">
+<asp:LinkButton ID="lnkNew" runat="server" onclick="lnkNew_Click" >[Cadastrar Agencia]</asp:LinkButton>
     <asp:LinkButton ID="lnkImprimir" runat="server" OnClientClick="javascript:CallPrint('divPrint');">[Imprimir]</asp:LinkButton>
     <div id="divPrint">
         <asp:GridView ID="grvData" runat="server">

@@ -11,6 +11,16 @@ using System.Configuration;
 
 public partial class CADASTRAR_AGENCIA : System.Web.UI.Page
 {
+
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        if (!IsPostBack)
+        {
+            //to do:
+        }
+    }
+
+
     bool VerificarCampos()
     {
         if (txtCodAgencia.Text.Trim() == "")
@@ -55,15 +65,15 @@ public partial class CADASTRAR_AGENCIA : System.Web.UI.Page
         {
             return false;
         }
-         else if (txtContatos.Text.Trim() == "")
+        else if (txtContatos.Text.Trim() == "")
         {
             return false;
         }
-         else if (txtTelefone.Text.Trim() == "")
+        else if (txtTelefone.Text.Trim() == "")
         {
             return false;
         }
-         else if (txtEmail.Text.Trim() == "")
+        else if (txtEmail.Text.Trim() == "")
         {
             return false;
         }
@@ -72,7 +82,7 @@ public partial class CADASTRAR_AGENCIA : System.Web.UI.Page
     }
     protected void btnAdAgencia_Click(object sender, EventArgs e)
     {
-         if (VerificarCampos())
+        if (VerificarCampos())
         {
 
 
@@ -135,7 +145,7 @@ public partial class CADASTRAR_AGENCIA : System.Web.UI.Page
                 conn.Close();
                 conn.Dispose();
 
-                Response.Write("<script type='text/javascript'>alert('Registro salvo com sucesso!');</script>");
+                Page.ClientScript.RegisterClientScriptBlock(this.Page.GetType(), "Alerta", "<script language='javascript'>window.alert('Registro salvo com sucesso!');</script>", false);
             }
 
             catch (Exception ex)
@@ -147,9 +157,14 @@ public partial class CADASTRAR_AGENCIA : System.Web.UI.Page
 
         else
         {
-            Response.Write("<script type='text/javascript'>alert('Favor preencher os campos!');</script>");
+            Page.ClientScript.RegisterClientScriptBlock(this.Page.GetType(), "Alerta", "<script language='javascript'>window.alert('Favor preencher os campos!');</script>", false);
         }
     }
 
- 
+
+
+    protected void btnVoltar_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("MENU_ADMINISTRACAO.aspx");
     }
+}

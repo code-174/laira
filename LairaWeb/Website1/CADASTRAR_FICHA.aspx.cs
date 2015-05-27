@@ -11,6 +11,10 @@ using System.Configuration;
 
 public partial class CADASTRAR_FICHA : System.Web.UI.Page
 {
+   
+
+
+
     bool VerificarCampos()
     {
         if (txtCodFicha.Text.Trim() == "")
@@ -55,7 +59,7 @@ public partial class CADASTRAR_FICHA : System.Web.UI.Page
         {
             return false;
         }
-        else if (txtAgencia.Text.Trim() == "")
+        else if (ddlAgencia.SelectedValue.Trim() == "")
         {
             return false;
         }
@@ -80,6 +84,10 @@ public partial class CADASTRAR_FICHA : System.Web.UI.Page
     }
     protected void btnAdFicha_Click(object sender, EventArgs e)
     {
+
+        //Convert.ToInt64( )
+       //Page.ClientScript.RegisterClientScriptBlock(this.Page.GetType(), "Alerta", "<script language='javascript'>window.alert('" + ddlAgencia.SelectedValue + "');</script>", false);
+
         if (VerificarCampos())
         {
 
@@ -137,7 +145,7 @@ public partial class CADASTRAR_FICHA : System.Web.UI.Page
                 cmd.Parameters.Add(new SqlParameter("@H", SqlDbType.NChar)).Value = txtAeroportoChegada.Text.Trim();
                 cmd.Parameters.Add(new SqlParameter("@I", SqlDbType.NChar)).Value = txtAeroportoSaida.Text.Trim();
                 cmd.Parameters.Add(new SqlParameter("@J", SqlDbType.NChar)).Value = txtCodExcursao.Text.Trim();
-                cmd.Parameters.Add(new SqlParameter("@L", SqlDbType.NChar)).Value = txtAgencia.Text.Trim();
+                cmd.Parameters.Add(new SqlParameter("@L", SqlDbType.BigInt)).Value = Convert.ToInt64(ddlAgencia.SelectedValue.ToString());
                 cmd.Parameters.Add(new SqlParameter("@M", SqlDbType.NChar)).Value = txtRecibo.Text.Trim();
                 cmd.Parameters.Add(new SqlParameter("@N", SqlDbType.NChar)).Value = txtHotel.Text.Trim();
                 cmd.Parameters.Add(new SqlParameter("@O", SqlDbType.NChar)).Value = txtApartamento.Text.Trim();
@@ -149,7 +157,7 @@ public partial class CADASTRAR_FICHA : System.Web.UI.Page
                 conn.Close();
                 conn.Dispose();
 
-                Response.Write("<script type='text/javascript'>alert('Registro salvo com sucesso!');</script>");
+                Page.ClientScript.RegisterClientScriptBlock(this.Page.GetType(), "Alerta", "<script language='javascript'>window.alert('Registro salvo com sucesso!');</script>", false);
             }
 
             catch (Exception ex)
@@ -161,10 +169,107 @@ public partial class CADASTRAR_FICHA : System.Web.UI.Page
 
         else
         {
-            Response.Write("<script type='text/javascript'>alert('Favor preencher os campos!');</script>");
+            Page.ClientScript.RegisterClientScriptBlock(this.Page.GetType(), "Alerta", "<script language='javascript'>window.alert('Favor preencher os campos!');</script>", false);
         }
     }
 
- 
+
+    protected void btnVoltar_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("MENU_FICHAS.aspx"); //LISTAR_FICHAS
     }
-    
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        if (!IsPostBack)
+        {
+            Agencias c = new Agencias();
+            List<Agencias> details = c.GetAgenciasCombo();
+
+            ddlAgencia.DataTextField = "NOME";
+            ddlAgencia.DataValueField = "ID";
+            ddlAgencia.DataSource = details;
+            ddlAgencia.DataBind();
+
+           loadDataTables();
+
+        }
+
+    }
+
+    private void loadTablePAX()
+    {
+        DataSet ds = new DataSet();
+        DataTable dt;
+        DataRow dr;
+        DataColumn pName;
+        DataColumn pIdentidade;
+        DataColumn pOrgao;
+        DataColumn pTelefone;
+        DataColumn pObs;
+        int i = 0;
+        dt = new DataTable();
+        pName = new DataColumn("Nome", Type.GetType("System.String"));
+        pIdentidade = new DataColumn("Identidade", Type.GetType("System.String"));
+        pOrgao = new DataColumn("Orgao", Type.GetType("System.String"));
+        pTelefone = new DataColumn("Telefone", Type.GetType("System.String"));
+        pObs = new DataColumn("Obs", Type.GetType("System.String"));
+
+        dt.Columns.Add(pName);
+        dt.Columns.Add(pIdentidade);
+        dt.Columns.Add(pOrgao);
+        dt.Columns.Add(pTelefone);
+        dt.Columns.Add(pObs);
+
+        dr = dt.NewRow();
+        dr["Nome"] = "";
+        dr["Identidade"] = "";
+        dr["Orgao"] = "";
+        dr["Telefone"] = "";
+        dr["Obs"] = "";
+        dt.Rows.Add(dr);
+
+        ds.Tables.Add(dt);
+        grvData.DataSource = ds.Tables[0];
+        grvData.DataBind();
+    }
+
+    private void loadTableServIncl()
+    {
+        DataSet ds = new DataSet();
+        DataTable dt;
+        DataRow dr;
+        DataColumn pLocal;
+        DataColumn pValor;
+        DataColumn pPagamento;
+        int i = 0;
+        dt = new DataTable();
+        pLocal = new DataColumn("Local", Type.GetType("System.String"));
+        pValor = new DataColumn("Valor", Type.GetType("System.String"));
+        pPagamento = new DataColumn("Pagamento", Type.GetType("System.String"));
+
+        dt.Columns.Add(pLocal);
+        dt.Columns.Add(pValor);
+        dt.Columns.Add(pPagamento);
+
+        dr = dt.NewRow();
+        dr["Local"] = "";
+        dr["Valor"] = "";
+        dr["Pagamento"] = "";
+        dt.Rows.Add(dr);
+
+        ds.Tables.Add(dt);
+        grvData1.DataSource = ds.Tables[0];
+        grvData1.DataBind();
+    }
+    private void loadDataTables()
+    {
+        loadTablePAX();
+        loadTableServIncl();
+            
+    }
+    protected void Unnamed2_Click(object sender, ImageClickEventArgs e)
+    {
+      
+    }
+}
+

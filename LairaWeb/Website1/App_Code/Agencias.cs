@@ -13,6 +13,7 @@ using System.Text;
 public class Agencias
 {
     #region Propriedades
+    public Int64 ID { get; set; }
     public string CODIGO { get; set; }
     public string NOME { get; set; }
     public string CONTATOS { get; set; }
@@ -20,12 +21,12 @@ public class Agencias
     public string EMAIL { get; set; }
     #endregion
 
-	public Agencias()
-	{
-		//
-		// TODO: Add constructor logic here
-		//
-	}
+    public Agencias()
+    {
+        //
+        // TODO: Add constructor logic here
+        //
+    }
 
     /// <summary>
     /// Retornar Lista de Agencias
@@ -60,5 +61,35 @@ public class Agencias
         }
 
         return xList;
+    }
+
+
+    public List<Agencias> GetAgenciasCombo()
+    {
+        List<Agencias> xList = new List<Agencias>();
+
+        SqlCommand cmd = new SqlCommand();
+        SqlConnection conn = new SqlConnection();
+        conn.ConnectionString = ConfigurationManager.ConnectionStrings["LairaWebDB"].ConnectionString;
+        cmd.Connection = conn;
+        StringBuilder str = new StringBuilder();
+        str.AppendLine(" select ID_AGENCIA , NOME_AGENCIA from AGENCIAS ");
+        cmd.CommandText = str.ToString();
+        conn.Open();
+        SqlDataReader reader = cmd.ExecuteReader();
+
+        while (reader.Read())
+        {
+            Agencias Agencia = new Agencias
+            {
+                ID = reader.GetInt64(0),
+                NOME = reader.GetString(1)
+            };
+
+            xList.Add(Agencia);
+        }
+
+        return xList;
+
     }
 }

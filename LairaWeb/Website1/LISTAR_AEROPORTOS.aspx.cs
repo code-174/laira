@@ -13,4 +13,8 @@ public partial class LISTAR_AEROPORTOS : System.Web.UI.Page
         grvData.DataSource = c.GetAeroportos();
         grvData.DataBind();
     }
+    protected void lnkNew_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("CADASTRAR_AEROPORTO.aspx");
+    }
 }

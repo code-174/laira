@@ -4,33 +4,30 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head runat="server">
     <title>Laira Tours</title>
-    <link href="~/Styles/Site.css" rel="stylesheet" type="text/css" />
-
+    <link href="Styles/Site.css" rel="stylesheet" type="text/css" />
     <link id="Link1" runat="server" rel="shortcut icon" href="~/favicon.ico" type="image/x-icon" />
     <link id="Link2" runat="server" rel="icon" href="~/favicon.ico" type="image/ico" />
+    <script language="javascript" type="text/javascript">
+        function AbrirJanela(caminho) {
+            window.open(caminho); //,'Agni Campos', 'height = 300, width = 400');
+        }
 
-     <script language="javascript" type="text/javascript">
-         function AbrirJanela(caminho) {
-             window.open(caminho); //,'Agni Campos', 'height = 300, width = 400');
-         }
-
-         function CallPrint(strid) {
-             var prtContent = document.getElementById(strid);
-             var WinPrint = window.open('', '', 'letf=0,top=0,width=400,height=300,toolbar=0,scrollbars=0,status=0');
-             WinPrint.document.write(prtContent.innerHTML);
-             WinPrint.document.close();
-             WinPrint.focus();
-             WinPrint.print();
-             WinPrint.close();
-             prtContent.innerHTML = strOldOne;
-         } 
+        function CallPrint(strid) {
+            var prtContent = document.getElementById(strid);
+            var WinPrint = window.open('', '', 'letf=0,top=0,width=400,height=300,toolbar=0,scrollbars=0,status=0');
+            WinPrint.document.write(prtContent.innerHTML);
+            WinPrint.document.close();
+            WinPrint.focus();
+            WinPrint.print();
+            WinPrint.close();
+            prtContent.innerHTML = strOldOne;
+        } 
 
     </script>
-
     <asp:ContentPlaceHolder ID="HeadContent" runat="server">
     </asp:ContentPlaceHolder>
 </head>
-<body>
+<body runat="server">
     <form runat="server">
     <div class="page">
         <div class="header">
@@ -42,37 +39,40 @@
             <div class="loginDisplay">
                 <asp:LoginView ID="HeadLoginView" runat="server" EnableViewState="false">
                     <AnonymousTemplate>
-                        [ <a href="~/Account/Login.aspx" ID="HeadLoginStatus" runat="server">Acessar Painel</a> ]
+                        [ <a href="~/Account/Login.aspx" id="HeadLoginStatus" runat="server">Acessar Painel</a>
+                        ]
                     </AnonymousTemplate>
                     <LoggedInTemplate>
-                        Welcome <span class="bold"><asp:LoginName ID="HeadLoginName" runat="server" /></span>!
-                        [ <asp:LoginStatus ID="HeadLoginStatus" runat="server" LogoutAction="Redirect" LogoutText="Sair" LogoutPageUrl="~/"/> ]
+                        Welcome <span class="bold">
+                            <asp:LoginName ID="HeadLoginName" runat="server" />
+                        </span>! [
+                        <asp:LoginStatus ID="HeadLoginStatus" runat="server" LogoutAction="Redirect" LogoutText="Sair"
+                            LogoutPageUrl="~/" />
+                        ]
                     </LoggedInTemplate>
                 </asp:LoginView>
             </div>
             <div class="clear hideSkiplink">
-                <asp:Menu ID="NavigationMenu" runat="server" CssClass="menu" EnableViewState="false" IncludeStyleBlock="false" Orientation="Horizontal">
+                <asp:Menu ID="NavigationMenu" runat="server" CssClass="menu" EnableViewState="false"
+                    IncludeStyleBlock="false" Orientation="Horizontal">
                     <Items>
-                        <asp:MenuItem NavigateUrl="~/MENU_FICHAS.aspx" Text="Fichas"/>
-                        <asp:MenuItem NavigateUrl="~/MENU_ORD_SERV.aspx" Text="Ordem de Serviço"/>
-                        <asp:MenuItem NavigateUrl="~/MENU_ORD_SERV_ADC.aspx" 
-                            Text="Ordem de Serviço Adicional"/>
-                        <asp:MenuItem NavigateUrl="~/MENU_COMUNICADOS.aspx" Text="Comunicados" 
-                            Value="Comunicados"/>
-                        <asp:MenuItem NavigateUrl="~/MENU_FINANCEIRO.aspx" Text="Financeiro"/>
-                        <asp:MenuItem NavigateUrl="~/MENU_ADMINISTRACAO.aspx" Text="Administração"/>
+                        <asp:MenuItem NavigateUrl="~/MENU_FICHAS.aspx" Text="Fichas" />
+                        <asp:MenuItem NavigateUrl="~/MENU_ORD_SERV.aspx" Text="Ordem de Serviço" />
+                        <asp:MenuItem NavigateUrl="~/MENU_ORD_SERV_ADC.aspx" Text="Ordem de Serviço Adicional" />
+                        <asp:MenuItem NavigateUrl="~/MENU_COMUNICADOS.aspx" Text="Comunicados" Value="Comunicados" />
+                        <asp:MenuItem NavigateUrl="~/MENU_FINANCEIRO.aspx" Text="Financeiro" />
+                        <asp:MenuItem NavigateUrl="~/MENU_ADMINISTRACAO.aspx" Text="Administração" />
                     </Items>
                 </asp:Menu>
             </div>
         </div>
         <div class="main">
-            <asp:ContentPlaceHolder ID="MainContent" runat="server"/>
+            <asp:ContentPlaceHolder ID="MainContent" runat="server" />
         </div>
         <div class="clear">
         </div>
     </div>
     <div class="footer">
-        
     </div>
     </form>
 </body>

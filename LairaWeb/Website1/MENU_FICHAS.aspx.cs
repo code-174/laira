@@ -11,4 +11,8 @@ public partial class MENU_FICHAS : System.Web.UI.Page
     {
 
     }
+    protected void btnCadastrarFicha_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("CADASTRAR_FICHA.aspx");
+    }
 }
