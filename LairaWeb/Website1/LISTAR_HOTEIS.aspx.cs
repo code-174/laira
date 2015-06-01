@@ -14,4 +14,8 @@ public partial class LISTAR_HOTEIS : System.Web.UI.Page
         grvData.DataSource = c.GetHoteis();
         grvData.DataBind();
     }
+    protected void lnkNew_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("CADASTRAR_HOTEL.aspx");
+    }
 }

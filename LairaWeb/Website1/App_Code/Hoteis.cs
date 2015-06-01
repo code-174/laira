@@ -14,6 +14,7 @@ using System.Text;
 public class Hoteis
 {
     #region Propriedades
+    public Int64 ID { get; set; }
     public string CODIGO { get; set; }
     public string NOME { get; set; }
     public string ENDERECO { get; set; }
@@ -62,5 +63,33 @@ public class Hoteis
         }
 
         return xList;
+    }
+    public List<Hoteis> GetHoteisCombo()
+    {
+        List<Hoteis> xList = new List<Hoteis>();
+
+        SqlCommand cmd = new SqlCommand();
+        SqlConnection conn = new SqlConnection();
+        conn.ConnectionString = ConfigurationManager.ConnectionStrings["LairaWebDB"].ConnectionString;
+        cmd.Connection = conn;
+        StringBuilder str = new StringBuilder();
+        str.AppendLine(" select ID_HOTEL , NOME_HOTEL from HOTEIS ");
+        cmd.CommandText = str.ToString();
+        conn.Open();
+        SqlDataReader reader = cmd.ExecuteReader();
+
+        while (reader.Read())
+        {
+            Hoteis Hotel = new Hoteis
+            {
+                ID = reader.GetInt64(0),
+                NOME = reader.GetString(1)
+            };
+
+            xList.Add(Hotel);
+        }
+
+        return xList;
+
     }
 }

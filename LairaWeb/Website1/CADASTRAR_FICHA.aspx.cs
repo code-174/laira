@@ -30,7 +30,7 @@ public partial class CADASTRAR_FICHA : System.Web.UI.Page
             return false;
         }
 
-        else if (txtVooChegada.Text.Trim() == "")
+        else if (ddlVooChegada.SelectedValue.Trim() == "")
         {
             return false;
         }
@@ -39,7 +39,7 @@ public partial class CADASTRAR_FICHA : System.Web.UI.Page
         {
             return false;
         }
-        else if (txtVooSaida.Text.Trim() == "")
+        else if (ddlVooSaida.SelectedValue.Trim() == "")
         {
             return false;
         }
@@ -67,7 +67,7 @@ public partial class CADASTRAR_FICHA : System.Web.UI.Page
         {
             return false;
         }
-        else if (txtHotel.Text.Trim() == "")
+        else if (ddlHotel.SelectedValue.Trim() == "")
         {
             return false;
         }
@@ -138,16 +138,16 @@ public partial class CADASTRAR_FICHA : System.Web.UI.Page
                 cmd.Parameters.Add(new SqlParameter("@A", SqlDbType.NChar)).Value = txtCodFicha.Text.Trim();
                 cmd.Parameters.Add(new SqlParameter("@B", SqlDbType.NChar)).Value = txtDataChegada.Text.Trim();
                 cmd.Parameters.Add(new SqlParameter("@C", SqlDbType.NChar)).Value = txtDataSaida.Text.Trim();
-                cmd.Parameters.Add(new SqlParameter("@D", SqlDbType.NChar)).Value = txtVooChegada.Text.Trim();
+                cmd.Parameters.Add(new SqlParameter("@D", SqlDbType.BigInt)).Value = Convert.ToInt64(ddlVooChegada.SelectedValue.ToString());
                 cmd.Parameters.Add(new SqlParameter("@E", SqlDbType.NChar)).Value = txtVooHoraChegada.Text.Trim();
-                cmd.Parameters.Add(new SqlParameter("@F", SqlDbType.NChar)).Value = txtVooSaida.Text.Trim();
+                cmd.Parameters.Add(new SqlParameter("@F", SqlDbType.BigInt)).Value = Convert.ToInt64(ddlVooSaida.SelectedValue.ToString());
                 cmd.Parameters.Add(new SqlParameter("@G", SqlDbType.NChar)).Value = txtVooHoraSaida.Text.Trim();
                 cmd.Parameters.Add(new SqlParameter("@H", SqlDbType.NChar)).Value = txtAeroportoChegada.Text.Trim();
                 cmd.Parameters.Add(new SqlParameter("@I", SqlDbType.NChar)).Value = txtAeroportoSaida.Text.Trim();
                 cmd.Parameters.Add(new SqlParameter("@J", SqlDbType.NChar)).Value = txtCodExcursao.Text.Trim();
                 cmd.Parameters.Add(new SqlParameter("@L", SqlDbType.BigInt)).Value = Convert.ToInt64(ddlAgencia.SelectedValue.ToString());
                 cmd.Parameters.Add(new SqlParameter("@M", SqlDbType.NChar)).Value = txtRecibo.Text.Trim();
-                cmd.Parameters.Add(new SqlParameter("@N", SqlDbType.NChar)).Value = txtHotel.Text.Trim();
+                cmd.Parameters.Add(new SqlParameter("@N", SqlDbType.BigInt)).Value = Convert.ToInt64(ddlHotel.SelectedValue.ToString());
                 cmd.Parameters.Add(new SqlParameter("@O", SqlDbType.NChar)).Value = txtApartamento.Text.Trim();
                 cmd.Parameters.Add(new SqlParameter("@P", SqlDbType.NChar)).Value = txtSaidaHotel.Text.Trim();
                 conn.Open();
@@ -182,6 +182,7 @@ public partial class CADASTRAR_FICHA : System.Web.UI.Page
     {
         if (!IsPostBack)
         {
+            // POPULATE AGENCIAS DROP DOWN LIST
             Agencias c = new Agencias();
             List<Agencias> details = c.GetAgenciasCombo();
 
@@ -190,11 +191,39 @@ public partial class CADASTRAR_FICHA : System.Web.UI.Page
             ddlAgencia.DataSource = details;
             ddlAgencia.DataBind();
 
-           loadDataTables();
+           //loadDataTables();
 
+            // POPULATE VOOS CHEGADA DROP DOWN LIST
+            Voos vc = new Voos();
+            List<Voos> vcdetails = vc.GetVooChegadaCombo();
+
+            ddlVooChegada.DataTextField = "SIGLA";
+            ddlVooChegada.DataValueField = "ID";
+            ddlVooChegada.DataSource = vcdetails;
+            ddlVooChegada.DataBind();
+
+            // POPULATE VOOS SAIDA DROP DOWN LIST
+            Voos vs = new Voos();
+            List<Voos> vsdetails = vs.GetVooSaidaCombo();
+
+            ddlVooSaida.DataTextField = "SIGLA";
+            ddlVooSaida.DataValueField = "ID";
+            ddlVooSaida.DataSource = vsdetails;
+            ddlVooSaida.DataBind();
+                        
+            // POPULATE HOTEIS DROP DOWN LIST
+            Hoteis h = new Hoteis();
+            List<Hoteis> hdetails = h.GetHoteisCombo();
+
+            ddlHotel.DataTextField = "NOME";
+            ddlHotel.DataValueField = "ID";
+            ddlHotel.DataSource = hdetails;
+            ddlHotel.DataBind();
         }
 
     }
+
+    
 
     private void loadTablePAX()
     {

@@ -13,4 +13,8 @@ public partial class LISTAR_PRESTADORES : System.Web.UI.Page
         grvData.DataSource = c.GetPrestadores();
         grvData.DataBind();
     }
+    protected void lnkNew_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("CADASTRAR_PRESTADOR.aspx");
+    }
 }

@@ -1,27 +1,14 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true"
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="false"
     CodeFile="CADASTRAR_VENDEDOR.aspx.cs" Inherits="CADASTRAR_VENDEDOR" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="Server">
-    <style type="text/css">
-        .style1
-        {
-            width: 100%;
-        }
-        .style2
-        {
-    }
-    .style3
-    {
-        width: 150px;
-    }
-    </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="Server">
+    <div class="headd">
     <table class="style1">
         <tr>
-            <td class="style2" colspan="2">
+            <td colspan="2">
                 <asp:Label ID="Label1" runat="server" Font-Bold="True" Font-Size="Large" Text="Cadastrar Vendedor"></asp:Label>
-                &nbsp;
             </td>
         </tr>
         <tr>
@@ -57,12 +44,11 @@
             </td>
         </tr>
         <tr>
-            <td class="style3">
-                &nbsp;
-            </td>
-            <td>
-                <asp:Button ID="btnVendedor" runat="server" Text="Adicionar Vendedor" OnClick="btnVendedor_Click" />
+            <td colspan="2">
+                <asp:LinkButton ID="btnVendedor" runat="server" onclick="btnVendedor_Click">[Adicionar Vendedor]</asp:LinkButton>
+                &nbsp;<asp:LinkButton ID="btnVoltar" runat="server" OnClick="btnVoltar_Click">[Voltar]</asp:LinkButton>
             </td>
         </tr>
     </table>
+    </div>
 </asp:Content>

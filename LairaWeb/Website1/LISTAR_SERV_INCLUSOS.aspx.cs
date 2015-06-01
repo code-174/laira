@@ -13,4 +13,8 @@ public partial class LISTAR_SERV_INCLUSOS : System.Web.UI.Page
         grvData.DataSource = c.GetServInclusos();
         grvData.DataBind();
     }
+    protected void lnkNew_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("CADASTRAR_SERV_INCLUSO.aspx");
+    }
 }

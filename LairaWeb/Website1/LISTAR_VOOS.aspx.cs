@@ -13,4 +13,8 @@ public partial class LISTAR_VOOS : System.Web.UI.Page
         grvData.DataSource = c.GetVoos();
         grvData.DataBind();
     }
+    protected void lnkNew_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("CADASTRAR_VOO.aspx");
+    }
 }

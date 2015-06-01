@@ -91,5 +91,10 @@ public partial class CADASTRAR_VENDEDOR : System.Web.UI.Page
         }
     }
 
-  
+
+
+    protected void btnVoltar_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("MENU_ADMINISTRACAO.aspx");
+    }
 }

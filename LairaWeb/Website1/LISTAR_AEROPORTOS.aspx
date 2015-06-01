@@ -4,10 +4,10 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="Server">
-    <asp:LinkButton ID="lnkNew" runat="server" onclick="lnkNew_Click" >[Cadastrar Aeroporto]</asp:LinkButton>
-    <asp:LinkButton ID="lnkImprimir" runat="server" OnClientClick="javascript:CallPrint('divPrint');">[Imprimir]</asp:LinkButton>
     <div id="divPrint">
         <asp:GridView ID="grvData" runat="server">
         </asp:GridView>
     </div>
+    <asp:LinkButton ID="lnkNew" runat="server" OnClick="lnkNew_Click">[Cadastrar Aeroporto]</asp:LinkButton>
+    &nbsp;<asp:LinkButton ID="lnkImprimir" runat="server" OnClientClick="javascript:CallPrint('divPrint');">[Imprimir]</asp:LinkButton>
 </asp:Content>

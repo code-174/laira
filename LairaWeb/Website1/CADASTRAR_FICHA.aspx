@@ -81,7 +81,8 @@
                 <asp:Label ID="Label3" runat="server" Text="Voo Chegada / Hora"></asp:Label>
             </td>
             <td class="style3">
-                <asp:TextBox ID="txtVooChegada" runat="server"></asp:TextBox>
+                <asp:DropDownList ID="ddlVooChegada" runat="server">
+                </asp:DropDownList>
             </td>
             <td class="style7">
                 <asp:TextBox ID="txtVooHoraChegada" runat="server" Width="75px"></asp:TextBox>
@@ -90,7 +91,8 @@
                 <asp:Label ID="Label9" runat="server" Text="Voo Saída / Hora"></asp:Label>
             </td>
             <td class="style6">
-                <asp:TextBox ID="txtVooSaida" runat="server"></asp:TextBox>
+                <asp:DropDownList ID="ddlVooSaida" runat="server">
+                </asp:DropDownList>
             </td>
             <td style="margin-left: 40px">
                 <asp:TextBox ID="txtVooHoraSaida" runat="server" Width="75px"></asp:TextBox>
@@ -151,7 +153,8 @@
                 <asp:Label ID="Label12" runat="server" Text="Hotel"></asp:Label>
             </td>
             <td class="style6">
-                <asp:TextBox ID="txtHotel" runat="server"></asp:TextBox>
+                <asp:DropDownList ID="ddlHotel" runat="server">
+                </asp:DropDownList>
             </td>
             <td>
                 &nbsp;
@@ -208,7 +211,7 @@
         </tr>
         <tr>
             <td colspan="2">
-                <asp:GridView Visible="true" ID="grvData" runat="server" AutoGenerateColumns="False">
+                <asp:GridView Visible="true" ID="grvData" runat="server" ShowFooter=false AutoGenerateColumns="False">
                     <Columns>
                         <asp:TemplateField HeaderText="Nome">
                             <ItemTemplate>
@@ -261,10 +264,10 @@
     </table>
     <table>
         <tr>
-           <td colspan="2">
+            <td colspan="2">
                 <asp:GridView Visible="true" ID="grvData1" runat="server" AutoGenerateColumns="False">
                     <Columns>
-                        <asp:TemplateField HeaderText="Local" >
+                        <asp:TemplateField HeaderText="Local">
                             <ItemTemplate>
                                 <asp:DropDownList ID="IDNome" Width="300px" runat="server" />
                             </ItemTemplate>
@@ -279,20 +282,17 @@
                                 <asp:TextBox ID="IDOrgao" runat="server" />
                             </ItemTemplate>
                         </asp:TemplateField>
-                       
-                        <asp:TemplateField HeaderText="" HeaderStyle-HorizontalAlign ="Center">
+                        <asp:TemplateField HeaderText="" HeaderStyle-HorizontalAlign="Center">
                             <ItemTemplate>
-                                <asp:ImageButton ID="btnAdd" runat="server" AlternateText="Adicionar" 
-                                    Style="width: 80%" ImageUrl="~/Figuras/icon_plus.gif" />
-                                     <%--<asp:LinkButton ID="LinkButton1" runat="server" AlternateText="Adicionar" ImageAlign="Middle"
+                                <asp:ImageButton ID="btnAdd" runat="server" AlternateText="Adicionar" Style="width: 80%"
+                                    ImageUrl="~/Figuras/icon_plus.gif" />
+                                <%--<asp:LinkButton ID="LinkButton1" runat="server" AlternateText="Adicionar" ImageAlign="Middle"
                                     Text="Adicionar" />--%>
-                                    
                             </ItemTemplate>
                         </asp:TemplateField>
                     </Columns>
                     <AlternatingRowStyle BackColor="PaleTurquoise" ForeColor="DarkBlue" Font-Italic="false" />
                 </asp:GridView>
-
             </td>
         </tr>
     </table>

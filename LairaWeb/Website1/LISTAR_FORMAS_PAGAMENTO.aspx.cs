@@ -13,4 +13,8 @@ public partial class LISTAR_FORMAS_PAGAMENTO : System.Web.UI.Page
         grvData.DataSource = c.GetFormasPagamento();
         grvData.DataBind();
     }
+    protected void lnkNew_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("CADASTRAR_FORMA_PAGAMENTO.aspx");
+    }
 }

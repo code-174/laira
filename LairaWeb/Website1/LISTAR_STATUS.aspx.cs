@@ -14,4 +14,8 @@ public partial class LISTAR_STATUS : System.Web.UI.Page
         grvData.DataBind();
 
     }
+    protected void lnkNew_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("CADASTRAR_STATUS.aspx");
+    }
 }

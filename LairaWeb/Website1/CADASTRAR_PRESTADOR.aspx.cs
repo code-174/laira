@@ -92,6 +92,11 @@ public partial class CADASTRAR_PRESTADOR : System.Web.UI.Page
             Page.ClientScript.RegisterClientScriptBlock(this.Page.GetType(), "Alerta", "<script language='javascript'>window.alert('Favor preencher os campos!');</script>", false);
         }
     }
-    
-    
+
+
+
+    protected void btnVoltar_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("MENU_ADMINISTRACAO.aspx");
+    }
 }
