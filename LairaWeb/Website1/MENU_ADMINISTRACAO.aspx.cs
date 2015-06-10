@@ -17,10 +17,10 @@ public partial class MENU_ADMINISTRACAO : System.Web.UI.Page
         switch (dllSelected)
         {
             case "aer":
-                Response.Redirect("LISTAR_AEROPORTOS.aspx");
+                Response.Redirect("LISTAR_AEROPORTOS.aspx?Codigo=");
                 break;
             case "age":
-                Response.Redirect("LISTAR_AGENCIAS.aspx");
+                Response.Redirect("LISTAR_AGENCIAS.aspx?Codigo=");
                 break;
             case "dep":
                 Response.Redirect("LISTAR_DEPOIMENTOS.aspx");
@@ -108,5 +108,62 @@ public partial class MENU_ADMINISTRACAO : System.Web.UI.Page
             default:
                 break;
         }
+    }
+    protected void btnLocalizar_Click(object sender, EventArgs e)
+    {
+        string Busca = "?Codigo=" + txtLocalizar.Text.ToUpper().ToString();
+
+        if (txtLocalizar.Text.ToUpper().ToString() == "?Codigo=")
+        {
+            Busca = "";
+        }
+
+        string dllSelected = ddlListar.SelectedValue;
+        switch (dllSelected)
+        {
+            case "aer":
+                Response.Redirect("LISTAR_AEROPORTOS.aspx" + Busca);
+                break;
+            case "age":
+                Response.Redirect("LISTAR_AGENCIAS.aspx" + Busca);
+                break;
+            case "dep":
+                Response.Redirect("LISTAR_DEPOIMENTOS.aspx" + Busca);
+                break;
+            case "for":
+                Response.Redirect("LISTAR_FORMAS_PAGAMENTO.aspx" + Busca);
+                break;
+            case "hot":
+                Response.Redirect("LISTAR_HOTEIS.aspx" + Busca);
+                break;
+            case "pre":
+                Response.Redirect("LISTAR_PRESTADORES.aspx" + Busca);
+                break;
+            case "sea":
+                Response.Redirect("LISTAR_SERV_ADC.aspx" + Busca);
+                break;
+            case "inc":
+                Response.Redirect("LISTAR_INCOMING.aspx" + Busca);
+                break;
+            case "sei":
+                Response.Redirect("LISTAR_SERV_INCLUSOS.aspx");
+                break;
+            case "sta":
+                Response.Redirect("LISTAR_STATUS.aspx");
+                break;
+            case "usu":
+                Response.Redirect("LISTAR_AEROPORTOS.aspx");
+                break;
+            case "ven":
+                Response.Redirect("LISTAR_VENDEDORES.aspx");
+                break;
+            case "voo":
+                Response.Redirect("LISTAR_VOOS.aspx");
+                break;
+
+            default:
+                break;
+        }
+
     }
 }

@@ -94,7 +94,8 @@
                 <asp:TextBox ID="txtLocalizar" runat="server"></asp:TextBox>
             </td>
             <td>
-                <asp:Button ID="btnLocalizar" runat="server" Text="Localizar" />
+                <asp:Button ID="btnLocalizar" runat="server" Text="Localizar" 
+                    onclick="btnLocalizar_Click" />
             </td>
         </tr>
     </table>

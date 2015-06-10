@@ -41,7 +41,7 @@ public class Agencias
         conn.ConnectionString = ConfigurationManager.ConnectionStrings["LairaWebDB"].ConnectionString;
         cmd.Connection = conn;
         StringBuilder str = new StringBuilder();
-        str.AppendLine(" select CODIGO_AGENCIA, NOME_AGENCIA, CONTATOS_AGENCIA, TELEFONE_AGENCIA, EMAIL_AGENCIA from AGENCIAS ");
+        str.AppendLine(" select ID_AGENCIA, CODIGO_AGENCIA, NOME_AGENCIA, CONTATOS_AGENCIA, TELEFONE_AGENCIA, EMAIL_AGENCIA from AGENCIAS ");
         cmd.CommandText = str.ToString();
         conn.Open();
         SqlDataReader reader = cmd.ExecuteReader();
@@ -50,11 +50,12 @@ public class Agencias
         {
             Agencias Agencia = new Agencias
             {
-                CODIGO = reader.GetString(0),
-                NOME = reader.GetString(1),
-                CONTATOS = reader.GetString(2),
-                TELEFONE = reader.GetString(3),
-                EMAIL = reader.GetString(4)
+                ID = reader.GetInt64(0),
+                CODIGO = reader.GetString(1),
+                NOME = reader.GetString(2),
+                CONTATOS = reader.GetString(3),
+                TELEFONE = reader.GetString(4),
+                EMAIL = reader.GetString(5)
             };
 
             xList.Add(Agencia);
@@ -91,5 +92,37 @@ public class Agencias
 
         return xList;
 
+    }
+
+    public List<Agencias> GetAgenciasByCode(string strQuery)
+    {
+        List<Agencias> xList = new List<Agencias>();
+
+        SqlCommand cmd = new SqlCommand();
+        SqlConnection conn = new SqlConnection();
+        conn.ConnectionString = ConfigurationManager.ConnectionStrings["LairaWebDB"].ConnectionString;
+        cmd.Connection = conn;
+        StringBuilder str = new StringBuilder();
+        str.AppendLine(" select ID_AGENCIA, CODIGO_AGENCIA, NOME_AGENCIA, CONTATOS_AGENCIA, TELEFONE_AGENCIA, EMAIL_AGENCIA from AGENCIAS WHERE UPPER(CODIGO_AGENCIA) LIKE '%" + strQuery + "%'");
+        cmd.CommandText = str.ToString();
+        conn.Open();
+        SqlDataReader reader = cmd.ExecuteReader();
+
+        while (reader.Read())
+        {
+            Agencias Agencia = new Agencias
+            {
+                ID = reader.GetInt64(0),
+                CODIGO = reader.GetString(1),
+                NOME = reader.GetString(2),
+                CONTATOS = reader.GetString(3),
+                TELEFONE = reader.GetString(4),
+                EMAIL = reader.GetString(5)
+            };
+
+            xList.Add(Agencia);
+        }
+
+        return xList;
     }
 }

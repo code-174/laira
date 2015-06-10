@@ -9,9 +9,25 @@ public partial class LISTAR_AEROPORTOS : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        Aeroportos c = new Aeroportos();
-        grvData.DataSource = c.GetAeroportos();
-        grvData.DataBind();
+
+
+        if (!IsPostBack)
+        {
+            string Codigo = Request.QueryString["Codigo"];
+
+            if (Codigo.Trim().ToString() == "")
+            {
+                Aeroportos c = new Aeroportos();
+                grvData.DataSource = c.GetAeroportos();
+                grvData.DataBind();
+            }
+            else
+            {
+                Aeroportos c = new Aeroportos();
+                grvData.DataSource = c.GetAeroportosByCode(Codigo);
+                grvData.DataBind();
+            }
+        }
     }
     protected void lnkNew_Click(object sender, EventArgs e)
     {

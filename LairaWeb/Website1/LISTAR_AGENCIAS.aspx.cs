@@ -12,13 +12,26 @@ public partial class LISTAR_AGENCIAS : System.Web.UI.Page
 
         if (!IsPostBack)
         {
-            Agencias c = new Agencias();
-            grvData.DataSource = c.GetAgencias();
-            grvData.DataBind();
+            string Codigo = Request.QueryString["Codigo"];
+
+            if (Codigo.Trim().ToString() == "")
+            {
+                Agencias c = new Agencias();
+                grvData.DataSource = c.GetAgencias();
+                grvData.DataBind();
+
+            }
+            else
+            {
+                Agencias c = new Agencias();
+                grvData.DataSource = c.GetAgenciasByCode(Codigo);
+                grvData.DataBind();
+
+            }
 
         }
-        
-        
+
+
     }
     protected void lnkNew_Click(object sender, EventArgs e)
     {

@@ -14,7 +14,7 @@ public partial class Account_Login : System.Web.UI.Page
 
     protected void btnOK_Click(object sender, EventArgs e)
     {
-        Response.Redirect("../Default.aspx"); 
+        Response.Redirect("../MENU_FICHAS.aspx"); 
 
     }
 }
