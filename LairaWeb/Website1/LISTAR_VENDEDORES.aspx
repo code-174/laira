@@ -4,47 +4,38 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="Server">
-    <asp:LinkButton ID="lnkImprimir" runat="server" OnClientClick="javascript:CallPrint('divPrint');">[Imprimir]</asp:LinkButton>
-    <div id="divPrint">
-        <asp:GridView ID="grvData" runat="server" AutoGenerateColumns="False">
-            <Columns>
-                <%--  <asp:TemplateField HeaderText="Select">
-            <ItemTemplate>
-                <asp:ImageButton ID="imgconciliado" runat="server" 
-					AlternateText="Img" ImageAlign="Right" style="width:5%"
-					ImageUrl="Figuras\logo_laira_site.png" />
-            </ItemTemplate>
-            <HeaderTemplate>
-                <input id="chkAll"  
-                runat="server" type="checkbox" />
-            </HeaderTemplate>							  
-	   </asp:TemplateField>--%>
-                <asp:BoundField HeaderText="Codigo" DataField="CODIGO" ReadOnly="TRUE" />
-                <asp:BoundField HeaderText="Nome" Visible="TRUE" DataField="NOME" />
-                <asp:BoundField HeaderText="Telefone" Visible="TRUE" DataField="TELEFONE" />
-                <asp:BoundField HeaderText="Celular" Visible="TRUE" DataField="CELULAR" />
-                <asp:TemplateField HeaderText="Editar">
-                    <ItemTemplate>
-                        <asp:ImageButton ID="imgEditar" runat="server" AlternateText="Img" ImageAlign="Middle"
-                            Style="width: 35%" ImageUrl="Figuras\logo_laira_site.png" />
-                    </ItemTemplate>
-                </asp:TemplateField>
-                <asp:TemplateField HeaderText="Excluir">
-                    <ItemTemplate>
-                        <asp:ImageButton ID="imgExcluir" runat="server" AlternateText="Img" ImageAlign="Middle"
-                            Style="width: 35%" ImageUrl="Figuras\logo_laira_site.png" />
-                    </ItemTemplate>
-                </asp:TemplateField>
-                <%--<asp:BoundField HeaderText="Data" DataField="_data" dataformatstring="{0:dd/MM/yyyy}" htmlencode="false"  />--%>
-                <%-- <asp:TemplateField HeaderText="Conciliado?">
-			<ItemTemplate>
-				<asp:ImageButton ID="imgconciliado" runat="server" 
-					AlternateText="Conciliado" ImageAlign="Right" style="width:25%"
-					ImageUrl="Images\ok.png" />
-			</ItemTemplate>
-		</asp:TemplateField>  --%>
-            </Columns>
-            <AlternatingRowStyle BackColor="PaleTurquoise" ForeColor="DarkBlue" Font-Italic="false" />
-        </asp:GridView>
+    <div class="container-fluid">
+        <fieldset>
+            <legend>Listar Vendedores</legend>
+            <form id="Form1" class="form col-md-7" runat="server">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <strong>Busca interna:</strong></div>
+                <div class="panel-body">
+                    <div class="form-inline">
+                        <label class="sr-only" for="txtNome">
+                            Nome:</label>
+                        <asp:TextBox ID="txtNome" runat="server" class="form-control" placeholder="Nome"></asp:TextBox>
+                        <label class="sr-only" for="txtPaginas">
+                            Total de resultados por página:</label>
+                        <asp:TextBox ID="txtPaginas" runat="server" class="form-control" placeholder="Resultados por página"></asp:TextBox>
+                        <asp:LinkButton ID="lnkFiltrar" runat="server" class="btn btn-success" OnClick="lnkFiltrar_Click">
+                        <span class="glyphicon glyphicon-ok-sign"></span> Processar
+                        </asp:LinkButton>
+                    </div>
+                </div>
+            </div>
+            <div id="divPrint">
+                <asp:GridView ID="grvData" runat="server" class="table">
+                </asp:GridView>
+            </div>
+            <div class="btn-group btn-group-justified">
+                <asp:LinkButton ID="lnkNew" runat="server" OnClick="lnkNew_Click" class="btn btn-primary">Adicionar Vendedor</asp:LinkButton>
+                <asp:LinkButton ID="lnkImprimir" runat="server" OnClientClick="javascript:CallPrint('divPrint');"
+                    class="btn btn-info">Imprimir</asp:LinkButton>
+                <asp:LinkButton ID="lnkVoltar" runat="server" OnClick="lnkVoltar_Click" class="btn btn-warning">Voltar</asp:LinkButton>
+            </div>
+            </form>
+        </fieldset>
     </div>
 </asp:Content>

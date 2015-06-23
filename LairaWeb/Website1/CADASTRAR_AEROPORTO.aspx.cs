@@ -27,9 +27,9 @@ public partial class INCLUIR_AEROPORTO : System.Web.UI.Page
     }
 
 
-        
 
-    protected void btnAdAeroporto_Click(object sender, EventArgs e)
+
+    protected void lnkAdAeroporto_Click(object sender, EventArgs e)
     {
         if (VerificarCampos())
         {
@@ -77,7 +77,7 @@ public partial class INCLUIR_AEROPORTO : System.Web.UI.Page
             Page.ClientScript.RegisterClientScriptBlock(this.Page.GetType(), "Alerta", "<script language='javascript'>window.alert('Favor preencher os campos!');</script>", false);
         }
     }
-    protected void btnVoltar_Click(object sender, EventArgs e)
+    protected void lnkVoltar_Click(object sender, EventArgs e)
     {
         Response.Redirect("MENU_ADMINISTRACAO.aspx");
     }

@@ -4,36 +4,32 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="Server">
-    <div class="headd">
-        <table class="style1">
-            <tr>
-                <td colspan="2">
-                    <asp:Label ID="Label1" runat="server" Font-Size="Large" Text="Cadastrar Aeroporto"
-                        Font-Bold="True"></asp:Label>
-                </td>
-            </tr>
-            <tr>
-                <td class="style3">
-                    <asp:Label ID="Label2" runat="server" Text="Nome"></asp:Label>
-                </td>
-                <td>
-                    <asp:TextBox ID="txtNomeAeroporto" runat="server"></asp:TextBox>
-                </td>
-            </tr>
-            <tr>
-                <td class="style3">
-                    <asp:Label ID="Label3" runat="server" Text="Sigla"></asp:Label>
-                </td>
-                <td>
-                    <asp:TextBox ID="txtSiglaAeroporto" runat="server"></asp:TextBox>
-                </td>
-            </tr>
-            <tr>
-                <td class="style3" colspan="2">
-                    <asp:LinkButton ID="btnAdAeroporto" runat="server" OnClick="btnAdAeroporto_Click">[Adicionar Aeroporto]</asp:LinkButton>
-                    &nbsp;<asp:LinkButton ID="btnVoltar" runat="server" OnClick="btnVoltar_Click">[Voltar]</asp:LinkButton>
-                </td>
-            </tr>
-        </table>
+    <div class="container-fluid">
+        <fieldset>
+            <legend>Cadastrar Aeroporto</legend>
+            <form class="form-horizontal col-md-7" runat="server">
+            <div class="form-group">
+                <label for="txtNomeAeroporto" class="control-label col-md-2">
+                    Nome</label>
+                <div class="col-md-7">
+                    <asp:TextBox ID="txtNomeAeroporto" runat="server" class="form-control"></asp:TextBox>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="txtSiglaAeroporto" class="control-label col-md-2">
+                    Sigla</label>
+                <div class="col-md-7">
+                    <asp:TextBox ID="txtSiglaAeroporto" runat="server" class="form-control"></asp:TextBox>
+                </div>
+            </div>
+            <div class="col-md-6 col-md-offset-2">
+            <div class="btn-group btn-group-justified">
+                <asp:LinkButton ID="lnkAdAeroporto" runat="server" OnClick="lnkAdAeroporto_Click"
+                    class="btn btn-primary">Adicionar Aeroporto</asp:LinkButton>
+                <asp:LinkButton ID="lnkVoltar" runat="server" OnClick="lnkVoltar_Click" class="btn btn-warning">Voltar</asp:LinkButton>
+            </div>
+            </div>
+            </form>
+        </fieldset>
     </div>
 </asp:Content>

@@ -51,11 +51,11 @@ public class Agencias
             Agencias Agencia = new Agencias
             {
                 ID = reader.GetInt64(0),
-                CODIGO = reader.GetString(1),
-                NOME = reader.GetString(2),
-                CONTATOS = reader.GetString(3),
-                TELEFONE = reader.GetString(4),
-                EMAIL = reader.GetString(5)
+                CODIGO = reader.IsDBNull(1) ? null : reader.GetString(1),
+                NOME = reader.IsDBNull(2) ? null : reader.GetString(2),
+                CONTATOS = reader.IsDBNull(3) ? null : reader.GetString(3),
+                TELEFONE = reader.IsDBNull(4) ? null : reader.GetString(4),
+                EMAIL = reader.IsDBNull(5) ? null : reader.GetString(5)
             };
 
             xList.Add(Agencia);
@@ -84,7 +84,7 @@ public class Agencias
             Agencias Agencia = new Agencias
             {
                 ID = reader.GetInt64(0),
-                NOME = reader.GetString(1)
+                NOME = reader.IsDBNull(1) ? null : reader.GetString(1)
             };
 
             xList.Add(Agencia);
@@ -113,11 +113,11 @@ public class Agencias
             Agencias Agencia = new Agencias
             {
                 ID = reader.GetInt64(0),
-                CODIGO = reader.GetString(1),
-                NOME = reader.GetString(2),
-                CONTATOS = reader.GetString(3),
-                TELEFONE = reader.GetString(4),
-                EMAIL = reader.GetString(5)
+                CODIGO = reader.IsDBNull(1) ? null : reader.GetString(1),
+                NOME = reader.IsDBNull(2) ? null : reader.GetString(2),
+                CONTATOS = reader.IsDBNull(3) ? null : reader.GetString(3),
+                TELEFONE = reader.IsDBNull(4) ? null : reader.GetString(4),
+                EMAIL = reader.IsDBNull(5) ? null : reader.GetString(5)
             };
 
             xList.Add(Agencia);

@@ -46,8 +46,8 @@ public class Status
         {
             Status Stat = new Status
             {
-                CODIGO = reader.GetString(0),
-                STATUS = reader.GetString(1)
+                CODIGO = reader.IsDBNull(0) ? null : reader.GetString(0),
+                STATUS = reader.IsDBNull(1) ? null : reader.GetString(1)
             };
 
             xList.Add(Stat);

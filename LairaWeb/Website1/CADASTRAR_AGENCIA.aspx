@@ -4,123 +4,108 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="Server">
-    <div class="headd">
-        <table class="style1">
-            <tr>
-                <td colspan="2">
-                    <asp:Label ID="Label1" runat="server" Font-Bold="True" Font-Size="Large" Text="Cadastrar Agência"></asp:Label>
-                </td>
-            </tr>
-            <tr>
-                <td class="style3">
-                    <asp:Label ID="Label14" runat="server" Text="Código da Agência"></asp:Label>
-                </td>
-                <td>
-                    <asp:TextBox ID="txtCodAgencia" runat="server"></asp:TextBox>
-                </td>
-            </tr>
-            <tr>
-                <td class="style3">
-                    <asp:Label ID="Label2" runat="server" Text="Razão Social"></asp:Label>
-                </td>
-                <td>
-                    <asp:TextBox ID="txtRazaoSocial" runat="server"></asp:TextBox>
-                </td>
-            </tr>
-            <tr>
-                <td class="style3">
-                    <asp:Label ID="Label3" runat="server" Text="Nome"></asp:Label>
-                </td>
-                <td>
-                    <asp:TextBox ID="txtNome" runat="server"></asp:TextBox>
-                </td>
-            </tr>
-            <tr>
-                <td class="style3">
-                    <asp:Label ID="Label4" runat="server" Text="Endereço"></asp:Label>
-                </td>
-                <td>
-                    <asp:TextBox ID="txtEndereco" runat="server"></asp:TextBox>
-                </td>
-            </tr>
-            <tr>
-                <td class="style3">
-                    <asp:Label ID="Label5" runat="server" Text="Bairro"></asp:Label>
-                </td>
-                <td>
-                    <asp:TextBox ID="txtBairro" runat="server"></asp:TextBox>
-                </td>
-            </tr>
-            <tr>
-                <td class="style3">
-                    <asp:Label ID="Label6" runat="server" Text="Cidade"></asp:Label>
-                </td>
-                <td>
-                    <asp:TextBox ID="txtCidade" runat="server"></asp:TextBox>
-                </td>
-            </tr>
-            <tr>
-                <td class="style3">
-                    <asp:Label ID="Label7" runat="server" Text="UF"></asp:Label>
-                </td>
-                <td>
-                    <asp:TextBox ID="txtUF" runat="server"></asp:TextBox>
-                </td>
-            </tr>
-            <tr>
-                <td class="style3">
-                    <asp:Label ID="Label8" runat="server" Text="CEP"></asp:Label>
-                </td>
-                <td>
-                    <asp:TextBox ID="txtCEP" runat="server"></asp:TextBox>
-                </td>
-            </tr>
-            <tr>
-                <td class="style3">
-                    <asp:Label ID="Label9" runat="server" Text="CNPJ"></asp:Label>
-                </td>
-                <td>
-                    <asp:TextBox ID="txtCNPJ" runat="server"></asp:TextBox>
-                </td>
-            </tr>
-            <tr>
-                <td class="style3">
-                    <asp:Label ID="Label10" runat="server" Text="Inscrição municipal"></asp:Label>
-                </td>
-                <td>
-                    <asp:TextBox ID="txtInscrMun" runat="server"></asp:TextBox>
-                </td>
-            </tr>
-            <tr>
-                <td class="style3">
-                    <asp:Label ID="Label11" runat="server" Text="Contatos"></asp:Label>
-                </td>
-                <td>
-                    <asp:TextBox ID="txtContatos" runat="server"></asp:TextBox>
-                </td>
-            </tr>
-            <tr>
-                <td class="style3">
-                    <asp:Label ID="Label12" runat="server" Text="Telefone"></asp:Label>
-                </td>
-                <td>
-                    <asp:TextBox ID="txtTelefone" runat="server"></asp:TextBox>
-                </td>
-            </tr>
-            <tr>
-                <td class="style3">
-                    <asp:Label ID="Label13" runat="server" Text="Email"></asp:Label>
-                </td>
-                <td>
-                    <asp:TextBox ID="txtEmail" runat="server"></asp:TextBox>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="2">
-                    <asp:LinkButton ID="btnAdAgencia" runat="server" OnClick="btnAdAgencia_Click">[Adicionar Agência]</asp:LinkButton>
-                    &nbsp;<asp:LinkButton ID="btnVoltar" runat="server" OnClick="btnVoltar_Click">[Voltar]</asp:LinkButton>
-                </td>
-            </tr>
-        </table>
+    <div class="container-fluid">
+        <fieldset>
+            <legend>Cadastrar Agência</legend>
+            <form id="Form2" class="form-horizontal col-md-7" runat="server">
+            <div class="form-group">
+                <label for="txtCodAgencia" class="control-label col-md-2">
+                    Cód. Agência</label>
+                <div class="col-md-7">
+                    <asp:TextBox ID="txtCodAgencia" runat="server" class="form-control"></asp:TextBox>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="txtRazaoSocial" class="control-label col-md-2">
+                    Razão Social</label>
+                <div class="col-md-7">
+                    <asp:TextBox ID="txtRazaoSocial" runat="server" class="form-control"></asp:TextBox>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="txtNome" class="control-label col-md-2">
+                    Nome</label>
+                <div class="col-md-7">
+                    <asp:TextBox ID="txtNome" runat="server" class="form-control"></asp:TextBox>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="txtEndereco" class="control-label col-md-2">
+                    Endereço</label>
+                <div class="col-md-7">
+                    <asp:TextBox ID="txtEndereco" runat="server" class="form-control"></asp:TextBox>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="txtBairro" class="control-label col-md-2">
+                    Bairro</label>
+                <div class="col-md-7">
+                    <asp:TextBox ID="txtBairro" runat="server" class="form-control"></asp:TextBox>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="txtCidade" class="control-label col-md-2">
+                    Cidade</label>
+                <div class="col-md-7">
+                    <asp:TextBox ID="txtCidade" runat="server" class="form-control"></asp:TextBox>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="txtUF" class="control-label col-md-2">
+                    UF</label>
+                <div class="col-md-7">
+                    <asp:TextBox ID="txtUF" runat="server" class="form-control"></asp:TextBox>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="txtCEP" class="control-label col-md-2">
+                    CEP</label>
+                <div class="col-md-7">
+                    <asp:TextBox ID="txtCEP" runat="server" class="form-control"></asp:TextBox>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="txtCNPJ" class="control-label col-md-2">
+                    CNPJ</label>
+                <div class="col-md-7">
+                    <asp:TextBox ID="txtCNPJ" runat="server" class="form-control"></asp:TextBox>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="txtInscrMun" class="control-label col-md-2">
+                    Inscr. Mun.</label>
+                <div class="col-md-7">
+                    <asp:TextBox ID="txtInscrMun" runat="server" class="form-control"></asp:TextBox>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="txtContatos" class="control-label col-md-2">
+                    Contatos</label>
+                <div class="col-md-7">
+                    <asp:TextBox ID="txtContatos" runat="server" class="form-control"></asp:TextBox>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="txtTelefone" class="control-label col-md-2">
+                    Telefone</label>
+                <div class="col-md-7">
+                    <asp:TextBox ID="txtTelefone" runat="server" class="form-control"></asp:TextBox>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="txtEmail" class="control-label col-md-2">
+                    Email</label>
+                <div class="col-md-7">
+                    <asp:TextBox ID="txtEmail" runat="server" class="form-control"></asp:TextBox>
+                </div>
+            </div>
+            <div class="col-md-6 col-md-offset-2">
+                <div class="btn-group btn-group-justified">
+                    <asp:LinkButton ID="lnkAdAgencia" runat="server" OnClick="lnkAdAgencia_Click" class="btn btn-primary">Adicionar Agência</asp:LinkButton>
+                    <asp:LinkButton ID="lnkVoltar" runat="server" OnClick="lnkVoltar_Click" class="btn btn-warning">Voltar</asp:LinkButton>
+                </div>
+            </div>
+            </form>
+        </fieldset>
     </div>
 </asp:Content>

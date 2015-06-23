@@ -17,4 +17,12 @@ public partial class LISTAR_SERV_INCLUSOS : System.Web.UI.Page
     {
         Response.Redirect("CADASTRAR_SERV_INCLUSO.aspx");
     }
+    protected void lnkVoltar_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("MENU_ADMINISTRACAO.aspx");
+    }
+    protected void lnkFiltrar_Click(object sender, EventArgs e)
+    {
+        // TO DO
+    }
 }

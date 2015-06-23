@@ -51,12 +51,12 @@ public class Hoteis
         {
             Hoteis Hotel = new Hoteis
             {
-                CODIGO = reader.GetString(0),
-                NOME = reader.GetString(1),
-                ENDERECO = reader.GetString(2),
-                EMAIL = reader.GetString(3),
-                TELEFONE = reader.GetString(4),
-                HORA = reader.GetString(5)
+                CODIGO = reader.IsDBNull(0) ? null : reader.GetString(0),
+                NOME = reader.IsDBNull(1) ? null : reader.GetString(1),
+                ENDERECO = reader.IsDBNull(2) ? null : reader.GetString(2),
+                EMAIL = reader.IsDBNull(3) ? null : reader.GetString(3),
+                TELEFONE = reader.IsDBNull(4) ? null : reader.GetString(4),
+                HORA = reader.IsDBNull(5) ? null : reader.GetString(5)
             };
 
             xList.Add(Hotel);
@@ -83,7 +83,7 @@ public class Hoteis
             Hoteis Hotel = new Hoteis
             {
                 ID = reader.GetInt64(0),
-                NOME = reader.GetString(1)
+                NOME = reader.IsDBNull(1) ? null : reader.GetString(1)
             };
 
             xList.Add(Hotel);

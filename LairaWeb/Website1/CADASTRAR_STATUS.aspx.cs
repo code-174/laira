@@ -25,7 +25,7 @@ public partial class CADASTRAR_STATUS : System.Web.UI.Page
         
         return true;
     }
-    protected void btnAdStatus_Click(object sender, EventArgs e)
+    protected void lnkAdStatus_Click(object sender, EventArgs e)
     {
         if (VerificarCampos())
         {
@@ -73,7 +73,7 @@ public partial class CADASTRAR_STATUS : System.Web.UI.Page
         }
     }
 
-    protected void btnVoltar_Click(object sender, EventArgs e)
+    protected void lnkVoltar_Click(object sender, EventArgs e)
     {
         Response.Redirect("MENU_ADMINISTRACAO.aspx");
     }

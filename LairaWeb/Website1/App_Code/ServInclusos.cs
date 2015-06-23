@@ -47,9 +47,9 @@ public class ServInclusos
         {
             ServInclusos ServicoInclusos = new ServInclusos
             {
-                CODIGO = reader.GetString(0),
-                SERVICO = reader.GetString(1),
-                PRECO = reader.GetString(2)
+                CODIGO = reader.IsDBNull(0) ? null : reader.GetString(0),
+                SERVICO = reader.IsDBNull(1) ? null : reader.GetString(1),
+                PRECO = reader.IsDBNull(2) ? null : reader.GetString(2)
             };
 
             xList.Add(ServicoInclusos);

@@ -41,7 +41,7 @@ public partial class CADASTRAR_HOTEL : System.Web.UI.Page
         return true;
     }
 
-    protected void  btnAdHotel_Click(object sender, EventArgs e)
+   protected void lnkAdHotel_Click(object sender, EventArgs e)
 {
     if (VerificarCampos())
     {
@@ -100,7 +100,7 @@ public partial class CADASTRAR_HOTEL : System.Web.UI.Page
     }
 }
 
-    protected void btnVoltar_Click(object sender, EventArgs e)
+   protected void lnkVoltar_Click(object sender, EventArgs e)
     {
         Response.Redirect("MENU_ADMINISTRACAO.aspx");
     }

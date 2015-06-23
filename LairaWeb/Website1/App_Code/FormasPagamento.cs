@@ -47,9 +47,9 @@ public class FormasPagamento
         {
             FormasPagamento FormaPag = new FormasPagamento
             {
-                CODIGO = reader.GetString(0),
-                FORMA_PAG = reader.GetString(1),
-                TIPO = reader.GetString(2),                
+                CODIGO = reader.IsDBNull(0) ? null : reader.GetString(0),
+                FORMA_PAG = reader.IsDBNull(1) ? null : reader.GetString(1),
+                TIPO = reader.IsDBNull(2) ? null : reader.GetString(2),                
             };
 
             xList.Add(FormaPag);

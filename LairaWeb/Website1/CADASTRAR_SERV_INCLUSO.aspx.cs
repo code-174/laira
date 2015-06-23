@@ -29,7 +29,7 @@ public partial class CADASTRAR_SERV_INCLUSO : System.Web.UI.Page
 
         return true;
     }
-    protected void btnAdServ_Click(object sender, EventArgs e)
+    protected void lnkAdServ_Click(object sender, EventArgs e)
     {
         if (VerificarCampos())
         {
@@ -80,7 +80,7 @@ public partial class CADASTRAR_SERV_INCLUSO : System.Web.UI.Page
     }
 
 
-    protected void btnVoltar_Click(object sender, EventArgs e)
+    protected void lnkVoltar_Click(object sender, EventArgs e)
     {
         Response.Redirect("MENU_ADMINISTRACAO.aspx");
     }

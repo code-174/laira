@@ -14,4 +14,16 @@ public partial class LISTAR_VENDEDORES : System.Web.UI.Page
         grvData.DataBind();
 
     }
+    protected void lnkNew_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("CADASTRAR_VENDEDOR.aspx");
+    }
+    protected void lnkVoltar_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("MENU_ADMINISTRACAO.aspx");
+    }
+    protected void lnkFiltrar_Click(object sender, EventArgs e)
+    {
+        // TO DO
+    }
 }

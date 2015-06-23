@@ -1,145 +1,83 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true" CodeFile="MENU_FICHAS.aspx.cs" Inherits="MENU_FICHAS" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true"
+    CodeFile="MENU_FICHAS.aspx.cs" Inherits="MENU_FICHAS" %>
 
-<%@ Register src="WebControls/wucFiltrosFichas.ascx" tagname="wucFiltrosFichas" tagprefix="uc1" %>
-
-<asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" Runat="Server">
- 
+<asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="Server">
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" Runat="Server">
-    <style type="text/css">
-    .style1
-    {
-        width: 100%;
-    }
-    .style3
-    {
-        height: 29px;
-    }
-    .style4
-    {
-        width: 201px;
-    }
-    .style5
-    {
-        width: 200px;
-    }
-</style>
- <table class="style1">
-    <tr>
-        <td class="style3" colspan="2">
-            <asp:Label ID="Label1" runat="server" Font-Bold="True" Font-Size="Large" 
-                Text="Fichas"></asp:Label>
-        </td>
-    </tr>
-    <tr>
-        <td class="style4">
-            <asp:Label ID="Label2" runat="server" Text="Cadastrar Ficha"></asp:Label>
-        </td>
-        <td>
-            <asp:Button ID="btnCadastrarFicha" runat="server" Text="Ok" onclick="btnCadastrarFicha_Click" 
-                />
-        </td>
-    </tr>
-</table>
-<p>
-</p>
-<table class="style1">
-    <tr>
-        <td class="style5">
-            <asp:Label ID="Label3" runat="server" Text="Listar Ficha"></asp:Label>
-        </td>
-        <td>
-            &nbsp;</td>
-    </tr>
-    <tr>
-        <td class="style5">
-            <asp:RadioButtonList ID="RadioButtonList1" runat="server">
-                <asp:ListItem>Chegada</asp:ListItem>
-                <asp:ListItem Value="Saida">Saída</asp:ListItem>
-            </asp:RadioButtonList>
-        </td>
-        <td>
-            &nbsp;</td>
-    </tr>
-    <tr>
-        <td class="style5">
-            <asp:TextBox ID="txtListarFicha" runat="server"></asp:TextBox>
-        </td>
-        <td>
-            <asp:Button ID="btnListarFicha" runat="server" Text="Ok" />
-        </td>
-    </tr>
-</table>
-<p>
-</p>
-<table class="style1">
-    <tr>
-        <td class="style5">
-            <asp:Label ID="Label5" runat="server" Text="Relatório"></asp:Label>
-        </td>
-        <td>
-            &nbsp;</td>
-    </tr>
-    <tr>
-        <td class="style5">
-            <asp:RadioButtonList ID="RadioButtonList2" runat="server">
-                <asp:ListItem>Chegada</asp:ListItem>
-                <asp:ListItem Value="Saida">Saída</asp:ListItem>
-            </asp:RadioButtonList>
-        </td>
-        <td>
-            &nbsp;</td>
-    </tr>
-    <tr>
-        <td class="style5">
-            <asp:TextBox ID="txtDataRelatorio" runat="server"></asp:TextBox>
-        </td>
-        <td>
-            <asp:Button ID="btnRelatorio" runat="server" Text="Ok" />
-        </td>
-    </tr>
-</table>
-<p>
-</p>
-<table class="style1">
-    <tr>
-        <td class="style5">
-            <asp:Label ID="Label6" runat="server" Text="Localizar"></asp:Label>
-        </td>
-        <td>
-            &nbsp;</td>
-    </tr>
-    <tr>
-        <td class="style5">
-            <asp:RadioButtonList ID="RadioButtonList3" runat="server">
-                <asp:ListItem Value="Numero">Número</asp:ListItem>
-                <asp:ListItem Value="CodExc">Cod. Excursão</asp:ListItem>
-            </asp:RadioButtonList>
-        </td>
-        <td>
-            &nbsp;</td>
-    </tr>
-    <tr>
-        <td class="style5">
-            <asp:TextBox ID="txtLocalizar" runat="server"></asp:TextBox>
-        </td>
-        <td>
-            <asp:Button ID="btnLocalizar" runat="server" Text="Ok" />
-        </td>
-    </tr>
-    <tr>
-        <td class="style5">
-            &nbsp;</td>
-        <td>
-            &nbsp;</td>
-    </tr>
-    <tr>
-        <td class="style5">
-            &nbsp;</td>
-        <td>
-            &nbsp;</td>
-    </tr>
-</table>
-   
+<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="Server">
+    <div class="container-fluid">
+        <fieldset>
+            <legend>Fichas</legend>
+            <form id="Form1" class="form col-md-4" runat="server">
+            <div class="well">
+                <div class="form-group">
+                    <a href="CADASTRAR_FICHA.aspx" class="btn btn-primary btn-lg btn-block">Cadastrar Ficha
+                    </a>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Listar Ficha</div>
+                <div class="panel-body">
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="optradio">Chegada</label>
+                    </div>
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="optradio">Saída</label>
+                    </div>
+                    <div class="form-group col-xs-5">
+                        <input type="text" class="form-control" id="txtData">
+                    </div>
+                    <div>
+                        <a href="CADASTRAR_FICHA.aspx" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-arrow-right">
+                        </span></a>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Relatório</div>
+                <div class="panel-body">
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="optradio">Chegada</label>
+                    </div>
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="optradio">Saída</label>
+                    </div>
+                    <div class="form-group col-xs-5">
+                        <input type="text" class="form-control" id="Text1">
+                    </div>
+                    <div>
+                        <a href="CADASTRAR_FICHA.aspx" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-arrow-right">
+                        </span></a>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Localizar</div>
+                <div class="panel-body">
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="optradio">Número</label>
+                    </div>
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="optradio">Cod. Excursão</label>
+                    </div>
+                    <div class="form-group col-xs-5">
+                        <input type="text" class="form-control" id="Text2">
+                    </div>
+                    <div>
+                        <a href="CADASTRAR_FICHA.aspx" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-arrow-right">
+                        </span></a>
+                    </div>
+                </div>
+            </div>
+            </form>
+        </fieldset>
+    </div>
 </asp:Content>
-

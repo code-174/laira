@@ -44,11 +44,12 @@ public class Vendedores
         while (reader.Read())
         {
             Vendedores Vendedor = new Vendedores
-             {
-                 CODIGO = reader.GetString(0),
-                 NOME = reader.GetString(1),
-                 TELEFONE = reader.GetString(2),
-                 CELULAR = reader.GetString(3)
+             {                 
+                 CODIGO = reader.IsDBNull(0) ? null : reader.GetString(0),
+                 NOME = reader.IsDBNull(1) ? null : reader.GetString(1),
+                 TELEFONE = reader.IsDBNull(2) ? null : reader.GetString(2),
+                 CELULAR = reader.IsDBNull(3) ? null : reader.GetString(3),
+
              };
 
             xList.Add(Vendedor);

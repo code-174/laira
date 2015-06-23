@@ -4,51 +4,46 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="Server">
-    <div class="headd">
-        <table class="style1">
-            <tr>
-                <td colspan="2">
-                    <asp:Label ID="Label1" runat="server" Font-Bold="True" Font-Size="Large" Text="Cadastrar Depoimento"></asp:Label>                   
-                </td>
-            </tr>
-            <tr>
-                <td class="style3">
-                    <asp:Label ID="Label8" runat="server" Text="Código Depoimento"></asp:Label>
-                </td>
-                <td>
-                    <asp:TextBox ID="txtCodDepoimento" runat="server" Style="margin-left: 0px"></asp:TextBox>
-                </td>
-            </tr>
-            <tr>
-                <td class="style3">
-                    <asp:Label ID="Label3" runat="server" Text="Nome"></asp:Label>
-                </td>
-                <td>
-                    <asp:TextBox ID="txtNome" runat="server"></asp:TextBox>
-                </td>
-            </tr>
-            <tr>
-                <td class="style3">
-                    <asp:Label ID="Label6" runat="server" Text="Cidade"></asp:Label>
-                </td>
-                <td>
-                    <asp:TextBox ID="txtCidade" runat="server"></asp:TextBox>
-                </td>
-            </tr>
-            <tr>
-                <td class="style3">
-                    <asp:Label ID="Label7" runat="server" Text="Depoimento"></asp:Label>
-                </td>
-                <td>
-                    <asp:TextBox ID="txtDepoimento" runat="server"></asp:TextBox>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="2">
-                    <asp:LinkButton ID="btnAdDepoimento" runat="server" OnClick="btnAdDepoimento_Click">[Adicionar Depoimento]</asp:LinkButton>
-                    &nbsp;<asp:LinkButton ID="btnVoltar" runat="server" OnClick="btnVoltar_Click">[Voltar]</asp:LinkButton>
-                </td>
-            </tr>
-        </table>
+    <div class="container-fluid">
+        <fieldset>
+            <legend>Cadastrar Depoimento</legend>
+            <form id="Form1" class="form-horizontal col-md-7" runat="server">
+            <div class="form-group">
+                <label for="txtNomeAeroporto" class="control-label col-md-2">
+                    Cod. Depoimento</label>
+                <div class="col-md-7">
+                    <asp:TextBox ID="txtCodDepoimento" runat="server" class="form-control"></asp:TextBox>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="txtNomeAeroporto" class="control-label col-md-2">
+                    Nome</label>
+                <div class="col-md-7">
+                    <asp:TextBox ID="txtNome" runat="server" class="form-control"></asp:TextBox>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="txtNomeAeroporto" class="control-label col-md-2">
+                    Cidade</label>
+                <div class="col-md-7">
+                    <asp:TextBox ID="txtCidade" runat="server" class="form-control"></asp:TextBox>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="txtNomeAeroporto" class="control-label col-md-2">
+                    Depoimento</label>
+                <div class="col-md-7">
+                    <asp:TextBox ID="txtDepoimento" runat="server" class="form-control"></asp:TextBox>
+                </div>
+            </div>
+            <div class="col-md-6 col-md-offset-2">
+                <div class="btn-group btn-group-justified">
+                    <asp:LinkButton ID="lnkAdDepoimento" runat="server" OnClick="lnkAdDepoimento_Click"
+                        class="btn btn-primary">Adicionar Depoimento</asp:LinkButton>
+                    <asp:LinkButton ID="lnkVoltar" runat="server" OnClick="lnkVoltar_Click" class="btn btn-warning">Voltar</asp:LinkButton>
+                </div>
+            </div>
+            </form>
+        </fieldset>
     </div>
 </asp:Content>

@@ -47,9 +47,9 @@ public class ServAdc
         {
             ServAdc ServicoAdicional = new ServAdc
             {
-                CODIGO = reader.GetString(0),
-                PASSEIO = reader.GetString(1),
-                PRECO = reader.GetString(2)
+                CODIGO = reader.IsDBNull(0) ? null : reader.GetString(0),
+                PASSEIO = reader.IsDBNull(1) ? null : reader.GetString(1),
+                PRECO = reader.IsDBNull(2) ? null : reader.GetString(2)
             };
 
             xList.Add(ServicoAdicional);

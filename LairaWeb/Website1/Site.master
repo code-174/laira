@@ -1,10 +1,15 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="Site.master.cs" Inherits="SiteMaster" %>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head runat="server">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>Laira Tours</title>
-    <link href="Styles/Site.css" rel="stylesheet" type="text/css" />
+    <%--<link href="Styles/Site.css" rel="stylesheet" type="text/css" />--%>
+    <link href="Styles/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <link id="Link1" runat="server" rel="shortcut icon" href="~/favicon.ico" type="image/x-icon" />
     <link id="Link2" runat="server" rel="icon" href="~/favicon.ico" type="image/ico" />
     <script language="javascript" type="text/javascript">
@@ -22,58 +27,48 @@
             WinPrint.close();
             prtContent.innerHTML = strOldOne;
         } 
-
     </script>
     <asp:ContentPlaceHolder ID="HeadContent" runat="server">
     </asp:ContentPlaceHolder>
 </head>
-<body runat="server">
-    <form runat="server">
-    <div class="page">
-        <div class="header">
-            <div class="title">
-                <h1>
-                    Laira Tours
-                </h1>
-            </div>
-            <div class="loginDisplay">
-                <asp:LoginView ID="HeadLoginView" runat="server" EnableViewState="false">
-                    <AnonymousTemplate>
-                        [ <a href="~/Account/Login.aspx" id="HeadLoginStatus" runat="server">Acessar Painel</a>
-                        ]
-                    </AnonymousTemplate>
-                    <LoggedInTemplate>
-                        Welcome <span class="bold">
-                            <asp:LoginName ID="HeadLoginName" runat="server" />
-                        </span>! [
-                        <asp:LoginStatus ID="HeadLoginStatus" runat="server" LogoutAction="Redirect" LogoutText="Sair"
-                            LogoutPageUrl="~/" />
-                        ]
-                    </LoggedInTemplate>
-                </asp:LoginView>
-            </div>
-            <div class="clear hideSkiplink">
-                <asp:Menu ID="NavigationMenu" runat="server" CssClass="menu" EnableViewState="false"
-                    IncludeStyleBlock="false" Orientation="Horizontal">
-                    <Items>
-                        <asp:MenuItem NavigateUrl="~/MENU_FICHAS.aspx" Text="Fichas" />
-                        <asp:MenuItem NavigateUrl="~/MENU_ORD_SERV.aspx" Text="Ordem de Serviço" />
-                        <asp:MenuItem NavigateUrl="~/MENU_ORD_SERV_ADC.aspx" Text="Ordem de Serviço Adicional" />
-                        <asp:MenuItem NavigateUrl="~/MENU_COMUNICADOS.aspx" Text="Comunicados" Value="Comunicados" />
-                        <asp:MenuItem NavigateUrl="~/MENU_FINANCEIRO.aspx" Text="Financeiro" />
-                        <asp:MenuItem NavigateUrl="~/MENU_ADMINISTRACAO.aspx" Text="Administração" />
-                    </Items>
-                </asp:Menu>
-            </div>
-        </div>
-        <div class="main">
-            <asp:ContentPlaceHolder ID="MainContent" runat="server" />
-        </div>
-        <div class="clear">
-        </div>
+<body>
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">Laira Tours</a>
+       <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
     </div>
+    <div class="navbar-collapse collapse" id="navbar-main">
+    <div>
+      <ul class="nav navbar-nav">
+        <li><a href="MENU_FICHAS.aspx">Fichas</a></li>
+        <li><a href="MENU_ORD_SERV.aspx">Ordem de Serviço</a></li>
+        <li><a href="MENU_ORD_SERV_ADC.aspx">Ordem de Serviço Adicional</a></li>
+        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Comunicados<span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Passeio</a></li>
+            <li><a href="#">Transfer Out</a></li>            
+          </ul>
+        </li>
+        <li><a href="MENU_FINANCEIRO.aspx">Financeiro</a></li>
+        <li><a href="MENU_ADMINISTRACAO.aspx">Administração</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+    <div class="main">
+        <asp:ContentPlaceHolder ID="MainContent" runat="server" />
+    </div>
+    <div class="clear">
+    </div>    
     <div class="footer">
     </div>
-    </form>
+    <script src="Scripts/jquery-1.11.3.js" type="text/javascript"></script>
+    <script src="js/bootstrap.min.js" type="text/javascript"></script>
 </body>
 </html>

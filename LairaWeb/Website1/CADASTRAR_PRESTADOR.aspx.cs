@@ -37,7 +37,7 @@ public partial class CADASTRAR_PRESTADOR : System.Web.UI.Page
 
         return true;
     }
-    protected void btnAdPrestador_Click(object sender, EventArgs e)
+    protected void lnkAdPrestador_Click(object sender, EventArgs e)
     {
         if (VerificarCampos())
         {
@@ -95,7 +95,7 @@ public partial class CADASTRAR_PRESTADOR : System.Web.UI.Page
 
 
 
-    protected void btnVoltar_Click(object sender, EventArgs e)
+    protected void lnkVoltar_Click(object sender, EventArgs e)
     {
         Response.Redirect("MENU_ADMINISTRACAO.aspx");
     }

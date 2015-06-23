@@ -48,10 +48,10 @@ public class Depoimentos
         {
             Depoimentos Depoimento = new Depoimentos
             {
-                CODIGO = reader.GetString(0),
-                NOME = reader.GetString(1),
-                CIDADE = reader.GetString(2),
-                DEPOIMENTO = reader.GetString(3)
+                CODIGO = reader.IsDBNull(0) ? null : reader.GetString(0),
+                NOME = reader.IsDBNull(1) ? null : reader.GetString(1),
+                CIDADE = reader.IsDBNull(2) ? null : reader.GetString(2),
+                DEPOIMENTO = reader.IsDBNull(3) ? null : reader.GetString(3)
             };
 
             xList.Add(Depoimento);

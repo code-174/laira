@@ -49,8 +49,8 @@ public class Aeroportos
         {
             Aeroportos Aeroporto = new Aeroportos
             {
-                CODIGO = reader.GetString(0),
-                NOME = reader.GetString(1)
+                CODIGO = reader.IsDBNull(0) ? null : reader.GetString(0),
+                NOME = reader.IsDBNull(1) ? null : reader.GetString(1)
             };
 
             xList.Add(Aeroporto);
@@ -82,8 +82,8 @@ public class Aeroportos
         {
             Aeroportos Aeroporto = new Aeroportos
             {
-                CODIGO = reader.GetString(0),
-                NOME = reader.GetString(1)
+                CODIGO = reader.IsDBNull(0) ? null : reader.GetString(0),
+                NOME = reader.IsDBNull(1) ? null : reader.GetString(1)
             };
 
             xList.Add(Aeroporto);

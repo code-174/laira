@@ -17,4 +17,12 @@ public partial class LISTAR_VOOS : System.Web.UI.Page
     {
         Response.Redirect("CADASTRAR_VOO.aspx");
     }
+    protected void lnkVoltar_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("MENU_ADMINISTRACAO.aspx");
+    }
+    protected void lnkFiltrar_Click(object sender, EventArgs e)
+    {
+        // TO DO
+    }
 }

@@ -48,11 +48,11 @@ public class Incoming
         {
             Incoming Incom = new Incoming
             {
-                CODIGO = reader.GetString(0),
-                NOME = reader.GetString(1),
-                EMPRESA = reader.GetString(2),
-                TELEFONE = reader.GetString(3),
-                EMAIL = reader.GetString(4)
+                CODIGO = reader.IsDBNull(0) ? null : reader.GetString(0),
+                NOME = reader.IsDBNull(1) ? null : reader.GetString(1),
+                EMPRESA = reader.IsDBNull(2) ? null : reader.GetString(2),
+                TELEFONE = reader.IsDBNull(3) ? null : reader.GetString(3),
+                EMAIL = reader.IsDBNull(4) ? null : reader.GetString(4)
             };
 
             xList.Add(Incom);

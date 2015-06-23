@@ -4,51 +4,45 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="Server">
-    <div class="headd">
-    <table class="style1">
-        <tr>
-            <td colspan="2">
-                <asp:Label ID="Label1" runat="server" Font-Bold="True" Font-Size="Large" Text="Cadastrar Vendedor"></asp:Label>
-            </td>
-        </tr>
-        <tr>
-            <td class="style3">
-                <asp:Label ID="Label14" runat="server" Text="Código do Vendedor"></asp:Label>
-            </td>
-            <td>
-                <asp:TextBox ID="txtCodigo" runat="server"></asp:TextBox>
-            </td>
-        </tr>
-        <tr>
-            <td class="style3">
-                <asp:Label ID="Label3" runat="server" Text="Nome"></asp:Label>
-            </td>
-            <td>
-                <asp:TextBox ID="txtNome" runat="server"></asp:TextBox>
-            </td>
-        </tr>
-        <tr>
-            <td class="style3">
-                <asp:Label ID="Label12" runat="server" Text="Telefone"></asp:Label>
-            </td>
-            <td>
-                <asp:TextBox ID="txtTelefone" runat="server"></asp:TextBox>
-            </td>
-        </tr>
-        <tr>
-            <td class="style3">
-                <asp:Label ID="Label13" runat="server" Text="Celular"></asp:Label>
-            </td>
-            <td>
-                <asp:TextBox ID="txtCelular" runat="server"></asp:TextBox>
-            </td>
-        </tr>
-        <tr>
-            <td colspan="2">
-                <asp:LinkButton ID="btnVendedor" runat="server" onclick="btnVendedor_Click">[Adicionar Vendedor]</asp:LinkButton>
-                &nbsp;<asp:LinkButton ID="btnVoltar" runat="server" OnClick="btnVoltar_Click">[Voltar]</asp:LinkButton>
-            </td>
-        </tr>
-    </table>
+    <div class="container-fluid">
+        <fieldset>
+            <legend>Cadastrar Vendedor</legend>
+            <form id="Form1" class="form-horizontal col-md-7" runat="server">
+            <div class="form-group">
+                <label for="txtCodigo" class="control-label col-md-2">
+                    Cod. Vendedor</label>
+                <div class="col-md-7">
+                    <asp:TextBox ID="txtCodigo" runat="server" class="form-control"></asp:TextBox>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="txtNome" class="control-label col-md-2">
+                    Nome</label>
+                <div class="col-md-7">
+                    <asp:TextBox ID="txtNome" runat="server" class="form-control"></asp:TextBox>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="txtTelefone" class="control-label col-md-2">
+                    Telefone</label>
+                <div class="col-md-7">
+                    <asp:TextBox ID="txtTelefone" runat="server" class="form-control"></asp:TextBox>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="txtCelular" class="control-label col-md-2">
+                    Celular</label>
+                <div class="col-md-7">
+                    <asp:TextBox ID="txtCelular" runat="server" class="form-control"></asp:TextBox>
+                </div>
+            </div>
+            <div class="col-md-6 col-md-offset-2">
+                <div class="btn-group btn-group-justified">
+                    <asp:LinkButton ID="lnkVendedor" runat="server" OnClick="lnkVendedor_Click" class="btn btn-primary">Adicionar Vendedor</asp:LinkButton>
+                    <asp:LinkButton ID="lnkVoltar" runat="server" OnClick="lnkVoltar_Click" class="btn btn-warning">Voltar</asp:LinkButton>
+                </div>
+            </div>
+            </form>
+        </fieldset>
     </div>
 </asp:Content>

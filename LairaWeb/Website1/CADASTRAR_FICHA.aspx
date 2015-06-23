@@ -1,299 +1,252 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true"
     CodeFile="CADASTRAR_FICHA.aspx.cs" Inherits="CADASTRAR_FICHA" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="Server">
-    <style type="text/css">
-        .style1
-        {
-            width: 100%;
-        }
-        .style2
-        {
-            width: 161px;
-        }
-        .style3
-        {
-            width: 175px;
-        }
-        .style5
-        {
-            width: 125px;
-        }
-        .style6
-        {
-            width: 173px;
-        }
-        .style7
-        {
-            width: 91px;
-        }
-    </style>
+<asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="Server">  
+<link href="Styles/Site.css" rel="stylesheet" type="text/css" /> 
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="Server">
-    <table class="style1">
-        <tr>
-            <td colspan="6">
-                <asp:Label ID="Label1" runat="server" Font-Bold="True" Font-Size="Large" Text="Cadastrar Ficha"></asp:Label>
-            </td>
-        </tr>
-        <tr>
-            <td class="style2">
-                <asp:Label runat="server" Text="Código da Ficha"></asp:Label>
-            </td>
-            <td class="style3">
-                <asp:TextBox ID="txtCodFicha" runat="server"></asp:TextBox>
-            </td>
-            <td class="style7">
-                &nbsp;
-            </td>
-            <td class="style5">
-                &nbsp;
-            </td>
-            <td class="style6">
-                &nbsp;
-            </td>
-            <td>
-                &nbsp;
-            </td>
-        </tr>
-        <tr>
-            <td class="style2">
-                <asp:Label ID="Label2" runat="server" Text="Data Chegada"></asp:Label>
-            </td>
-            <td class="style3">
-                <asp:TextBox ID="txtDataChegada" runat="server"></asp:TextBox>
-            </td>
-            <td class="style7">
-                &nbsp;
-            </td>
-            <td class="style5">
-                <asp:Label ID="Label8" runat="server" Text="Data Saída"></asp:Label>
-            </td>
-            <td class="style6">
-                <asp:TextBox ID="txtDataSaida" runat="server"></asp:TextBox>
-            </td>
-            <td>
-                &nbsp;
-            </td>
-        </tr>
-        <tr>
-            <td class="style2">
-                <asp:Label ID="Label3" runat="server" Text="Voo Chegada / Hora"></asp:Label>
-            </td>
-            <td class="style3">
-                <asp:DropDownList ID="ddlVooChegada" runat="server">
+<div class="container-fluid">
+        <fieldset>
+            <legend>Cadastrar Ficha</legend>
+            <form id="Form1" class="form-horizontal" runat="server">
+            <div class="form-inline">
+            <div class="row">
+                <div class="form-group col-md-2"> 
+                    <label for="txtCodFicha" class="control-label">Código da Ficha</label>            
+                    <asp:TextBox ID="txtCodFicha" runat="server" class="form-control col-md-offset-1"></asp:TextBox>
+                </div> 
+                </div>           
+                
+                
+                <div class="row voffset2">
+                <div class="form-group col-md-2">          
+                <label for="txtDataChegada" class="control-label">Data Chegada</label>           
+                <asp:TextBox ID="txtDataChegada" runat="server" class="form-control col-md-offset-1"></asp:TextBox>
+                </div>
+                <div class="form-group col-md-2">       
+                <label for="txtDataSaida" class="control-label">Data Saída</label>         
+                <asp:TextBox ID="txtDataSaida" runat="server" class="form-control col-md-offset-1"></asp:TextBox>                
+                </div>
+                </div>
+                
+                <div class="row voffset2">                
+                <div class="form-group col-md-2">           
+                <label for="ddlVooChegada"  class="control-label">Voo Chegada / Hora</label>           
+                <asp:DropDownList ID="ddlVooChegada" runat="server" class="form-control">
+                </asp:DropDownList>            
+                <asp:TextBox ID="txtVooHoraChegada" runat="server" class="form-control"></asp:TextBox>
+                </div>
+                <div class="form-group col-md-2">
+                <label for="ddlVooSaida"  class="control-label">Voo Saída / Hora</label>            
+                <asp:DropDownList ID="ddlVooSaida" runat="server" class="form-control">
+                </asp:DropDownList>           
+                <asp:TextBox ID="txtVooHoraSaida" runat="server" class="form-control"></asp:TextBox>
+                </div>
+                </div>                
+
+                <div class="row voffset2">
+                <div class="form-group col-md-2">
+                <label for="txtAeroportoChegada"  class="control-label">Aeroporto Chegada</label>            
+                <asp:TextBox ID="txtAeroportoChegada" runat="server" class="form-control"></asp:TextBox>
+                </div>
+                <div class="form-group col-md-2">                    
+                <label for="txtAeroportoSaida"  class="control-label">Aeroporto Saída</label>            
+                <asp:TextBox ID="txtAeroportoSaida" runat="server" class="form-control"></asp:TextBox>
+                </div>                
+                </div>
+                 
+                <div class="row voffset2">
+                <div class="form-group col-md-2">
+                <label for="txtCodExcursao"  class="control-label">Código Excursão</label>
+                <asp:TextBox ID="txtCodExcursao" runat="server" class="form-control"></asp:TextBox>
+                </div>
+                <div class="form-group col-md-3">
+                <label for="ddlAgencia"  class="control-label">Agência</label>
+                <asp:DropDownList ID="ddlAgencia" runat="server" class="form-control"></asp:DropDownList>
+                </div>                
+                </div>
+               
+                <div class="row voffset2">
+                <div class="form-group col-md-2">
+                <label for="txtRecibo"  class="control-label">Recibo</label>           
+                <asp:TextBox ID="txtRecibo" runat="server" class="form-control"></asp:TextBox>
+                </div>
+                <div class="form-group col-md-3">
+                <label for="ddlHotel"  class="control-label">Hotel</label>           
+                <asp:DropDownList ID="ddlHotel" runat="server" class="form-control">
                 </asp:DropDownList>
-            </td>
-            <td class="style7">
-                <asp:TextBox ID="txtVooHoraChegada" runat="server" Width="75px"></asp:TextBox>
-            </td>
-            <td class="style5">
-                <asp:Label ID="Label9" runat="server" Text="Voo Saída / Hora"></asp:Label>
-            </td>
-            <td class="style6">
-                <asp:DropDownList ID="ddlVooSaida" runat="server">
-                </asp:DropDownList>
-            </td>
-            <td style="margin-left: 40px">
-                <asp:TextBox ID="txtVooHoraSaida" runat="server" Width="75px"></asp:TextBox>
-            </td>
-        </tr>
-        <tr>
-            <td class="style2">
-                <asp:Label ID="Label4" runat="server" Text="Aeroporto Chegada"></asp:Label>
-            </td>
-            <td class="style3">
-                <asp:TextBox ID="txtAeroportoChegada" runat="server"></asp:TextBox>
-            </td>
-            <td class="style7">
-                &nbsp;
-            </td>
-            <td class="style5">
-                <asp:Label ID="Label10" runat="server" Text="Aeroporto Saída"></asp:Label>
-            </td>
-            <td class="style6">
-                <asp:TextBox ID="txtAeroportoSaida" runat="server"></asp:TextBox>
-            </td>
-            <td>
-                &nbsp;
-            </td>
-        </tr>
-        <tr>
-            <td class="style2">
-                <asp:Label ID="Label5" runat="server" Text="Código Excursão"></asp:Label>
-            </td>
-            <td class="style3">
-                <asp:TextBox ID="txtCodExcursao" runat="server"></asp:TextBox>
-            </td>
-            <td class="style7">
-                &nbsp;
-            </td>
-            <td class="style5">
-                <asp:Label ID="Label11" runat="server" Text="Agência"></asp:Label>
-            </td>
-            <td class="style6">
-                <asp:DropDownList ID="ddlAgencia" runat="server">
-                </asp:DropDownList>
-            </td>
-            <td>
-                &nbsp;
-            </td>
-        </tr>
-        <tr>
-            <td class="style2">
-                <asp:Label ID="Label6" runat="server" Text="Recibo"></asp:Label>
-            </td>
-            <td class="style3">
-                <asp:TextBox ID="txtRecibo" runat="server"></asp:TextBox>
-            </td>
-            <td class="style7">
-                &nbsp;
-            </td>
-            <td class="style5">
-                <asp:Label ID="Label12" runat="server" Text="Hotel"></asp:Label>
-            </td>
-            <td class="style6">
-                <asp:DropDownList ID="ddlHotel" runat="server">
-                </asp:DropDownList>
-            </td>
-            <td>
-                &nbsp;
-            </td>
-        </tr>
-        <tr>
-            <td class="style2">
-                <asp:Label ID="Label7" runat="server" Text="Apartamento"></asp:Label>
-            </td>
-            <td class="style3">
-                <asp:TextBox ID="txtApartamento" runat="server"></asp:TextBox>
-            </td>
-            <td class="style7">
-                &nbsp;
-            </td>
-            <td class="style5">
-                <asp:Label ID="Label13" runat="server" Text="Saída do Hotel"></asp:Label>
-            </td>
-            <td class="style6">
-                <asp:TextBox ID="txtSaidaHotel" runat="server"></asp:TextBox>
-            </td>
-            <td>
-                &nbsp;
-            </td>
-        </tr>
-        <tr>
-            <td class="style2">
-                &nbsp;
-            </td>
-            <td class="style3">
-                &nbsp;
-            </td>
-            <td class="style7">
-                &nbsp;
-            </td>
-            <td class="style5">
-                &nbsp;
-            </td>
-            <td class="style6">
+                </div>
+                </div>
+                
+                <div class="row voffset2">
+                <div class="form-group col-md-2">
+                <label for="txtApartamento"  class="control-label">Apartamento</label>            
+                <asp:TextBox ID="txtApartamento" runat="server" class="form-control"></asp:TextBox>
+                </div>
+                <div class="form-group col-md-3">
+                <label for="txtSaidaHotel"  class="control-label">Saída do Hotel</label>          
+                <asp:TextBox ID="txtSaidaHotel" runat="server" class="form-control"></asp:TextBox>
+                </div>
+                </div>
+                </div> <%--end form-inline--%>
+
+                <div class="row voffset3">
+           
                 <asp:LinkButton ID="btnAdFicha" runat="server" OnClick="btnAdFicha_Click">[Adicionar Ficha]</asp:LinkButton>
                 &nbsp;<asp:LinkButton ID="btnVoltar" runat="server" OnClick="btnVoltar_Click">[Voltar]</asp:LinkButton>
-            </td>
-            <td>
-                &nbsp;
-            </td>
-        </tr>
-    </table>
-    <table>
-        <tr>
-            <td colspan="2">
-                Passageiros(&nbsp;<asp:ImageButton runat="server" ImageUrl="~/Figuras/AddPAX.gif"
-                    OnClick="Unnamed2_Click" />&nbsp;clique aqui para adicionar pax)
-            </td>
-        </tr>
-        <tr>
-            <td colspan="2">
-                <asp:GridView Visible="true" ID="grvData" runat="server" ShowFooter=false AutoGenerateColumns="False">
+            
+                Passageiros(&nbsp;<asp:ImageButton runat="server" ImageUrl="~/Figuras/AddPAX.gif" />&nbsp;clique
+                aqui para adicionar pax)
+
+                </div>
+            
+                <asp:GridView ID="grvData" runat="server" ShowFooter="true" AutoGenerateColumns="false">
                     <Columns>
+                        <asp:BoundField DataField="#" HeaderText="#" />
                         <asp:TemplateField HeaderText="Nome">
                             <ItemTemplate>
-                                <asp:TextBox ID="IDNome" runat="server" />
+                                <asp:TextBox ID="txtNome" runat="server"></asp:TextBox>
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Identidade">
                             <ItemTemplate>
-                                <asp:TextBox ID="ID" runat="server" />
+                                <asp:TextBox ID="txtIdentidade" runat="server"></asp:TextBox>
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Orgao Exp">
                             <ItemTemplate>
-                                <asp:TextBox ID="IDOrgao" runat="server" />
+                                <asp:TextBox ID="txtOrgao" runat="server"></asp:TextBox>
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Telefone">
                             <ItemTemplate>
-                                <asp:TextBox ID="IDTelefone" runat="server" />
+                                <asp:TextBox ID="txtTelefone" runat="server"></asp:TextBox>
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Obs">
                             <ItemTemplate>
-                                <asp:TextBox ID="IDObs" runat="server" />
+                                <asp:TextBox ID="txtObs" runat="server"></asp:TextBox>
                             </ItemTemplate>
                         </asp:TemplateField>
-                        <asp:TemplateField HeaderText="">
+                        <asp:TemplateField HeaderText="Excluir">
                             <ItemTemplate>
-                                <asp:ImageButton ID="btnExcluir" runat="server" AlternateText="Excluir" ImageAlign="Middle"
-                                    Style="width: 80%" ImageUrl="~/Figuras/btn_Delete.gif" />
+                                <asp:ImageButton ID="lnkExcluir" runat="server" CommandName="Excluir" ImageUrl="~/Figuras/btn_Delete.gif"
+                                    ToolTip="Excluir a linha" />
                             </ItemTemplate>
+                            <FooterStyle HorizontalAlign="Right" />
+                            <FooterTemplate>
+                                <asp:Button ID="ButtonAdd" runat="server" Text="Adicionar PAX" OnClick="ButtonAdd_Click" />
+                            </FooterTemplate>
                         </asp:TemplateField>
                     </Columns>
-                    <AlternatingRowStyle BackColor="PaleTurquoise" ForeColor="DarkBlue" Font-Italic="false" />
                 </asp:GridView>
-            </td>
-        </tr>
-    </table>
-    <table>
-        <tr>
-            <td>
+            
                 Observacoes:
-            </td>
-        </tr>
-        <tr>
-            <td>
+            
                 <asp:TextBox TextMode="MultiLine" Width="745px" runat="server"></asp:TextBox>
-            </td>
-        </tr>
-    </table>
-    <table>
-        <tr>
-            <td colspan="2">
-                <asp:GridView Visible="true" ID="grvData1" runat="server" AutoGenerateColumns="False">
+           
+          <asp:GridView ID="grvServIn" runat="server" ShowFooter="true" AutoGenerateColumns="false" OnRowDataBound = "RowDataBound">
                     <Columns>
+                        <asp:BoundField DataField="#" HeaderText="#" />
                         <asp:TemplateField HeaderText="Local">
                             <ItemTemplate>
-                                <asp:DropDownList ID="IDNome" Width="300px" runat="server" />
+                                <asp:DropDownList ID="ddlLocal" runat="server"></asp:DropDownList>
                             </ItemTemplate>
                         </asp:TemplateField>
-                        <asp:TemplateField HeaderText="Valor" ControlStyle-BorderStyle="NotSet">
+                        <asp:TemplateField HeaderText="Valor">
                             <ItemTemplate>
-                                <asp:TextBox ID="ID" runat="server" />
+                                <asp:TextBox ID="txtValor" runat="server"></asp:TextBox>
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Pagamento">
                             <ItemTemplate>
-                                <asp:TextBox ID="IDOrgao" runat="server" />
+                                <asp:TextBox ID="txtPagamento" runat="server"></asp:TextBox>
                             </ItemTemplate>
                         </asp:TemplateField>
-                        <asp:TemplateField HeaderText="" HeaderStyle-HorizontalAlign="Center">
+                        <asp:TemplateField HeaderText="Excluir">
                             <ItemTemplate>
-                                <asp:ImageButton ID="btnAdd" runat="server" AlternateText="Adicionar" Style="width: 80%"
-                                    ImageUrl="~/Figuras/icon_plus.gif" />
-                                <%--<asp:LinkButton ID="LinkButton1" runat="server" AlternateText="Adicionar" ImageAlign="Middle"
-                                    Text="Adicionar" />--%>
+                                <asp:ImageButton ID="lnkExcluirServIn" runat="server" CommandName="Excluir" ImageUrl="~/Figuras/btn_Delete.gif"
+                                    ToolTip="Excluir a linha" />
                             </ItemTemplate>
+                            <FooterStyle HorizontalAlign="Right" />
+                            <FooterTemplate>
+                                <asp:Button ID="ButtonAddServIn" runat="server" Text="Adicionar" OnClick="ButtonAddServIn_Click" />
+                            </FooterTemplate>
                         </asp:TemplateField>
                     </Columns>
-                    <AlternatingRowStyle BackColor="PaleTurquoise" ForeColor="DarkBlue" Font-Italic="false" />
                 </asp:GridView>
-            </td>
-        </tr>
-    </table>
+       
+          <asp:GridView ID="grvServAd" runat="server" ShowFooter="true" AutoGenerateColumns="false" OnRowDataBound = "RowDataBound2">
+                    <Columns>
+                        <asp:BoundField DataField="#" HeaderText="#" />
+
+                          <asp:TemplateField HeaderText="Voucher">
+                            <ItemTemplate>
+                                <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+
+                        <asp:TemplateField HeaderText="Passeio">
+                            <ItemTemplate>
+                                <asp:DropDownList  CssClass=style1 ID="ddlPasseio" runat="server"></asp:DropDownList>
+                            </ItemTemplate>
+                        </asp:TemplateField>                        
+
+                          <asp:TemplateField HeaderText="Vendedor">
+                            <ItemTemplate>
+                                <asp:DropDownList  CssClass=style1 ID="ddlVendedor" runat="server"></asp:DropDownList>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+
+                        <asp:TemplateField HeaderText="Valor">
+                            <ItemTemplate>
+                                <asp:TextBox ID="TextBox4" runat="server"></asp:TextBox>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+
+                        <asp:TemplateField HeaderText="Data">
+                            <ItemTemplate>
+                                <asp:TextBox ID="TextBox5" runat="server"></asp:TextBox>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                           
+                          <asp:TemplateField HeaderText="Hora">
+                            <ItemTemplate>
+                                <asp:TextBox ID="TextBox6" runat="server"></asp:TextBox>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+
+                        <asp:TemplateField HeaderText="Pagamento">
+                            <ItemTemplate>
+                                <asp:DropDownList  CssClass=style1 ID="ddlPagamento" runat="server"></asp:DropDownList>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+
+                        <asp:TemplateField HeaderText="Status">
+                            <ItemTemplate>
+                                <asp:DropDownList CssClass=style1 ID="ddlStatus" runat="server"></asp:DropDownList>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+
+
+
+
+                        <asp:TemplateField HeaderText="Excluir">
+                            <ItemTemplate>
+                                <asp:ImageButton ID="lnkExcluirServIn" runat="server" CommandName="Excluir" ImageUrl="~/Figuras/btn_Delete.gif"
+                                    ToolTip="Excluir a linha" />
+                            </ItemTemplate>
+                            <FooterStyle HorizontalAlign="Right" />
+                            <FooterTemplate>
+                                <asp:Button ID="ButtonAddServIn" runat="server" Text="Adicionar" OnClick="ButtonAddServIn_Click" />
+                            </FooterTemplate>
+                        </asp:TemplateField>
+                    </Columns>
+                </asp:GridView>
+
+           </form>     
+        </fieldset>
+        
+    </div>
+       
 </asp:Content>

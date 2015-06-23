@@ -2,67 +2,55 @@
     CodeFile="CADASTRAR_PRESTADOR.aspx.cs" Inherits="CADASTRAR_PRESTADOR" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="Server">
-    <style type="text/css">
-        .style4
-        {
-            height: 21px;
-        }
-    </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="Server">
-    <div class="headd">
-        <table class="style1">
-            <tr>
-                <td colspan="2">
-                    <asp:Label ID="Label1" runat="server" Font-Bold="True" Font-Size="Large" Text="Cadastrar Prestador"></asp:Label>
-                </td>
-            </tr>
-            <tr>
-                <td class="style3">
-                    <asp:Label ID="Label14" runat="server" Text="Código do Prestador"></asp:Label>
-                </td>
-                <td>
-                    <asp:TextBox ID="txtCodPrestador" runat="server"></asp:TextBox>
-                </td>
-            </tr>
-            <tr>
-                <td class="style3">
-                    <asp:Label ID="Label3" runat="server" Text="Nome"></asp:Label>
-                </td>
-                <td>
-                    <asp:TextBox ID="txtNome" runat="server"></asp:TextBox>
-                </td>
-            </tr>
-            <tr>
-                <td class="style3">
-                    <asp:Label ID="Label12" runat="server" Text="Telefone"></asp:Label>
-                </td>
-                <td>
-                    <asp:TextBox ID="txtTelefone" runat="server"></asp:TextBox>
-                </td>
-            </tr>
-            <tr>
-                <td class="style3">
-                    <asp:Label ID="Label4" runat="server" Text="Endereço"></asp:Label>
-                </td>
-                <td>
-                    <asp:TextBox ID="txtEndereco" runat="server"></asp:TextBox>
-                </td>
-            </tr>
-            <tr>
-                <td class="style3">
-                    <asp:Label ID="Label13" runat="server" Text="Email"></asp:Label>
-                </td>
-                <td>
-                    <asp:TextBox ID="txtEmail" runat="server"></asp:TextBox>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="2">
-                    <asp:LinkButton ID="btnAdPrestador" runat="server" OnClick="btnAdPrestador_Click">[Adicionar Prestador]</asp:LinkButton>
-                    &nbsp;<asp:LinkButton ID="btnVoltar" runat="server" OnClick="btnVoltar_Click">[Voltar]</asp:LinkButton>
-                </td>
-            </tr>
-        </table>
+    <div class="container-fluid">
+        <fieldset>
+            <legend>Cadastrar Prestador</legend>
+            <form id="Form1" class="form-horizontal col-md-7" runat="server">
+            <div class="form-group">
+                <label for="txtCodPrestador" class="control-label col-md-2">
+                    Cod. Prestador</label>
+                <div class="col-md-7">
+                    <asp:TextBox ID="txtCodPrestador" runat="server" class="form-control"></asp:TextBox>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="txtNome" class="control-label col-md-2">
+                    Nome</label>
+                <div class="col-md-7">
+                    <asp:TextBox ID="txtNome" runat="server" class="form-control"></asp:TextBox>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="txtTelefone" class="control-label col-md-2">
+                    Telefone</label>
+                <div class="col-md-7">
+                    <asp:TextBox ID="txtTelefone" runat="server" class="form-control"></asp:TextBox>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="txtEndereco" class="control-label col-md-2">
+                    Endereço</label>
+                <div class="col-md-7">
+                    <asp:TextBox ID="txtEndereco" runat="server" class="form-control"></asp:TextBox>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="txtEmail" class="control-label col-md-2">
+                    Email</label>
+                <div class="col-md-7">
+                    <asp:TextBox ID="txtEmail" runat="server" class="form-control"></asp:TextBox>
+                </div>
+            </div>
+            <div class="col-md-6 col-md-offset-2">
+                <div class="btn-group btn-group-justified">
+                    <asp:LinkButton ID="lnkAdPrestador" runat="server" OnClick="lnkAdPrestador_Click"
+                        class="btn btn-primary">Adicionar Prestador</asp:LinkButton>
+                    <asp:LinkButton ID="lnkVoltar" runat="server" OnClick="lnkVoltar_Click" class="btn btn-warning">Voltar</asp:LinkButton>
+                </div>
+            </div>
+            </form>
+        </fieldset>
     </div>
 </asp:Content>

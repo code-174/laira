@@ -50,11 +50,11 @@ public class Voos
         {
             Voos Voo = new Voos
             {
-                NOME = reader.GetString(0),
-                SIGLA = reader.GetString(1),
-                HORA = reader.GetString(2),
-                AEROPORTO = reader.GetString(3),
-                TIPO = reader.GetString(4)
+                NOME = reader.IsDBNull(0) ? null : reader.GetString(0),
+                SIGLA = reader.IsDBNull(1) ? null : reader.GetString(1),
+                HORA = reader.IsDBNull(2) ? null : reader.GetString(2),
+                AEROPORTO = reader.IsDBNull(3) ? null : reader.GetString(3),
+                TIPO = reader.IsDBNull(4) ? null : reader.GetString(4)
             };
 
             xList.Add(Voo);
@@ -82,7 +82,7 @@ public class Voos
             Voos Voo = new Voos
             {
                 ID = reader.GetInt64(0),
-                SIGLA = reader.GetString(1)
+                SIGLA = reader.IsDBNull(1) ? null : reader.GetString(1)
             };
 
             xList.Add(Voo);
@@ -111,7 +111,7 @@ public class Voos
             Voos Voo = new Voos
             {
                 ID = reader.GetInt64(0),
-                SIGLA = reader.GetString(1)
+                SIGLA = reader.IsDBNull(1) ? null : reader.GetString(1)
             };
 
             xList.Add(Voo);

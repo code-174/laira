@@ -18,4 +18,12 @@ public partial class LISTAR_STATUS : System.Web.UI.Page
     {
         Response.Redirect("CADASTRAR_STATUS.aspx");
     }
+    protected void lnkVoltar_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("MENU_ADMINISTRACAO.aspx");
+    }
+    protected void lnkFiltrar_Click(object sender, EventArgs e)
+    {
+        // TO DO
+    }
 }
