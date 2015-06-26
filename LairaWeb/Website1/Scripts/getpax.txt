@@ -1,0 +1,40 @@
+
+CREATE   FUNCTION dbo.getpax (@fichaid INT)
+    RETURNS VARCHAR(3000)
+AS
+begin
+  declare @NOME_PASSAGEIRO varchar(3000)
+  declare @NOME_PASSAGEIRO_AUX varchar(3000)
+  
+  SET @NOME_PASSAGEIRO = ''
+  SET @NOME_PASSAGEIRO_AUX = ''
+
+DECLARE db_cursor CURSOR FOR  
+select NOME_PASSAGEIRO 
+                      from dbo.PASSAGEIROS p                      
+                      where p.FICHA_NO = @fichaid
+
+OPEN db_cursor  
+FETCH NEXT FROM db_cursor INTO @NOME_PASSAGEIRO  
+
+WHILE @@FETCH_STATUS = 0  
+BEGIN  
+		IF @NOME_PASSAGEIRO_AUX <> '' 
+		BEGIN
+		   SET @NOME_PASSAGEIRO_AUX = @NOME_PASSAGEIRO_AUX + ',' + @NOME_PASSAGEIRO    
+		END 
+		ELSE
+		BEGIN
+		 SET @NOME_PASSAGEIRO_AUX = @NOME_PASSAGEIRO    
+		END 
+	          
+       FETCH NEXT FROM db_cursor INTO @NOME_PASSAGEIRO  
+END  
+
+CLOSE db_cursor  
+DEALLOCATE db_cursor 
+
+
+  return @NOME_PASSAGEIRO_AUX
+  
+end 
