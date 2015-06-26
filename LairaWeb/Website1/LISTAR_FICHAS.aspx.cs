@@ -22,18 +22,35 @@ public partial class LISTAR_FICHAS : System.Web.UI.Page
                 grvData.DataSource = c.GetFichas(Codigo, Data);
                 grvData.DataBind();
 
-                if (Codigo == "1")
+                switch (Codigo)
                 {
-                    Titulo.InnerText = "Fichas de Chegada programadas";
+                    case "1":
+                        Titulo.InnerText = "Fichas de Chegadas programadas";
+                        break;
+                    case "2":
+                        Titulo.InnerText = "Fichas de Saídas programadas";
+                        break;
+                    case "3":
+                        Titulo.InnerText = "Relatorio de Chegadas programadas";
+                        break;
+                    case "4":
+                        Titulo.InnerText = "Relatorio de Saídas programadas";
+                        break;
+                    case "5":
+                        Titulo.InnerText = "Saídas programadas por No. Ficha";
+                        break;
+                    case "6":
+                        Titulo.InnerText = "Saídas programadas por Cod. Exc.";
+                        break;
+                    default:
+                        break;
+
                 }
-                else
-                    
-                    {
-                        Titulo.InnerText = "Fichas de Saída programadas";
-                    }
+
+
             }
 
-            
+
 
         }
     }

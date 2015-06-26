@@ -20,14 +20,16 @@
                 <div class="panel-body">
                     <div class="radio">
                         <label>
-                            <asp:RadioButton runat="server" AutoPostBack="true"  id="optradio1" OnCheckedChanged="optradio1_CheckedChanged" />Chegada</label>
+                            <asp:RadioButton runat="server" Checked="true" AutoPostBack="true" ID="optradio1"
+                                OnCheckedChanged="optradio1_CheckedChanged" />Chegada</label>
                     </div>
                     <div class="radio">
                         <label>
-                            <asp:RadioButton runat="server"  AutoPostBack="true" id="optradio2" OnCheckedChanged="optradio2_CheckedChanged" />Saída</label>
+                            <asp:RadioButton runat="server" Checked="false" AutoPostBack="true" ID="optradio2"
+                                OnCheckedChanged="optradio2_CheckedChanged" />Saída</label>
                     </div>
                     <div class="form-group col-xs-5">
-                        <asp:TextBox class="form-control" runat="server" id="txtDataFicha"></asp:TextBox>
+                        <asp:TextBox type="date" class="form-control" runat="server" ID="txtDataFicha"></asp:TextBox>
                     </div>
                     <div>
                         <asp:LinkButton ID="lnkListarFichas" class="btn btn-success btn-sm" runat="server"
@@ -42,18 +44,21 @@
                 <div class="panel-body">
                     <div class="radio">
                         <label>
-                            <input type="radio" name="optradio">Chegada</label>
+                            <asp:RadioButton runat="server" Checked="true" AutoPostBack="true" ID="optradio3"
+                                OnCheckedChanged="optradio3_CheckedChanged" />Chegada</label>
                     </div>
                     <div class="radio">
                         <label>
-                            <input type="radio" name="optradio">Saída</label>
+                            <asp:RadioButton runat="server" Checked="false" AutoPostBack="true" ID="optradio4"
+                                OnCheckedChanged="optradio4_CheckedChanged" />Saída</label>
                     </div>
                     <div class="form-group col-xs-5">
-                        <asp:TextBox class="form-control" runat="server" id="txtDataRelatorio"></asp:TextBox>
+                        <asp:TextBox class="form-control" runat="server" ID="txtDataRelatorio"></asp:TextBox>
                     </div>
                     <div>
-                        <a href="CADASTRAR_FICHA.aspx" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-arrow-right">
-                        </span></a>
+                        <asp:LinkButton ID="lnkRelatorios" class="btn btn-success btn-sm" runat="server"
+                            OnClick="lnkRelatorios_Click"><span class="glyphicon glyphicon-arrow-right">
+                        </span></asp:LinkButton>
                     </div>
                 </div>
             </div>
@@ -63,18 +68,20 @@
                 <div class="panel-body">
                     <div class="radio">
                         <label>
-                            <input type="radio" name="optradio">Número</label>
+                            <asp:RadioButton runat="server" Checked="true" AutoPostBack="true" ID="optradio5"
+                                OnCheckedChanged="optradio5_CheckedChanged" />Número</label>
                     </div>
                     <div class="radio">
                         <label>
-                            <input type="radio" name="optradio">Cod. Excursão</label>
+                            <asp:RadioButton runat="server" Checked="false" AutoPostBack="true" ID="optradio6"
+                                OnCheckedChanged="optradio6_CheckedChanged" />Cod. Excursão</label>
                     </div>
                     <div class="form-group col-xs-5">
-                        <input type="text" class="form-control" id="Text2">
+                        <asp:TextBox class="form-control" runat="server" ID="txtChave"></asp:TextBox>
                     </div>
                     <div>
-                        <a href="CADASTRAR_FICHA.aspx" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-arrow-right">
-                        </span></a>
+                        <asp:LinkButton ID="lnkConsultar" class="btn btn-success btn-sm" runat="server" OnClick="lnkConsultar_Click"><span class="glyphicon glyphicon-arrow-right">
+                        </span></asp:LinkButton>
                     </div>
                 </div>
             </div>

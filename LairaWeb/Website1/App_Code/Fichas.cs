@@ -38,7 +38,7 @@ public class Fichas
 
 
 
-    public List<Fichas> GetFichas(string strQuery, string DataOperacao)
+    public List<Fichas> GetFichas(string strQuery, string Chave)
     {
         List<Fichas> xList = new List<Fichas>();
 
@@ -50,20 +50,44 @@ public class Fichas
 
         str.AppendLine(" select ");
 
-        if (strQuery == "1")
+        switch (strQuery)
         {
-            str.AppendLine(" cast(ID_FICHA as VARCHAR(10)), DATA_CHEGADA_FICHA, VOO_CHEGADA_HORA_FICHA, SIGLA_VOO, AEROPORTO_CHEGADA_FICHA, COD_EXCURSAO_FICHA, ISNULL(NOME_HOTEL, '---') , dbo.getpax(FICHAS.ID_FICHA) AS NOME_PASSAGEIRO   from FICHAS LEFT JOIN VOOS ON FICHAS.VOO_CHEGADA_FICHA = VOOS.ID_VOO  LEFT JOIN HOTEIS ON FICHAS.VOO_SAIDA_FICHA = HOTEIS.ID_HOTEL  ");
-            str.AppendLine(" WHERE ");
-            str.AppendLine(" DATA_CHEGADA_FICHA  = '" + DataOperacao + "'");
+            case "1"://1 e 3                
+                str.AppendLine(" cast(ID_FICHA as VARCHAR(10)), DATA_CHEGADA_FICHA, VOO_CHEGADA_HORA_FICHA, SIGLA_VOO, AEROPORTO_CHEGADA_FICHA, COD_EXCURSAO_FICHA, ISNULL(NOME_HOTEL, '---') , dbo.getpax(FICHAS.ID_FICHA) AS NOME_PASSAGEIRO   from FICHAS LEFT JOIN VOOS ON FICHAS.VOO_CHEGADA_FICHA = VOOS.ID_VOO  LEFT JOIN HOTEIS ON FICHAS.VOO_SAIDA_FICHA = HOTEIS.ID_HOTEL  ");
+                str.AppendLine(" WHERE ");
+                str.AppendLine(" DATA_CHEGADA_FICHA  = '" + Chave + "'");
+                break;
 
+            case "3"://1 e 3                
+                str.AppendLine(" cast(ID_FICHA as VARCHAR(10)), DATA_CHEGADA_FICHA, VOO_CHEGADA_HORA_FICHA, SIGLA_VOO, AEROPORTO_CHEGADA_FICHA, COD_EXCURSAO_FICHA, ISNULL(NOME_HOTEL, '---') , dbo.getpax(FICHAS.ID_FICHA) AS NOME_PASSAGEIRO   from FICHAS LEFT JOIN VOOS ON FICHAS.VOO_CHEGADA_FICHA = VOOS.ID_VOO  LEFT JOIN HOTEIS ON FICHAS.VOO_SAIDA_FICHA = HOTEIS.ID_HOTEL  ");
+                str.AppendLine(" WHERE ");
+                str.AppendLine(" DATA_CHEGADA_FICHA  = '" + Chave + "'");
+                break;
 
+            case "2": //2 e 4
+                str.AppendLine(" cast(ID_FICHA as VARCHAR(10)), DATA_SAIDA_FICHA, VOO_SAIDA_HORA_FICHA, SIGLA_VOO, AEROPORTO_SAIDA_FICHA, COD_EXCURSAO_FICHA, ISNULL(NOME_HOTEL, '---') , dbo.getpax(FICHAS.ID_FICHA) AS NOME_PASSAGEIRO   from FICHAS LEFT JOIN VOOS ON FICHAS.VOO_SAIDA_FICHA = VOOS.ID_VOO  LEFT JOIN HOTEIS ON FICHAS.VOO_SAIDA_FICHA = HOTEIS.ID_HOTEL ");
+                str.AppendLine(" WHERE ");
+                str.AppendLine("  DATA_SAIDA_FICHA='" + Chave + "'");
+                break;
+            case "4": //2 e 4
+                str.AppendLine(" cast(ID_FICHA as VARCHAR(10)), DATA_SAIDA_FICHA, VOO_SAIDA_HORA_FICHA, SIGLA_VOO, AEROPORTO_SAIDA_FICHA, COD_EXCURSAO_FICHA, ISNULL(NOME_HOTEL, '---') , dbo.getpax(FICHAS.ID_FICHA) AS NOME_PASSAGEIRO   from FICHAS LEFT JOIN VOOS ON FICHAS.VOO_SAIDA_FICHA = VOOS.ID_VOO  LEFT JOIN HOTEIS ON FICHAS.VOO_SAIDA_FICHA = HOTEIS.ID_HOTEL ");
+                str.AppendLine(" WHERE ");
+                str.AppendLine("  DATA_SAIDA_FICHA='" + Chave + "'");
+                break;
+            case "5":
+                 str.AppendLine(" cast(ID_FICHA as VARCHAR(10)), DATA_SAIDA_FICHA, VOO_SAIDA_HORA_FICHA, SIGLA_VOO, AEROPORTO_SAIDA_FICHA, COD_EXCURSAO_FICHA, ISNULL(NOME_HOTEL, '---') , dbo.getpax(FICHAS.ID_FICHA) AS NOME_PASSAGEIRO   from FICHAS LEFT JOIN VOOS ON FICHAS.VOO_SAIDA_FICHA = VOOS.ID_VOO  LEFT JOIN HOTEIS ON FICHAS.VOO_SAIDA_FICHA = HOTEIS.ID_HOTEL ");
+                str.AppendLine(" WHERE ");
+                str.AppendLine("  cast(ID_FICHA as VARCHAR(10)) ='" + Chave + "'");
+                break;
+            case "6":
+                str.AppendLine(" cast(ID_FICHA as VARCHAR(10)), DATA_SAIDA_FICHA, VOO_SAIDA_HORA_FICHA, SIGLA_VOO, AEROPORTO_SAIDA_FICHA, COD_EXCURSAO_FICHA, ISNULL(NOME_HOTEL, '---') , dbo.getpax(FICHAS.ID_FICHA) AS NOME_PASSAGEIRO   from FICHAS LEFT JOIN VOOS ON FICHAS.VOO_SAIDA_FICHA = VOOS.ID_VOO  LEFT JOIN HOTEIS ON FICHAS.VOO_SAIDA_FICHA = HOTEIS.ID_HOTEL ");
+                str.AppendLine(" WHERE ");
+                str.AppendLine("  COD_EXCURSAO_FICHA ='" + Chave + "'");
+                break;
+            default:
+                break;
         }
-        else
-        {
-            str.AppendLine(" cast(ID_FICHA as VARCHAR(10)), DATA_SAIDA_FICHA, VOO_SAIDA_HORA_FICHA, SIGLA_VOO, AEROPORTO_SAIDA_FICHA, COD_EXCURSAO_FICHA, ISNULL(NOME_HOTEL, '---') , dbo.getpax(FICHAS.ID_FICHA) AS NOME_PASSAGEIRO   from FICHAS LEFT JOIN VOOS ON FICHAS.VOO_SAIDA_FICHA = VOOS.ID_VOO  LEFT JOIN HOTEIS ON FICHAS.VOO_SAIDA_FICHA = HOTEIS.ID_HOTEL ");
-            str.AppendLine(" WHERE ");
-            str.AppendLine("  DATA_SAIDA_FICHA='" + DataOperacao + "'");
-        }
+
 
         cmd.CommandText = str.ToString();
         conn.Open();

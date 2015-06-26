@@ -36,6 +36,37 @@ public partial class MENU_FICHAS : System.Web.UI.Page
 
     }
 
+    protected void lnkRelatorios_Click(object sender, EventArgs e)
+    {
+
+        if (optradio3.Checked)
+        {
+            Response.Redirect("LISTAR_FICHAS.aspx?Codigo=3" + "&Data=" + txtDataRelatorio.Text);
+        }
+
+        else
+        {
+            Response.Redirect("LISTAR_FICHAS.aspx?Codigo=4" + "&Data=" + txtDataRelatorio.Text);
+        }
+
+    }
+
+    protected void lnkConsultar_Click(object sender, EventArgs e)
+    {
+
+        if (optradio5.Checked)
+        {
+            Response.Redirect("LISTAR_FICHAS.aspx?Codigo=5" + "&Data=" + txtChave.Text);
+        }
+
+        else
+        {
+            Response.Redirect("LISTAR_FICHAS.aspx?Codigo=6" + "&Data=" + txtChave.Text);
+        }
+
+    }
+
+
 
     protected void optradio1_CheckedChanged(Object sender, EventArgs e)
     {
@@ -47,4 +78,28 @@ public partial class MENU_FICHAS : System.Web.UI.Page
         optradio1.Checked = false;
 
     }
+
+
+    protected void optradio3_CheckedChanged(Object sender, EventArgs e)
+    {
+        optradio4.Checked = false;
+
+    }
+    protected void optradio4_CheckedChanged(Object sender, EventArgs e)
+    {
+        optradio3.Checked = false;
+
+    }
+
+    protected void optradio5_CheckedChanged(Object sender, EventArgs e)
+    {
+        optradio6.Checked = false;
+
+    }
+    protected void optradio6_CheckedChanged(Object sender, EventArgs e)
+    {
+        optradio5.Checked = false;
+
+    }
+
 }
