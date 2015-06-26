@@ -40,7 +40,6 @@ public partial class CADASTRAR_FICHA : System.Web.UI.Page
         grvData.DataBind();
 
     }
-
     void GridServIn()
     {
         //Grid Serv Inclusos
@@ -65,7 +64,7 @@ public partial class CADASTRAR_FICHA : System.Web.UI.Page
         grvServIn.DataBind();
 
     }
-    void GridServAd() 
+    void GridServAd()
     {
         //Grid Serv Adicionais
         DataTable dt = new DataTable();
@@ -97,15 +96,14 @@ public partial class CADASTRAR_FICHA : System.Web.UI.Page
 
         grvServAd.DataSource = dt;
         grvServAd.DataBind();
-    
-    }   
+
+    }
     private void SetInitialRow()
     {
         GridPAX();
         GridServIn();
         GridServAd();
     }
-
 
     bool VerificarCampos()
     {
@@ -247,20 +245,49 @@ public partial class CADASTRAR_FICHA : System.Web.UI.Page
                 conn.Close();
                 conn.Dispose();
 
-                System.Threading.Thread.Sleep(2000);
+                System.Threading.Thread.Sleep(1000);
 
                 Int64 IDFicha = getLastFicha();
 
-                //
+                System.Threading.Thread.Sleep(1000);
+
+                //PAX
                 for (int count = 0; count < grvData.Rows.Count; count++)
                 {
-                    var vTextBox1 = ((TextBox)grvData.Rows[count].FindControl("TextBox1")).Text;
-                    var vTextBox2 = ((TextBox)grvData.Rows[count].FindControl("TextBox2")).Text;
-                    var vTextBox3 = ((TextBox)grvData.Rows[count].FindControl("TextBox3")).Text;
-                    var vTextBox4 = ((TextBox)grvData.Rows[count].FindControl("TextBox4")).Text;
-                    var vTextBox5 = ((TextBox)grvData.Rows[count].FindControl("TextBox5")).Text;
+                    var vTextBox1 = ((TextBox)grvData.Rows[count].FindControl("txtNome")).Text;
+                    var vTextBox2 = ((TextBox)grvData.Rows[count].FindControl("txtIdentidade")).Text;
+                    var vTextBox3 = ((TextBox)grvData.Rows[count].FindControl("txtOrgao")).Text;
+                    var vTextBox4 = ((TextBox)grvData.Rows[count].FindControl("txtTelefone")).Text;
+                    var vTextBox5 = ((TextBox)grvData.Rows[count].FindControl("txtObs")).Text;
 
                     InserirPAX(IDFicha, vTextBox1.ToString(), vTextBox2.ToString(), vTextBox3.ToString(), vTextBox4.ToString(), vTextBox5.ToString());
+
+                }
+
+                //SERV_IN
+                for (int count = 0; count < grvServIn.Rows.Count; count++)
+                {
+                    var vTextBox1 = ((DropDownList)grvServIn.Rows[count].FindControl("ddlLocal")).SelectedValue;
+                    var vTextBox2 = ((TextBox)grvServIn.Rows[count].FindControl("txtValor")).Text;
+                    var vTextBox3 = ((DropDownList)grvServIn.Rows[count].FindControl("ddlPagamento1")).SelectedValue;
+
+                    InserirServIn(IDFicha, vTextBox2.ToString(), vTextBox3.ToString(), vTextBox1.ToString());
+
+                }
+
+                //SERV_AD
+                for (int count = 0; count < grvServAd.Rows.Count; count++)
+                {
+                    var vTextBox1 = ((TextBox)grvServAd.Rows[count].FindControl("txtVoucher")).Text;
+                    var vTextBox2 = ((DropDownList)grvServAd.Rows[count].FindControl("ddlPasseio")).SelectedValue;
+                    var vTextBox3 = ((DropDownList)grvServAd.Rows[count].FindControl("ddlVendedor")).SelectedValue;
+                    var vTextBox4 = ((TextBox)grvServAd.Rows[count].FindControl("txtValor2")).Text;
+                    var vTextBox5 = ((TextBox)grvServAd.Rows[count].FindControl("txtData")).Text;
+                    var vTextBox6 = ((TextBox)grvServAd.Rows[count].FindControl("txtHora")).Text;
+                    var vTextBox7 = ((DropDownList)grvServAd.Rows[count].FindControl("ddlPagamento2")).SelectedValue;
+                    var vTextBox8 = ((DropDownList)grvServAd.Rows[count].FindControl("ddlStatus")).SelectedValue;
+
+                    InserirServAd(IDFicha, vTextBox1.ToString(), vTextBox2.ToString(), vTextBox3.ToString(), vTextBox4.ToString(), vTextBox5.ToString(), vTextBox6.ToString(), vTextBox7.ToString(), vTextBox8.ToString());
 
                 }
 
@@ -332,7 +359,89 @@ public partial class CADASTRAR_FICHA : System.Web.UI.Page
 
 
     }
+    void InserirServIn(Int64 IDFicha, string Valor, string FormaPgto, string ServIncluso)
+    {
+        SqlCommand cmd = new SqlCommand();
+        SqlConnection conn = new SqlConnection();
+        conn.ConnectionString = ConfigurationManager.ConnectionStrings["LairaWebDB"].ConnectionString;
+        cmd.Connection = conn;
 
+        StringBuilder str = new StringBuilder();
+        str.AppendLine(" INSERT INTO [SERV_IN_FICHA] ");
+        str.AppendLine(" ([FICHA_NO] ");
+        str.AppendLine(" ,[VALOR] ");
+        str.AppendLine(" ,[FORMA_PAG_NO] ");
+        str.AppendLine(" ,[SERV_IN_NO] ");
+        str.AppendLine(" )");
+        str.AppendLine(" VALUES ");
+        str.AppendLine(" (@A ");
+        str.AppendLine(" ,@B ");
+        str.AppendLine(" ,@C ");
+        str.AppendLine(" ,@D )");
+        cmd.CommandText = str.ToString();
+        cmd.CommandType = CommandType.Text;
+        cmd.Parameters.Add(new SqlParameter("@A", SqlDbType.BigInt)).Value = IDFicha;
+        cmd.Parameters.Add(new SqlParameter("@B", SqlDbType.Money)).Value = Valor;
+        cmd.Parameters.Add(new SqlParameter("@C", SqlDbType.BigInt)).Value = FormaPgto;
+        cmd.Parameters.Add(new SqlParameter("@D", SqlDbType.BigInt)).Value = ServIncluso;
+        conn.Open();
+        cmd.ExecuteNonQuery();
+        cmd.Dispose();
+        cmd = null;
+        conn.Close();
+        conn.Dispose();
+
+    }
+    void InserirServAd(Int64 IDFicha, string Voucher, string Passeio, string Vendedor, string Valor2, string Data, string Hora, string Pagamento2, string Status)
+    {
+        SqlCommand cmd = new SqlCommand();
+        SqlConnection conn = new SqlConnection();
+        conn.ConnectionString = ConfigurationManager.ConnectionStrings["LairaWebDB"].ConnectionString;
+        cmd.Connection = conn;
+
+        StringBuilder str = new StringBuilder();
+        str.AppendLine(" INSERT INTO [SERV_AD_FICHA] ");
+        str.AppendLine(" ([FICHA_NO] ");
+        str.AppendLine(" ,[SERV_AD_NO] ");
+        str.AppendLine(" ,[VOUCHER] ");
+        str.AppendLine(" ,[VALOR] ");
+        str.AppendLine(" ,[VENDEDOR_NO]");
+        str.AppendLine(" ,[DATA] ");
+        str.AppendLine(" ,[HORA] ");
+        str.AppendLine(" ,[FORMA_PAG_NO]");
+        str.AppendLine(" ,[STATUS_NO]");
+        str.AppendLine(" )");
+        str.AppendLine(" VALUES ");
+        str.AppendLine(" (@A ");
+        str.AppendLine(" ,@B ");
+        str.AppendLine(" ,@C ");
+        str.AppendLine(" ,@D ");
+        str.AppendLine(" ,@E ");
+        str.AppendLine(" ,@F ");
+        str.AppendLine(" ,@G ");
+        str.AppendLine(" ,@H ");
+        str.AppendLine(" ,@I )");
+        cmd.CommandText = str.ToString();
+        cmd.CommandType = CommandType.Text;
+        cmd.Parameters.Add(new SqlParameter("@A", SqlDbType.BigInt)).Value = IDFicha;
+        cmd.Parameters.Add(new SqlParameter("@B", SqlDbType.BigInt)).Value = Passeio;
+        cmd.Parameters.Add(new SqlParameter("@C", SqlDbType.NChar)).Value = Voucher;
+        cmd.Parameters.Add(new SqlParameter("@D", SqlDbType.Money)).Value = Valor2;
+        cmd.Parameters.Add(new SqlParameter("@E", SqlDbType.BigInt)).Value = Vendedor;
+        cmd.Parameters.Add(new SqlParameter("@F", SqlDbType.NChar)).Value = Data;
+        cmd.Parameters.Add(new SqlParameter("@G", SqlDbType.NChar)).Value = Hora;
+        cmd.Parameters.Add(new SqlParameter("@H", SqlDbType.BigInt)).Value = Pagamento2;
+        cmd.Parameters.Add(new SqlParameter("@I", SqlDbType.BigInt)).Value = Status;
+
+        conn.Open();
+        cmd.ExecuteNonQuery();
+        cmd.Dispose();
+        cmd = null;
+        conn.Close();
+        conn.Dispose();
+
+
+    }
     protected void btnVoltar_Click(object sender, EventArgs e)
     {
         Response.Redirect("MENU_FICHAS.aspx"); //LISTAR_FICHAS
@@ -346,8 +455,6 @@ public partial class CADASTRAR_FICHA : System.Web.UI.Page
         }
 
     }
-
-
     private DataSet GetData(string query)
     {
         string conString = ConfigurationManager.ConnectionStrings["LairaWebDB"].ConnectionString;
@@ -367,8 +474,66 @@ public partial class CADASTRAR_FICHA : System.Web.UI.Page
         }
     }
 
+    void getInfoChegada(string IDVoo)
+    {
+
+        SqlCommand cmd = new SqlCommand();
+        SqlConnection conn = new SqlConnection();
+        conn.ConnectionString = ConfigurationManager.ConnectionStrings["LairaWebDB"].ConnectionString;
+        cmd.Connection = conn;
+        StringBuilder str = new StringBuilder();
+        str.AppendLine(" select HORA_VOO, NOME_AEROPORTO  from VOOS, AEROPORTOS WHERE VOOS.AEROPORTO_VOO = AEROPORTOS.ID_AEROPORTO AND ID_VOO=" + IDVoo);
+        cmd.CommandText = str.ToString();
+        conn.Open();
+        SqlDataReader reader = cmd.ExecuteReader();
+        txtVooHoraChegada.Text = "";
+        txtAeroportoChegada.Text = "";
+        while (reader.Read())
+        {
+            txtVooHoraChegada.Text = reader.GetString(0);
+            txtAeroportoChegada.Text = reader.GetString(1);
+        }
+
+    }
+    void getInfoSaida(string IDVoo)
+    {
+
+        SqlCommand cmd = new SqlCommand();
+        SqlConnection conn = new SqlConnection();
+        conn.ConnectionString = ConfigurationManager.ConnectionStrings["LairaWebDB"].ConnectionString;
+        cmd.Connection = conn;
+        StringBuilder str = new StringBuilder();
+        str.AppendLine(" select HORA_VOO, NOME_AEROPORTO  from VOOS, AEROPORTOS WHERE VOOS.AEROPORTO_VOO = AEROPORTOS.ID_AEROPORTO AND ID_VOO=" + IDVoo);
+        cmd.CommandText = str.ToString();
+        conn.Open();
+        SqlDataReader reader = cmd.ExecuteReader();
+        txtVooHoraSaida.Text = "";
+        txtAeroportoSaida.Text = "";
+        while (reader.Read())
+        {
+            txtVooHoraSaida.Text = reader.GetString(0);
+            txtAeroportoSaida.Text = reader.GetString(1);
+        }
+
+
+    }
+
+    protected void ddlVooChegada_Change(object sender, EventArgs e)
+    {
+        getInfoChegada(ddlVooChegada.SelectedValue);
+
+    }
+
+
+    protected void ddlVooSaida_Change(object sender, EventArgs e)
+    {
+        getInfoSaida(ddlVooSaida.SelectedValue);
+
+    }
+
     protected void RowDataBound2(object sender, System.Web.UI.WebControls.GridViewRowEventArgs e)
     {
+        //POPULANDO COMBO DENTRO DO GRID
         if (e.Row.RowType == DataControlRowType.DataRow)
         {
             DropDownList ddlPasseio = (e.Row.FindControl("ddlPasseio") as DropDownList);
@@ -383,7 +548,7 @@ public partial class CADASTRAR_FICHA : System.Web.UI.Page
             ddlVendedor.DataValueField = "ID_VENDEDOR";
             ddlVendedor.DataBind();
 
-            DropDownList ddlPagamento = (e.Row.FindControl("ddlPagamento") as DropDownList);
+            DropDownList ddlPagamento = (e.Row.FindControl("ddlPagamento2") as DropDownList);
             ddlPagamento.DataSource = GetData(" select  ID_FORMA_DE_PAGAMENTO , FORMA_DE_PAGAMENTO from FORMA_DE_PAGAMENTO ");
             ddlPagamento.DataTextField = "FORMA_DE_PAGAMENTO";
             ddlPagamento.DataValueField = "ID_FORMA_DE_PAGAMENTO";
@@ -398,18 +563,24 @@ public partial class CADASTRAR_FICHA : System.Web.UI.Page
         }
     }
 
-    protected void RowDataBound(object sender, System.Web.UI.WebControls.GridViewRowEventArgs e)
+    protected void RowDataBound1(object sender, System.Web.UI.WebControls.GridViewRowEventArgs e)
     {
         if (e.Row.RowType == DataControlRowType.DataRow)
         {
-
+            //POPULANDO COMBO DENTRO DO GRID
             DropDownList ddlLocal = (e.Row.FindControl("ddlLocal") as DropDownList);
             ddlLocal.DataSource = GetData(" select ID_SERV_INCLUSO , SERVICO_SERV_INCLUSO from SERV_INCLUSO ");
             ddlLocal.DataTextField = "SERVICO_SERV_INCLUSO";
             ddlLocal.DataValueField = "ID_SERV_INCLUSO";
             ddlLocal.DataBind();
 
-            
+            DropDownList ddlPagamento = (e.Row.FindControl("ddlPagamento1") as DropDownList);
+            ddlPagamento.DataSource = GetData(" select ID_FORMA_DE_PAGAMENTO, FORMA_DE_PAGAMENTO from FORMA_DE_PAGAMENTO ");
+            ddlPagamento.DataTextField = "FORMA_DE_PAGAMENTO";
+            ddlPagamento.DataValueField = "ID_FORMA_DE_PAGAMENTO";
+            ddlPagamento.DataBind();
+
+
 
         }
     }
@@ -467,14 +638,14 @@ public partial class CADASTRAR_FICHA : System.Web.UI.Page
                     //extract the TextBox values
                     DropDownList box1 = (DropDownList)grvServIn.Rows[rowIndex].Cells[1].FindControl("ddlLocal"); //Local
                     TextBox box2 = (TextBox)grvServIn.Rows[rowIndex].Cells[2].FindControl("txtValor"); //Valor
-                    TextBox box3 = (TextBox)grvServIn.Rows[rowIndex].Cells[3].FindControl("txtPagamento"); //Pagamento
+                    DropDownList box3 = (DropDownList)grvServIn.Rows[rowIndex].Cells[3].FindControl("ddlPagamento1"); //Pagamento
 
 
                     drCurrentRow = dtCurrentTable.NewRow();
                     drCurrentRow["#"] = i + 1;
                     dtCurrentTable.Rows[i - 1]["Local"] = box1.SelectedValue;
                     dtCurrentTable.Rows[i - 1]["Valor"] = box2.Text;
-                    dtCurrentTable.Rows[i - 1]["Pagamento"] = box3.Text;
+                    dtCurrentTable.Rows[i - 1]["Pagamento"] = box3.SelectedValue;
                     rowIndex++;
                 }
 
@@ -493,7 +664,7 @@ public partial class CADASTRAR_FICHA : System.Web.UI.Page
         //Set Previous Data on Postbacks
         SetPreviousDataServIn();
     }
-    private void AddNewRowToGridServAd() 
+    private void AddNewRowToGridServAd()
     {
         int rowIndex = 0;
 
@@ -506,13 +677,13 @@ public partial class CADASTRAR_FICHA : System.Web.UI.Page
                 for (int i = 1; i <= dtCurrentTable.Rows.Count; i++)
                 {
                     //extract the TextBox values
-                    TextBox box1 = (TextBox)grvServAd.Rows[rowIndex].Cells[1].FindControl("ddlLocal"); //Voucher
+                    TextBox box1 = (TextBox)grvServAd.Rows[rowIndex].Cells[1].FindControl("txtVoucher"); //Voucher
                     DropDownList box2 = (DropDownList)grvServAd.Rows[rowIndex].Cells[2].FindControl("ddlPasseio"); //Passeio
                     DropDownList box3 = (DropDownList)grvServAd.Rows[rowIndex].Cells[3].FindControl("ddlVendedor"); //Vendedor
                     TextBox box4 = (TextBox)grvServAd.Rows[rowIndex].Cells[4].FindControl("TextBox4"); //Valor
                     TextBox box5 = (TextBox)grvServAd.Rows[rowIndex].Cells[5].FindControl("TextBox5"); //Data
                     TextBox box6 = (TextBox)grvServAd.Rows[rowIndex].Cells[6].FindControl("TextBox6"); //Hora
-                    DropDownList box7 = (DropDownList)grvServAd.Rows[rowIndex].Cells[7].FindControl("ddlPagamento"); //Pagamento
+                    DropDownList box7 = (DropDownList)grvServAd.Rows[rowIndex].Cells[7].FindControl("ddlPagamento2"); //Pagamento
                     DropDownList box8 = (DropDownList)grvServAd.Rows[rowIndex].Cells[8].FindControl("ddlStatus"); //Status
 
                     drCurrentRow = dtCurrentTable.NewRow();
@@ -543,7 +714,7 @@ public partial class CADASTRAR_FICHA : System.Web.UI.Page
         //Set Previous Data on Postbacks
         SetPreviousDataServAd();
     }
-    
+
     private void AddNewRowToGrid()
     {
         int rowIndex = 0;
@@ -646,12 +817,12 @@ public partial class CADASTRAR_FICHA : System.Web.UI.Page
                 {
                     DropDownList box1 = (DropDownList)grvServIn.Rows[rowIndex].Cells[1].FindControl("ddlLocal");
                     TextBox box2 = (TextBox)grvServIn.Rows[rowIndex].Cells[2].FindControl("txtValor");
-                    TextBox box3 = (TextBox)grvServIn.Rows[rowIndex].Cells[3].FindControl("txtPagamento");
+                    DropDownList box3 = (DropDownList)grvServIn.Rows[rowIndex].Cells[3].FindControl("ddlPagamento1");
                     ImageButton box6 = (ImageButton)grvServIn.Rows[rowIndex].Cells[4].FindControl("lnkExcluirServIn");
 
                     box1.SelectedValue = dt.Rows[i]["Local"].ToString();
                     box2.Text = dt.Rows[i]["Valor"].ToString();
-                    box3.Text = dt.Rows[i]["Pagamento"].ToString();
+                    box3.SelectedValue = dt.Rows[i]["Pagamento"].ToString();
                     box6.ImageUrl = "~/Figuras/btn_Delete.gif";
 
                     rowIndex++;
@@ -669,13 +840,13 @@ public partial class CADASTRAR_FICHA : System.Web.UI.Page
             {
                 for (int i = 0; i < dt.Rows.Count; i++)
                 {
-                    TextBox box1 = (TextBox)grvServAd.Rows[rowIndex].Cells[1].FindControl("TextBox1");
+                    TextBox box1 = (TextBox)grvServAd.Rows[rowIndex].Cells[1].FindControl("txtVoucher");
                     DropDownList box2 = (DropDownList)grvServAd.Rows[rowIndex].Cells[2].FindControl("ddlPasseio");
                     DropDownList box3 = (DropDownList)grvServAd.Rows[rowIndex].Cells[3].FindControl("ddlVendedor");
                     TextBox box4 = (TextBox)grvServAd.Rows[rowIndex].Cells[4].FindControl("TextBox4");
                     TextBox box5 = (TextBox)grvServAd.Rows[rowIndex].Cells[5].FindControl("TextBox5");
                     TextBox box6 = (TextBox)grvServAd.Rows[rowIndex].Cells[6].FindControl("TextBox6");
-                    DropDownList box7 = (DropDownList)grvServAd.Rows[rowIndex].Cells[7].FindControl("ddlPagamento");
+                    DropDownList box7 = (DropDownList)grvServAd.Rows[rowIndex].Cells[7].FindControl("ddlPagamento2");
                     DropDownList box8 = (DropDownList)grvServAd.Rows[rowIndex].Cells[8].FindControl("ddlStatus");
                     ImageButton box9 = (ImageButton)grvServAd.Rows[rowIndex].Cells[9].FindControl("lnkExcluirServIn");
 
@@ -688,8 +859,8 @@ public partial class CADASTRAR_FICHA : System.Web.UI.Page
                     box6.Text = dt.Rows[i]["Hora"].ToString();
                     box7.SelectedValue = dt.Rows[i]["Pagamento"].ToString();
                     box8.SelectedValue = dt.Rows[i]["Status"].ToString();
-                    box9.ImageUrl = "~/Figuras/btn_Delete.gif";                          
-                   
+                    box9.ImageUrl = "~/Figuras/btn_Delete.gif";
+
 
                     rowIndex++;
                 }

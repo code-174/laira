@@ -59,6 +59,8 @@ public class Aeroportos
         return xList;
     }
 
+
+
     public List<Aeroportos> GetAeroportosByCode(string strQuery)
     {
         List<Aeroportos> xList = new List<Aeroportos>();
@@ -91,4 +93,5 @@ public class Aeroportos
 
         return xList;
     }
+
 }

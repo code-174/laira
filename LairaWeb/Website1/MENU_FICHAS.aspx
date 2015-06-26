@@ -20,18 +20,19 @@
                 <div class="panel-body">
                     <div class="radio">
                         <label>
-                            <input type="radio" name="optradio">Chegada</label>
+                            <asp:RadioButton runat="server" AutoPostBack="true"  id="optradio1" OnCheckedChanged="optradio1_CheckedChanged" />Chegada</label>
                     </div>
                     <div class="radio">
                         <label>
-                            <input type="radio" name="optradio">Saída</label>
+                            <asp:RadioButton runat="server"  AutoPostBack="true" id="optradio2" OnCheckedChanged="optradio2_CheckedChanged" />Saída</label>
                     </div>
                     <div class="form-group col-xs-5">
-                        <input type="text" class="form-control" id="txtData">
+                        <asp:TextBox class="form-control" runat="server" id="txtDataFicha"></asp:TextBox>
                     </div>
                     <div>
-                        <a href="CADASTRAR_FICHA.aspx" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-arrow-right">
-                        </span></a>
+                        <asp:LinkButton ID="lnkListarFichas" class="btn btn-success btn-sm" runat="server"
+                            OnClick="lnkListarFichas_Click"><span class="glyphicon glyphicon-arrow-right">
+                        </span></asp:LinkButton>
                     </div>
                 </div>
             </div>
@@ -48,7 +49,7 @@
                             <input type="radio" name="optradio">Saída</label>
                     </div>
                     <div class="form-group col-xs-5">
-                        <input type="text" class="form-control" id="Text1">
+                        <asp:TextBox class="form-control" runat="server" id="txtDataRelatorio"></asp:TextBox>
                     </div>
                     <div>
                         <a href="CADASTRAR_FICHA.aspx" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-arrow-right">

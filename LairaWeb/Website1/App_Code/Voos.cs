@@ -72,7 +72,7 @@ public class Voos
         conn.ConnectionString = ConfigurationManager.ConnectionStrings["LairaWebDB"].ConnectionString;
         cmd.Connection = conn;
         StringBuilder str = new StringBuilder();
-        str.AppendLine(" select ID_VOO , SIGLA_VOO from VOOS ");
+        str.AppendLine(" select ID_VOO , SIGLA_VOO from VOOS WHERE UPPER(TIPO_VOO)=UPPER('Chegada') ");
         cmd.CommandText = str.ToString();
         conn.Open();
         SqlDataReader reader = cmd.ExecuteReader();
@@ -101,7 +101,7 @@ public class Voos
         conn.ConnectionString = ConfigurationManager.ConnectionStrings["LairaWebDB"].ConnectionString;
         cmd.Connection = conn;
         StringBuilder str = new StringBuilder();
-        str.AppendLine(" select ID_VOO , SIGLA_VOO from VOOS ");
+        str.AppendLine(" select ID_VOO , SIGLA_VOO from VOOS WHERE UPPER(TIPO_VOO)<>UPPER('Saída')");
         cmd.CommandText = str.ToString();
         conn.Open();
         SqlDataReader reader = cmd.ExecuteReader();
