@@ -16,7 +16,7 @@
             </div>
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    Listar Ficha</div>
+                    <strong>Ficha</strong></div>
                 <div class="panel-body">
                     <div class="radio">
                         <label>
@@ -40,7 +40,8 @@
             </div>
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    Relatório</div>
+                    <strong>Relatório</strong>
+                </div>
                 <div class="panel-body">
                     <div class="radio">
                         <label>
@@ -64,7 +65,8 @@
             </div>
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    Localizar</div>
+                    <strong>Localizar</strong>
+                    </div>
                 <div class="panel-body">
                     <div class="radio">
                         <label>

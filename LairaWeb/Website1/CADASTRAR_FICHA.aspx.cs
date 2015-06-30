@@ -805,6 +805,11 @@ public partial class CADASTRAR_FICHA : System.Web.UI.Page
         AddNewRowToGrid();
     }
 
+    protected void lnkExcluirServAd_Click(object sender, EventArgs e) 
+    {
+        // TO DO
+    }
+
     private void SetPreviousDataServIn()
     {
         int rowIndex = 0;
@@ -848,7 +853,7 @@ public partial class CADASTRAR_FICHA : System.Web.UI.Page
                     TextBox box6 = (TextBox)grvServAd.Rows[rowIndex].Cells[6].FindControl("TextBox6");
                     DropDownList box7 = (DropDownList)grvServAd.Rows[rowIndex].Cells[7].FindControl("ddlPagamento2");
                     DropDownList box8 = (DropDownList)grvServAd.Rows[rowIndex].Cells[8].FindControl("ddlStatus");
-                    ImageButton box9 = (ImageButton)grvServAd.Rows[rowIndex].Cells[9].FindControl("lnkExcluirServIn");
+                    LinkButton box9 = (LinkButton)grvServAd.Rows[rowIndex].Cells[9].FindControl("lnkExcluirServAd");
 
 
                     box1.Text = dt.Rows[i]["Voucher"].ToString();
@@ -859,7 +864,7 @@ public partial class CADASTRAR_FICHA : System.Web.UI.Page
                     box6.Text = dt.Rows[i]["Hora"].ToString();
                     box7.SelectedValue = dt.Rows[i]["Pagamento"].ToString();
                     box8.SelectedValue = dt.Rows[i]["Status"].ToString();
-                    box9.ImageUrl = "~/Figuras/btn_Delete.gif";
+                    box9.ID = "lnkExcluirServAd";
 
 
                     rowIndex++;
@@ -867,6 +872,8 @@ public partial class CADASTRAR_FICHA : System.Web.UI.Page
             }
         }
     }
+
+
 
 }
 

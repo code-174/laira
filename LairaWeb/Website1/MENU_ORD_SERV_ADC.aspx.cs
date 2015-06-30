@@ -11,4 +11,16 @@ public partial class MENU_ORD_SERV_ADC : System.Web.UI.Page
     {
 
     }
+    protected void lnkRelatorios_Click(object sender, EventArgs e)
+    {
+        //Response.Redirect("LISTAR_ORDEM_SERV.aspx?Codigo=5" + "&Data=" + txtDataInicio.Text);
+    }
+    protected void lnkRelatorioPrestador_Click(object sender, EventArgs e)
+    {
+        //Response.Redirect("LISTAR_ORDEM_SERV.aspx?Codigo=5" + "&Data=" + txtDataInicio.Text);
+    }
+    protected void lnkConsultar_Click(object sender, EventArgs e)
+    {
+        //Response.Redirect("LISTAR_ORDEM_SERV.aspx?Codigo=5" + "&Data=" + txtChave.Text);
+    }
 }
