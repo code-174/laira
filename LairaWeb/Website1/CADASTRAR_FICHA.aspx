@@ -8,7 +8,7 @@
     <div class="container-fluid">
         <fieldset>
             <legend>Cadastrar Ficha</legend>
-            <form id="Form1" class="form-horizontal" runat="server">
+            <form id="Form1" class="form-horizontal" runat="server">            
             <div class="form-group col-md-3">
                 <label for="txtCodFicha" class="control-label col-md-6">
                     Código da Ficha</label>
@@ -149,15 +149,17 @@
 
             <div class="row">
             </div>
+            
 
             <%--Passageiros(&nbsp;<asp:ImageButton runat="server" ImageUrl="~/Figuras/AddPAX.gif" />&nbsp;clique
             aqui para adicionar pax)--%>
 
-            <div class="panel panel-default">
+            <div class="panel panel-primary">
                 <div class="panel-heading">
                     <strong>Passageiros</strong></div>
                 <div class="panel-body">
-            <asp:GridView ID="grvData" runat="server" ShowFooter="true" AutoGenerateColumns="false" class="table">
+            <asp:GridView ID="grvData" runat="server" ShowFooter="true" AutoGenerateColumns="false" 
+                        class="table table-hover table-bordered" GridLines="None">
                 <Columns>
                     <asp:BoundField DataField="#" HeaderText="#" />
                     <asp:TemplateField HeaderText="Nome">
@@ -186,13 +188,14 @@
                         </ItemTemplate>
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="">
-                        <ItemTemplate>                         
-                            <asp:ImageButton ID="lnkExcluir" runat="server" CommandName="Excluir" ImageUrl="~/Figuras/btn_Delete.gif"
-                                ToolTip="Excluir a linha" />
+                        <ItemTemplate>
+                                <asp:LinkButton ID="lnkExcluirPAX" runat="server" class="btn btn-danger" OnClick="lnkExcluirPAX_Click">
+                                <span class="glyphicon glyphicon-remove"></span>
+                                </asp:LinkButton>
                         </ItemTemplate>
                         <FooterStyle HorizontalAlign="Right" />
                         <FooterTemplate>
-                        <asp:LinkButton ID="ButtonAdd" runat="server" OnClick="ButtonAdd_Click" class="btn btn-primary">Adicionar PAX</asp:LinkButton>                            
+                        <asp:LinkButton ID="ButtonAdd" runat="server" OnClick="ButtonAdd_Click" class="btn btn-success">Adicionar PAX</asp:LinkButton>                            
                         </FooterTemplate>
                     </asp:TemplateField>
                 </Columns>
@@ -200,12 +203,12 @@
             </div>
             </div>
             <div class="row"> </div>
-            <div class="panel panel-default">
+            <div class="panel panel-primary">
                 <div class="panel-heading">
                     <strong>Serviços Inclusos</strong></div>
                 <div class="panel-body">          
             <asp:GridView ID="grvServIn" runat="server" ShowFooter="true" AutoGenerateColumns="false"
-                OnRowDataBound="RowDataBound1" class="table">
+                OnRowDataBound="RowDataBound1" class="table table-hover table-bordered" GridLines="None">
                 <Columns>
                     <asp:BoundField DataField="#" HeaderText="#" />
                     <asp:TemplateField HeaderText="Local">
@@ -226,12 +229,13 @@
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="">
                         <ItemTemplate>
-                            <asp:ImageButton ID="lnkExcluirServIn" runat="server" CommandName="Excluir" ImageUrl="~/Figuras/btn_Delete.gif"
-                                ToolTip="Excluir a linha" />
+                            <asp:LinkButton ID="lnkExcluirServIn" runat="server" class="btn btn-danger" OnClick="lnkExcluirServIn_Click">
+                                <span class="glyphicon glyphicon-remove"></span>
+                                </asp:LinkButton>
                         </ItemTemplate>
                         <FooterStyle HorizontalAlign="Right" />
                         <FooterTemplate>
-                        <asp:LinkButton ID="ButtonAddServIn" runat="server" OnClick="ButtonAddServIn_Click" class="btn btn-primary">Adicionar Serviço</asp:LinkButton>                         
+                        <asp:LinkButton ID="ButtonAddServIn" runat="server" OnClick="ButtonAddServIn_Click" class="btn btn-success">Adicionar Serviço</asp:LinkButton>                         
                         </FooterTemplate>
                     </asp:TemplateField>
                 </Columns>
@@ -240,12 +244,12 @@
               </div>
              
             <div class="row" ></div>
-            <div class="panel panel-default">
+            <div class="panel panel-primary">
                 <div class="panel-heading">
                     <strong>Serviços Adicionais</strong></div>
                 <div class="panel-body">          
                 <asp:GridView  ID="grvServAd" runat="server" ShowFooter="true" AutoGenerateColumns="false"
-                    OnRowDataBound="RowDataBound2" class="table">
+                    OnRowDataBound="RowDataBound2" class="table table-hover table-bordered" GridLines="None">
                     <Columns>
                         <asp:BoundField DataField="#" HeaderText="#" />
                         <asp:TemplateField HeaderText="Voucher">
@@ -302,7 +306,7 @@
                             </ItemTemplate>
                             <FooterStyle HorizontalAlign="Right" />
                             <FooterTemplate>
-                                <asp:LinkButton ID="ButtonAddServAd" runat="server" OnClick="ButtonAddServAd_Click" class="btn btn-primary">Adicionar Serviço</asp:LinkButton>
+                                <asp:LinkButton ID="ButtonAddServAd" runat="server" OnClick="ButtonAddServAd_Click" class="btn btn-success">Adicionar Serviço</asp:LinkButton>
                             </FooterTemplate>
                         </asp:TemplateField>
                     </Columns>

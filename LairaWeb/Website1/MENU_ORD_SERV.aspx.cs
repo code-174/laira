@@ -16,15 +16,38 @@ public partial class MENU_ORD_SERV : System.Web.UI.Page
         }
 
     }
-    protected void optChegada_CheckedChanged(Object sender, EventArgs e)
+    protected void optChegadaOS_CheckedChanged(Object sender, EventArgs e)
     {
-        optSaida.Checked = false;
+        optSaidaOS.Checked = false;
 
     }
-    protected void optSaida_CheckedChanged(Object sender, EventArgs e)
+    protected void optSaidaOS_CheckedChanged(Object sender, EventArgs e)
     {
-        optChegada.Checked = false;
+        optChegadaOS.Checked = false;
 
+    }
+    protected void optTodas_CheckedChanged(Object sender, EventArgs e)
+    {
+        optNaoImpressas.Checked = false;
+        optOSNo.Checked = false;
+
+    }
+    protected void optNaoImpressas_CheckedChanged(Object sender, EventArgs e)
+    {
+        optTodas.Checked = false;
+        optOSNo.Checked = false;
+
+    }
+    protected void optOSNo_CheckedChanged(Object sender, EventArgs e)
+    {
+        optTodas.Checked = false;
+        optNaoImpressas.Checked = false;
+
+    }
+    protected void lnkGerarOS_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("GERAR_ORDEM_SERV.aspx");
+        //Response.Redirect("LISTAR_ORDEM_SERV.aspx?Codigo=5" + "&Data=" + txtChave.Text);
     }
     protected void lnkRelatorios_Click(object sender, EventArgs e)
     {

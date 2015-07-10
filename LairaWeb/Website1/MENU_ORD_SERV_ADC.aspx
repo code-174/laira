@@ -64,7 +64,7 @@
                         </span></asp:LinkButton>
                     </div>
                 </div>
-            </div>
+            </div><!-- /PANEL RELATORIO POR PRESTADOR-->
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <strong>Localizar</strong>

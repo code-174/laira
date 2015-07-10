@@ -446,6 +446,7 @@ public partial class CADASTRAR_FICHA : System.Web.UI.Page
     {
         Response.Redirect("MENU_FICHAS.aspx"); //LISTAR_FICHAS
     }
+
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!IsPostBack)
@@ -455,6 +456,7 @@ public partial class CADASTRAR_FICHA : System.Web.UI.Page
         }
 
     }
+
     private DataSet GetData(string query)
     {
         string conString = ConfigurationManager.ConnectionStrings["LairaWebDB"].ConnectionString;
@@ -521,10 +523,7 @@ public partial class CADASTRAR_FICHA : System.Web.UI.Page
     protected void ddlVooChegada_Change(object sender, EventArgs e)
     {
         getInfoChegada(ddlVooChegada.SelectedValue);
-
     }
-
-
     protected void ddlVooSaida_Change(object sender, EventArgs e)
     {
         getInfoSaida(ddlVooSaida.SelectedValue);
@@ -680,9 +679,9 @@ public partial class CADASTRAR_FICHA : System.Web.UI.Page
                     TextBox box1 = (TextBox)grvServAd.Rows[rowIndex].Cells[1].FindControl("txtVoucher"); //Voucher
                     DropDownList box2 = (DropDownList)grvServAd.Rows[rowIndex].Cells[2].FindControl("ddlPasseio"); //Passeio
                     DropDownList box3 = (DropDownList)grvServAd.Rows[rowIndex].Cells[3].FindControl("ddlVendedor"); //Vendedor
-                    TextBox box4 = (TextBox)grvServAd.Rows[rowIndex].Cells[4].FindControl("TextBox4"); //Valor
-                    TextBox box5 = (TextBox)grvServAd.Rows[rowIndex].Cells[5].FindControl("TextBox5"); //Data
-                    TextBox box6 = (TextBox)grvServAd.Rows[rowIndex].Cells[6].FindControl("TextBox6"); //Hora
+                    TextBox box4 = (TextBox)grvServAd.Rows[rowIndex].Cells[4].FindControl("txtValor2"); //Valor
+                    TextBox box5 = (TextBox)grvServAd.Rows[rowIndex].Cells[5].FindControl("txtData"); //Data
+                    TextBox box6 = (TextBox)grvServAd.Rows[rowIndex].Cells[6].FindControl("txtHora"); //Hora
                     DropDownList box7 = (DropDownList)grvServAd.Rows[rowIndex].Cells[7].FindControl("ddlPagamento2"); //Pagamento
                     DropDownList box8 = (DropDownList)grvServAd.Rows[rowIndex].Cells[8].FindControl("ddlStatus"); //Status
 
@@ -775,14 +774,14 @@ public partial class CADASTRAR_FICHA : System.Web.UI.Page
                     TextBox box3 = (TextBox)grvData.Rows[rowIndex].Cells[3].FindControl("txtOrgao");
                     TextBox box4 = (TextBox)grvData.Rows[rowIndex].Cells[4].FindControl("txtTelefone");
                     TextBox box5 = (TextBox)grvData.Rows[rowIndex].Cells[5].FindControl("txtObs");
-                    ImageButton box6 = (ImageButton)grvData.Rows[rowIndex].Cells[6].FindControl("lnkExcluir");
+                    LinkButton box6 = (LinkButton)grvData.Rows[rowIndex].Cells[6].FindControl("lnkExcluirPAX");
 
                     box1.Text = dt.Rows[i]["Nome"].ToString();
                     box2.Text = dt.Rows[i]["Identidade"].ToString();
                     box3.Text = dt.Rows[i]["OrgaoExp"].ToString();
                     box4.Text = dt.Rows[i]["Telefone"].ToString();
                     box5.Text = dt.Rows[i]["Obs"].ToString();
-                    box6.ImageUrl = "~/Figuras/btn_Delete.gif";
+                    box6.ID = "lnkExcluirPAX";
 
                     rowIndex++;
                 }
@@ -809,6 +808,14 @@ public partial class CADASTRAR_FICHA : System.Web.UI.Page
     {
         // TO DO
     }
+    protected void lnkExcluirServIn_Click(object sender, EventArgs e)
+    {
+        // TO DO
+    }
+    protected void lnkExcluirPAX_Click(object sender, EventArgs e)
+    {
+        // TO DO
+    }
 
     private void SetPreviousDataServIn()
     {
@@ -823,12 +830,12 @@ public partial class CADASTRAR_FICHA : System.Web.UI.Page
                     DropDownList box1 = (DropDownList)grvServIn.Rows[rowIndex].Cells[1].FindControl("ddlLocal");
                     TextBox box2 = (TextBox)grvServIn.Rows[rowIndex].Cells[2].FindControl("txtValor");
                     DropDownList box3 = (DropDownList)grvServIn.Rows[rowIndex].Cells[3].FindControl("ddlPagamento1");
-                    ImageButton box6 = (ImageButton)grvServIn.Rows[rowIndex].Cells[4].FindControl("lnkExcluirServIn");
+                    LinkButton box6 = (LinkButton)grvServIn.Rows[rowIndex].Cells[4].FindControl("lnkExcluirServIn");
 
                     box1.SelectedValue = dt.Rows[i]["Local"].ToString();
                     box2.Text = dt.Rows[i]["Valor"].ToString();
                     box3.SelectedValue = dt.Rows[i]["Pagamento"].ToString();
-                    box6.ImageUrl = "~/Figuras/btn_Delete.gif";
+                    box6.ID = "lnkExcluirServIn";
 
                     rowIndex++;
                 }
@@ -848,9 +855,9 @@ public partial class CADASTRAR_FICHA : System.Web.UI.Page
                     TextBox box1 = (TextBox)grvServAd.Rows[rowIndex].Cells[1].FindControl("txtVoucher");
                     DropDownList box2 = (DropDownList)grvServAd.Rows[rowIndex].Cells[2].FindControl("ddlPasseio");
                     DropDownList box3 = (DropDownList)grvServAd.Rows[rowIndex].Cells[3].FindControl("ddlVendedor");
-                    TextBox box4 = (TextBox)grvServAd.Rows[rowIndex].Cells[4].FindControl("TextBox4");
-                    TextBox box5 = (TextBox)grvServAd.Rows[rowIndex].Cells[5].FindControl("TextBox5");
-                    TextBox box6 = (TextBox)grvServAd.Rows[rowIndex].Cells[6].FindControl("TextBox6");
+                    TextBox box4 = (TextBox)grvServAd.Rows[rowIndex].Cells[4].FindControl("txtValor2");
+                    TextBox box5 = (TextBox)grvServAd.Rows[rowIndex].Cells[5].FindControl("txtData");
+                    TextBox box6 = (TextBox)grvServAd.Rows[rowIndex].Cells[6].FindControl("txtHora");
                     DropDownList box7 = (DropDownList)grvServAd.Rows[rowIndex].Cells[7].FindControl("ddlPagamento2");
                     DropDownList box8 = (DropDownList)grvServAd.Rows[rowIndex].Cells[8].FindControl("ddlStatus");
                     LinkButton box9 = (LinkButton)grvServAd.Rows[rowIndex].Cells[9].FindControl("lnkExcluirServAd");

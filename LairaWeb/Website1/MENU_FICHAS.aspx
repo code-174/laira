@@ -16,7 +16,7 @@
             </div>
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <strong>Ficha</strong></div>
+                    <strong>Listar</strong></div>
                 <div class="panel-body">
                     <div class="radio">
                         <label>

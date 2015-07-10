@@ -1,125 +1,99 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true" CodeFile="MENU_FINANCEIRO.aspx.cs" Inherits="MENU_FINANCEIRO" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true"
+    CodeFile="MENU_FINANCEIRO.aspx.cs" Inherits="MENU_FINANCEIRO" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" Runat="Server">
-    <style type="text/css">
-        .style1
-        {
-            width: 100%;
-        }
-        .style2
-        {
-            width: 38px;
-        }
-        .style3
-        {
-            width: 200px;
-        }
-    </style>
+<asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="Server">
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" Runat="Server">
-    <table class="style1">
-        <tr>
-            <td colspan="2">
-            <asp:Label ID="Label1" runat="server" Text="Financeiro" Font-Bold="True" 
-                    Font-Size="Large"></asp:Label>
-            </td>
-        </tr>
-        <tr>
-            <td class="style3">
-            <asp:Label ID="Label2" runat="server" Text="Emitir Faturas"></asp:Label>
-            </td>
-            <td>
-            <asp:Button ID="btnEmitirFaturas" runat="server" Text="Ok" />
-            </td>
-        </tr>
-        </table>
-    <p>
-    </p>
-    <table class="style1">
-        <tr>
-            <td class="style3">
-            <asp:Label ID="Label3" runat="server" Text="Relatório de Vendedores"></asp:Label>
-            </td>
-            <td>
-            <asp:Button ID="btnRelatorioVendedores" runat="server" Text="Ok" />
-            </td>
-        </tr>
-        </table>
-    <p>
-    </p>
-    <table class="style1">
-        <tr>
-            <td colspan="2">
-                <asp:RadioButtonList ID="RadioButtonList1" runat="server">
-                    <asp:ListItem>Baixar</asp:ListItem>
-                    <asp:ListItem Value="Relatorios">Relatórios</asp:ListItem>
-                    <asp:ListItem>Imprimir</asp:ListItem>
-                </asp:RadioButtonList>
-            </td>
-        </tr>
-        <tr>
-            <td class="style2">
-            <asp:Label ID="Label5" runat="server" Text="de:"></asp:Label>
-            </td>
-            <td>
-            <asp:TextBox ID="txtDataInic" runat="server"></asp:TextBox>
-            </td>
-        </tr>
-        <tr>
-            <td class="style2">
-            <asp:Label ID="Label6" runat="server" Text="até:"></asp:Label>
-            </td>
-            <td>
-            <asp:TextBox ID="txtDataFinal" runat="server"></asp:TextBox>
-            </td>
-        </tr>
-        <tr>
-            <td class="style2">
-                <asp:DropDownList ID="DropDownList1" runat="server">
-                    <asp:ListItem>Vencimento</asp:ListItem>
-                    <asp:ListItem Value="Emissao">Emissão</asp:ListItem>
-                </asp:DropDownList>
-            </td>
-            <td>
-                &nbsp;</td>
-        </tr>
-        </table>
-    <p>
-    </p>
-    <table class="style1">
-        <tr>
-            <td class="style3">
-            <asp:Label ID="Label8" runat="server" Text="Localizar"></asp:Label>
-            </td>
-            <td>
-                &nbsp;</td>
-        </tr>
-        <tr>
-            <td class="style3">
-            <asp:Label ID="Label9" runat="server" Text="№:"></asp:Label>
-            <asp:TextBox ID="txtNumero" runat="server" Width="100px"></asp:TextBox>
-            </td>
-            <td>
-                &nbsp;</td>
-        </tr>
-        <tr>
-            <td class="style3">
-                <asp:Label ID="Label11" runat="server" Text="Agência"></asp:Label>
-            </td>
-            <td>
-                &nbsp;</td>
-        </tr>
-        <tr>
-            <td class="style3">
-                <asp:DropDownList ID="ddlAgencia" runat="server">
-                    <asp:ListItem>Todos</asp:ListItem>
-                    <asp:ListItem>CVC BRASIL</asp:ListItem>
-                </asp:DropDownList>
-            </td>
-            <td>
-            <asp:Button ID="btnLocalizarFatura" runat="server" Text="Ok" />
-            </td>
-        </tr>
-    </table>
+<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="Server">
+    <div class="container-fluid">
+        <fieldset>
+            <legend>Financeiro</legend>
+            <form id="Form2" class="form col-md-4" runat="server">
+            <div class="well">
+                <div class="form-group">
+                    <a href="GERAR_FATURA.aspx" class="btn btn-primary btn-lg btn-block">Emitir Fatura</a>
+                </div>
+            </div>
+            <div class="well">
+                <div class="form-group">
+                    <a href="GERAR_RELATORIO_VENDEDORES.aspx" class="btn btn-primary btn-lg btn-block">Relatório
+                        de Vendedores</a>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <strong>Processar</strong>
+                </div>
+                <div class="panel-body">
+                    <div class="radio">
+                        <label>
+                            <asp:RadioButton runat="server" Checked="true" AutoPostBack="true" ID="optBaixar"
+                                OnCheckedChanged="optBaixar_CheckedChanged" />Baixar</label>
+                    </div>
+                    <div class="radio">
+                        <label>
+                            <asp:RadioButton runat="server" Checked="false" AutoPostBack="true" ID="optRelatorio"
+                                OnCheckedChanged="optRelatorio_CheckedChanged" />Relatórios</label>
+                    </div>
+                    <div class="radio">
+                        <label>
+                            <asp:RadioButton runat="server" Checked="false" AutoPostBack="true" ID="optImprimir"
+                                OnCheckedChanged="optImprimir_CheckedChanged" />Imprimir</label>
+                    </div>
+                    <div class="form-group form-horizontal col-md-12">
+                        <label for="txtDataInicio" class="control-label col-md-3">
+                            De</label>
+                        <div class="col-md-5">
+                            <asp:TextBox ID="txtDataInicio" runat="server" class="form-control"></asp:TextBox>
+                        </div>
+                    </div>
+                    <div class="row">
+                    </div>
+                    <div class="form-group form-horizontal col-md-12">
+                        <label for="txtDataFim" class="control-label col-md-3">
+                            Até</label>
+                        <div class="col-md-5">
+                            <asp:TextBox ID="txtDataFim" runat="server" class="form-control"></asp:TextBox>
+                        </div>
+                    </div>
+                    <div class="form-group form-horizontal col-md-12">
+                        <label for="ddlTipo" class="control-label col-md-3">
+                            Tipo</label>
+                        <div class="col-md-6">
+                            <asp:DropDownList ID="ddlTipo" runat="server" class="form-control">
+                                <asp:ListItem Value="ven">Vencimento</asp:ListItem>
+                                <asp:ListItem Value="emi">Emissão</asp:ListItem>
+                            </asp:DropDownList>
+                        </div>
+                    </div>
+                    <div class="form-group form-horizontal col-md-12">
+                        <label for="ddlAgencia" class="control-label col-md-3">
+                            Agência</label>
+                        <div class="col-md-6">
+                            <asp:DropDownList ID="ddlAgencia" runat="server" class="form-control">
+                            </asp:DropDownList>
+                        </div>
+                        <asp:LinkButton ID="lnkProcessar" class="btn btn-success btn-sm" runat="server" OnClick="lnkProcessar_Click"><span class="glyphicon glyphicon-arrow-right">
+                        </span></asp:LinkButton>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <strong>Localizar</strong>
+                </div>
+                <div class="panel-body">
+                    <div class="form-group form-horizontal">
+                        <label for="txtChave" class="control-label col-md-2">
+                            Número</label>
+                        <div class="col-md-4">
+                            <asp:TextBox ID="txtChave" runat="server" class="form-control"></asp:TextBox>
+                        </div>
+                        <asp:LinkButton ID="lnkLocalizar" class="btn btn-success btn-sm" runat="server" OnClick="lnkLocalizar_Click"><span class="glyphicon glyphicon-arrow-right">
+                        </span></asp:LinkButton>
+                    </div>
+                </div>
+            </div>
+            </form>
+        </fieldset>
+    </div>
 </asp:Content>
-

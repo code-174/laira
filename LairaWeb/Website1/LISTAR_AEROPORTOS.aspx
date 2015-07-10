@@ -26,7 +26,8 @@
                 </div>
             </div>
             <div id="divPrint">
-                <asp:GridView ID="grvData" runat="server" class="table table-hover">
+                <asp:GridView ID="grvData" runat="server" class="table table-hover" 
+                    GridLines="None" AllowPaging="True">
                 </asp:GridView>
             </div>
             <div class="btn-group btn-group-justified">

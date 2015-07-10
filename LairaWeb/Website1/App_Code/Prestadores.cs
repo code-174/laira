@@ -13,6 +13,7 @@ using System.Text;
 public class Prestadores
 {
     #region Propriedades
+    public Int64 ID { get; set; }
     public string CODIGO { get; set; }
     public string NOME { get; set; }
     public string ENDERECO { get; set; }
@@ -40,7 +41,7 @@ public class Prestadores
         conn.ConnectionString = ConfigurationManager.ConnectionStrings["LairaWebDB"].ConnectionString;
         cmd.Connection = conn;
         StringBuilder str = new StringBuilder();
-        str.AppendLine(" select CODIGO_PRESTADOR, NOME_PRESTADOR, ENDERECO_PRESTADOR, TELEFONE_PRESTADOR, EMAIL_PRESTADOR from PRESTADORES ");
+        str.AppendLine(" select ID_PRESTADOR, CODIGO_PRESTADOR, NOME_PRESTADOR, ENDERECO_PRESTADOR, TELEFONE_PRESTADOR, EMAIL_PRESTADOR from PRESTADORES ");
         cmd.CommandText = str.ToString();
         conn.Open();
         SqlDataReader reader = cmd.ExecuteReader();
@@ -49,16 +50,45 @@ public class Prestadores
         {
             Prestadores Prestador = new Prestadores
             {
-                CODIGO = reader.GetString(0),
-                NOME = reader.GetString(1),
-                ENDERECO = reader.GetString(2),
-                TELEFONE = reader.GetString(3),
-                EMAIL = reader.GetString(4)
+                ID = reader.GetInt64(0),
+                CODIGO = reader.GetString(1),
+                NOME = reader.GetString(2),
+                ENDERECO = reader.GetString(3),
+                TELEFONE = reader.GetString(4),
+                EMAIL = reader.GetString(5)
             };
 
             xList.Add(Prestador);
         }
 
         return xList;
+    }
+    public List<Prestadores> GetPrestadoresCombo()
+    {
+        List<Prestadores> xList = new List<Prestadores>();
+
+        SqlCommand cmd = new SqlCommand();
+        SqlConnection conn = new SqlConnection();
+        conn.ConnectionString = ConfigurationManager.ConnectionStrings["LairaWebDB"].ConnectionString;
+        cmd.Connection = conn;
+        StringBuilder str = new StringBuilder();
+        str.AppendLine(" select ID_PRESTADOR, NOME_PRESTADOR from PRESTADORES ");
+        cmd.CommandText = str.ToString();
+        conn.Open();
+        SqlDataReader reader = cmd.ExecuteReader();
+
+        while (reader.Read())
+        {
+            Prestadores Prestador = new Prestadores
+            {
+                ID = reader.GetInt64(0),
+                NOME = reader.IsDBNull(1) ? null : reader.GetString(1)
+            };
+
+            xList.Add(Prestador);
+        }
+
+        return xList;
+
     }
 }
