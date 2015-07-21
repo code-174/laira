@@ -25,8 +25,8 @@
                             Tipo dos Serviços</label>
                         <div class="col-md-5">
                             <asp:DropDownList ID="ddlTipoServico" runat="server" class="form-control">
-                                <asp:ListItem Value="chegada">Transfer In (Chegada)</asp:ListItem>
-                                <asp:ListItem Value="saida">Transfer Out (Saída)</asp:ListItem>
+                                <asp:ListItem Value="C">Transfer In (Chegada)</asp:ListItem>
+                                <asp:ListItem Value="S">Transfer Out (Saída)</asp:ListItem>
                             </asp:DropDownList>
                         </div>
                     </div>
@@ -36,6 +36,7 @@
                             OnClick="lnkProcessarCriterios_Click"><span class="glyphicon glyphicon-ok">
                         </span> Processar</asp:LinkButton>
                     </div>
+                    <!-- / BUTTON PROCESSAR-->
                 </div>
             </div>
             <!-- / PANEL CRITERIOS-->
@@ -125,7 +126,7 @@
             </div>
             <!-- /PANEL DADOS MOTORISTA E GUIA-->
             <asp:GridView ID="grvFichas" runat="server" class="table table-hover table-bordered"
-                GridLines="None">
+                GridLines="None" EmptyDataRowStyle-BackColor="Yellow" EmptyDataText="Nao existem fichas para a Data informada!">
             </asp:GridView>
             </form>
         </fieldset>

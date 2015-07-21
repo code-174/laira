@@ -5,74 +5,98 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="Server">
     <div class="container-fluid">
-            <fieldset>
+        <fieldset>
             <legend>Administração</legend>
-        <form id="Form1" class="form col-md-4" runat="server">
-            <div class="well">
-                <div class="form-group">
-                    <label for="ddlListar">Listar:</label>
-                    <asp:DropDownList ID="ddlListar" runat="server" class="form-control">
-                        <asp:ListItem Value="aer">Aeroportos</asp:ListItem>
-                        <asp:ListItem Value="age">Agências</asp:ListItem>
-                        <asp:ListItem Value="dep">Depoimentos</asp:ListItem>
-                        <asp:ListItem Value="for">Formas de Pagamento</asp:ListItem>
-                        <asp:ListItem Value="hot">Hotéis</asp:ListItem>
-                        <asp:ListItem Value="pre">Prestadores</asp:ListItem>
-                        <asp:ListItem Value="sea">Serv. Adicionais</asp:ListItem>
-                        <asp:ListItem Value="inc">Incoming</asp:ListItem>
-                        <asp:ListItem Value="sei">Serv. Inclusos</asp:ListItem>
-                        <asp:ListItem Value="sta">Status</asp:ListItem>
-                        <asp:ListItem Value="usu">Usuários</asp:ListItem>
-                        <asp:ListItem Value="ven">Vendedores</asp:ListItem>
-                        <asp:ListItem Value="voo">Voos</asp:ListItem>
-                    </asp:DropDownList>
+            <form id="Form1" class="form form-horizontal col-md-4" runat="server">
+            <div class="form-group">
+                    <a href="teste_ficha.aspx" class="btn btn-primary btn-lg btn-block">teste ficha</a>
                 </div>
-                <div class="form-group">
-                    <asp:LinkButton ID="btnListar" runat="server" class="btn btn-success" OnClick="btnListar_Click">
-                        <span class="glyphicon glyphicon-ok-sign"></span> Processar
-                    </asp:LinkButton>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <strong>Processar</strong>
                 </div>
-            </div>
-            <div class="well">
-                <div class="form-group">
-                    <label for="ddlCadastrar">
-                        Cadastrar:</label>
-                    <asp:DropDownList ID="ddlCadastrar" runat="server" class="form-control">
-                        <asp:ListItem Value="aer">Aeroportos</asp:ListItem>
-                        <asp:ListItem Value="age">Agências</asp:ListItem>
-                        <asp:ListItem Value="dep">Depoimentos</asp:ListItem>
-                        <asp:ListItem Value="for">Formas de Pagamento</asp:ListItem>
-                        <asp:ListItem Value="hot">Hotéis</asp:ListItem>
-                        <asp:ListItem Value="pre">Prestadores</asp:ListItem>
-                        <asp:ListItem Value="sea">Serv. Adicionais</asp:ListItem>
-                        <asp:ListItem Value="inc">Incoming</asp:ListItem>
-                        <asp:ListItem Value="sei">Serv. Inclusos</asp:ListItem>
-                        <asp:ListItem Value="sta">Status</asp:ListItem>
-                        <asp:ListItem Value="usu">Usuários</asp:ListItem>
-                        <asp:ListItem Value="ven">Vendedores</asp:ListItem>
-                        <asp:ListItem Value="voo">Voos</asp:ListItem>
-                    </asp:DropDownList>
-                </div>
-                <div class="form-group">
-                    <asp:LinkButton ID="btnCadastrar" runat="server" class="btn btn-success" OnClick="btnCadastrar_Click">
-                        <span class="glyphicon glyphicon-ok-sign"></span> Processar
-                    </asp:LinkButton>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <label for="ddlOperacao" class="control-label col-md-3">
+                            Operação</label>
+                        <div class="col-md-6">
+                            <asp:DropDownList ID="ddlOperacao" runat="server" class="form-control">
+                                <asp:ListItem Value="L">Listar</asp:ListItem>
+                                <asp:ListItem Value="C">Cadastrar</asp:ListItem>
+                            </asp:DropDownList>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="ddlSelecione" class="control-label col-md-3">
+                            Selecione</label>
+                        <div class="col-md-6">
+                            <asp:DropDownList ID="ddlSelecione" runat="server" class="form-control">
+                                <asp:ListItem Value="aer">Aeroportos</asp:ListItem>
+                                <asp:ListItem Value="age">Agências</asp:ListItem>
+                                <asp:ListItem Value="dep">Depoimentos</asp:ListItem>
+                                <asp:ListItem Value="for">Formas de Pagamento</asp:ListItem>
+                                <asp:ListItem Value="hot">Hotéis</asp:ListItem>
+                                <asp:ListItem Value="pre">Prestadores</asp:ListItem>
+                                <asp:ListItem Value="sea">Serv. Adicionais</asp:ListItem>
+                                <asp:ListItem Value="inc">Incoming</asp:ListItem>
+                                <asp:ListItem Value="sei">Serv. Inclusos</asp:ListItem>
+                                <asp:ListItem Value="sta">Status</asp:ListItem>
+                                <asp:ListItem Value="usu">Usuários</asp:ListItem>
+                                <asp:ListItem Value="ven">Vendedores</asp:ListItem>
+                                <asp:ListItem Value="voo">Voos</asp:ListItem>
+                            </asp:DropDownList>
+                        </div>
+                    </div>
+                    <div class="button-group col-md-offset-3">
+                        <asp:LinkButton ID="lnkProcessar" class="btn btn-success" runat="server" OnClick="lnkProcessar_Click"><span class="glyphicon glyphicon-ok">
+                        </span> Processar</asp:LinkButton>
+                    </div>
+                    <!-- / BUTTON PROCESSAR-->
                 </div>
             </div>
-            <div class="well">
-                <div class="form-group">
-                    <label for="txtLocalizar">
-                        Localizar:</label>
-                    <asp:TextBox ID="txtLocalizar" runat="server" class="form-control"></asp:TextBox>
+            <!-- / PANEL PROCESSAR-->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <strong>Localizar</strong>
                 </div>
-                <div class="form-group">
-                    <asp:LinkButton ID="btnLocalizar" runat="server" class="btn btn-success" OnClick="btnLocalizar_Click">
-                        <span class="glyphicon glyphicon-search"></span> Localizar
-                    </asp:LinkButton>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <label for="ddlLocalizar" class="control-label col-md-3">
+                            Selecione</label>
+                        <div class="col-md-6">
+                            <asp:DropDownList ID="ddlLocalizar" runat="server" class="form-control">
+                                <asp:ListItem Value="aer">Aeroportos</asp:ListItem>
+                                <asp:ListItem Value="age">Agências</asp:ListItem>
+                                <asp:ListItem Value="dep">Depoimentos</asp:ListItem>
+                                <asp:ListItem Value="for">Formas de Pagamento</asp:ListItem>
+                                <asp:ListItem Value="hot">Hotéis</asp:ListItem>
+                                <asp:ListItem Value="pre">Prestadores</asp:ListItem>
+                                <asp:ListItem Value="sea">Serv. Adicionais</asp:ListItem>
+                                <asp:ListItem Value="inc">Incoming</asp:ListItem>
+                                <asp:ListItem Value="sei">Serv. Inclusos</asp:ListItem>
+                                <asp:ListItem Value="sta">Status</asp:ListItem>
+                                <asp:ListItem Value="usu">Usuários</asp:ListItem>
+                                <asp:ListItem Value="ven">Vendedores</asp:ListItem>
+                                <asp:ListItem Value="voo">Voos</asp:ListItem>
+                            </asp:DropDownList>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="txtLocalizar" class="control-label col-md-3">
+                            Localizar:</label>
+                        <div class="col-md-6">
+                            <asp:TextBox ID="txtLocalizar" runat="server" class="form-control"></asp:TextBox>
+                        </div>
+                    </div>
+                    <div class="button-group col-md-offset-3">
+                        <asp:LinkButton ID="lnkLocalizar" class="btn btn-success" runat="server" OnClick="lnkLocalizar_Click"><span class="glyphicon glyphicon-ok">
+                        </span> Filtrar</asp:LinkButton>
+                    </div>
+                    <!-- / BUTTON LOCALIZAR-->
                 </div>
             </div>
+            <!-- / PANEL LOCALIZAR-->
             </form>
         </fieldset>
-        
     </div>
 </asp:Content>

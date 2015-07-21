@@ -11,9 +11,9 @@ public partial class LISTAR_AEROPORTOS : System.Web.UI.Page
     {
         if (!IsPostBack)
         {
-            string Codigo = Request.QueryString["Codigo"];
+            string Filtro = Request.QueryString["Filtro"];
 
-            if (Codigo.Trim().ToString() == "")
+            if (Filtro.Trim().ToString() == "")
             {
                 Aeroportos c = new Aeroportos();
                 grvData.DataSource = c.GetAeroportos();
@@ -22,7 +22,7 @@ public partial class LISTAR_AEROPORTOS : System.Web.UI.Page
             else
             {
                 Aeroportos c = new Aeroportos();
-                grvData.DataSource = c.GetAeroportosByCode(Codigo);
+                grvData.DataSource = c.GetAeroportosByCode(Filtro);
                 grvData.DataBind();
             }
         }
@@ -37,6 +37,9 @@ public partial class LISTAR_AEROPORTOS : System.Web.UI.Page
     }
     protected void lnkFiltrar_Click(object sender, EventArgs e)
     {
-        // TO DO
+        string Filtro = txtFiltro.Text;
+        Aeroportos c = new Aeroportos();
+        grvData.DataSource = c.GetAeroportosByCode(Filtro);
+        grvData.DataBind();
     }
 }

@@ -42,7 +42,7 @@ public class Hoteis
         conn.ConnectionString = ConfigurationManager.ConnectionStrings["LairaWebDB"].ConnectionString;
         cmd.Connection = conn;
         StringBuilder str = new StringBuilder();
-        str.AppendLine(" select CODIGO_HOTEL, NOME_HOTEL, ENDERECO_HOTEL,  EMAIL_HOTEL, TELEFONE_HOTEL, HORA_HOTEL from HOTEIS ");
+        str.AppendLine(" select ID_HOTEL, CODIGO_HOTEL, NOME_HOTEL, ENDERECO_HOTEL,  EMAIL_HOTEL, TELEFONE_HOTEL, HORA_HOTEL from HOTEIS ");
         cmd.CommandText = str.ToString();
         conn.Open();
         SqlDataReader reader = cmd.ExecuteReader();
@@ -51,12 +51,13 @@ public class Hoteis
         {
             Hoteis Hotel = new Hoteis
             {
-                CODIGO = reader.IsDBNull(0) ? null : reader.GetString(0),
-                NOME = reader.IsDBNull(1) ? null : reader.GetString(1),
-                ENDERECO = reader.IsDBNull(2) ? null : reader.GetString(2),
-                EMAIL = reader.IsDBNull(3) ? null : reader.GetString(3),
-                TELEFONE = reader.IsDBNull(4) ? null : reader.GetString(4),
-                HORA = reader.IsDBNull(5) ? null : reader.GetString(5)
+                ID = reader.GetInt64(0),
+                CODIGO = reader.IsDBNull(1) ? null : reader.GetString(1),
+                NOME = reader.IsDBNull(2) ? null : reader.GetString(2),
+                ENDERECO = reader.IsDBNull(3) ? null : reader.GetString(3),
+                EMAIL = reader.IsDBNull(4) ? null : reader.GetString(4),
+                TELEFONE = reader.IsDBNull(5) ? null : reader.GetString(5),
+                HORA = reader.IsDBNull(6) ? null : reader.GetString(6)
             };
 
             xList.Add(Hotel);

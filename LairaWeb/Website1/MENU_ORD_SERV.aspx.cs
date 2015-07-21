@@ -12,20 +12,20 @@ public partial class MENU_ORD_SERV : System.Web.UI.Page
     {
         if (!IsPostBack)
         {
-            txtDataRelatorio.Text = DateTime.Now.ToString("d", CultureInfo.CreateSpecificCulture("pt-BR"));            
+            txtDataRelatorio.Text = DateTime.Now.ToString("d", CultureInfo.CreateSpecificCulture("pt-BR"));
         }
 
     }
-    protected void optChegadaOS_CheckedChanged(Object sender, EventArgs e)
-    {
-        optSaidaOS.Checked = false;
+    //protected void optChegadaOS_CheckedChanged(Object sender, EventArgs e)
+    //{
+    //    optSaidaOS.Checked = false;
 
-    }
-    protected void optSaidaOS_CheckedChanged(Object sender, EventArgs e)
-    {
-        optChegadaOS.Checked = false;
+    //}
+    //protected void optSaidaOS_CheckedChanged(Object sender, EventArgs e)
+    //{
+    //    optChegadaOS.Checked = false;
 
-    }
+    //}
     protected void optTodas_CheckedChanged(Object sender, EventArgs e)
     {
         optNaoImpressas.Checked = false;
@@ -46,8 +46,11 @@ public partial class MENU_ORD_SERV : System.Web.UI.Page
     }
     protected void lnkGerarOS_Click(object sender, EventArgs e)
     {
-        Response.Redirect("GERAR_ORDEM_SERV.aspx");
-        //Response.Redirect("LISTAR_ORDEM_SERV.aspx?Codigo=5" + "&Data=" + txtChave.Text);
+        if (txtDataOS.Text != "")
+        {
+            Response.Redirect("GERAR_ORDEM_SERV.aspx?Tipo=" + ddlTipoOS.SelectedValue.ToString().Substring(0) + "&Data=" + txtDataOS.Text);
+        }
+
     }
     protected void lnkRelatorios_Click(object sender, EventArgs e)
     {

@@ -9,24 +9,18 @@ public partial class MENU_FINANCEIRO : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-
+        LoadCombos();
     }
-    protected void optBaixar_CheckedChanged(Object sender, EventArgs e)
-    {        
-        optRelatorio.Checked = false;
-        optImprimir.Checked = false;
 
-    }
-    protected void optRelatorio_CheckedChanged(Object sender, EventArgs e)
+    void LoadCombos()
     {
-        optBaixar.Checked = false;
-        optImprimir.Checked = false;
-
-    }
-    protected void optImprimir_CheckedChanged(Object sender, EventArgs e)
-    {
-        optBaixar.Checked = false;
-        optRelatorio.Checked = false;
+        // POPULATE AGENCIAS DROP DOWN LIST
+        Agencias c = new Agencias();
+        List<Agencias> details = c.GetAgenciasCombo();
+        ddlAgencia.DataTextField = "NOME";
+        ddlAgencia.DataValueField = "ID";
+        ddlAgencia.DataSource = details;
+        ddlAgencia.DataBind();
     }
     protected void lnkProcessar_Click(object sender, EventArgs e)
     {

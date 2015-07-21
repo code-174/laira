@@ -7,80 +7,86 @@
     <div class="container-fluid">
         <fieldset>
             <legend>Ordem de Serviço Adicional</legend>
-            <form id="Form2" class="form col-md-4" runat="server">
-            <div class="well">
-                <div class="form-group">
-                    <a href="GERAR_ORDEM_SERV_ADC.aspx" class="btn btn-primary btn-lg btn-block">Gerar OS
-                        Adicional</a>
-                </div>
-            </div>
+            <form id="Form2" class="form form-horizontal col-md-4" runat="server">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <strong>Relatório</strong>
+                    <strong>Processar</strong>
                 </div>
                 <div class="panel-body">
-                    <div class="form-group form-horizontal">
-                        <label for="txtDataRelatorio" class="control-label col-md-2">
-                            Data</label>
-                        <div class="col-md-5">
-                            <asp:TextBox ID="txtDataRelatorio" runat="server" class="form-control"></asp:TextBox>
+                    <div class="form-group">
+                        <label for="ddlSelecione" class="control-label col-md-3">
+                            Selecione</label>
+                        <div class="col-md-4">
+                            <asp:DropDownList ID="ddlSelecione" runat="server" class="form-control">
+                                <asp:ListItem Value="G">Gerar</asp:ListItem>
+                                <asp:ListItem Value="R">Relatório</asp:ListItem>
+                            </asp:DropDownList>
                         </div>
-                        <asp:LinkButton ID="lnkRelatorios" class="btn btn-success btn-sm" runat="server"
-                            OnClick="lnkRelatorios_Click"><span class="glyphicon glyphicon-arrow-right">
+                    </div>
+                    <div class="form-group">
+                        <label for="txtData" class="control-label col-md-3">
+                            Data</label>
+                        <div class="col-md-4">
+                            <asp:TextBox ID="txtData" runat="server" class="form-control"></asp:TextBox>
+                        </div>
+                        <asp:LinkButton ID="lnkGerarOSAdc" class="btn btn-success" runat="server" OnClick="lnkGerarOSAdc_Click"><span class="glyphicon glyphicon-ok">
                         </span></asp:LinkButton>
                     </div>
                 </div>
             </div>
+            <!-- / PANEL PROCESSAR-->
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <strong>Relatório por Prestador</strong>
                 </div>
                 <div class="panel-body">
-                    <div class="form-group form-horizontal col-md-12">
+                    <div class="form-group">
                         <label for="txtDataInicio" class="control-label col-md-3">
                             De</label>
-                        <div class="col-md-5">
+                        <div class="col-md-4">
                             <asp:TextBox ID="txtDataInicio" runat="server" class="form-control"></asp:TextBox>
                         </div>
                     </div>
                     <div class="row">
                     </div>
-                    <div class="form-group form-horizontal col-md-12">
+                    <div class="form-group">
                         <label for="txtDataFim" class="control-label col-md-3">
                             Até</label>
-                        <div class="col-md-5">
+                        <div class="col-md-4">
                             <asp:TextBox ID="txtDataFim" runat="server" class="form-control"></asp:TextBox>
                         </div>
                     </div>
-                    <div class="form-group form-horizontal col-md-12">
+                    <div class="form-group">
                         <label for="ddlPrestador" class="control-label col-md-3">
                             Prestador</label>
-                        <div class="col-md-5">
+                        <div class="col-md-6">
                             <asp:DropDownList ID="ddlPrestador" runat="server" class="form-control">
                             </asp:DropDownList>
                         </div>
-                        <asp:LinkButton ID="lnkRelatorioPrestador" class="btn btn-success btn-sm" runat="server"
-                            OnClick="lnkRelatorioPrestador_Click"><span class="glyphicon glyphicon-arrow-right">
+                        <asp:LinkButton ID="lnkRelatorioPrestador" class="btn btn-success" runat="server"
+                            OnClick="lnkRelatorioPrestador_Click"><span class="glyphicon glyphicon-ok">
                         </span></asp:LinkButton>
                     </div>
                 </div>
-            </div><!-- /PANEL RELATORIO POR PRESTADOR-->
+            </div>
+            <!-- /PANEL RELATORIO POR PRESTADOR-->
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <strong>Localizar</strong>
                 </div>
                 <div class="panel-body">
-                    <div class="form-group form-horizontal">
-                        <label for="txtChave" class="control-label col-md-2">
+                    <div class="form-group">
+                        <label for="txtChave" class="control-label col-md-3">
                             Número</label>
                         <div class="col-md-4">
                             <asp:TextBox ID="txtChave" runat="server" class="form-control"></asp:TextBox>
                         </div>
-                        <asp:LinkButton ID="lnkConsultar" class="btn btn-success btn-sm" runat="server" OnClick="lnkConsultar_Click"><span class="glyphicon glyphicon-arrow-right">
+                        <asp:LinkButton ID="lnkConsultar" class="btn btn-success" runat="server" OnClick="lnkConsultar_Click"><span class="glyphicon glyphicon-ok">
                         </span></asp:LinkButton>
                     </div>
                 </div>
             </div>
+            <!-- /PANEL LOCALIZAR-->
             </form>
         </fieldset>
     </div>

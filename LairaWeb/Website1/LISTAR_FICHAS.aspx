@@ -10,7 +10,8 @@
             <form id="Form1" class="form col-md-7" runat="server">
             
             <div id="divPrint">
-                <asp:GridView ID="grvData" runat="server" class="table">
+                <asp:GridView ID="grvData" runat="server" class="table table-hover" 
+                    GridLines="None">
                 </asp:GridView>
             </div>
             <div class="btn-group btn-group-justified">

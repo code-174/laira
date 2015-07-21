@@ -11,16 +11,28 @@ public partial class MENU_ADMINISTRACAO : System.Web.UI.Page
     {
 
     }
-    protected void btnListar_Click(object sender, EventArgs e)
+
+    protected void lnkProcessar_Click(object sender, EventArgs e)
     {
-        string dllSelected = ddlListar.SelectedValue;
+        if (ddlOperacao.SelectedValue == "L")
+        {
+            Listar();
+        }
+        else
+        {
+            Cadastrar();
+        }    
+    }
+    void Listar() 
+    {
+        string dllSelected = ddlSelecione.SelectedValue;
         switch (dllSelected)
         {
             case "aer":
-                Response.Redirect("LISTAR_AEROPORTOS.aspx?Codigo=");
+                Response.Redirect("LISTAR_AEROPORTOS.aspx?Filtro=");
                 break;
             case "age":
-                Response.Redirect("LISTAR_AGENCIAS.aspx?Codigo=");
+                Response.Redirect("LISTAR_AGENCIAS.aspx?Filtro=");
                 break;
             case "dep":
                 Response.Redirect("LISTAR_DEPOIMENTOS.aspx");
@@ -55,14 +67,13 @@ public partial class MENU_ADMINISTRACAO : System.Web.UI.Page
             case "voo":
                 Response.Redirect("LISTAR_VOOS.aspx");
                 break;
-
             default:
                 break;
-        }
-    }
-    protected void btnCadastrar_Click(object sender, EventArgs e)
+        }   
+    }   
+    void Cadastrar()
     {
-        string dllSelected = ddlCadastrar.SelectedValue;
+        string dllSelected = ddlSelecione.SelectedValue;
         switch (dllSelected)
         {
             case "aer":
@@ -104,21 +115,20 @@ public partial class MENU_ADMINISTRACAO : System.Web.UI.Page
             case "voo":
                 Response.Redirect("CADASTRAR_VOO.aspx");
                 break;
-
             default:
                 break;
         }
     }
-    protected void btnLocalizar_Click(object sender, EventArgs e)
+    protected void lnkLocalizar_Click(object sender, EventArgs e)
     {
-        string Busca = "?Codigo=" + txtLocalizar.Text.ToUpper().ToString();
+        string Busca = "?Filtro=" + txtLocalizar.Text.ToUpper().ToString();
 
-        if (txtLocalizar.Text.ToUpper().ToString() == "?Codigo=")
+        if (txtLocalizar.Text.ToUpper().ToString() == "?Filtro=")
         {
             Busca = "";
         }
 
-        string dllSelected = ddlListar.SelectedValue;
+        string dllSelected = ddlLocalizar.SelectedValue;
         switch (dllSelected)
         {
             case "aer":

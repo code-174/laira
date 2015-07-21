@@ -59,8 +59,6 @@ public class Aeroportos
         return xList;
     }
 
-
-
     public List<Aeroportos> GetAeroportosByCode(string strQuery)
     {
         List<Aeroportos> xList = new List<Aeroportos>();
@@ -71,12 +69,13 @@ public class Aeroportos
         cmd.Connection = conn;
         StringBuilder str = new StringBuilder();
 
-        str.AppendLine(" select CODIGO_AEROPORTO, NOME_AEROPORTO from AEROPORTOS WHERE ( UPPER(CODIGO_AEROPORTO) ");
-        str.AppendLine(" LIKE '%" + strQuery + "%' )");
-        str.AppendLine("OR");
-        str.AppendLine(" (UPPER(NOME_AEROPORTO)  LIKE '%" + strQuery + "%' )");
+        str.AppendLine(" select CODIGO_AEROPORTO, NOME_AEROPORTO from AEROPORTOS where ( UPPER(CODIGO_AEROPORTO) ");
+        str.AppendLine(" like @CODIGO_AEROPORTO )");
+        //str.AppendLine("OR");
+        //str.AppendLine(" (UPPER(NOME_AEROPORTO)  LIKE '%" + strQuery + "%' )");
 
         cmd.CommandText = str.ToString();
+        cmd.Parameters.AddWithValue("@CODIGO_AEROPORTO", "%" + strQuery + "%");
         conn.Open();
         SqlDataReader reader = cmd.ExecuteReader();
 

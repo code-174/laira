@@ -19,77 +19,75 @@
                         de Vendedores</a>
                 </div>
             </div>
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <strong>Processar</strong>
-                </div>
-                <div class="panel-body">
-                    <div class="radio">
-                        <label>
-                            <asp:RadioButton runat="server" Checked="true" AutoPostBack="true" ID="optBaixar"
-                                OnCheckedChanged="optBaixar_CheckedChanged" />Baixar</label>
+            <div class="form-group form-horizontal">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <strong>Processar</strong>
                     </div>
-                    <div class="radio">
-                        <label>
-                            <asp:RadioButton runat="server" Checked="false" AutoPostBack="true" ID="optRelatorio"
-                                OnCheckedChanged="optRelatorio_CheckedChanged" />Relatórios</label>
-                    </div>
-                    <div class="radio">
-                        <label>
-                            <asp:RadioButton runat="server" Checked="false" AutoPostBack="true" ID="optImprimir"
-                                OnCheckedChanged="optImprimir_CheckedChanged" />Imprimir</label>
-                    </div>
-                    <div class="form-group form-horizontal col-md-12">
-                        <label for="txtDataInicio" class="control-label col-md-3">
-                            De</label>
-                        <div class="col-md-5">
-                            <asp:TextBox ID="txtDataInicio" runat="server" class="form-control"></asp:TextBox>
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <label for="ddlSelecione" class="control-label col-md-3">
+                                Selecione</label>
+                            <div class="col-md-6">
+                                <asp:DropDownList ID="ddlSelecione" runat="server" class="form-control">
+                                    <asp:ListItem Value="B">Baixar</asp:ListItem>
+                                    <asp:ListItem Value="R">Relatórios</asp:ListItem>
+                                    <asp:ListItem Value="I">Imprimir</asp:ListItem>
+                                </asp:DropDownList>
+                            </div>
                         </div>
-                    </div>
-                    <div class="row">
-                    </div>
-                    <div class="form-group form-horizontal col-md-12">
-                        <label for="txtDataFim" class="control-label col-md-3">
-                            Até</label>
-                        <div class="col-md-5">
-                            <asp:TextBox ID="txtDataFim" runat="server" class="form-control"></asp:TextBox>
+                        <div class="form-group">
+                            <label for="txtDataInicio" class="control-label col-md-3">
+                                De</label>
+                            <div class="col-md-5">
+                                <asp:TextBox ID="txtDataInicio" runat="server" class="form-control"></asp:TextBox>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group form-horizontal col-md-12">
-                        <label for="ddlTipo" class="control-label col-md-3">
-                            Tipo</label>
-                        <div class="col-md-6">
-                            <asp:DropDownList ID="ddlTipo" runat="server" class="form-control">
-                                <asp:ListItem Value="ven">Vencimento</asp:ListItem>
-                                <asp:ListItem Value="emi">Emissão</asp:ListItem>
-                            </asp:DropDownList>
+                        <div class="row">
                         </div>
-                    </div>
-                    <div class="form-group form-horizontal col-md-12">
-                        <label for="ddlAgencia" class="control-label col-md-3">
-                            Agência</label>
-                        <div class="col-md-6">
-                            <asp:DropDownList ID="ddlAgencia" runat="server" class="form-control">
-                            </asp:DropDownList>
+                        <div class="form-group">
+                            <label for="txtDataFim" class="control-label col-md-3">
+                                Até</label>
+                            <div class="col-md-5">
+                                <asp:TextBox ID="txtDataFim" runat="server" class="form-control"></asp:TextBox>
+                            </div>
                         </div>
-                        <asp:LinkButton ID="lnkProcessar" class="btn btn-success btn-sm" runat="server" OnClick="lnkProcessar_Click"><span class="glyphicon glyphicon-arrow-right">
+                        <div class="form-group">
+                            <label for="ddlTipo" class="control-label col-md-3">
+                                Tipo</label>
+                            <div class="col-md-6">
+                                <asp:DropDownList ID="ddlTipo" runat="server" class="form-control">
+                                    <asp:ListItem Value="ven">Vencimento</asp:ListItem>
+                                    <asp:ListItem Value="emi">Emissão</asp:ListItem>
+                                </asp:DropDownList>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="ddlAgencia" class="control-label col-md-3">
+                                Agência</label>
+                            <div class="col-md-6">
+                                <asp:DropDownList ID="ddlAgencia" runat="server" class="form-control">
+                                </asp:DropDownList>
+                            </div>
+                            <asp:LinkButton ID="lnkProcessar" class="btn btn-success btn-sm" runat="server" OnClick="lnkProcessar_Click"><span class="glyphicon glyphicon-arrow-right">
                         </span></asp:LinkButton>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <strong>Localizar</strong>
-                </div>
-                <div class="panel-body">
-                    <div class="form-group form-horizontal">
-                        <label for="txtChave" class="control-label col-md-2">
-                            Número</label>
-                        <div class="col-md-4">
-                            <asp:TextBox ID="txtChave" runat="server" class="form-control"></asp:TextBox>
-                        </div>
-                        <asp:LinkButton ID="lnkLocalizar" class="btn btn-success btn-sm" runat="server" OnClick="lnkLocalizar_Click"><span class="glyphicon glyphicon-arrow-right">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <strong>Localizar</strong>
+                    </div>
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <label for="txtChave" class="control-label col-md-2">
+                                Número</label>
+                            <div class="col-md-4">
+                                <asp:TextBox ID="txtChave" runat="server" class="form-control"></asp:TextBox>
+                            </div>
+                            <asp:LinkButton ID="lnkLocalizar" class="btn btn-success btn-sm" runat="server" OnClick="lnkLocalizar_Click"><span class="glyphicon glyphicon-arrow-right">
                         </span></asp:LinkButton>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -13,14 +13,14 @@
                     <strong>Busca interna:</strong></div>
                 <div class="panel-body">
                     <div class="form-inline">
-                        <label class="sr-only" for="txtSigla">
+                        <label class="sr-only" for="txtFiltro">
                             Sigla:</label>
-                        <asp:TextBox ID="txtSigla" runat="server" class="form-control" placeholder="Sigla"></asp:TextBox>
+                        <asp:TextBox ID="txtFiltro" runat="server" class="form-control" placeholder="Sigla"></asp:TextBox>
                         <label class="sr-only" for="txtPaginas">
                             Total de resultados por página:</label>
                         <asp:TextBox ID="txtPaginas" runat="server" class="form-control" placeholder="Resultados por página"></asp:TextBox>
                         <asp:LinkButton ID="lnkFiltrar" runat="server" class="btn btn-success" OnClick="lnkFiltrar_Click">
-                        <span class="glyphicon glyphicon-ok-sign"></span> Processar
+                        <span class="glyphicon glyphicon-ok"></span> Filtrar
                         </asp:LinkButton>
                     </div>
                 </div>
@@ -36,6 +36,7 @@
                     class="btn btn-info">Imprimir</asp:LinkButton>
                 <asp:LinkButton ID="lnkVoltar" runat="server" OnClick="lnkVoltar_Click" class="btn btn-warning">Voltar</asp:LinkButton>
             </div>
+            <!-- / BUTTON GROUP-->
             </form>
         </fieldset>
     </div>

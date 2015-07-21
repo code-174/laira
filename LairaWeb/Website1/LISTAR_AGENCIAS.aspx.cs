@@ -12,9 +12,9 @@ public partial class LISTAR_AGENCIAS : System.Web.UI.Page
 
         if (!IsPostBack)
         {
-            string Codigo = Request.QueryString["Codigo"];
+            string Filtro = Request.QueryString["Filtro"];
 
-            if (Codigo.Trim().ToString() == "")
+            if (Filtro.Trim().ToString() == "")
             {
                 Agencias c = new Agencias();
                 grvData.DataSource = c.GetAgencias();
@@ -23,7 +23,7 @@ public partial class LISTAR_AGENCIAS : System.Web.UI.Page
             else
             {
                 Agencias c = new Agencias();
-                grvData.DataSource = c.GetAgenciasByCode(Codigo);
+                grvData.DataSource = c.GetAgenciasByCode(Filtro);
                 grvData.DataBind();
             }
         }

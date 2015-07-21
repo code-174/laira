@@ -7,13 +7,28 @@ using System.Web.UI.WebControls;
 
 public partial class GERAR_ORDEM_SERV : System.Web.UI.Page
 {
+    public string TipoFicha { get; set; }
+    public string DataFicha { get; set; }
+
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!IsPostBack)
         {
             LoadCombos();
+            TipoFicha = Request.QueryString["Tipo"];
+            DataFicha = Request.QueryString["Data"];
+            LoadGrid(TipoFicha, DataFicha);
+            ddlTipoServico.SelectedValue = TipoFicha;
+            txtDataServico.Text = DataFicha;
         }
     }
+    private void LoadGrid(string TipoFicha, string DataFicha)
+    {
+        Fichas c = new Fichas();
+        grvFichas.DataSource = c.GetFichasByTypeNDate(TipoFicha, DataFicha);
+        grvFichas.DataBind();
+    }
+
     void LoadCombos()
     { 
         // POPULATE SERVICO FEITO POR DROP DOWN LIST
@@ -45,6 +60,8 @@ public partial class GERAR_ORDEM_SERV : System.Web.UI.Page
     
     protected void lnkProcessarCriterios_Click(object sender, EventArgs e)
     {
-        //Response.Redirect("LISTAR_ORDEM_SERV.aspx?Codigo=5" + "&Data=" + txtChave.Text);
+        TipoFicha = ddlTipoServico.SelectedValue;
+        DataFicha = txtDataServico.Text;
+        LoadGrid(TipoFicha, DataFicha);
     }
 }

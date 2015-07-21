@@ -7,34 +7,30 @@
     <div class="container-fluid">
         <fieldset>
             <legend><strong>Ordem de Serviço</strong></legend>
-            <form id="Form2" class="form col-md-4" runat="server">
-            <%--<div class="well">
-                <div class="form-group">
-                    <a href="GERAR_ORDEM_SERV.aspx" class="btn btn-primary btn-lg btn-block">Gerar OS</a>
-                </div>
-            </div>--%>
+            <form id="Form2" class="form form-horizontal col-md-4" runat="server">            
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <strong>Gerar</strong>
+                    <strong>Gerar OS</strong>
                 </div>
-                <div class="panel-body">
-                    <div class="radio">
-                        <label>
-                            <asp:RadioButton runat="server" Checked="true" AutoPostBack="true" ID="optChegadaOS"
-                                OnCheckedChanged="optChegadaOS_CheckedChanged" />Chegada</label>
-                    </div>
-                    <div class="radio">
-                        <label>
-                            <asp:RadioButton runat="server" Checked="false" AutoPostBack="true" ID="optSaidaOS"
-                                OnCheckedChanged="optSaidaOS_CheckedChanged" />Saída</label>
-                    </div>
-                    <div class="form-group form-horizontal">
+                <div class="panel-body">                    
+                    <div class="form-group">
                         <label for="txtDataOS" class="control-label col-md-2">
                             Data</label>
                         <div class="col-md-5">
                             <asp:TextBox ID="txtDataOS" runat="server" class="form-control"></asp:TextBox>
+                        </div>                        
+                    </div>
+                    <div class="form-group">
+                        <label for="ddlTipoOS" class="control-label col-md-2">
+                            Tipo</label>
+                        <div class="col-md-5">
+                            <asp:DropDownList ID="ddlTipoOS" runat="server" class="form-control">
+                                <asp:ListItem Value="C">Chegada</asp:ListItem>
+                                <asp:ListItem Value="S">Saída</asp:ListItem>
+                            </asp:DropDownList>
                         </div>
-                        <asp:LinkButton ID="lnkGerarOS" class="btn btn-success btn-sm" runat="server" OnClick="lnkGerarOS_Click"><span class="glyphicon glyphicon-arrow-right">
+                        <asp:LinkButton ID="lnkGerarOS" class="btn btn-success" runat="server" 
+                            OnClick="lnkGerarOS_Click"><span class="glyphicon glyphicon-ok">
                         </span></asp:LinkButton>
                     </div>
                 </div>

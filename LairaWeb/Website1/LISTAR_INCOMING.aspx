@@ -20,13 +20,14 @@
                             Total de resultados por página:</label>
                         <asp:TextBox ID="txtPaginas" runat="server" class="form-control" placeholder="Resultados por página"></asp:TextBox>
                         <asp:LinkButton ID="lnkFiltrar" runat="server" class="btn btn-success" OnClick="lnkFiltrar_Click">
-                        <span class="glyphicon glyphicon-ok-sign"></span> Processar
+                        <span class="glyphicon glyphicon-ok"></span> Filtrar
                         </asp:LinkButton>
                     </div>
                 </div>
             </div>
             <div id="divPrint">
-                <asp:GridView ID="grvData" runat="server" class="table">
+                <asp:GridView ID="grvData" runat="server" class="table table-hover" 
+                    GridLines="None">
                 </asp:GridView>
             </div>
             <div class="btn-group btn-group-justified">

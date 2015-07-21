@@ -17,7 +17,7 @@ public class Voos
     public string NOME { get; set; }
     public string SIGLA { get; set; }
     public string HORA { get; set; }
-    public string AEROPORTO { get; set; }
+    public Int64 AEROPORTO { get; set; }
     public string TIPO { get; set; }
     #endregion
 
@@ -41,7 +41,7 @@ public class Voos
         conn.ConnectionString = ConfigurationManager.ConnectionStrings["LairaWebDB"].ConnectionString;
         cmd.Connection = conn;
         StringBuilder str = new StringBuilder();
-        str.AppendLine(" select NOME_VOO, SIGLA_VOO, HORA_VOO, AEROPORTO_VOO, TIPO_VOO from VOOS ");
+        str.AppendLine(" select ID_VOO, NOME_VOO, SIGLA_VOO, HORA_VOO, AEROPORTO_VOO, TIPO_VOO from VOOS ");
         cmd.CommandText = str.ToString();
         conn.Open();
         SqlDataReader reader = cmd.ExecuteReader();
@@ -50,11 +50,12 @@ public class Voos
         {
             Voos Voo = new Voos
             {
-                NOME = reader.IsDBNull(0) ? null : reader.GetString(0),
-                SIGLA = reader.IsDBNull(1) ? null : reader.GetString(1),
-                HORA = reader.IsDBNull(2) ? null : reader.GetString(2),
-                AEROPORTO = reader.IsDBNull(3) ? null : reader.GetString(3),
-                TIPO = reader.IsDBNull(4) ? null : reader.GetString(4)
+                ID = reader.GetInt64(0),
+                NOME = reader.IsDBNull(1) ? null : reader.GetString(1),
+                SIGLA = reader.IsDBNull(2) ? null : reader.GetString(2),
+                HORA = reader.IsDBNull(3) ? null : reader.GetString(3),
+                AEROPORTO = reader.GetInt64(4),
+                TIPO = reader.IsDBNull(5) ? null : reader.GetString(5)
             };
 
             xList.Add(Voo);

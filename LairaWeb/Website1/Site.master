@@ -7,9 +7,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>Laira Tours</title>
-    <%--<link href="Styles/Site.css" rel="stylesheet" type="text/css" />--%>
+    <title>Laira Tours</title>    
     <link href="Styles/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="Styles/Site.css" rel="stylesheet" type="text/css" />
     <link id="Link1" runat="server" rel="shortcut icon" href="~/favicon.ico" type="image/x-icon" />
     <link id="Link2" runat="server" rel="icon" href="~/favicon.ico" type="image/ico" />
     <script language="javascript" type="text/javascript">
@@ -51,8 +51,8 @@
         <li><a href="MENU_ORD_SERV_ADC.aspx">Ordem de Serviço Adicional</a></li>
         <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Comunicados<span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="#">Passeio</a></li>
-            <li><a href="#">Transfer Out</a></li>            
+            <li><a href="GERAR_COMUNICADO_PASSEIO.aspx">Passeio</a></li>
+            <li><a href="GERAR_COMUNICADO_TRANSFER.aspx">Transfer Out</a></li>            
           </ul>
         </li>
         <li><a href="MENU_FINANCEIRO.aspx">Financeiro</a></li>
