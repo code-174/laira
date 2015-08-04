@@ -29,6 +29,13 @@ public class FichasRelatorio
             return ServInFicha.GetServInFicha(this.FICHA_NO);
         }
     }
+    public List<ServAdFicha> ServicosAdicionais
+    {
+        get
+        {
+            return ServAdFicha.GetServAdFicha(this.FICHA_NO);
+        }
+    }
     #endregion
 
     public FichasRelatorio()
