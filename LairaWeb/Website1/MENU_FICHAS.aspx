@@ -14,7 +14,6 @@
                     </a>
                 </div>
             </div>
-
             <div class="form-group form-horizontal">
                 <div class="panel panel-default">
                     <div class="panel-heading">

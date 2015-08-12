@@ -23,7 +23,6 @@ public partial class MENU_FICHAS : System.Web.UI.Page
 
     protected void lnkProcessar_Click(object sender, EventArgs e)
     {
-
         if (ddlOperacao.SelectedValue == "L")
         {            
             Response.Redirect("LISTAR_FICHAS.aspx?Tipo=" + ddlTipo.SelectedValue + "&Data=" + txtData.Text);
