@@ -9,55 +9,74 @@ public partial class LISTAR_FICHAS : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-
-
         if (!IsPostBack)
         {
-            string Codigo = Request.QueryString["Codigo"];
+            string Tipo = Request.QueryString["Tipo"];
             string Data = Request.QueryString["Data"];
 
-            if (Codigo.Trim().ToString() != "")
+            if (Tipo.Trim().ToString() != "")
             {
-                Fichas c = new Fichas();
-                grvData.DataSource = c.GetFichas(Codigo, Data);
-                grvData.DataBind();
+                GridView1.DataSource = FichasListagem.GetFichasListagem(Tipo, Data);
+                GridView1.DataBind();
 
-                switch (Codigo)
+                switch (Tipo)
                 {
-                    case "1":
-                        Titulo.InnerText = "Fichas de Chegadas programadas";
+                    case "C":
+                        Titulo.InnerText = "Listagem Fichas de Chegada";
                         break;
-                    case "2":
-                        Titulo.InnerText = "Fichas de Saídas programadas";
+                    case "S":
+                        Titulo.InnerText = "Listagem Fichas de Saída";
                         break;
                     case "3":
-                        Titulo.InnerText = "Relatorio de Chegadas programadas";
+                        Titulo.InnerText = "Relatório de Chegadas Programadas";
                         break;
                     case "4":
-                        Titulo.InnerText = "Relatorio de Saídas programadas";
+                        Titulo.InnerText = "Relatório de Saídas Programadas";
                         break;
                     case "5":
-                        Titulo.InnerText = "Saídas programadas por No. Ficha";
+                        Titulo.InnerText = "Saídas Programadas por No. Ficha";
                         break;
                     case "6":
-                        Titulo.InnerText = "Saídas programadas por Cod. Exc.";
+                        Titulo.InnerText = "Saídas Programadas por Cod. Exc.";
                         break;
                     default:
                         break;
 
                 }
 
-
             }
-
-
-
         }
+    }
+
+    protected void GridView1_RowDataBound(object sender, GridViewRowEventArgs e)
+    {
+        //if (e.Row.RowType == DataControlRowType.Header)
+        //{
+        //    e.Row.Cells[9].Visible = false;
+        //    e.Row.Cells[10].Visible = false;
+        //}
     }
 
     protected void lnkVoltar_Click(object sender, EventArgs e)
     {
         Response.Redirect("MENU_FICHAS.aspx");
+    }
+
+    protected void lnkProcessar_Click(object sender, EventArgs e)
+    {
+        string strTipo = ddlTipo.SelectedValue;
+        string strCriterio = txtCriterio.Text;
+        if (ddlSelecione.SelectedValue == "D")
+        {
+            GridView1.DataSource = FichasListagem.GetFichasListagem(strTipo, strCriterio);
+            GridView1.DataBind();   
+        }
+        else 
+        {
+            string strSelected  = ddlSelecione.SelectedValue;
+            GridView1.DataSource = FichasListagem.FiltroFichasListagem(strSelected, strTipo, strCriterio);
+            GridView1.DataBind();
+        }
     }
 
 }

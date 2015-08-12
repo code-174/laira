@@ -44,6 +44,7 @@ public class ServInFicha
         str.AppendLine(" from SERV_IN_FICHA ");
         str.AppendLine(" left join SERV_INCLUSO on SERV_IN_FICHA.SERV_IN_NO = SERV_INCLUSO.ID_SERV_INCLUSO ");
         str.AppendLine(" where FICHA_NO = @ID_FICHA ");
+        
         cmd.CommandText = str.ToString();
 
         SqlParameter parameter = new SqlParameter();

@@ -9,8 +9,7 @@
         <asp:LinkButton ID="lnkGerar" runat="server" OnClick="lnkGerar_Click" class="btn btn-warning">Gerar</asp:LinkButton>
 
         <asp:GridView ID="GridView1" class="table table-hover" runat="server" AutoGenerateColumns="false"
-            OnRowDataBound="GridView1_RowDataBound" GridLines="none" 
-            onrowcreated="GridView1_RowCreated">
+            OnRowDataBound="GridView1_RowDataBound" GridLines="vertical">
             <Columns>
                 <asp:BoundField DataField="FICHA_NO" HeaderText="FICHA" />
                 <asp:BoundField DataField="COD_EXCURSAO" HeaderText="Cód. Excursão" />
@@ -25,7 +24,7 @@
                         <tr>
                             <td colspan="100%">
                                 <asp:GridView ID="GridView2" class="table table-hover" runat="server" AutoGenerateColumns="false"
-                                     DataSource='<%# Bind("ServicosInclusos") %>' GridLines="none">
+                                    DataSource='<%# Bind("ServicosInclusos") %>' GridLines="none">
                                     <Columns>
                                         <asp:BoundField DataField="SERV_IN" HeaderText="Serviços Inclusos" />
                                         <asp:BoundField DataField="PRECO" HeaderText="Valor" />

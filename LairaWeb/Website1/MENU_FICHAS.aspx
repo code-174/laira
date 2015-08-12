@@ -14,6 +14,55 @@
                     </a>
                 </div>
             </div>
+
+            <div class="form-group form-horizontal">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <strong>Processar</strong>
+                    </div>
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <label for="ddlOperacao" class="control-label col-md-3">
+                                Operação</label>
+                            <div class="col-md-5">
+                                <asp:DropDownList ID="ddlOperacao" runat="server" class="form-control">
+                                    <asp:ListItem Value="L">Listar</asp:ListItem>
+                                    <asp:ListItem Value="R">Relatório</asp:ListItem>
+                                </asp:DropDownList>
+                            </div>                        
+                        </div>
+                        <div class="form-group">
+                        <label for="ddlTipo" class="control-label col-md-3">
+                            Tipo</label>
+                        <div class="col-md-5">
+                            <asp:DropDownList ID="ddlTipo" runat="server" class="form-control">
+                                <asp:ListItem Value="C">Chegada</asp:ListItem>
+                                <asp:ListItem Value="S">Saída</asp:ListItem>
+                            </asp:DropDownList>
+                        </div>                        
+                    </div>
+                    <div class="form-group">
+                        <label for="txtData" class="control-label col-md-3">
+                            Data</label>
+                        <div class="col-md-4">
+                            <asp:TextBox ID="txtData" runat="server" class="form-control"></asp:TextBox>
+                        </div>
+                        </div>
+
+                    <div class="button-group col-md-offset-3">
+                        <asp:LinkButton ID="lnkProcessar" class="btn btn-success" runat="server" OnClick="lnkProcessar_Click"><span class="glyphicon glyphicon-ok">
+                        </span> Processar</asp:LinkButton>
+                    </div>
+
+
+                        </div>
+                        </div>
+                        </div>
+
+
+
+
+<%--
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <strong>Listar</strong></div>
@@ -62,7 +111,9 @@
                         </span></asp:LinkButton>
                     </div>
                 </div>
-            </div>
+            </div>--%>
+
+
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <strong>Localizar</strong>
