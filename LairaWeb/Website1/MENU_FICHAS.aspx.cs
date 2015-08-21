@@ -28,10 +28,10 @@ public partial class MENU_FICHAS : System.Web.UI.Page
             Response.Redirect("LISTAR_FICHAS.aspx?Tipo=" + ddlTipo.SelectedValue + "&Data=" + txtData.Text);
         }
 
-        //else
-        //{
-        //    Response.Redirect("LISTAR_FICHAS.aspx?Codigo=2" + "&Data=" + txtDataFicha.Text);
-        //}
+        else
+        {
+            Response.Redirect("RELATORIO_FICHAS.aspx?Tipo=" + ddlTipo.SelectedValue + "&Data=" + txtData.Text);
+        }
 
     }
 

@@ -6,7 +6,7 @@
 <div class="container-fluid">
         <fieldset>
             <legend>Comunicado de Passeio</legend>
-            <form id="Form2" class="form form-horizontal col-md-6" runat="server">
+            <form id="Form2" class="form form-horizontal col-md-4" runat="server">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <strong>Período</strong>
@@ -15,7 +15,7 @@
                     <div class="form-group form-horizontal">
                         <label for="txtData" class="control-label col-md-3">
                             Data</label>
-                        <div class="col-md-3">
+                        <div class="col-md-5">
                             <asp:TextBox ID="txtData" runat="server" class="form-control"></asp:TextBox>
                         </div>                        
                     </div>
@@ -30,7 +30,7 @@
                     <div class="form-group">
                         <label for="ddlPasseio" class="control-label col-md-3">
                             Passeio</label>
-                        <div class="col-md-4">
+                        <div class="col-md-5">
                             <asp:DropDownList ID="ddlPasseio" runat="server" class="form-control">
                             </asp:DropDownList>
                         </div>
@@ -39,7 +39,7 @@
                     <div class="form-group">
                         <label for="ddlPrestador" class="control-label col-md-3">
                             Prestador</label>
-                        <div class="col-md-4">
+                        <div class="col-md-5">
                             <asp:DropDownList ID="ddlPrestador" runat="server" class="form-control">
                             </asp:DropDownList>
                         </div>
@@ -48,7 +48,7 @@
                     <div class="form-group">
                         <label for="ddlVendedor" class="control-label col-md-3">
                             Vendedor</label>
-                        <div class="col-md-4">
+                        <div class="col-md-5">
                             <asp:DropDownList ID="ddlVendedor" runat="server" class="form-control">
                             </asp:DropDownList>
                         </div>
@@ -57,7 +57,7 @@
                     <div class="form-group">
                         <label for="ddlVisualizar" class="control-label col-md-3">
                             Visualizar</label>
-                        <div class="col-md-4">
+                        <div class="col-md-5">
                             <asp:DropDownList ID="ddlVisualizar" runat="server" class="form-control">
                             </asp:DropDownList>
                         </div>
@@ -66,7 +66,7 @@
                     <div class="form-group">
                         <label for="txtPaginas" class="control-label col-md-3">
                             Fichas por Página</label>
-                        <div class="col-md-2">
+                        <div class="col-md-5">
                             <asp:TextBox ID="txtPaginas" runat="server" class="form-control">
                             </asp:TextBox>
                         </div>

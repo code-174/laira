@@ -12,7 +12,7 @@ public partial class MENU_ORD_SERV_ADC : System.Web.UI.Page
     {
         if (!IsPostBack)
         {
-            txtData.Text = DateTime.Now.ToString("d", CultureInfo.CreateSpecificCulture("pt-BR"));
+            //txtData.Text = DateTime.Now.ToString("d", CultureInfo.CreateSpecificCulture("pt-BR"));
             LoadCombos();
         }
     }
@@ -30,7 +30,7 @@ public partial class MENU_ORD_SERV_ADC : System.Web.UI.Page
     {
         if (txtData.Text != "")
         {
-            Response.Redirect("GERAR_ORDEM_SERV_ADC.aspx?Tipo=" + "&Data=" + txtData.Text);
+            Response.Redirect("GERAR_ORDEM_SERV_ADC.aspx?&Data=" + txtData.Text);
         }
 
     }

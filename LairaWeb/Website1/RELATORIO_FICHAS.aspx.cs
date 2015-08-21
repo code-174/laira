@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-public partial class LISTAR_FICHAS : System.Web.UI.Page
+public partial class RELATORIO_FICHAS : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -22,29 +22,28 @@ public partial class LISTAR_FICHAS : System.Web.UI.Page
                 switch (Tipo)
                 {
                     case "C":
-                        Titulo.InnerText = "Listagem de Fichas de Chegada";                        
+                        Titulo.InnerText = "Relatório de Fichas de Chegada";
                         break;
                     case "S":
-                        Titulo.InnerText = "Listagem de Fichas de Saída";
-                        break;   
-                 
+                        Titulo.InnerText = "Relatório de Fichas de Saída";
+                        break;
+                   
                     default:
                         break;
                 }
-
+                
                 ddlTipo.SelectedValue = Tipo;
-
             }
         }
     }
 
     protected void GridView1_RowDataBound(object sender, GridViewRowEventArgs e)
     {
-        //if (e.Row.RowType == DataControlRowType.Header)
-        //{
-        //    e.Row.Cells[9].Visible = false;
+        if (e.Row.RowType == DataControlRowType.Header)
+        {
+            e.Row.Cells[7].Visible = false;
         //    e.Row.Cells[10].Visible = false;
-        //}
+        }
     }
 
     protected void lnkVoltar_Click(object sender, EventArgs e)
@@ -59,9 +58,9 @@ public partial class LISTAR_FICHAS : System.Web.UI.Page
         if (ddlSelecione.SelectedValue == "D")
         {
             GridView1.DataSource = FichasListagem.GetFichasListagem(strTipo, strCriterio);
-            GridView1.DataBind();   
+            GridView1.DataBind();
         }
-        else 
+        else
         {
             string strSelected = ddlSelecione.SelectedValue;
             GridView1.DataSource = FichasListagem.FiltroFichasListagem(strSelected, strTipo, strCriterio);
@@ -70,15 +69,14 @@ public partial class LISTAR_FICHAS : System.Web.UI.Page
         switch (strTipo)
         {
             case "C":
-                Titulo.InnerText = "Listagem de Fichas de Chegada";
+                Titulo.InnerText = "Relatório de Fichas de Chegada";
                 break;
             case "S":
-                Titulo.InnerText = "Listagem de Fichas de Saída";
+                Titulo.InnerText = "Relatório de Fichas de Saída";
                 break;
 
             default:
                 break;
         }
     }
-
 }

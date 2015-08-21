@@ -6,7 +6,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="Server">
     <div class="container-fluid">
         <fieldset>
-            <legend>Ordens de Serviços</legend>
+            <legend id="Titulo" runat="server">Ordens de Serviços</legend>
             <form id="Form2" class="form form-horizontal col-md-6" runat="server">
             <div class="panel panel-primary">
                 <div class="panel-heading">
@@ -96,6 +96,14 @@
                         </div>
                     </div>
                     <!-- / TXT TOTAL SERVICO-->
+                    <div class="form-group">
+                        <label for="txtObs" class="control-label col-md-4">
+                            Obs</label>
+                        <div class="col-md-3">
+                            <asp:TextBox ID="txtObs" runat="server" class="form-control"></asp:TextBox>
+                        </div>
+                    </div>
+                    <!-- / TXT OBS-->
                 </div>
             </div>
             <!-- /PANEL DADOS ADICIONAIS-->
@@ -125,9 +133,79 @@
                 </div>
             </div>
             <!-- /PANEL DADOS MOTORISTA E GUIA-->
-            <asp:GridView ID="grvFichas" runat="server" class="table table-hover table-bordered"
+            <%--<asp:GridView ID="grvFichas" runat="server" class="table table-hover table-bordered"
                 GridLines="None" EmptyDataRowStyle-BackColor="Yellow" EmptyDataText="Nao existem fichas para a Data informada!">
-            </asp:GridView>
+            </asp:GridView>--%>
+            <%--<asp:GridView runat="server">
+            <asp:TemplateField HeaderTemplate    
+            <asp:TemplateField>
+                    <ItemTemplate>
+                        <tr>
+                            <td colspan="100%">--%>
+
+            <asp:GridView ID="GridView1" class="table table-hover table-bordered" runat="server" AutoGenerateColumns="false"
+            OnRowDataBound="GridView1_RowDataBound" GridLines="none"
+            EmptyDataRowStyle-BackColor="Yellow" EmptyDataText="Nao existem fichas para a Data informada!">
+            <Columns>                
+                <asp:TemplateField>
+                <ItemTemplate>
+                    <asp:CheckBox ID="chkSelect" runat="server" />
+                </ItemTemplate>
+                </asp:TemplateField>
+                <asp:BoundField DataField="FICHA_NO" HeaderText="FICHA" />
+                <asp:BoundField DataField="HORA" HeaderText="Hora" />
+                <asp:BoundField DataField="VOO" HeaderText="Vôo" />
+                <asp:BoundField DataField="AEROPORTO" HeaderText="Aer" />
+                <asp:BoundField DataField="HOTEL" HeaderText="Hotel" />
+                <asp:BoundField DataField="APTO" HeaderText="Apto" />
+                <asp:BoundField DataField="COD_EXCURSAO" HeaderText="Cód. Excursão" />
+                <%--<asp:BoundField DataField="QUANT_PAX" HeaderText="Quant. Pax" />--%>
+                <asp:BoundField DataField="PAX" HeaderText="Pax" />
+                
+                <asp:TemplateField>
+                    <ItemTemplate>
+                        <tr>
+                            <td colspan="100%">
+                                <asp:GridView ID="GridView2" class="table table-hover" runat="server" AutoGenerateColumns="false"
+                                    DataSource='<%# Bind("ServicosInclusos") %>' GridLines="none">
+                                    <Columns>
+                                        <asp:BoundField DataField="SERV_IN" HeaderText="Serviços Inclusos" />
+                                        <asp:BoundField DataField="PRECO" HeaderText="Valor" />
+                                        <asp:BoundField DataField="FORMA_PAG_NO" HeaderText="Forma Pag." />
+                                    </Columns>
+                                </asp:GridView>
+                            </td>
+                        </tr>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField>
+                    <ItemTemplate>
+                        <tr>
+                            <td colspan="100%">
+                                <asp:GridView ID="GridView3" class="table table-hover" runat="server"  AutoGenerateColumns="false"
+                                     DataSource='<%# Bind("ServicosAdicionais") %>' GridLines="none">
+                                    <Columns>
+                                        <asp:BoundField DataField="SERV_AD" HeaderText="Serviços Adicionais" />
+                                        <asp:BoundField DataField="VOUCHER" HeaderText="Voucher" />
+                                        <asp:BoundField DataField="PRECO" HeaderText="Valor" />
+                                        <asp:BoundField DataField="DATA" HeaderText="Data" />
+                                        <asp:BoundField DataField="HORA" HeaderText="Hora" />
+                                        <asp:BoundField DataField="VENDEDOR" HeaderText="Vendedor" />
+                                    </Columns>
+                                </asp:GridView>
+                            </td>
+                        </tr>
+                    </ItemTemplate>
+                </asp:TemplateField>
+            </Columns>
+        </asp:GridView>
+        <div class="button-group col-md-offset-3">
+                        <asp:LinkButton ID="lnkProcessar" class="btn btn-warning" runat="server"
+                            OnClick="lnkProcessar_Click"><span class="glyphicon glyphicon-ok">
+                        </span> Confirmar</asp:LinkButton>
+                    </div>
+                    <!-- / BUTTON PROCESSAR-->
+
             </form>
         </fieldset>
     </div>

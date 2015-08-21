@@ -8,9 +8,9 @@
         <fieldset>
             <legend>Administração</legend>
             <form id="Form1" class="form form-horizontal col-md-4" runat="server">
-            <div class="form-group">
+           <%-- <div class="form-group">
                     <a href="teste_ficha.aspx" class="btn btn-primary btn-lg btn-block">teste ficha</a>
-                </div>
+                </div>--%>
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <strong>Processar</strong>

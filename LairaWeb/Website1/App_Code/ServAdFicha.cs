@@ -13,6 +13,7 @@ using System.Text;
 public class ServAdFicha
 {
     #region Propriedades
+    public Int64 ID { get; set; }
     public string SERV_AD { get; set; }
     public string VOUCHER { get; set; }
     public string PRECO { get; set; }
@@ -74,5 +75,36 @@ public class ServAdFicha
         }
 
         return xList;
+    }
+
+    public void InserirOSAdc(Int64 OSADC_NO, Int64 SERV_ADC_FICHA_NO)
+    {
+        SqlCommand cmd = new SqlCommand();
+        SqlConnection conn = new SqlConnection();
+        conn.ConnectionString = ConfigurationManager.ConnectionStrings["LairaWebDB"].ConnectionString;
+        cmd.Connection = conn;
+        StringBuilder str = new StringBuilder();
+
+
+        str.AppendLine(" update SERV_AD_FICHA ");
+        str.AppendLine(" set OS_ADC_NO = @OSADC_NO ");
+        str.AppendLine(" where ID_SERV_AD_FICHA = @SERV_ADC_FICHA_NO ");
+        
+            
+
+        cmd.CommandText = str.ToString();
+        cmd.CommandType = CommandType.Text;
+        cmd.Parameters.Add(new SqlParameter("@OSADC_NO", SqlDbType.BigInt)).Value = OSADC_NO;
+        cmd.Parameters.Add(new SqlParameter("@SERV_ADC_FICHA_NO", SqlDbType.BigInt)).Value = SERV_ADC_FICHA_NO;
+
+        conn.Open();
+
+        cmd.ExecuteNonQuery();
+
+        cmd.Dispose();
+        cmd = null;
+        conn.Close();
+        conn.Dispose();
+
     }
 }

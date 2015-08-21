@@ -1,12 +1,11 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true"
-    CodeFile="LISTAR_FICHAS.aspx.cs" Inherits="LISTAR_FICHAS" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true" CodeFile="RELATORIO_FICHAS.aspx.cs" Inherits="RELATORIO_FICHAS" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="Server">
+<asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" Runat="Server">
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="Server">
-    <div class="container-fluid">
+<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" Runat="Server">
+<div class="container-fluid">
         <fieldset>
-            <legend id="Titulo" runat="server">Listar Fichas</legend>
+            <legend id="Titulo" runat="server">Relatório Fichas</legend>
             <form id="Form1" class="form col-md-7" runat="server">
             <div class="form-group form-horizontal">
                 <div class="panel panel-primary">
@@ -58,18 +57,15 @@
 
 
                 <asp:GridView ID="GridView1" class="table table-hover" runat="server" AutoGenerateColumns="false"
-            OnRowDataBound="GridView1_RowDataBound" GridLines="both">
+            OnRowDataBound="GridView1_RowDataBound" GridLines="none">
             <Columns>
-                <asp:BoundField DataField="FICHA_NO" HeaderText="FICHA" />
-                <asp:BoundField DataField="COD_EXCURSAO" HeaderText="Cód. Excursão" />
-                <asp:BoundField DataField="DATA" HeaderText="Data" />
                 <asp:BoundField DataField="HORA" HeaderText="Hora" />
                 <asp:BoundField DataField="AEROPORTO" HeaderText="Aer" />
                 <asp:BoundField DataField="VOO" HeaderText="Vôo" />
-                <%--<asp:BoundField DataField="QUANT_PAX" HeaderText="Quant. Pax" />--%>
+                <asp:BoundField DataField="FICHA_NO" HeaderText="FICHA" />
+                <asp:BoundField DataField="COD_EXCURSAO" HeaderText="Cód. Excursão" />
                 <asp:BoundField DataField="PAX" HeaderText="Pax" />
                 <asp:BoundField DataField="HOTEL" HeaderText="Hotel" />
-                <asp:BoundField DataField="APTO" HeaderText="Apto" />
                 <asp:TemplateField>
                     <ItemTemplate>
                         <tr>
@@ -86,7 +82,7 @@
                         </tr>
                     </ItemTemplate>
                 </asp:TemplateField>
-                <asp:TemplateField>
+                <%--<asp:TemplateField>
                     <ItemTemplate>
                         <tr>
                             <td colspan="100%">
@@ -104,7 +100,7 @@
                             </td>
                         </tr>
                     </ItemTemplate>
-                </asp:TemplateField>
+                </asp:TemplateField>--%>
             </Columns>
         </asp:GridView>
 
@@ -119,3 +115,4 @@
         </fieldset>
     </div>
 </asp:Content>
+

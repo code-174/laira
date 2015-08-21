@@ -199,4 +199,41 @@ public class Fichas
         return retorno;
     }
 
+    public void UpdateOSFicha(string Tipo, Int64 OS_NO, Int64 FICHA_NO)
+    {
+        SqlCommand cmd = new SqlCommand();
+        SqlConnection conn = new SqlConnection();
+        conn.ConnectionString = ConfigurationManager.ConnectionStrings["LairaWebDB"].ConnectionString;
+        cmd.Connection = conn;
+        StringBuilder str = new StringBuilder();
+
+        if (Tipo == "C")
+        {
+            str.AppendLine(" update FICHAS ");
+            str.AppendLine(" set OS_CHEGADA = @OS_NO ");
+            str.AppendLine(" where ID_FICHA = @FICHA_NO "); 
+        }
+        else
+        {
+            str.AppendLine(" update FICHAS ");
+            str.AppendLine(" set OS_SAIDA = @OS_NO ");
+            str.AppendLine(" where ID_FICHA = @FICHA_NO "); 
+        }
+
+        cmd.CommandText = str.ToString();
+        cmd.CommandType = CommandType.Text;
+        cmd.Parameters.Add(new SqlParameter("@OS_NO", SqlDbType.BigInt)).Value = OS_NO;
+        cmd.Parameters.Add(new SqlParameter("@FICHA_NO", SqlDbType.BigInt)).Value = FICHA_NO;
+
+        conn.Open();
+
+        cmd.ExecuteNonQuery();
+
+        cmd.Dispose();
+        cmd = null;
+        conn.Close();
+        conn.Dispose();
+
+    }
+
 }

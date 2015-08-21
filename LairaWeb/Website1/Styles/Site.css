@@ -1,3 +1,4 @@
-﻿ .hidden-column {
+﻿.DisplayNone
+{
     display: none;
-  }
+}
