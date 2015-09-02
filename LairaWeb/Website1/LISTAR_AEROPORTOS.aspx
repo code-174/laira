@@ -27,7 +27,31 @@
             </div>
             <div id="divPrint">
                 <asp:GridView ID="grvData" runat="server" class="table table-hover" 
-                    GridLines="None">
+                    GridLines="None" AutoGenerateColumns="false">
+                    <Columns>   
+                    <asp:TemplateField HeaderStyle-Width="100%">
+                    <ItemTemplate>
+                        <tr>
+                            <th>
+                                CODIGO_AEROPORTO
+                            </th>
+                            <th>
+                                NOME_AEROPORTO
+                            </th>                            
+                        </tr>
+                        <tr>
+                            <td>
+                                <%#Eval("CODIGO")%>
+                            </td>
+                            <td>
+                                <%#Eval("NOME")%>
+                            </td>                           
+                        </tr>
+                        </Columns>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                    
+                    </Columns>
                 </asp:GridView>
             </div>
             <div class="btn-group btn-group-justified">

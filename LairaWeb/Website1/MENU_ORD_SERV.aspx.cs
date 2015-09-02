@@ -12,38 +12,11 @@ public partial class MENU_ORD_SERV : System.Web.UI.Page
     {
         if (!IsPostBack)
         {
-            txtDataRelatorio.Text = DateTime.Now.ToString("d", CultureInfo.CreateSpecificCulture("pt-BR"));
+            //txtDataRelatorio.Text = DateTime.Now.ToString("d", CultureInfo.CreateSpecificCulture("pt-BR"));
         }
 
-    }
-    //protected void optChegadaOS_CheckedChanged(Object sender, EventArgs e)
-    //{
-    //    optSaidaOS.Checked = false;
-
-    //}
-    //protected void optSaidaOS_CheckedChanged(Object sender, EventArgs e)
-    //{
-    //    optChegadaOS.Checked = false;
-
-    //}
-    protected void optTodas_CheckedChanged(Object sender, EventArgs e)
-    {
-        optNaoImpressas.Checked = false;
-        optOSNo.Checked = false;
-
-    }
-    protected void optNaoImpressas_CheckedChanged(Object sender, EventArgs e)
-    {
-        optTodas.Checked = false;
-        optOSNo.Checked = false;
-
-    }
-    protected void optOSNo_CheckedChanged(Object sender, EventArgs e)
-    {
-        optTodas.Checked = false;
-        optNaoImpressas.Checked = false;
-
-    }
+    }        
+    
     protected void lnkGerarOS_Click(object sender, EventArgs e)
     {
         if (txtDataOS.Text != "")
@@ -54,20 +27,22 @@ public partial class MENU_ORD_SERV : System.Web.UI.Page
     }
     protected void lnkRelatorios_Click(object sender, EventArgs e)
     {
-
-        //if (optChegada.Checked)
-        //{
-        //    Response.Redirect("LISTAR_FICHAS.aspx?Codigo=3" + "&Data=" + txtDataRelatorio.Text);
-        //}
-
-        //else
-        //{
-        //    Response.Redirect("LISTAR_FICHAS.aspx?Codigo=4" + "&Data=" + txtDataRelatorio.Text);
-        //}
+        //if (txtDataRelatorio.Text != "")        
+        if (ddlSelecione.SelectedValue == "T")
+        {
+            Response.Redirect("LISTAR_ORDEM_SERV.aspx?Tipo=" + ddlTipoRel.SelectedValue.ToString().Substring(0) + "&Data=" + txtDataRelatorio.Text);
+        }
+        else
+        {
+             //TO DO OS NAO IMPRESSAS   
+        }
 
     }
-    protected void lnkConsultar_Click(object sender, EventArgs e)
+    protected void lnkLocalizar_Click(object sender, EventArgs e)
     {
-        //Response.Redirect("LISTAR_ORDEM_SERV.aspx?Codigo=5" + "&Data=" + txtChave.Text);
+        if (txtOSNo.Text != "")
+        {
+            Response.Redirect("RELATORIO_ORDEM_SERVICO.aspx?No=" + txtOSNo.Text);
+        }        
     }
 }

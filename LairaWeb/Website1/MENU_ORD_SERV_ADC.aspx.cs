@@ -26,18 +26,23 @@ public partial class MENU_ORD_SERV_ADC : System.Web.UI.Page
         ddlPrestador.DataSource = details;
         ddlPrestador.DataBind();
     }
-    protected void lnkGerarOSAdc_Click(object sender, EventArgs e)
+    protected void lnkProcessar_Click(object sender, EventArgs e)
     {
         if (txtData.Text != "")
         {
-            Response.Redirect("GERAR_ORDEM_SERV_ADC.aspx?&Data=" + txtData.Text);
+            if (ddlSelecione.SelectedValue == "G")
+            {
+                Response.Redirect("GERAR_ORDEM_SERV_ADC.aspx?&Data=" + txtData.Text);
+            }
+            else
+            {
+                Response.Redirect("RELATORIO_OS_ADC.aspx?&Data=" + txtData.Text);
+            }
+            
         }
 
     }
-    protected void lnkRelatorios_Click(object sender, EventArgs e)
-    {
-        //Response.Redirect("LISTAR_ORDEM_SERV.aspx?Codigo=5" + "&Data=" + txtDataInicio.Text);
-    }
+ 
     protected void lnkRelatorioPrestador_Click(object sender, EventArgs e)
     {
         //Response.Redirect("LISTAR_ORDEM_SERV.aspx?Codigo=5" + "&Data=" + txtDataInicio.Text);

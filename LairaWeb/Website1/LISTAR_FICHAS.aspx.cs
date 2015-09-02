@@ -40,6 +40,7 @@ public partial class LISTAR_FICHAS : System.Web.UI.Page
 
     protected void GridView1_RowDataBound(object sender, GridViewRowEventArgs e)
     {
+        //this.GridView1.AllowUserToAddRows = false;
         //if (e.Row.RowType == DataControlRowType.Header)
         //{
         //    e.Row.Cells[9].Visible = false;

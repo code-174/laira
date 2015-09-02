@@ -5,18 +5,17 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-public partial class LISTAR_ORDEM_SERV : System.Web.UI.Page
+public partial class RELATORIO_ORDEM_SERVICO : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!IsPostBack)
         {
-            string Tipo = Request.QueryString["Tipo"];
-            string Data = Request.QueryString["Data"];
+            string OS_NO = Request.QueryString["No"];
 
-            if (Tipo.Trim().ToString() != "")
+            if (OS_NO.Trim().ToString() != "")
             {
-                GridView1.DataSource = OrdemServico.GetOS(Tipo, Data);
+                GridView1.DataSource = OrdemServico.GetOSByNo(OS_NO);
                 GridView1.DataBind();
 
                 //switch (Tipo)

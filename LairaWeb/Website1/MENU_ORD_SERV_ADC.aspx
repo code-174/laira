@@ -28,10 +28,13 @@
                             Data</label>
                         <div class="col-md-4">
                             <asp:TextBox ID="txtData" runat="server" class="form-control"></asp:TextBox>
-                        </div>
-                        <asp:LinkButton ID="lnkGerarOSAdc" class="btn btn-success" runat="server" OnClick="lnkGerarOSAdc_Click"><span class="glyphicon glyphicon-ok">
-                        </span></asp:LinkButton>
+                        </div>                        
                     </div>
+                    <div class="button-group col-md-offset-3">
+                        <asp:LinkButton ID="lnkProcessar" class="btn btn-success" runat="server" OnClick="lnkProcessar_Click"><span class="glyphicon glyphicon-ok">
+                        </span> Processar</asp:LinkButton>
+                    </div>
+                    <!-- / BUTTON PROCESSAR-->
                 </div>
             </div>
             <!-- / PANEL PROCESSAR-->
