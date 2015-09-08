@@ -7,8 +7,8 @@
     <div class="container-fluid">
         <fieldset>
             <legend id="Titulo" runat="server">Emitir Fatura</legend>
-            <form id="Form1" class="form col-md-7" runat="server">
-             <div class="panel panel-primary">
+            <form id="Form1" class="form form-horizontal col-md-6" runat="server">
+            <div class="panel panel-success">
                 <div class="panel-heading">
                     <strong>Critérios</strong>
                 </div>
@@ -38,39 +38,43 @@
                 </div>
             </div>
             <!-- / PANEL CRITERIOS-->
-            <asp:GridView ID="GridView1" class="table table-hover table-bordered" runat="server"
-                AutoGenerateColumns="false" GridLines="none"
-                BorderWidth="0" ShowHeader="false">
+            <asp:GridView ID="GridView1" class="table table-bordered" runat="server"
+                AutoGenerateColumns="false" GridLines="none">
                 <Columns>
                     <asp:TemplateField>
                         <ItemTemplate>
-                            <tr>
+                            <tr class="bg-primary">
                                 <th>
-                                    FICHA NO
                                 </th>
                                 <th>
-                                    COD. EXCURSSÃO
+                                    Ficha
                                 </th>
                                 <th>
-                                    VOO
+                                    Excursão
                                 </th>
                                 <th>
-                                    AER
-                                </th> 
-                                <th>
-                                    VALOR UNIT.
-                                </th>                               
-                                <th>
-                                    PAX
+                                    Vôo
                                 </th>
                                 <th>
-                                    QUANT. PAX
+                                    Aer.
                                 </th>
                                 <th>
-                                    VALOR TOTAL
+                                    Valor Unit.
+                                </th>
+                                <th>
+                                    Pax
+                                </th>
+                                <th>
+                                    Quant. Pax
+                                </th>
+                                <th>
+                                    Valor Total
                                 </th>
                             </tr>
                             <tr>
+                                <td>
+                                    <asp:CheckBox ID="chkFicha" runat="server" />
+                                </td>
                                 <td>
                                     <%#Eval("FICHA_NO")%>
                                 </td>
@@ -82,9 +86,8 @@
                                 </td>
                                 <td>
                                     <%#Eval("AEROPORTO")%>
-                                </td>                                
+                                </td>
                                 <td>
-                                    
                                 </td>
                                 <td>
                                     <%#Eval("PAX")%>
@@ -93,7 +96,6 @@
                                     <%#Eval("QUANT_PAX")%>
                                 </td>
                                 <td>
-                                    
                                 </td>
                             </tr>
                         </ItemTemplate>
@@ -113,24 +115,25 @@
                             <tr>
                                 <td colspan="100%">
                                     <asp:GridView ID="GridView2" class="table table-hover" runat="server" AutoGenerateColumns="false"
-                                        DataSource='<%# Bind("ServicosInclusos") %>' GridLines="none" OnRowDataBound = "GridView2_RowDataBound"
+                                        DataSource='<%# Bind("ServicosInclusos") %>' GridLines="none" OnRowDataBound="GridView2_RowDataBound"
                                         ShowFooter="true">
                                         <Columns>
                                             <asp:BoundField DataField="SERV_IN" HeaderText="Serviços Inclusos" />
-                                            <asp:BoundField DataField="PRECO" HeaderText="Valor" />                                            
+                                            <asp:BoundField DataField="PRECO" HeaderText="Valor" />
                                         </Columns>
                                     </asp:GridView>
                                 </td>
                             </tr>
                         </ItemTemplate>
-                    </asp:TemplateField>                   
+                    </asp:TemplateField>
                 </Columns>
             </asp:GridView>
-    
-    <%--<div class="btn-group btn-group-justified">
+            <%--<div class="btn-group btn-group-justified">
         <asp:LinkButton ID="lnkImprimir" runat="server" OnClientClick="javascript:CallPrint('divPrint');"
             class="btn btn-info">Imprimir</asp:LinkButton>
         <asp:LinkButton ID="lnkVoltar" runat="server" OnClick="lnkVoltar_Click" class="btn btn-warning">Voltar</asp:LinkButton>
     </div>--%>
-    </form> </fieldset> </div>
+            </form>
+        </fieldset>
+    </div>
 </asp:Content>

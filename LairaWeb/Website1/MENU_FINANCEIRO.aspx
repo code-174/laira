@@ -6,16 +6,16 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="Server">
     <div class="container-fluid">
         <fieldset>
-            <legend>Financeiro</legend>
+            <legend><strong>Financeiro</strong></legend>
             <form id="Form2" class="form col-md-4" runat="server">
             <div class="well">
                 <div class="form-group">
-                    <a href="GERAR_FATURA.aspx" class="btn btn-primary btn-lg btn-block">Emitir Fatura</a>
+                    <a href="GERAR_FATURA.aspx" class="btn btn-success btn-lg btn-block">Emitir Fatura</a>
                 </div>
             </div>
             <div class="well">
                 <div class="form-group">
-                    <a href="GERAR_RELATORIO_VENDEDORES.aspx" class="btn btn-primary btn-lg btn-block">Relatório
+                    <a href="GERAR_RELATORIO_VENDEDORES.aspx" class="btn btn-success btn-lg btn-block">Relatório
                         de Vendedores</a>
                 </div>
             </div>

@@ -6,9 +6,9 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="Server">
     <div class="container-fluid">
         <fieldset>
-            <legend id="Titulo" runat="server">Ordens de Serviços (Passeios)</legend>
+            <legend><strong>Gerar Ordem de Serviço Adicional (Passeios)</strong></legend>
             <form id="Form2" class="form form-horizontal col-md-6" runat="server">
-            <div class="panel panel-primary">
+            <div class="panel panel-success">
                 <div class="panel-heading">
                     <strong>Critérios</strong>
                 </div>
@@ -38,7 +38,7 @@
                 </div>
             </div>
             <!-- / PANEL CRITERIOS-->
-            <div class="panel panel-primary">
+            <div class="panel panel-success">
                 <div class="panel-heading">
                     <strong>Dados Adicionais</strong>
                 </div>
@@ -75,7 +75,7 @@
                 </div>
             </div>
             <!-- /PANEL DADOS ADICIONAIS-->
-            <div class="panel panel-primary">
+            <div class="panel panel-success">
                 <div class="panel-heading">
                     <strong>Motorista e Guia</strong>
                 </div>
@@ -101,8 +101,9 @@
                 </div>
             </div>
             <!-- /PANEL DADOS MOTORISTA E GUIA-->
-            <asp:GridView ID="GridView1" class="table table-hover table-bordered" runat="server"
-                AutoGenerateColumns="false" GridLines="none" EmptyDataRowStyle-BackColor="Yellow"
+            <asp:GridView ID="GridView1" class="table table-bordered" runat="server"
+                AutoGenerateColumns="false" GridLines="none" HeaderStyle-CssClass="bg-primary"
+                EmptyDataRowStyle-BackColor="Yellow"
                 EmptyDataText="Nao existem fichas para a Data informada!" DataKeyNames="ID_SERV_AD_FICHA">
                 <Columns>
                     <asp:TemplateField>

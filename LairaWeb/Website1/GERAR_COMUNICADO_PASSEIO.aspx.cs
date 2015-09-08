@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Globalization;
 
 public partial class GERAR_COMUNICADO_PASSEIO : System.Web.UI.Page
 {
@@ -12,6 +13,10 @@ public partial class GERAR_COMUNICADO_PASSEIO : System.Web.UI.Page
         if (!IsPostBack)
         {
             LoadCombos();
+            txtData.Text = DateTime.Now.ToString("d", CultureInfo.CreateSpecificCulture("pt-BR"));
+            string DataOS;
+            DataOS = txtData.Text;
+            LoadGrid(DataOS);
         }
     }
     void LoadCombos()
@@ -41,9 +46,18 @@ public partial class GERAR_COMUNICADO_PASSEIO : System.Web.UI.Page
         ddlVendedor.DataBind();
 
     }
+
+    private void LoadGrid(string DataOS)
+    {
+        GridView1.DataSource = FichasListagem.GetFichasPasseio(DataOS);
+        GridView1.DataBind();
+    }
     protected void lnkProcessar_Click(object sender, EventArgs e)
     {
-        // TO DO
+        string DataOS;
+        DataOS = txtData.Text;
+        LoadGrid(DataOS);
+
     }
     protected void lnkSelecionarTodas_Click(object sender, EventArgs e)
     {

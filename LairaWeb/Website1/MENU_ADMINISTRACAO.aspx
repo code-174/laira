@@ -6,7 +6,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="Server">
     <div class="container-fluid">
         <fieldset>
-            <legend>Administração</legend>
+            <legend><strong>Administração</strong></legend>
             <form id="Form1" class="form form-horizontal col-md-4" runat="server">
            <%-- <div class="form-group">
                     <a href="teste_ficha.aspx" class="btn btn-primary btn-lg btn-block">teste ficha</a>

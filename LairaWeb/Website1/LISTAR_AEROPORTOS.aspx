@@ -8,7 +8,7 @@
         <fieldset>
             <legend>Listar Aeroportos</legend>
             <form id="Form1" class="form col-md-7" runat="server">
-            <div class="panel panel-primary">
+            <div class="panel panel-success">
                 <div class="panel-heading">
                     <strong>Busca interna:</strong></div>
                 <div class="panel-body">
@@ -27,31 +27,7 @@
             </div>
             <div id="divPrint">
                 <asp:GridView ID="grvData" runat="server" class="table table-hover" 
-                    GridLines="None" AutoGenerateColumns="false">
-                    <Columns>   
-                    <asp:TemplateField HeaderStyle-Width="100%">
-                    <ItemTemplate>
-                        <tr>
-                            <th>
-                                CODIGO_AEROPORTO
-                            </th>
-                            <th>
-                                NOME_AEROPORTO
-                            </th>                            
-                        </tr>
-                        <tr>
-                            <td>
-                                <%#Eval("CODIGO")%>
-                            </td>
-                            <td>
-                                <%#Eval("NOME")%>
-                            </td>                           
-                        </tr>
-                        </Columns>
-                    </ItemTemplate>
-                </asp:TemplateField>
-                    
-                    </Columns>
+                    GridLines="None" HeaderStyle-CssClass="bg-primary">                    
                 </asp:GridView>
             </div>
             <div class="btn-group btn-group-justified">

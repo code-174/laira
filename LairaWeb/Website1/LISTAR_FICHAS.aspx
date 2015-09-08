@@ -9,7 +9,7 @@
             <legend id="Titulo" runat="server">Listar Fichas</legend>
             <form id="Form1" class="form col-md-7" runat="server">
             <div class="form-group form-horizontal">
-                <div class="panel panel-primary">
+                <div class="panel panel-success">
                     <div class="panel-heading">
                         <strong>Filtros</strong>
                     </div>
@@ -44,7 +44,7 @@
                         </div>
                         <div class="button-group col-md-offset-3">
                             <asp:LinkButton ID="lnkProcessar" class="btn btn-success" runat="server" OnClick="lnkProcessar_Click"><span class="glyphicon glyphicon-ok">
-                        </span> Processar</asp:LinkButton>
+                        </span> Filtrar Dados</asp:LinkButton>
                         </div>
                     </div>
                 </div>
@@ -53,38 +53,38 @@
                 <%--<asp:GridView ID="grvData" runat="server" class="table table-hover" 
                     GridLines="None">
                 </asp:GridView>--%>
-                <asp:GridView ID="GridView1" class="table table-hover table-bordered" runat="server" AutoGenerateColumns="false"
+                <asp:GridView ID="GridView1" class="table table-bordered" runat="server" AutoGenerateColumns="false"
                     OnRowDataBound="GridView1_RowDataBound" GridLines="none" BorderWidth="0" ShowHeader="false">
                     <Columns>                    
                     <asp:TemplateField>
                     <ItemTemplate>                    
-                        <tr>
+                        <tr class="bg-primary">
                             <th>
-                                FICHA
+                                Ficha 
                             </th>
                             <th>
-                                EXCURSAO
+                                Excursão
                             </th>
                             <th>
-                                DATA
+                                Data
                             </th>
                             <th>
-                                HORA
+                                Hora
                             </th>
                             <th>
-                                AER
+                                Aer
                             </th>
                             <th>
-                                VOO
+                                Vôo
                             </th>
                             <th>
-                                PAX
+                                Pax
                             </th>
                             <th>
-                                HOTEL
+                                Hotel
                             </th>
                             <th>
-                                APTO
+                                Apto.
                             </th>
                         </tr>
                         <tr>

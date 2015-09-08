@@ -6,7 +6,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="Server">
     <div class="container-fluid">
         <fieldset>
-            <legend>Ordem de Serviço Adicional</legend>
+            <legend><strong>Ordem de Serviço Adicional</strong></legend>
             <form id="Form2" class="form form-horizontal col-md-4" runat="server">
             <div class="panel panel-default">
                 <div class="panel-heading">

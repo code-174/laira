@@ -8,7 +8,7 @@
             <legend id="Titulo" runat="server">Relatório Fichas</legend>
             <form id="Form1" class="form col-md-7" runat="server">
             <div class="form-group form-horizontal">
-                <div class="panel panel-primary">
+                <div class="panel panel-success">
                     <div class="panel-heading">
                         <strong>Filtros</strong>
                     </div>
@@ -43,7 +43,7 @@
                             </div>
                             <div class="button-group col-md-offset-3">
                         <asp:LinkButton ID="lnkProcessar" class="btn btn-success" runat="server" OnClick="lnkProcessar_Click"><span class="glyphicon glyphicon-ok">
-                        </span> Processar</asp:LinkButton>
+                        </span> Filtrar Dados</asp:LinkButton>
                     </div>
 
                         </div>
@@ -56,9 +56,14 @@
                 </asp:GridView>--%>
 
 
-                <asp:GridView ID="GridView1" class="table table-hover" runat="server" AutoGenerateColumns="false"
-            OnRowDataBound="GridView1_RowDataBound" GridLines="none">
+                <asp:GridView ID="GridView1" class="table table-bordered" runat="server" AutoGenerateColumns="false"
+                    OnRowDataBound="GridView1_RowDataBound" GridLines="none" HeaderStyle-CssClass="bg-primary">
             <Columns>
+            <asp:TemplateField HeaderStyle-CssClass="bg-primary">
+                <ItemTemplate>
+                    <asp:CheckBox ID="chkSelect" runat="server" />
+                </ItemTemplate>
+                </asp:TemplateField>
                 <asp:BoundField DataField="HORA" HeaderText="Hora" />
                 <asp:BoundField DataField="AEROPORTO" HeaderText="Aer" />
                 <asp:BoundField DataField="VOO" HeaderText="Vôo" />

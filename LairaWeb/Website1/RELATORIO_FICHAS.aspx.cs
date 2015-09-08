@@ -41,8 +41,8 @@ public partial class RELATORIO_FICHAS : System.Web.UI.Page
     {
         if (e.Row.RowType == DataControlRowType.Header)
         {
-            e.Row.Cells[7].Visible = false;
-        //    e.Row.Cells[10].Visible = false;
+            e.Row.Cells[8].Visible = false;
+            //e.Row.Cells[9].Visible = false;
         }
     }
 
