@@ -5,7 +5,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" Runat="Server">
 <div class="container-fluid">
         <fieldset>
-            <legend id="Titulo" runat="server">Relatório Fichas</legend>
+            <legend id="Titulo" runat="server" style="font-weight: bold">Relatório Fichas</legend>
             <form id="Form1" class="form col-md-7" runat="server">
             <div class="form-group form-horizontal">
                 <div class="panel panel-success">

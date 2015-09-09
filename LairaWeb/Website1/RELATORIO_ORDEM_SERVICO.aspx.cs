@@ -36,4 +36,17 @@ public partial class RELATORIO_ORDEM_SERVICO : System.Web.UI.Page
             }
         }
     }
+
+    protected void lnkProcessar_Click(object sender, EventArgs e)
+    {
+
+    }
+
+    protected void lnkLocalizar_Click(object sender, EventArgs e)
+    {
+        if (txtOSNo.Text != "")
+        {
+            Response.Redirect("RELATORIO_ORDEM_SERVICO.aspx?No=" + txtOSNo.Text);
+        }
+    }
 }

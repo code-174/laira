@@ -15,7 +15,7 @@
             </div>
             <div class="well">
                 <div class="form-group">
-                    <a href="GERAR_RELATORIO_VENDEDORES.aspx" class="btn btn-success btn-lg btn-block">Relatório
+                    <a href="RELATORIO_VENDEDORES.aspx" class="btn btn-success btn-lg btn-block">Relatório
                         de Vendedores</a>
                 </div>
             </div>

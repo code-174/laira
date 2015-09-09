@@ -70,12 +70,17 @@ public class FichasListagem
             str.AppendLine(" select ID_FICHA, COD_EXCURSAO_FICHA, DATA_CHEGADA_FICHA, VOO_CHEGADA_HORA_FICHA, AEROPORTO_CHEGADA_FICHA, ");
             str.AppendLine(" SIGLA_VOO, ");
             str.AppendLine(" dbo.getpax(FICHAS.ID_FICHA) AS NOME_PASSAGEIRO, ");
-            str.AppendLine(" ISNULL(NOME_HOTEL, '---') AS HOTEL, APARTAMENTO_FICHA ");
+            str.AppendLine(" ISNULL(NOME_HOTEL, '---') AS HOTEL, APARTAMENTO_FICHA, ");
+            str.AppendLine(" OS_CHEGADA, NOME_PRESTADOR ");
             str.AppendLine(" from FICHAS ");
+            str.AppendLine(" inner join ORDEM_SERV ");
+            str.AppendLine(" on FICHAS.OS_CHEGADA = ORDEM_SERV.ID_ORDEM_SERV ");
+            str.AppendLine(" LEFT JOIN PRESTADORES ON ORDEM_SERV.FEITO_POR_NO = PRESTADORES.ID_PRESTADOR ");
             str.AppendLine(" LEFT JOIN VOOS ON FICHAS.VOO_CHEGADA_FICHA = VOOS.ID_VOO ");
             str.AppendLine(" LEFT JOIN HOTEIS ON FICHAS.HOTEL_FICHA = HOTEIS.ID_HOTEL ");
             str.AppendLine(" WHERE ");
             str.AppendLine(" DATA_CHEGADA_FICHA  = @DATA_CHEGADA_FICHA ");
+            str.AppendLine(" and OS_CHEGADA is not null ");
 
             cmd.CommandText = str.ToString();
 
@@ -100,6 +105,9 @@ public class FichasListagem
                 FichaListagem.PAX = reader["NOME_PASSAGEIRO"].ToString();
                 FichaListagem.HOTEL = reader["HOTEL"].ToString();
                 FichaListagem.APTO = reader["APARTAMENTO_FICHA"].ToString();
+                FichaListagem.OS_NO = reader["OS_CHEGADA"].ToString();
+                FichaListagem.PRESTADOR = reader["NOME_PRESTADOR"].ToString();
+
                 xList.Add(FichaListagem);
             }
 
@@ -110,12 +118,17 @@ public class FichasListagem
             str.AppendLine(" select ID_FICHA, COD_EXCURSAO_FICHA, DATA_SAIDA_FICHA, VOO_SAIDA_HORA_FICHA, AEROPORTO_SAIDA_FICHA, ");
             str.AppendLine(" SIGLA_VOO, ");
             str.AppendLine(" dbo.getpax(FICHAS.ID_FICHA) AS NOME_PASSAGEIRO, ");
-            str.AppendLine(" ISNULL(NOME_HOTEL, '---') AS HOTEL, APARTAMENTO_FICHA ");
+            str.AppendLine(" ISNULL(NOME_HOTEL, '---') AS HOTEL, APARTAMENTO_FICHA, ");
+            str.AppendLine(" OS_SAIDA, NOME_PRESTADOR ");
             str.AppendLine(" from FICHAS ");
+            str.AppendLine(" inner join ORDEM_SERV ");
+            str.AppendLine(" on FICHAS.OS_SAIDA = ORDEM_SERV.ID_ORDEM_SERV ");
+            str.AppendLine(" LEFT JOIN PRESTADORES ON ORDEM_SERV.FEITO_POR_NO = PRESTADORES.ID_PRESTADOR ");
             str.AppendLine(" LEFT JOIN VOOS ON FICHAS.VOO_SAIDA_FICHA = VOOS.ID_VOO ");
             str.AppendLine(" LEFT JOIN HOTEIS ON FICHAS.HOTEL_FICHA = HOTEIS.ID_HOTEL ");
             str.AppendLine(" WHERE ");
             str.AppendLine(" DATA_SAIDA_FICHA  = @DATA_SAIDA_FICHA ");
+            str.AppendLine(" and OS_SAIDA is not null ");
 
             cmd.CommandText = str.ToString();
 
@@ -140,6 +153,9 @@ public class FichasListagem
                 FichaListagem.PAX = reader["NOME_PASSAGEIRO"].ToString();
                 FichaListagem.HOTEL = reader["HOTEL"].ToString();
                 FichaListagem.APTO = reader["APARTAMENTO_FICHA"].ToString();
+                FichaListagem.OS_NO = reader["OS_SAIDA"].ToString();
+                FichaListagem.PRESTADOR = reader["NOME_PRESTADOR"].ToString();
+
                 xList.Add(FichaListagem);
             }
 
@@ -163,11 +179,17 @@ public class FichasListagem
             str.AppendLine(" select ID_FICHA, COD_EXCURSAO_FICHA, DATA_CHEGADA_FICHA, VOO_CHEGADA_HORA_FICHA, AEROPORTO_CHEGADA_FICHA, ");
             str.AppendLine(" SIGLA_VOO, ");
             str.AppendLine(" dbo.getpax(FICHAS.ID_FICHA) AS NOME_PASSAGEIRO, ");
-            str.AppendLine(" ISNULL(NOME_HOTEL, '---') AS HOTEL, APARTAMENTO_FICHA ");
+            str.AppendLine(" ISNULL(NOME_HOTEL, '---') AS HOTEL, APARTAMENTO_FICHA, ");
+            str.AppendLine(" OS_CHEGADA, NOME_PRESTADOR ");
             str.AppendLine(" from FICHAS ");
+            str.AppendLine(" inner join ORDEM_SERV ");
+            str.AppendLine(" on FICHAS.OS_CHEGADA = ORDEM_SERV.ID_ORDEM_SERV ");
+            str.AppendLine(" LEFT JOIN PRESTADORES ON ORDEM_SERV.FEITO_POR_NO = PRESTADORES.ID_PRESTADOR ");
             str.AppendLine(" LEFT JOIN VOOS ON FICHAS.VOO_CHEGADA_FICHA = VOOS.ID_VOO ");
             str.AppendLine(" LEFT JOIN HOTEIS ON FICHAS.HOTEL_FICHA = HOTEIS.ID_HOTEL ");
             str.AppendLine(" WHERE ");
+            str.AppendLine(" OS_CHEGADA is not null and ");
+
             if (strSelected == "F")
             {
                 str.AppendLine(" ID_FICHA  = @ID_FICHA ");
@@ -209,6 +231,9 @@ public class FichasListagem
                 FichaListagem.PAX = reader["NOME_PASSAGEIRO"].ToString();
                 FichaListagem.HOTEL = reader["HOTEL"].ToString();
                 FichaListagem.APTO = reader["APARTAMENTO_FICHA"].ToString();
+                FichaListagem.OS_NO = reader["OS_CHEGADA"].ToString();
+                FichaListagem.PRESTADOR = reader["NOME_PRESTADOR"].ToString();
+
                 xList.Add(FichaListagem);
             }
 
@@ -219,11 +244,17 @@ public class FichasListagem
             str.AppendLine(" select ID_FICHA, COD_EXCURSAO_FICHA, DATA_SAIDA_FICHA, VOO_SAIDA_HORA_FICHA, AEROPORTO_SAIDA_FICHA, ");
             str.AppendLine(" SIGLA_VOO, ");
             str.AppendLine(" dbo.getpax(FICHAS.ID_FICHA) AS NOME_PASSAGEIRO, ");
-            str.AppendLine(" ISNULL(NOME_HOTEL, '---') AS HOTEL, APARTAMENTO_FICHA ");
+            str.AppendLine(" ISNULL(NOME_HOTEL, '---') AS HOTEL, APARTAMENTO_FICHA, ");
+            str.AppendLine(" OS_SAIDA, NOME_PRESTADOR ");
             str.AppendLine(" from FICHAS ");
-            str.AppendLine(" LEFT JOIN VOOS ON FICHAS.VOO_CHEGADA_FICHA = VOOS.ID_VOO ");
+            str.AppendLine(" inner join ORDEM_SERV ");
+            str.AppendLine(" on FICHAS.OS_SAIDA = ORDEM_SERV.ID_ORDEM_SERV ");
+            str.AppendLine(" LEFT JOIN PRESTADORES ON ORDEM_SERV.FEITO_POR_NO = PRESTADORES.ID_PRESTADOR ");
+            str.AppendLine(" LEFT JOIN VOOS ON FICHAS.VOO_SAIDA_FICHA = VOOS.ID_VOO ");
             str.AppendLine(" LEFT JOIN HOTEIS ON FICHAS.HOTEL_FICHA = HOTEIS.ID_HOTEL ");
             str.AppendLine(" WHERE ");
+            str.AppendLine(" OS_SAIDA is not null and ");
+
             if (strSelected == "F")
             {
                 str.AppendLine(" ID_FICHA  = @ID_FICHA ");
@@ -265,6 +296,9 @@ public class FichasListagem
                 FichaListagem.PAX = reader["NOME_PASSAGEIRO"].ToString();
                 FichaListagem.HOTEL = reader["HOTEL"].ToString();
                 FichaListagem.APTO = reader["APARTAMENTO_FICHA"].ToString();
+                FichaListagem.OS_NO = reader["OS_SAIDA"].ToString();
+                FichaListagem.PRESTADOR = reader["NOME_PRESTADOR"].ToString();
+
                 xList.Add(FichaListagem);
             }
 
@@ -284,16 +318,20 @@ public class FichasListagem
 
         if (strTipo == "C")
         {
-            str.AppendLine(" select ID_FICHA, COD_EXCURSAO_FICHA, DATA_CHEGADA_FICHA, VOO_CHEGADA_HORA_FICHA, AEROPORTO_CHEGADA_FICHA, ");
-            str.AppendLine(" SIGLA_VOO, ");
-            str.AppendLine(" dbo.getpax(FICHAS.ID_FICHA) AS NOME_PASSAGEIRO, ");
-            str.AppendLine(" ISNULL(NOME_HOTEL, '---') AS HOTEL, APARTAMENTO_FICHA ");
+            str.AppendLine(" select ID_FICHA, VOO_CHEGADA_HORA_FICHA, SIGLA_VOO, AEROPORTO_CHEGADA_FICHA, ");
+            str.AppendLine(" ISNULL(NOME_HOTEL, '---') AS HOTEL, APARTAMENTO_FICHA, ");
+            str.AppendLine(" COD_EXCURSAO_FICHA, ");
+            str.AppendLine(" count(ID_PASSAGEIRO) as QUANT_PAX, ");
+            str.AppendLine(" dbo.getpax(FICHAS.ID_FICHA) AS NOME_PASSAGEIRO ");
             str.AppendLine(" from FICHAS ");
             str.AppendLine(" LEFT JOIN VOOS ON FICHAS.VOO_CHEGADA_FICHA = VOOS.ID_VOO ");
             str.AppendLine(" LEFT JOIN HOTEIS ON FICHAS.HOTEL_FICHA = HOTEIS.ID_HOTEL ");
+            str.AppendLine(" LEFT JOIN PASSAGEIROS ON FICHAS.ID_FICHA = PASSAGEIROS.FICHA_NO ");
             str.AppendLine(" WHERE ");
             str.AppendLine(" DATA_CHEGADA_FICHA  = @DATA_CHEGADA_FICHA ");
             str.AppendLine(" AND OS_CHEGADA IS NULL ");
+            str.AppendLine(" group by ID_FICHA, VOO_CHEGADA_HORA_FICHA, SIGLA_VOO, AEROPORTO_CHEGADA_FICHA, ");
+            str.AppendLine(" NOME_HOTEL, APARTAMENTO_FICHA, COD_EXCURSAO_FICHA");
 
             cmd.CommandText = str.ToString();
 
@@ -310,14 +348,15 @@ public class FichasListagem
             {
                 FichasListagem FichaListagem = new FichasListagem();
                 FichaListagem.FICHA_NO = Convert.ToInt64(reader["ID_FICHA"]);
-                FichaListagem.COD_EXCURSAO = reader["COD_EXCURSAO_FICHA"].ToString();
-                FichaListagem.DATA = reader["DATA_CHEGADA_FICHA"].ToString();
                 FichaListagem.HORA = reader["VOO_CHEGADA_HORA_FICHA"].ToString();
-                FichaListagem.AEROPORTO = reader["AEROPORTO_CHEGADA_FICHA"].ToString();
                 FichaListagem.VOO = reader["SIGLA_VOO"].ToString();
-                FichaListagem.PAX = reader["NOME_PASSAGEIRO"].ToString();
+                FichaListagem.AEROPORTO = reader["AEROPORTO_CHEGADA_FICHA"].ToString();
                 FichaListagem.HOTEL = reader["HOTEL"].ToString();
                 FichaListagem.APTO = reader["APARTAMENTO_FICHA"].ToString();
+                FichaListagem.COD_EXCURSAO = reader["COD_EXCURSAO_FICHA"].ToString();
+                FichaListagem.QUANT_PAX = reader["QUANT_PAX"].ToString();
+                FichaListagem.PAX = reader["NOME_PASSAGEIRO"].ToString();
+                
                 xList.Add(FichaListagem);
             }
 
@@ -325,18 +364,20 @@ public class FichasListagem
         }
         else
         {
-            str.AppendLine(" select ID_FICHA, COD_EXCURSAO_FICHA, DATA_SAIDA_FICHA, VOO_SAIDA_HORA_FICHA, AEROPORTO_SAIDA_FICHA, ");
-            str.AppendLine(" SIGLA_VOO, ");
-            //str.AppendLine(" count(dbo.getpax(FICHAS.ID_FICHA)) AS QUANT_PASSAGEIRO, ");
-            str.AppendLine(" dbo.getpax(FICHAS.ID_FICHA) AS NOME_PASSAGEIRO, ");
-            str.AppendLine(" ISNULL(NOME_HOTEL, '---') AS HOTEL, APARTAMENTO_FICHA ");
+            str.AppendLine(" select ID_FICHA, VOO_SAIDA_HORA_FICHA, SIGLA_VOO, AEROPORTO_SAIDA_FICHA, ");
+            str.AppendLine(" ISNULL(NOME_HOTEL, '---') AS HOTEL, APARTAMENTO_FICHA, ");
+            str.AppendLine(" COD_EXCURSAO_FICHA, ");
+            str.AppendLine(" count(ID_PASSAGEIRO) as QUANT_PAX, ");
+            str.AppendLine(" dbo.getpax(FICHAS.ID_FICHA) AS NOME_PASSAGEIRO ");
             str.AppendLine(" from FICHAS ");
             str.AppendLine(" LEFT JOIN VOOS ON FICHAS.VOO_SAIDA_FICHA = VOOS.ID_VOO ");
             str.AppendLine(" LEFT JOIN HOTEIS ON FICHAS.HOTEL_FICHA = HOTEIS.ID_HOTEL ");
+            str.AppendLine(" LEFT JOIN PASSAGEIROS ON FICHAS.ID_FICHA = PASSAGEIROS.FICHA_NO ");
             str.AppendLine(" WHERE ");
             str.AppendLine(" DATA_SAIDA_FICHA  = @DATA_SAIDA_FICHA ");
             str.AppendLine(" AND OS_SAIDA IS NULL ");
-            //str.AppendLine(" group by ID_FICHA ");
+            str.AppendLine(" group by ID_FICHA, VOO_SAIDA_HORA_FICHA, SIGLA_VOO, AEROPORTO_SAIDA_FICHA, ");
+            str.AppendLine(" NOME_HOTEL, APARTAMENTO_FICHA, COD_EXCURSAO_FICHA");
 
             cmd.CommandText = str.ToString();
 
@@ -353,15 +394,15 @@ public class FichasListagem
             {
                 FichasListagem FichaListagem = new FichasListagem();
                 FichaListagem.FICHA_NO = Convert.ToInt64(reader["ID_FICHA"]);
-                FichaListagem.COD_EXCURSAO = reader["COD_EXCURSAO_FICHA"].ToString();
-                FichaListagem.DATA = reader["DATA_SAIDA_FICHA"].ToString();
                 FichaListagem.HORA = reader["VOO_SAIDA_HORA_FICHA"].ToString();
-                FichaListagem.AEROPORTO = reader["AEROPORTO_SAIDA_FICHA"].ToString();
                 FichaListagem.VOO = reader["SIGLA_VOO"].ToString();
-                //FichaListagem.QUANT_PAX = reader["QUANT_PASSAGEIRO"].ToString();
-                FichaListagem.PAX = reader["NOME_PASSAGEIRO"].ToString();
+                FichaListagem.AEROPORTO = reader["AEROPORTO_SAIDA_FICHA"].ToString();
                 FichaListagem.HOTEL = reader["HOTEL"].ToString();
                 FichaListagem.APTO = reader["APARTAMENTO_FICHA"].ToString();
+                FichaListagem.COD_EXCURSAO = reader["COD_EXCURSAO_FICHA"].ToString();
+                FichaListagem.QUANT_PAX = reader["QUANT_PAX"].ToString();
+                FichaListagem.PAX = reader["NOME_PASSAGEIRO"].ToString();
+
                 xList.Add(FichaListagem);
             }
 
@@ -634,11 +675,11 @@ public class FichasListagem
         str.AppendLine(" inner join FICHAS ");
         str.AppendLine(" on SERV_AD_FICHA.FICHA_NO = FICHAS.ID_FICHA ");
         str.AppendLine(" left join SERV_ADC on SERV_AD_FICHA.SERV_AD_NO = SERV_ADC.ID_SERV_ADC ");
-        str.AppendLine(" LEFT JOIN PASSAGEIROS ON FICHAS.ID_FICHA = PASSAGEIROS.FICHA_NO ");
+        str.AppendLine(" left join PASSAGEIROS ON FICHAS.ID_FICHA = PASSAGEIROS.FICHA_NO ");
         str.AppendLine(" left join FORMA_DE_PAGAMENTO on SERV_AD_FICHA.FORMA_PAG_NO = FORMA_DE_PAGAMENTO.ID_FORMA_DE_PAGAMENTO ");
         str.AppendLine(" left join HOTEIS on FICHAS.HOTEL_FICHA = HOTEIS.ID_HOTEL ");
         str.AppendLine(" where ");
-        str.AppendLine(" DATA  = @DATA ");
+        str.AppendLine(" DATA = @DATA ");
         str.AppendLine(" and OS_ADC_NO is not null ");
         str.AppendLine(" group by ID_SERV_AD_FICHA, ID_FICHA, HORA, NOME_HOTEL, APARTAMENTO_FICHA,PASSEIO_SERV_ADC, FORMA_DE_PAGAMENTO, VOUCHER ");
 

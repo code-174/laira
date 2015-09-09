@@ -12,7 +12,8 @@ public partial class LISTAR_FICHAS : System.Web.UI.Page
         if (!IsPostBack)
         {
             string Tipo = Request.QueryString["Tipo"];
-            string Data = Request.QueryString["Data"];
+            string Data = Request.QueryString["Data"];            
+           
 
             if (Tipo.Trim().ToString() != "")
             {
@@ -22,16 +23,17 @@ public partial class LISTAR_FICHAS : System.Web.UI.Page
                 switch (Tipo)
                 {
                     case "C":
-                        Titulo.InnerText = "Listagem de Fichas de Chegada";                        
+                        Titulo.InnerText = "Listagem de Fichas de Chegada" + " " + Data;                     
                         break;
                     case "S":
-                        Titulo.InnerText = "Listagem de Fichas de Saída";
+                        Titulo.InnerText = "Listagem de Fichas de Saída" + " " + Data;
                         break;   
                  
                     default:
                         break;
                 }
-
+                
+                txtCriterio.Text = Data;
                 ddlTipo.SelectedValue = Tipo;
 
             }

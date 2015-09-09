@@ -6,7 +6,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="Server">
     <div class="container-fluid">
         <fieldset>
-            <legend id="Titulo" runat="server">Listar Fichas</legend>
+            <legend id="Titulo" runat="server" style="font-weight: bold">Listar Fichas</legend>
             <form id="Form1" class="form col-md-7" runat="server">
             <div class="form-group form-horizontal">
                 <div class="panel panel-success">
@@ -86,6 +86,12 @@
                             <th>
                                 Apto.
                             </th>
+                            <th>
+                                Realizado Por
+                            </th>
+                            <th>
+                                Nr. OS
+                            </th>
                         </tr>
                         <tr>
                             <td>
@@ -114,6 +120,12 @@
                             </td>
                             <td>
                                 <%#Eval("APTO")%>
+                            </td>                            
+                            <td>
+                                <%#Eval("PRESTADOR")%>
+                            </td>
+                            <td>
+                                <%#Eval("OS_NO")%>
                             </td>
                         </tr>
                        

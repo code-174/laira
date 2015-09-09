@@ -5,9 +5,14 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-public partial class GERAR_RELATORIO_VENDEDORES : System.Web.UI.Page
+public partial class RELATORIO_VENDEDORES : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
+    {
+
+    }
+
+    protected void lnkProcessar_Click(object sender, EventArgs e)
     {
 
     }

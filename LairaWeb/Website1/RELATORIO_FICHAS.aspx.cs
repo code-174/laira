@@ -22,10 +22,10 @@ public partial class RELATORIO_FICHAS : System.Web.UI.Page
                 switch (Tipo)
                 {
                     case "C":
-                        Titulo.InnerText = "Relatório de Fichas de Chegada";
+                        Titulo.InnerText = "Relatório de Fichas de Chegada" + " " + Data; 
                         break;
                     case "S":
-                        Titulo.InnerText = "Relatório de Fichas de Saída";
+                        Titulo.InnerText = "Relatório de Fichas de Saída" + " " + Data; 
                         break;
                    
                     default:
@@ -33,6 +33,7 @@ public partial class RELATORIO_FICHAS : System.Web.UI.Page
                 }
                 
                 ddlTipo.SelectedValue = Tipo;
+                txtCriterio.Text = Data;
             }
         }
     }

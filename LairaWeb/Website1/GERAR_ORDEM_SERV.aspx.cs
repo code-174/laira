@@ -30,18 +30,18 @@ public partial class GERAR_ORDEM_SERV : System.Web.UI.Page
     {
         GridView1.DataSource = FichasListagem.GetFichasOS(TipoFicha, DataFicha);
         GridView1.DataBind();
-        //switch (TipoFicha)
-        //{
-        //    case "C":
-        //        Titulo.InnerText = "Ordens de Serviço de Chegada";
-        //        break;
-        //    case "S":
-        //        Titulo.InnerText = "Ordens de Serviço de Saída";
-        //        break;
+        switch (TipoFicha)
+        {
+            case "C":
+                Titulo.InnerText = "Gerar OS de Chegada" + " " + DataFicha;
+                break;
+            case "S":
+                Titulo.InnerText = "Gerar OS de Saída" + " " + DataFicha;
+                break;
 
-        //    default:
-        //        break;
-        //}
+            default:
+                break;
+        }
         //Fichas c = new Fichas();
         //grvFichas.DataSource = c.GetFichasByTypeNDate(TipoFicha, DataFicha);
         //grvFichas.DataBind();

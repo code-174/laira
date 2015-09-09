@@ -6,24 +6,24 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="Server">
     <div class="container-fluid">
         <fieldset>
-            <legend><strong>Gerar Ordem de Serviço</strong></legend>
-            <form id="Form2" class="form form-horizontal col-md-6" runat="server">
+            <legend id="Titulo" runat="server" style="font-weight: bold"><strong>Gerar Ordem de Serviço</strong></legend>
+            <form id="Form2" class="form form-horizontal col-md-7" runat="server">
             <div class="panel panel-success">
                 <div class="panel-heading">
                     <strong>Critérios</strong>
                 </div>
                 <div class="panel-body">
                     <div class="form-group">
-                        <label for="txtDataServico" class="control-label col-md-4">
+                        <label for="txtDataServico" class="control-label col-md-3">
                             Data dos Serviços</label>
                         <div class="col-md-3">
                             <asp:TextBox ID="txtDataServico" runat="server" class="form-control"></asp:TextBox>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="ddlTipoServico" class="control-label col-md-4">
+                        <label for="ddlTipoServico" class="control-label col-md-3">
                             Tipo dos Serviços</label>
-                        <div class="col-md-5">
+                        <div class="col-md-4">
                             <asp:DropDownList ID="ddlTipoServico" runat="server" class="form-control">
                                 <asp:ListItem Value="C">Transfer In (Chegada)</asp:ListItem>
                                 <asp:ListItem Value="S">Transfer Out (Saída)</asp:ListItem>
@@ -158,9 +158,9 @@
                     <asp:BoundField DataField="HOTEL" HeaderText="Hotel" />
                     <asp:BoundField DataField="APTO" HeaderText="Apto" />
                     <asp:BoundField DataField="COD_EXCURSAO" HeaderText="Cód. Excursão" />
-                    <%--<asp:BoundField DataField="QUANT_PAX" HeaderText="Quant. Pax" />--%>
+                    <asp:BoundField DataField="QUANT_PAX" HeaderText="Quant. Pax" />
                     <asp:BoundField DataField="PAX" HeaderText="Pax" />
-                    <asp:TemplateField>
+                    <%--<asp:TemplateField>
                         <ItemTemplate>
                             <tr>
                                 <td colspan="100%">
@@ -194,7 +194,7 @@
                                 </td>
                             </tr>
                         </ItemTemplate>
-                    </asp:TemplateField>
+                    </asp:TemplateField>--%>
                 </Columns>
             </asp:GridView>
             <div class="button-group col-md-offset-3">
