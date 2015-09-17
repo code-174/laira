@@ -15,7 +15,7 @@ public class ServInFicha
     #region Propriedades
     public Int64 ID { get; set; }
     public string PRECO { get; set; }
-    public Int64 FORMA_PAG_NO { get; set; }
+    public string FORMA_PAG{ get; set; }
     public string SERV_IN { get; set; }
     public Int64 OS_ADC_NO { get; set; }
     #endregion
@@ -41,9 +41,10 @@ public class ServInFicha
         cmd.Connection = conn;
         StringBuilder str = new StringBuilder();
         str.AppendLine(" select ID_SERV_IN_FICHA, REPLACE (CAST(VALOR AS VARCHAR(100)),'.' ,',') AS PRECO, ");
-        str.AppendLine(" FORMA_PAG_NO, SERVICO_SERV_INCLUSO ");
+        str.AppendLine(" FORMA_DE_PAGAMENTO, SERVICO_SERV_INCLUSO ");
         str.AppendLine(" from SERV_IN_FICHA ");
         str.AppendLine(" left join SERV_INCLUSO on SERV_IN_FICHA.SERV_IN_NO = SERV_INCLUSO.ID_SERV_INCLUSO ");
+        str.AppendLine(" left join FORMA_DE_PAGAMENTO on SERV_IN_FICHA.FORMA_PAG_NO = FORMA_DE_PAGAMENTO.ID_FORMA_DE_PAGAMENTO ");
         str.AppendLine(" where FICHA_NO = @ID_FICHA ");
         
         cmd.CommandText = str.ToString();
@@ -62,7 +63,7 @@ public class ServInFicha
             ServInFicha ServicosInclusosFicha = new ServInFicha();
             ServicosInclusosFicha.ID = Convert.ToInt64(reader["ID_SERV_IN_FICHA"]);            
             ServicosInclusosFicha.PRECO = reader["PRECO"].ToString();
-            ServicosInclusosFicha.FORMA_PAG_NO = Convert.ToInt64(reader["FORMA_PAG_NO"]);
+            ServicosInclusosFicha.FORMA_PAG = reader["FORMA_DE_PAGAMENTO"].ToString();
             ServicosInclusosFicha.SERV_IN = reader["SERVICO_SERV_INCLUSO"].ToString();
                 
             xList.Add(ServicosInclusosFicha);
@@ -81,9 +82,10 @@ public class ServInFicha
         cmd.Connection = conn;
         StringBuilder str = new StringBuilder();
         str.AppendLine(" select ID_SERV_IN_FICHA, REPLACE (CAST(VALOR AS VARCHAR(100)),'.' ,',') AS PRECO, ");
-        str.AppendLine(" FORMA_PAG_NO, SERVICO_SERV_INCLUSO ");
+        str.AppendLine(" FORMA_DE_PAGAMENTO, SERVICO_SERV_INCLUSO ");
         str.AppendLine(" from SERV_IN_FICHA ");
         str.AppendLine(" left join SERV_INCLUSO on SERV_IN_FICHA.SERV_IN_NO = SERV_INCLUSO.ID_SERV_INCLUSO ");
+        str.AppendLine(" left join FORMA_DE_PAGAMENTO on SERV_IN_FICHA.FORMA_PAG_NO = FORMA_DE_PAGAMENTO.ID_FORMA_DE_PAGAMENTO ");
         str.AppendLine(" where FICHA_NO = @ID_FICHA ");
         str.AppendLine(" and OS_ADC_NO is null");
 
@@ -103,7 +105,7 @@ public class ServInFicha
             ServInFicha ServicosInclusosFicha = new ServInFicha();
             ServicosInclusosFicha.ID = Convert.ToInt64(reader["ID_SERV_IN_FICHA"]);
             ServicosInclusosFicha.PRECO = reader["PRECO"].ToString();
-            ServicosInclusosFicha.FORMA_PAG_NO = Convert.ToInt64(reader["FORMA_PAG_NO"]);
+            ServicosInclusosFicha.FORMA_PAG = reader["FORMA_DE_PAGAMENTO"].ToString();
             ServicosInclusosFicha.SERV_IN = reader["SERVICO_SERV_INCLUSO"].ToString();
 
             xList.Add(ServicosInclusosFicha);

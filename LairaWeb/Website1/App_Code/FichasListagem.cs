@@ -482,12 +482,16 @@ public class FichasListagem
         {
             str.AppendLine(" select ID_FICHA, VOO_CHEGADA_HORA_FICHA, SIGLA_VOO, AEROPORTO_CHEGADA_FICHA, ");
             str.AppendLine(" dbo.getpax(FICHAS.ID_FICHA) AS NOME_PASSAGEIRO, ");
+            str.AppendLine(" count(ID_PASSAGEIRO) as QUANT_PAX, ");
             str.AppendLine(" ISNULL(NOME_HOTEL, '---') AS HOTEL ");
             str.AppendLine(" from FICHAS ");
             str.AppendLine(" LEFT JOIN VOOS ON FICHAS.VOO_CHEGADA_FICHA = VOOS.ID_VOO ");
             str.AppendLine(" LEFT JOIN HOTEIS ON FICHAS.HOTEL_FICHA = HOTEIS.ID_HOTEL ");
+            str.AppendLine(" LEFT JOIN PASSAGEIROS ON FICHAS.ID_FICHA = PASSAGEIROS.FICHA_NO ");
             str.AppendLine(" WHERE ");
             str.AppendLine(" OS_CHEGADA  = @ID_OS ");
+            str.AppendLine(" group by ID_FICHA, VOO_CHEGADA_HORA_FICHA, SIGLA_VOO, AEROPORTO_CHEGADA_FICHA, ");
+            str.AppendLine(" NOME_HOTEL ");
 
             cmd.CommandText = str.ToString();
 
@@ -508,6 +512,7 @@ public class FichasListagem
                 FichaListagem.VOO = reader["SIGLA_VOO"].ToString();
                 FichaListagem.AEROPORTO = reader["AEROPORTO_CHEGADA_FICHA"].ToString();
                 FichaListagem.PAX = reader["NOME_PASSAGEIRO"].ToString();
+                FichaListagem.QUANT_PAX = reader["QUANT_PAX"].ToString();
                 FichaListagem.HOTEL = reader["HOTEL"].ToString();
                 xList.Add(FichaListagem);
             }
@@ -518,12 +523,16 @@ public class FichasListagem
         {
             str.AppendLine(" select ID_FICHA, VOO_SAIDA_HORA_FICHA, SIGLA_VOO, AEROPORTO_SAIDA_FICHA, ");
             str.AppendLine(" dbo.getpax(FICHAS.ID_FICHA) AS NOME_PASSAGEIRO, ");
+            str.AppendLine(" count(ID_PASSAGEIRO) as QUANT_PAX, ");
             str.AppendLine(" ISNULL(NOME_HOTEL, '---') AS HOTEL ");
             str.AppendLine(" from FICHAS ");
             str.AppendLine(" LEFT JOIN VOOS ON FICHAS.VOO_SAIDA_FICHA = VOOS.ID_VOO ");
             str.AppendLine(" LEFT JOIN HOTEIS ON FICHAS.HOTEL_FICHA = HOTEIS.ID_HOTEL ");
+            str.AppendLine(" LEFT JOIN PASSAGEIROS ON FICHAS.ID_FICHA = PASSAGEIROS.FICHA_NO ");
             str.AppendLine(" WHERE ");
             str.AppendLine(" OS_SAIDA  = @ID_OS ");
+            str.AppendLine(" group by ID_FICHA, VOO_SAIDA_HORA_FICHA, SIGLA_VOO, AEROPORTO_SAIDA_FICHA, ");
+            str.AppendLine(" NOME_HOTEL ");
 
             cmd.CommandText = str.ToString();
 
@@ -544,6 +553,7 @@ public class FichasListagem
                 FichaListagem.VOO = reader["SIGLA_VOO"].ToString();
                 FichaListagem.AEROPORTO = reader["AEROPORTO_SAIDA_FICHA"].ToString();
                 FichaListagem.PAX = reader["NOME_PASSAGEIRO"].ToString();
+                FichaListagem.QUANT_PAX = reader["QUANT_PAX"].ToString();
                 FichaListagem.HOTEL = reader["HOTEL"].ToString();
                 xList.Add(FichaListagem);
             }
@@ -769,6 +779,64 @@ public class FichasListagem
             FichaListagem.OS_NO = reader["OS_SAIDA"].ToString();
             FichaListagem.PRESTADOR = reader["NOME_PRESTADOR"].ToString();
 
+            xList.Add(FichaListagem);
+        }
+
+        return xList;
+    }
+
+    public static List<FichasListagem> GetFiltroFichasOSAdc(Int64 intServAdNo)
+    {
+        List<FichasListagem> xList = new List<FichasListagem>();
+
+        SqlCommand cmd = new SqlCommand();
+        SqlConnection conn = new SqlConnection();
+        conn.ConnectionString = ConfigurationManager.ConnectionStrings["LairaWebDB"].ConnectionString;
+        cmd.Connection = conn;
+        StringBuilder str = new StringBuilder();
+
+
+        str.AppendLine(" select ID_SERV_AD_FICHA, FICHA_NO, SERV_AD_NO, HORA, ");
+        str.AppendLine(" ISNULL(NOME_HOTEL, '---') AS HOTEL, APARTAMENTO_FICHA, ");
+        str.AppendLine(" PASSEIO_SERV_ADC, ");
+        str.AppendLine(" dbo.getpax(FICHAS.ID_FICHA) AS NOME_PASSAGEIRO, ");
+        str.AppendLine(" FORMA_DE_PAGAMENTO, ");
+        str.AppendLine(" NOME_VENDEDOR ");
+        str.AppendLine(" from SERV_AD_FICHA ");
+        str.AppendLine(" inner join OS_ADC ");
+        str.AppendLine(" on SERV_AD_FICHA.OS_ADC_NO = OS_ADC.ID_OS_ADC ");
+        str.AppendLine(" left join FICHAS on SERV_AD_FICHA.FICHA_NO = FICHAS.ID_FICHA ");
+        str.AppendLine(" left join SERV_ADC on SERV_AD_FICHA.SERV_AD_NO = SERV_ADC.ID_SERV_ADC ");
+        str.AppendLine(" left join FORMA_DE_PAGAMENTO on SERV_AD_FICHA.FORMA_PAG_NO = FORMA_DE_PAGAMENTO.ID_FORMA_DE_PAGAMENTO ");
+        str.AppendLine(" left join HOTEIS on FICHAS.HOTEL_FICHA = HOTEIS.ID_HOTEL ");
+        str.AppendLine(" left join VENDEDORES on SERV_AD_FICHA.VENDEDOR_NO = VENDEDORES.ID_VENDEDOR ");
+        str.AppendLine(" where ");
+        str.AppendLine(" ID_SERV_AD_FICHA  = @ID_SERV_AD_FICHA ");
+
+        cmd.CommandText = str.ToString();
+
+        SqlParameter parameter = new SqlParameter();
+        parameter.ParameterName = "@ID_SERV_AD_FICHA";
+        parameter.Value = intServAdNo;
+        cmd.Parameters.Add(parameter);
+
+        conn.Open();
+
+        SqlDataReader reader = cmd.ExecuteReader();
+
+        while (reader.Read())
+        {
+            FichasListagem FichaListagem = new FichasListagem();
+            FichaListagem.ID_SERV_AD_FICHA = Convert.ToInt64(reader["ID_SERV_AD_FICHA"]);
+            FichaListagem.FICHA_NO = Convert.ToInt64(reader["FICHA_NO"]);
+            FichaListagem.PASSEIO_NO = Convert.ToInt64(reader["SERV_AD_NO"]);
+            FichaListagem.HORA = reader["HORA"].ToString();
+            FichaListagem.HOTEL = reader["HOTEL"].ToString();
+            FichaListagem.APTO = reader["APARTAMENTO_FICHA"].ToString();
+            FichaListagem.PASSEIO = reader["PASSEIO_SERV_ADC"].ToString();
+            FichaListagem.PAX = reader["NOME_PASSAGEIRO"].ToString();
+            FichaListagem.FORMA_PAG = reader["FORMA_DE_PAGAMENTO"].ToString();
+            FichaListagem.VENDEDOR = reader["NOME_VENDEDOR"].ToString();
             xList.Add(FichaListagem);
         }
 

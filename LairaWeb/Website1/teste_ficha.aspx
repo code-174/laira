@@ -28,7 +28,7 @@
                                     <Columns>
                                         <asp:BoundField DataField="SERV_IN" HeaderText="Serviços Inclusos" />
                                         <asp:BoundField DataField="PRECO" HeaderText="Valor" />
-                                        <asp:BoundField DataField="FORMA_PAG_NO" HeaderText="Forma Pag." />
+                                        <asp:BoundField DataField="FORMA_PAG" HeaderText="Forma Pag." />
                                     </Columns>
                                 </asp:GridView>
                             </td>

@@ -48,6 +48,12 @@
                         </div>
                     </div>
                 </div>
+                <div class="btn-group btn-group-justified">
+                    <asp:LinkButton ID="lnkCadastrarFicha" runat="server"  OnClick="lnkCadastrarFicha_Click"
+                        class="btn btn-info">Adicionar 
+                        Ficha</asp:LinkButton>
+                    <asp:LinkButton ID="lnkVoltar" runat="server" OnClick="lnkVoltar_Click" class="btn btn-warning">Voltar</asp:LinkButton>
+                </div>
             </div>
             <div id="divPrint">
                 <%--<asp:GridView ID="grvData" runat="server" class="table table-hover" 
@@ -55,85 +61,88 @@
                 </asp:GridView>--%>
                 <asp:GridView ID="GridView1" class="table table-bordered" runat="server" AutoGenerateColumns="false"
                     OnRowDataBound="GridView1_RowDataBound" GridLines="none" BorderWidth="0" ShowHeader="false">
-                    <Columns>                    
-                    <asp:TemplateField>
-                    <ItemTemplate>                    
-                        <tr class="bg-primary">
-                            <th>
-                                Ficha 
-                            </th>
-                            <th>
-                                Excursão
-                            </th>
-                            <th>
-                                Data
-                            </th>
-                            <th>
-                                Hora
-                            </th>
-                            <th>
-                                Aer
-                            </th>
-                            <th>
-                                Vôo
-                            </th>
-                            <th>
-                                Pax
-                            </th>
-                            <th>
-                                Hotel
-                            </th>
-                            <th>
-                                Apto.
-                            </th>
-                            <th>
-                                Realizado Por
-                            </th>
-                            <th>
-                                Nr. OS
-                            </th>
-                        </tr>
-                        <tr>
-                            <td>
-                                <%#Eval("FICHA_NO")%>
-                            </td>
-                            <td>
-                                <%#Eval("COD_EXCURSAO")%>
-                            </td>
-                            <td>
-                                <%#Eval("DATA")%>
-                            </td>
-                            <td>
-                                <%#Eval("HORA")%>
-                            </td>
-                            <td>
-                                <%#Eval("AEROPORTO")%>
-                            </td>
-                            <td>
-                                <%#Eval("VOO")%>
-                            </td>
-                            <td>
-                                <%#Eval("PAX")%>
-                            </td>
-                            <td>
-                                <%#Eval("HOTEL")%>
-                            </td>
-                            <td>
-                                <%#Eval("APTO")%>
-                            </td>                            
-                            <td>
-                                <%#Eval("PRESTADOR")%>
-                            </td>
-                            <td>
-                                <%#Eval("OS_NO")%>
-                            </td>
-                        </tr>
-                       
-                    </ItemTemplate>
-                </asp:TemplateField>
-
-
-
+                    <Columns>
+                        <asp:TemplateField>
+                            <ItemTemplate>
+                                <tr class="bg-primary">
+                                    <th>
+                                        Ficha
+                                    </th>
+                                    <th>
+                                        Excursão
+                                    </th>
+                                    <th>
+                                        Data
+                                    </th>
+                                    <th>
+                                        Hora
+                                    </th>
+                                    <th>
+                                        Aer
+                                    </th>
+                                    <th>
+                                        Vôo
+                                    </th>
+                                    <th>
+                                        Pax
+                                    </th>
+                                    <th>
+                                        Hotel
+                                    </th>
+                                    <th>
+                                        Apto.
+                                    </th>
+                                    <th>
+                                        Realizado Por
+                                    </th>
+                                    <th>
+                                        Nr. OS
+                                    </th>
+                                    <th>
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <%#Eval("FICHA_NO")%>
+                                    </td>
+                                    <td>
+                                        <%#Eval("COD_EXCURSAO")%>
+                                    </td>
+                                    <td>
+                                        <%#Eval("DATA")%>
+                                    </td>
+                                    <td>
+                                        <%#Eval("HORA")%>
+                                    </td>
+                                    <td>
+                                        <%#Eval("AEROPORTO")%>
+                                    </td>
+                                    <td>
+                                        <%#Eval("VOO")%>
+                                    </td>
+                                    <td>
+                                        <%#Eval("PAX")%>
+                                    </td>
+                                    <td>
+                                        <%#Eval("HOTEL")%>
+                                    </td>
+                                    <td>
+                                        <%#Eval("APTO")%>
+                                    </td>
+                                    <td>
+                                        <%#Eval("PRESTADOR")%>
+                                    </td>
+                                    <td>
+                                        <%#Eval("OS_NO")%>
+                                    </td>
+                                    <td>
+                                        <asp:LinkButton ID="lnkExcluirFicha" runat="server" class="btn btn-danger" OnClick="lnkExcluirFicha_Click">
+                                <span class="glyphicon glyphicon-remove"></span>
+                                        </asp:LinkButton>
+                                    </td>
+                                </tr>
+                            </ItemTemplate>
+                        </asp:TemplateField>
                         <%--<asp:BoundField DataField="ficha_no" HeaderText="ficha" />
                         <asp:BoundField DataField="cod_excursao" HeaderText="cód. excursão" />
                         <asp:BoundField DataField="data" HeaderText="data" />
@@ -153,7 +162,7 @@
                                             <Columns>
                                                 <asp:BoundField DataField="SERV_IN" HeaderText="Serviços Inclusos" />
                                                 <asp:BoundField DataField="PRECO" HeaderText="Valor" />
-                                                <asp:BoundField DataField="FORMA_PAG_NO" HeaderText="Forma Pag." />
+                                                <asp:BoundField DataField="FORMA_PAG" HeaderText="Forma Pag." />
                                             </Columns>
                                         </asp:GridView>
                                     </td>
@@ -181,11 +190,6 @@
                         </asp:TemplateField>
                     </Columns>
                 </asp:GridView>
-            </div>
-            <div class="btn-group btn-group-justified">
-                <asp:LinkButton ID="lnkImprimir" runat="server" OnClientClick="javascript:CallPrint('divPrint');"
-                    class="btn btn-info">Imprimir</asp:LinkButton>
-                <asp:LinkButton ID="lnkVoltar" runat="server" OnClick="lnkVoltar_Click" class="btn btn-warning">Voltar</asp:LinkButton>
             </div>
             </form>
         </fieldset>

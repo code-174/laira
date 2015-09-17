@@ -71,7 +71,7 @@ public class OrdemServAdc
         //DateTime DataOS = Convert.ToDateTime(strData);
 
 
-        str.AppendLine(" select ID_OS_ADC, DATA, NOME_PRESTADOR AS FEITO_POR, OBS ");
+        str.AppendLine(" select ID_OS_ADC, DATA_OS_ADC, NOME_PRESTADOR AS FEITO_POR, OBS ");
             //str.AppendLine(" MOTORISTA_NO, GUIA_NO ");
             //str.AppendLine(" dbo.getpax(FICHAS.ID_FICHA) AS NOME_PASSAGEIRO, ");
             //str.AppendLine(" ISNULL(NOME_HOTEL, '---') AS HOTEL, APARTAMENTO_FICHA ");
@@ -80,7 +80,7 @@ public class OrdemServAdc
             //str.AppendLine(" LEFT JOIN HOTEIS ON FICHAS.HOTEL_FICHA = HOTEIS.ID_HOTEL ");
             //str.AppendLine(" LEFT JOIN HOTEIS ON FICHAS.HOTEL_FICHA = HOTEIS.ID_HOTEL ");
             str.AppendLine(" WHERE ");
-            str.AppendLine(" DATA  = @DATA ");
+            str.AppendLine(" DATA_OS_ADC  = @DATA ");
             //str.AppendLine(" AND OS_CHEGADA IS NULL ");
 
             cmd.CommandText = str.ToString();
@@ -98,7 +98,7 @@ public class OrdemServAdc
             {
                 OrdemServAdc OS = new OrdemServAdc();
                 OS.ID_OS_ADC = Convert.ToInt64(reader["ID_OS_ADC"]);
-                OS.DATA = reader["DATA"].ToString();
+                OS.DATA = reader["DATA_OS_ADC"].ToString();
                 OS.FEITO_POR = reader["FEITO_POR"].ToString();
                 OS.OBS_OS = reader["OBS"].ToString();
                 //OS.MOTORISTA = reader["SIGLA_VOO"].ToString();
@@ -108,5 +108,103 @@ public class OrdemServAdc
 
             return xList;
         }
+
+    public static List<OrdemServAdc> FiltroOSAdc(string DataIni, string DataFin, string Passeio, string Prestador, string Vendedor)
+    {
+        List<OrdemServAdc> xList = new List<OrdemServAdc>();
+
+        SqlCommand cmd = new SqlCommand();
+        SqlConnection conn = new SqlConnection();
+        conn.ConnectionString = ConfigurationManager.ConnectionStrings["LairaWebDB"].ConnectionString;
+        cmd.Connection = conn;
+        StringBuilder str = new StringBuilder();
+
+        //DateTime DataOS = new DateTime(strData);
+        //DateTime DataOS = Convert.ToDateTime(strData);
+
+
+        str.AppendLine(" select ID_OS_ADC, DATA_OS_ADC, NOME_PRESTADOR AS FEITO_POR, OBS ");
+        //str.AppendLine(" MOTORISTA_NO, GUIA_NO ");
+        //str.AppendLine(" dbo.getpax(FICHAS.ID_FICHA) AS NOME_PASSAGEIRO, ");
+        //str.AppendLine(" ISNULL(NOME_HOTEL, '---') AS HOTEL, APARTAMENTO_FICHA ");
+        str.AppendLine(" from OS_ADC ");
+        str.AppendLine(" inner join SERV_AD_FICHA ");
+        str.AppendLine(" on OS_ADC.ID_OS_ADC = SERV_AD_FICHA.OS_ADC_NO ");
+
+        str.AppendLine(" LEFT JOIN PRESTADORES ON OS_ADC.FEITO_POR_NO = PRESTADORES.ID_PRESTADOR ");
+        //str.AppendLine(" LEFT JOIN HOTEIS ON FICHAS.HOTEL_FICHA = HOTEIS.ID_HOTEL ");
+        //str.AppendLine(" LEFT JOIN HOTEIS ON FICHAS.HOTEL_FICHA = HOTEIS.ID_HOTEL ");
+        str.AppendLine(" WHERE ");
+        str.AppendLine(" DATA_OS_ADC between @DATA_INI and @DATA_FIN ");
+        //str.AppendLine(" AND OS_CHEGADA IS NULL ");
+
+        if (Passeio != "0")
+        {
+            str.AppendLine(" AND SERV_AD_NO = @PASSEIO ");
+        }
+        if (Prestador != "0")
+        {
+            str.AppendLine(" AND FEITO_POR_NO = @PRESTADOR ");
+        }
+        if (Vendedor != "0")
+        {
+            str.AppendLine(" AND VENDEDOR_NO = @VENDEDOR ");
+        }
+
+
+        cmd.CommandText = str.ToString();
+
+        SqlParameter parameter = new SqlParameter();
+        parameter.ParameterName = "@DATA_INI";
+        parameter.Value = DataIni;
+        cmd.Parameters.Add(parameter);
+
+        SqlParameter parameter2 = new SqlParameter();
+        parameter2.ParameterName = "@DATA_FIN";
+        parameter2.Value = DataFin;
+        cmd.Parameters.Add(parameter2);
+
+        if (Passeio != "0")
+        {
+            SqlParameter parameter3 = new SqlParameter();
+            parameter3.ParameterName = "@PASSEIO";
+            parameter3.Value = Passeio;
+            cmd.Parameters.Add(parameter3);
+        }
+
+        if (Prestador != "0")
+        {
+            SqlParameter parameter4 = new SqlParameter();
+            parameter4.ParameterName = "@PRESTADOR";
+            parameter4.Value = Prestador;
+            cmd.Parameters.Add(parameter4);
+        }
+
+        if (Vendedor != "0")
+        {
+            SqlParameter parameter5 = new SqlParameter();
+            parameter5.ParameterName = "@VENDEDOR";
+            parameter5.Value = Vendedor;
+            cmd.Parameters.Add(parameter5);
+        }
+
+        conn.Open();
+
+        SqlDataReader reader = cmd.ExecuteReader();
+
+        while (reader.Read())
+        {
+            OrdemServAdc OS = new OrdemServAdc();
+            OS.ID_OS_ADC = Convert.ToInt64(reader["ID_OS_ADC"]);
+            OS.DATA = reader["DATA_OS_ADC"].ToString();
+            OS.FEITO_POR = reader["FEITO_POR"].ToString();
+            OS.OBS_OS = reader["OBS"].ToString();
+            //OS.MOTORISTA = reader["SIGLA_VOO"].ToString();
+            //OS.GUIA = reader["NOME_PASSAGEIRO"].ToString();               
+            xList.Add(OS);
+        }
+
+        return xList;
+    }
 
 }

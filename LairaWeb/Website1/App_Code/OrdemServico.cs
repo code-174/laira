@@ -70,89 +70,45 @@ public class OrdemServico
         //DateTime DataOS = new DateTime(strData);
         DateTime DataOS = Convert.ToDateTime(strData);
 
-
+        str.AppendLine(" select ID_ORDEM_SERV, TIPO_SERVICO, DATA, NOME_PRESTADOR AS FEITO_POR, OBS_ORDEM_SERV ");
+        //str.AppendLine(" MOTORISTA_NO, GUIA_NO ");
+        str.AppendLine(" from ORDEM_SERV ");
+        str.AppendLine(" LEFT JOIN PRESTADORES ON ORDEM_SERV.FEITO_POR_NO = PRESTADORES.ID_PRESTADOR ");
+        str.AppendLine(" WHERE ");
+        str.AppendLine(" DATA  = @DATA ");
         if (strTipo == "C")
         {
-            str.AppendLine(" select ID_ORDEM_SERV, TIPO_SERVICO, DATA, NOME_PRESTADOR AS FEITO_POR, OBS_ORDEM_SERV ");
-            //str.AppendLine(" MOTORISTA_NO, GUIA_NO ");
-            //str.AppendLine(" dbo.getpax(FICHAS.ID_FICHA) AS NOME_PASSAGEIRO, ");
-            //str.AppendLine(" ISNULL(NOME_HOTEL, '---') AS HOTEL, APARTAMENTO_FICHA ");
-            str.AppendLine(" from ORDEM_SERV ");
-            str.AppendLine(" LEFT JOIN PRESTADORES ON ORDEM_SERV.FEITO_POR_NO = PRESTADORES.ID_PRESTADOR ");
-            //str.AppendLine(" LEFT JOIN HOTEIS ON FICHAS.HOTEL_FICHA = HOTEIS.ID_HOTEL ");
-            //str.AppendLine(" LEFT JOIN HOTEIS ON FICHAS.HOTEL_FICHA = HOTEIS.ID_HOTEL ");
-            str.AppendLine(" WHERE ");
-            str.AppendLine(" DATA  = @DATA ");
-            //str.AppendLine(" AND OS_CHEGADA IS NULL ");
-
-            cmd.CommandText = str.ToString();
-
-            SqlParameter parameter = new SqlParameter();
-            parameter.ParameterName = "@DATA";
-            parameter.Value = DataOS;
-            cmd.Parameters.Add(parameter);
-
-            conn.Open();
-
-            SqlDataReader reader = cmd.ExecuteReader();
-
-            while (reader.Read())
-            {
-                OrdemServico OS = new OrdemServico();
-                OS.ID_OS = Convert.ToInt64(reader["ID_ORDEM_SERV"]);
-                OS.TIPO_OS = reader["TIPO_SERVICO"].ToString();
-                OS.DATA = reader["DATA"].ToString();
-                OS.FEITO_POR = reader["FEITO_POR"].ToString();
-                OS.OBS_OS = reader["OBS_ORDEM_SERV"].ToString();
-                //OS.MOTORISTA = reader["SIGLA_VOO"].ToString();
-                //OS.GUIA = reader["NOME_PASSAGEIRO"].ToString();               
-                xList.Add(OS);
-            }
-
-            return xList;
+            str.AppendLine(" AND TIPO_SERVICO = 'C' ");
         }
         else
         {
-            str.AppendLine(" select ID_ORDEM_SERV, TIPO_SERVICO, DATA, NOME_PRESTADOR AS FEITO_POR, OBS_ORDEM_SERV ");
-            //str.AppendLine(" MOTORISTA_NO, GUIA_NO ");
-            //str.AppendLine(" dbo.getpax(FICHAS.ID_FICHA) AS NOME_PASSAGEIRO, ");
-            //str.AppendLine(" ISNULL(NOME_HOTEL, '---') AS HOTEL, APARTAMENTO_FICHA ");
-            str.AppendLine(" from ORDEM_SERV ");
-            str.AppendLine(" LEFT JOIN PRESTADORES ON ORDEM_SERV.FEITO_POR_NO = PRESTADORES.ID_PRESTADOR ");
-            //str.AppendLine(" LEFT JOIN HOTEIS ON FICHAS.HOTEL_FICHA = HOTEIS.ID_HOTEL ");
-            //str.AppendLine(" LEFT JOIN HOTEIS ON FICHAS.HOTEL_FICHA = HOTEIS.ID_HOTEL ");
-            str.AppendLine(" WHERE ");
-            str.AppendLine(" DATA  = @DATA ");
-            //str.AppendLine(" AND OS_SAIDA IS NULL ");
-            //str.AppendLine(" group by ID_FICHA ");
-
-            cmd.CommandText = str.ToString();
-
-            SqlParameter parameter = new SqlParameter();
-            parameter.ParameterName = "@DATA";
-            parameter.Value = DataOS;
-            cmd.Parameters.Add(parameter);
-
-            conn.Open();
-
-            SqlDataReader reader = cmd.ExecuteReader();
-
-            while (reader.Read())
-            {
-                OrdemServico OS = new OrdemServico();
-                OS.ID_OS = Convert.ToInt64(reader["ID_ORDEM_SERV"]);
-                OS.TIPO_OS = reader["TIPO_SERVICO"].ToString();
-                OS.DATA = reader["DATA"].ToString();
-                OS.FEITO_POR = reader["FEITO_POR"].ToString();
-                OS.OBS_OS = reader["OBS_ORDEM_SERV"].ToString();
-                //OS.MOTORISTA = reader["SIGLA_VOO"].ToString();
-                //OS.GUIA = reader["NOME_PASSAGEIRO"].ToString();               
-                xList.Add(OS);
-            }
-
-            return xList;
+            str.AppendLine(" AND TIPO_SERVICO = 'S' ");
         }
 
+        cmd.CommandText = str.ToString();
+
+        SqlParameter parameter = new SqlParameter();
+        parameter.ParameterName = "@DATA";
+        parameter.Value = DataOS;
+        cmd.Parameters.Add(parameter);
+
+        conn.Open();
+
+        SqlDataReader reader = cmd.ExecuteReader();
+
+        while (reader.Read())
+        {
+            OrdemServico OS = new OrdemServico();
+            OS.ID_OS = Convert.ToInt64(reader["ID_ORDEM_SERV"]);
+            OS.TIPO_OS = reader["TIPO_SERVICO"].ToString();
+            OS.DATA = reader["DATA"].ToString();
+            OS.FEITO_POR = reader["FEITO_POR"].ToString();
+            OS.OBS_OS = reader["OBS_ORDEM_SERV"].ToString();
+            //OS.MOTORISTA = reader["SIGLA_VOO"].ToString();
+            xList.Add(OS);
+        }
+
+        return xList;
     }
 
     public static List<OrdemServico> GetOSByNo(string OS_NO)
@@ -199,6 +155,79 @@ public class OrdemServico
             OS.OBS_OS = reader["OBS_ORDEM_SERV"].ToString();
             //OS.MOTORISTA = reader["SIGLA_VOO"].ToString();
             //OS.GUIA = reader["NOME_PASSAGEIRO"].ToString();               
+            xList.Add(OS);
+        }
+
+        return xList;
+    }
+
+    public static List<OrdemServico> FiltroOS(string DataIni, string DataFin, string Tipo, string FeitoPor)
+    {
+        List<OrdemServico> xList = new List<OrdemServico>();
+
+        SqlCommand cmd = new SqlCommand();
+        SqlConnection conn = new SqlConnection();
+        conn.ConnectionString = ConfigurationManager.ConnectionStrings["LairaWebDB"].ConnectionString;
+        cmd.Connection = conn;
+        StringBuilder str = new StringBuilder();
+
+        DateTime DataI = Convert.ToDateTime(DataIni);
+        DateTime DataF = Convert.ToDateTime(DataFin);
+
+        str.AppendLine(" select ID_ORDEM_SERV, TIPO_SERVICO, DATA, NOME_PRESTADOR AS FEITO_POR, OBS_ORDEM_SERV ");
+        //str.AppendLine(" MOTORISTA_NO, GUIA_NO ");
+        str.AppendLine(" from ORDEM_SERV ");
+        str.AppendLine(" LEFT JOIN PRESTADORES ON ORDEM_SERV.FEITO_POR_NO = PRESTADORES.ID_PRESTADOR ");
+        str.AppendLine(" WHERE ");
+        str.AppendLine(" DATA between @DATA_INI and @DATA_FIN ");        
+
+        if (Tipo == "C")
+        {
+            str.AppendLine(" AND TIPO_SERVICO = 'C' ");
+        }
+        else
+        {
+            str.AppendLine(" AND TIPO_SERVICO = 'S' ");
+        }
+
+        if (FeitoPor != "0")
+        {
+            str.AppendLine(" AND FEITO_POR_NO = @FEITO_POR ");
+        }
+
+        cmd.CommandText = str.ToString();
+
+        SqlParameter parameter = new SqlParameter();
+        parameter.ParameterName = "@DATA_INI";
+        parameter.Value = DataI;
+        cmd.Parameters.Add(parameter);
+
+        SqlParameter parameter2 = new SqlParameter();
+        parameter2.ParameterName = "@DATA_FIN";
+        parameter2.Value = DataF;
+        cmd.Parameters.Add(parameter2);
+
+        if (FeitoPor != "0")
+        {
+            SqlParameter parameter3 = new SqlParameter();
+            parameter3.ParameterName = "@FEITO_POR";
+            parameter3.Value = FeitoPor;
+            cmd.Parameters.Add(parameter3);
+        }
+
+        conn.Open();
+
+        SqlDataReader reader = cmd.ExecuteReader();
+
+        while (reader.Read())
+        {
+            OrdemServico OS = new OrdemServico();
+            OS.ID_OS = Convert.ToInt64(reader["ID_ORDEM_SERV"]);
+            OS.TIPO_OS = reader["TIPO_SERVICO"].ToString();
+            OS.DATA = reader["DATA"].ToString();
+            OS.FEITO_POR = reader["FEITO_POR"].ToString();
+            OS.OBS_OS = reader["OBS_ORDEM_SERV"].ToString();
+            //OS.MOTORISTA = reader["SIGLA_VOO"].ToString();
             xList.Add(OS);
         }
 

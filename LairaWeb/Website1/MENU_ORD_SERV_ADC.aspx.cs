@@ -36,7 +36,7 @@ public partial class MENU_ORD_SERV_ADC : System.Web.UI.Page
             }
             else
             {
-                Response.Redirect("RELATORIO_OS_ADC.aspx?&Data=" + txtData.Text);
+                Response.Redirect("RELATORIO_OS_ADC.aspx?&Data=" + txtData.Text + "&ReportType=DateRpt");
             }
             
         }

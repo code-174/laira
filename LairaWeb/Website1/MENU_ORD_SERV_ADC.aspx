@@ -16,7 +16,7 @@
                     <div class="form-group">
                         <label for="ddlSelecione" class="control-label col-md-3">
                             Selecione</label>
-                        <div class="col-md-4">
+                        <div class="col-md-5">
                             <asp:DropDownList ID="ddlSelecione" runat="server" class="form-control">
                                 <asp:ListItem Value="G">Gerar</asp:ListItem>
                                 <asp:ListItem Value="R">Relatório</asp:ListItem>
@@ -26,7 +26,7 @@
                     <div class="form-group">
                         <label for="txtData" class="control-label col-md-3">
                             Data</label>
-                        <div class="col-md-4">
+                        <div class="col-md-5">
                             <asp:TextBox ID="txtData" runat="server" class="form-control"></asp:TextBox>
                         </div>                        
                     </div>

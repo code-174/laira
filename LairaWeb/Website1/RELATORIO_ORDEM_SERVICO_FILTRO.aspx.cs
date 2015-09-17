@@ -5,19 +5,22 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-public partial class LISTAR_ORDEM_SERV : System.Web.UI.Page
+public partial class RELATORIO_ORDEM_SERVICO_FILTRO : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!IsPostBack)
         {
+            string DataIni = Request.QueryString["DataIni"];
+            string DataFin = Request.QueryString["DataFin"];
             string Tipo = Request.QueryString["Tipo"];
-            string Data = Request.QueryString["Data"];
+            string FeitoPor = Request.QueryString["FeitoPor"];
+
             LoadCombos();
 
-            if (Tipo.Trim().ToString() != "")
+            if (DataIni.Trim().ToString() != "")
             {
-                GridView1.DataSource = OrdemServico.GetOS(Tipo, Data);
+                GridView1.DataSource = OrdemServico.FiltroOS(DataIni, DataFin, Tipo, FeitoPor);
                 GridView1.DataBind();
 
                 //switch (Tipo)
@@ -66,16 +69,17 @@ public partial class LISTAR_ORDEM_SERV : System.Web.UI.Page
     {
         if (VerificarCampos())
         {
-            string strDataIni = txtDataInicio.Text.Trim();
+            //string strDataIni = txtDataInicio.Text.Trim();
             if (txtDataFim.Text == "")
             {
-                string strDataFin = strDataIni;
-                Response.Redirect("RELATORIO_ORDEM_SERVICO_FILTRO.aspx?DataIni=" + strDataIni + "&DataFin=" + strDataFin + "&Tipo=" + ddlTipoOS.SelectedValue + "&FeitoPor=" + ddlPrestador.SelectedValue);
+                txtDataFim.Text = txtDataInicio.Text;
+                //string strDataFin = strDataIni;
+                Response.Redirect("RELATORIO_ORDEM_SERVICO_FILTRO.aspx?DataIni=" + txtDataInicio.Text + "&DataFin=" + txtDataFim.Text + "&Tipo=" + ddlTipoOS.SelectedValue + "&FeitoPor=" + ddlPrestador.SelectedValue);
             }
             else
             {
-                string strDataFin = txtDataFim.Text.Trim();
-                Response.Redirect("RELATORIO_ORDEM_SERVICO_FILTRO.aspx?DataIni=" + strDataIni + "&DataFin=" + strDataFin + "&Tipo=" + ddlTipoOS.SelectedValue + "&FeitoPor=" + ddlPrestador.SelectedValue);
+                //string strDataFin = txtDataFim.Text.Trim();
+                Response.Redirect("RELATORIO_ORDEM_SERVICO_FILTRO.aspx?DataIni=" + txtDataInicio.Text + "&DataFin=" + txtDataFim.Text + "&Tipo=" + ddlTipoOS.SelectedValue + "&FeitoPor=" + ddlPrestador.SelectedValue);
             }
         }
     }
@@ -85,6 +89,6 @@ public partial class LISTAR_ORDEM_SERV : System.Web.UI.Page
         if (txtOSNo.Text != "")
         {
             Response.Redirect("RELATORIO_ORDEM_SERVICO.aspx?No=" + txtOSNo.Text);
-        }    
+        }
     }
 }

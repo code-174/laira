@@ -1,10 +1,9 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true"
-    CodeFile="RELATORIO_ORDEM_SERVICO.aspx.cs" Inherits="RELATORIO_ORDEM_SERVICO" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true" CodeFile="RELATORIO_ORDEM_SERVICO_FILTRO.aspx.cs" Inherits="RELATORIO_ORDEM_SERVICO_FILTRO" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="Server">
+<asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" Runat="Server">
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="Server">
-    <div class="container-fluid">
+<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" Runat="Server">
+<div class="container-fluid">
         <fieldset>
             <legend id="Titulo" runat="server" style="font-weight: bold">Relatório de Ordens de Serviços</legend>
             <form id="Form2" class="form form-horizontal col-md-6" runat="server">
@@ -197,3 +196,4 @@
     </div>
     <!-- /.container-fluid -->
 </asp:Content>
+

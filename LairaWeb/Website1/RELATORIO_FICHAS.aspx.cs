@@ -42,7 +42,7 @@ public partial class RELATORIO_FICHAS : System.Web.UI.Page
     {
         if (e.Row.RowType == DataControlRowType.Header)
         {
-            e.Row.Cells[8].Visible = false;
+            e.Row.Cells[10].Visible = false;
             //e.Row.Cells[9].Visible = false;
         }
     }
@@ -50,6 +50,10 @@ public partial class RELATORIO_FICHAS : System.Web.UI.Page
     protected void lnkVoltar_Click(object sender, EventArgs e)
     {
         Response.Redirect("MENU_FICHAS.aspx");
+    }
+    protected void lnkSelectAll_Click(object sender, EventArgs e)
+    {
+        // TO DO
     }
 
     protected void lnkProcessar_Click(object sender, EventArgs e)
@@ -61,7 +65,19 @@ public partial class RELATORIO_FICHAS : System.Web.UI.Page
             GridView1.DataSource = FichasListagem.GetFichasListagem(strTipo, strCriterio);
             GridView1.DataBind();
         }
-        else
+        else if (ddlSelecione.SelectedValue == "F")
+        {
+            string Str = txtCriterio.Text.Trim();
+            double Num;
+            bool isNum = double.TryParse(Str, out Num);
+            if (isNum)
+            {
+                string strSelected = ddlSelecione.SelectedValue;
+                GridView1.DataSource = FichasListagem.FiltroFichasListagem(strSelected, strTipo, strCriterio);
+                GridView1.DataBind();
+            }
+        }
+        else if (ddlSelecione.SelectedValue == "E")
         {
             string strSelected = ddlSelecione.SelectedValue;
             GridView1.DataSource = FichasListagem.FiltroFichasListagem(strSelected, strTipo, strCriterio);
@@ -70,10 +86,10 @@ public partial class RELATORIO_FICHAS : System.Web.UI.Page
         switch (strTipo)
         {
             case "C":
-                Titulo.InnerText = "Relatório de Fichas de Chegada";
+                Titulo.InnerText = "Listagem de Fichas de Chegada";
                 break;
             case "S":
-                Titulo.InnerText = "Relatório de Fichas de Saída";
+                Titulo.InnerText = "Listagem de Fichas de Saída";
                 break;
 
             default:

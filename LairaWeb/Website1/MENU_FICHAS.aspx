@@ -43,7 +43,7 @@
                         <div class="form-group">
                             <label for="txtData" class="control-label col-md-3">
                                 Data</label>
-                            <div class="col-md-4">
+                            <div class="col-md-5">
                                 <asp:TextBox ID="txtData" runat="server" class="form-control"></asp:TextBox>
                             </div>
                         </div>
