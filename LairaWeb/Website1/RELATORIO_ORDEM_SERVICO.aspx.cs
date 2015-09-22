@@ -11,32 +11,36 @@ public partial class RELATORIO_ORDEM_SERVICO : System.Web.UI.Page
     {
         if (!IsPostBack)
         {
-            string OS_NO = Request.QueryString["No"];
             LoadCombos();
 
-            if (OS_NO.Trim().ToString() != "")
+            string ReportType = Request.QueryString["ReportType"];
+
+            if (ReportType == "DateRpt")
             {
-                GridView1.DataSource = OrdemServico.GetOSByNo(OS_NO);
+                string strTipo = Request.QueryString["Tipo"];
+                string strData = Request.QueryString["Data"];
+
+                GridView1.DataSource = OrdemServico.GetOS(strTipo, strData);
                 GridView1.DataBind();
 
-                //switch (Tipo)
-                //{
-                //    case "C":
-                //        Titulo.InnerText = "Listagem de Fichas de Chegada";
-                //        break;
-                //    case "S":
-                //        Titulo.InnerText = "Listagem de Fichas de Saída";
-                //        break;
+                txtDataInicio.Text = strData;
+                ddlTipoOS.SelectedValue = strTipo;
 
-                //    default:
-                //        break;
-                //}
+            }
+            else if (ReportType == "NumberRpt")
+            {
+                string OS_NO = Request.QueryString["No"];
+                if (OS_NO.Trim().ToString() != "")
+                {
+                    GridView1.DataSource = OrdemServico.GetOSByNo(OS_NO);
+                    GridView1.DataBind();
 
-                //ddlTipo.SelectedValue = Tipo;
-
+                    txtOSNo.Text = OS_NO;
+                }
             }
         }
     }
+
 
     void LoadCombos()
     {
@@ -49,45 +53,46 @@ public partial class RELATORIO_ORDEM_SERVICO : System.Web.UI.Page
         ddlPrestador.DataBind();
     }
 
-    bool VerificarCampos()
-    {
-        if (txtDataInicio.Text.Trim() == "")
-        {
-            return false;
-        }
-        else
-        {
-            return true;
-        }
-
-        
-    }
-
     protected void lnkProcessar_Click(object sender, EventArgs e)
     {
-        if (VerificarCampos())
+        if (txtDataInicio.Text.Trim() != "")
         {
             string strDataIni = txtDataInicio.Text.Trim();
+            string strTipo = ddlTipoOS.SelectedValue;
+            string strFeitoPor = ddlPrestador.SelectedValue;
+            string strDataFin = "";
+
             if (txtDataFim.Text == "")
             {
-                string strDataFin = strDataIni;
-                Response.Redirect("RELATORIO_ORDEM_SERVICO_FILTRO.aspx?DataIni=" + strDataIni + "&DataFin=" + strDataFin + "&Tipo=" + ddlTipoOS.SelectedValue + "&FeitoPor=" + ddlPrestador.SelectedValue);
+                strDataFin = strDataIni;
             }
             else
             {
-                string strDataFin = txtDataFim.Text.Trim();
-                Response.Redirect("RELATORIO_ORDEM_SERVICO_FILTRO.aspx?DataIni=" + strDataIni + "&DataFin=" + strDataFin + "&Tipo=" + ddlTipoOS.SelectedValue + "&FeitoPor=" + ddlPrestador.SelectedValue);
+                strDataFin = txtDataFim.Text.Trim();
             }
+
+            GridView1.DataSource = OrdemServico.FiltroOS(strDataIni, strDataFin, strTipo, strFeitoPor);
+            GridView1.DataBind();
         }
-
-
     }
 
     protected void lnkLocalizar_Click(object sender, EventArgs e)
     {
         if (txtOSNo.Text != "")
         {
-            Response.Redirect("RELATORIO_ORDEM_SERVICO.aspx?No=" + txtOSNo.Text);
+            string OS_NO = txtOSNo.Text.Trim();
+            double Num;
+            bool isNum = double.TryParse(OS_NO, out Num);
+            if (isNum)
+            {
+                GridView1.DataSource = OrdemServico.GetOSByNo(OS_NO);
+                GridView1.DataBind();
+            }
+            else
+            {
+                // mesage box "you gotta put only numbers"
+                // no records found asp gridview
+            }
         }
     }
 }

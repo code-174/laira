@@ -18,18 +18,35 @@ public partial class GERAR_COMUNICADO_TRANSFER : System.Web.UI.Page
         }
     }
 
-        private void LoadGrid(string DataOS)
+    private void LoadGrid(string strCriterio, string strTipo)
     {
-        GridView1.DataSource = FichasListagem.GetFichasTransferOut(DataOS);
+        GridView1.DataSource = FichasListagem.GetFichasTransferOut(strCriterio, strTipo);
         GridView1.DataBind();
     }
 
-   
+
     protected void lnkProcessar_Click(object sender, EventArgs e)
     {
-       string DataOS;
-       DataOS = txtCriterio.Text;
-       LoadGrid(DataOS);
+        if (txtCriterio.Text != "")
+        {
+            string strTipo = ddlSelecione.SelectedValue;
+            string strCriterio = txtCriterio.Text.Trim();
+            if (strTipo == "D")
+            {
+                LoadGrid(strCriterio, strTipo);
+            }
+            else
+            {
+                double Num;
+                bool isNum = double.TryParse(strCriterio, out Num);
+                if (isNum)
+                {
+                    LoadGrid(strCriterio, strTipo);
+                }
+            }            
+        }
+
+
     }
     protected void lnkSelecionarTodas_Click(object sender, EventArgs e)
     {

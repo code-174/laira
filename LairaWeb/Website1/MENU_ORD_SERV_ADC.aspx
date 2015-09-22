@@ -28,7 +28,7 @@
                             Data</label>
                         <div class="col-md-5">
                             <asp:TextBox ID="txtData" runat="server" class="form-control"></asp:TextBox>
-                        </div>                        
+                        </div>
                     </div>
                     <div class="button-group col-md-offset-3">
                         <asp:LinkButton ID="lnkProcessar" class="btn btn-success" runat="server" OnClick="lnkProcessar_Click"><span class="glyphicon glyphicon-ok">
@@ -46,7 +46,7 @@
                     <div class="form-group">
                         <label for="txtDataInicio" class="control-label col-md-3">
                             De</label>
-                        <div class="col-md-4">
+                        <div class="col-md-5">
                             <asp:TextBox ID="txtDataInicio" runat="server" class="form-control"></asp:TextBox>
                         </div>
                     </div>
@@ -55,7 +55,7 @@
                     <div class="form-group">
                         <label for="txtDataFim" class="control-label col-md-3">
                             Até</label>
-                        <div class="col-md-4">
+                        <div class="col-md-5">
                             <asp:TextBox ID="txtDataFim" runat="server" class="form-control"></asp:TextBox>
                         </div>
                     </div>
@@ -79,13 +79,17 @@
                 </div>
                 <div class="panel-body">
                     <div class="form-group">
-                        <label for="txtChave" class="control-label col-md-3">
+                        <label for="txtOSNo" class="control-label col-md-3">
                             Número</label>
                         <div class="col-md-4">
-                            <asp:TextBox ID="txtChave" runat="server" class="form-control"></asp:TextBox>
+                            <asp:TextBox ID="txtOSNo" runat="server" class="form-control"></asp:TextBox>
                         </div>
-                        <asp:LinkButton ID="lnkConsultar" class="btn btn-success" runat="server" OnClick="lnkConsultar_Click"><span class="glyphicon glyphicon-ok">
-                        </span></asp:LinkButton>
+                        <div class="button-group col-md-3">
+                            <asp:LinkButton ID="lnkLocalizar" class="btn btn-success" runat="server" OnClick="lnkLocalizar_Click"><span class="glyphicon glyphicon-ok">
+                        </span> 
+                        Localizar</asp:LinkButton>
+                        </div>
+                        <!-- / BUTTON LOCALIZAR-->
                     </div>
                 </div>
             </div>

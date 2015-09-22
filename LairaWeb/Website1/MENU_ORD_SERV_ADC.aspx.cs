@@ -45,10 +45,29 @@ public partial class MENU_ORD_SERV_ADC : System.Web.UI.Page
  
     protected void lnkRelatorioPrestador_Click(object sender, EventArgs e)
     {
-        //Response.Redirect("LISTAR_ORDEM_SERV.aspx?Codigo=5" + "&Data=" + txtDataInicio.Text);
+        if (txtDataInicio.Text.Trim() != "")
+        {
+            string strDataIni = txtDataInicio.Text.Trim();
+            if (txtDataFim.Text == "")
+            {
+                string strDataFin = strDataIni;
+                Response.Redirect("RELATORIO_OS_ADC.aspx?DataIni=" + strDataIni + "&DataFin=" + strDataFin + "&Passeio=0" + "&Prestador=" + ddlPrestador.SelectedValue + "&Vendedor=0" + "&ReportType=FilterRpt");
+            }
+            else
+            {
+                string strDataFin = txtDataFim.Text.Trim();
+                Response.Redirect("RELATORIO_OS_ADC.aspx?DataIni=" + strDataIni + "&DataFin=" + strDataFin + "&Passeio=0" + "&Prestador=" + ddlPrestador.SelectedValue + "&Vendedor=0" + "&ReportType=FilterRpt");
+            }
+        }
     }
-    protected void lnkConsultar_Click(object sender, EventArgs e)
+    
+    protected void lnkLocalizar_Click(object sender, EventArgs e)
     {
-        //Response.Redirect("LISTAR_ORDEM_SERV.aspx?Codigo=5" + "&Data=" + txtChave.Text);
+        if (txtOSNo.Text != "")
+        {
+            string strOSNo = txtOSNo.Text.Trim();
+            Response.Redirect("RELATORIO_OS_ADC.aspx?OSNo=" + strOSNo + "&ReportType=NumberRpt");
+        }
     }
+   
 }

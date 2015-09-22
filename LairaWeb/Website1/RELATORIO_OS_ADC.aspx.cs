@@ -17,8 +17,9 @@ public partial class RELATORIO_OS_ADC : System.Web.UI.Page
 
             if (ReportType == "DateRpt")
             {
-                string DataOSAdc = Request.QueryString["Data"];
-                GridReportDate(DataOSAdc);                
+                string strCriterio = Request.QueryString["Data"];
+                string strTipo = "D";
+                GridReport(strCriterio, strTipo);                
             }
             else if (ReportType == "FilterRpt")
             {
@@ -31,8 +32,9 @@ public partial class RELATORIO_OS_ADC : System.Web.UI.Page
             }
             else if (ReportType == "NumberRpt")
             {
-                string OSAdcNo = Request.QueryString["OSAdcNo"];
-                GridReportNumber(OSAdcNo);
+                string strCriterio = Request.QueryString["OSNo"];
+                string strTipo = "N";
+                GridReport(strCriterio, strTipo);
             }
             
         }
@@ -66,9 +68,9 @@ public partial class RELATORIO_OS_ADC : System.Web.UI.Page
 
     }
 
-    private void GridReportDate(string DataOSAdc)
+    private void GridReport(string strCriterio, string strTipo)
     {
-        GridView1.DataSource = OrdemServAdc.GetOSAdc(DataOSAdc);
+        GridView1.DataSource = OrdemServAdc.GetOSAdc(strCriterio, strTipo);
         GridView1.DataBind();
     }
 
@@ -76,13 +78,7 @@ public partial class RELATORIO_OS_ADC : System.Web.UI.Page
     {
         GridView1.DataSource = FichasOSAdc.FiltroOSAdc(DataIni, DataFin, Passeio, Prestador, Vendedor);
         GridView1.DataBind();
-    }
-
-    private void GridReportNumber(string OSAdcNo)
-    {
-        GridView1.DataSource = OrdemServAdc.GetOSAdc(OSAdcNo);
-        GridView1.DataBind();
-    }
+    }   
 
     bool VerificarCampos()
     {
@@ -116,6 +112,10 @@ public partial class RELATORIO_OS_ADC : System.Web.UI.Page
 
     protected void lnkLocalizar_Click(object sender, EventArgs e)
     {
-
+        if (txtOSNo.Text != "")
+        {
+            string strOSNo = txtOSNo.Text.Trim();
+            Response.Redirect("RELATORIO_OS_ADC.aspx?OSNo=" + strOSNo + "&ReportType=NumberRpt");
+        }
     }
 }

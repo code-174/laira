@@ -29,11 +29,11 @@ public class OrdemServAdc
     }
     #endregion
     public OrdemServAdc()
-	{
-		//
-		// TODO: Add constructor logic here
-		//
-	}
+    {
+        //
+        // TODO: Add constructor logic here
+        //
+    }
 
     public Int64 getLastOSAdc()
     {
@@ -57,7 +57,7 @@ public class OrdemServAdc
         return retorno;
     }
 
-    public static List<OrdemServAdc> GetOSAdc(string strData)
+    public static List<OrdemServAdc> GetOSAdc(string strCriterio, string strTipo)
     {
         List<OrdemServAdc> xList = new List<OrdemServAdc>();
 
@@ -72,42 +72,49 @@ public class OrdemServAdc
 
 
         str.AppendLine(" select ID_OS_ADC, DATA_OS_ADC, NOME_PRESTADOR AS FEITO_POR, OBS ");
-            //str.AppendLine(" MOTORISTA_NO, GUIA_NO ");
-            //str.AppendLine(" dbo.getpax(FICHAS.ID_FICHA) AS NOME_PASSAGEIRO, ");
-            //str.AppendLine(" ISNULL(NOME_HOTEL, '---') AS HOTEL, APARTAMENTO_FICHA ");
+        //str.AppendLine(" MOTORISTA_NO, GUIA_NO ");
+        //str.AppendLine(" dbo.getpax(FICHAS.ID_FICHA) AS NOME_PASSAGEIRO, ");
+        //str.AppendLine(" ISNULL(NOME_HOTEL, '---') AS HOTEL, APARTAMENTO_FICHA ");
         str.AppendLine(" from OS_ADC ");
         str.AppendLine(" LEFT JOIN PRESTADORES ON OS_ADC.FEITO_POR_NO = PRESTADORES.ID_PRESTADOR ");
-            //str.AppendLine(" LEFT JOIN HOTEIS ON FICHAS.HOTEL_FICHA = HOTEIS.ID_HOTEL ");
-            //str.AppendLine(" LEFT JOIN HOTEIS ON FICHAS.HOTEL_FICHA = HOTEIS.ID_HOTEL ");
-            str.AppendLine(" WHERE ");
-            str.AppendLine(" DATA_OS_ADC  = @DATA ");
-            //str.AppendLine(" AND OS_CHEGADA IS NULL ");
-
-            cmd.CommandText = str.ToString();
-
-            SqlParameter parameter = new SqlParameter();
-            parameter.ParameterName = "@DATA";
-            parameter.Value = strData;
-            cmd.Parameters.Add(parameter);
-
-            conn.Open();
-
-            SqlDataReader reader = cmd.ExecuteReader();
-
-            while (reader.Read())
-            {
-                OrdemServAdc OS = new OrdemServAdc();
-                OS.ID_OS_ADC = Convert.ToInt64(reader["ID_OS_ADC"]);
-                OS.DATA = reader["DATA_OS_ADC"].ToString();
-                OS.FEITO_POR = reader["FEITO_POR"].ToString();
-                OS.OBS_OS = reader["OBS"].ToString();
-                //OS.MOTORISTA = reader["SIGLA_VOO"].ToString();
-                //OS.GUIA = reader["NOME_PASSAGEIRO"].ToString();               
-                xList.Add(OS);
-            }
-
-            return xList;
+        //str.AppendLine(" LEFT JOIN HOTEIS ON FICHAS.HOTEL_FICHA = HOTEIS.ID_HOTEL ");
+        //str.AppendLine(" LEFT JOIN HOTEIS ON FICHAS.HOTEL_FICHA = HOTEIS.ID_HOTEL ");
+        str.AppendLine(" WHERE ");
+        if (strTipo == "D")
+        {
+            str.AppendLine(" DATA_OS_ADC  = @CRITERIO ");
         }
+        else if (strTipo == "N")
+        {
+            str.AppendLine(" ID_OS_ADC  = @CRITERIO ");
+        }
+
+
+        cmd.CommandText = str.ToString();
+
+        SqlParameter parameter = new SqlParameter();
+        parameter.ParameterName = "@CRITERIO";
+        parameter.Value = strCriterio;
+        cmd.Parameters.Add(parameter);
+
+        conn.Open();
+
+        SqlDataReader reader = cmd.ExecuteReader();
+
+        while (reader.Read())
+        {
+            OrdemServAdc OS = new OrdemServAdc();
+            OS.ID_OS_ADC = Convert.ToInt64(reader["ID_OS_ADC"]);
+            OS.DATA = reader["DATA_OS_ADC"].ToString();
+            OS.FEITO_POR = reader["FEITO_POR"].ToString();
+            OS.OBS_OS = reader["OBS"].ToString();
+            //OS.MOTORISTA = reader["SIGLA_VOO"].ToString();
+            //OS.GUIA = reader["NOME_PASSAGEIRO"].ToString();               
+            xList.Add(OS);
+        }
+
+        return xList;
+    }
 
     public static List<OrdemServAdc> FiltroOSAdc(string DataIni, string DataFin, string Passeio, string Prestador, string Vendedor)
     {

@@ -356,7 +356,7 @@ public class FichasListagem
                 FichaListagem.COD_EXCURSAO = reader["COD_EXCURSAO_FICHA"].ToString();
                 FichaListagem.QUANT_PAX = reader["QUANT_PAX"].ToString();
                 FichaListagem.PAX = reader["NOME_PASSAGEIRO"].ToString();
-                
+
                 xList.Add(FichaListagem);
             }
 
@@ -642,7 +642,7 @@ public class FichasListagem
         str.AppendLine(" FATURA_NO  is null ");
         str.AppendLine(" group by ID_FICHA, COD_EXCURSAO_FICHA, SIGLA_VOO, AEROPORTO_CHEGADA_FICHA ");
 
-        cmd.CommandText = str.ToString();        
+        cmd.CommandText = str.ToString();
 
         conn.Open();
 
@@ -663,7 +663,7 @@ public class FichasListagem
         return xList;
     }
 
-    public static List<FichasListagem> GetFichasPasseio(string strData) 
+    public static List<FichasListagem> GetFichasPasseio(string strOSNo)
     {
         List<FichasListagem> xList = new List<FichasListagem>();
 
@@ -689,15 +689,15 @@ public class FichasListagem
         str.AppendLine(" left join FORMA_DE_PAGAMENTO on SERV_AD_FICHA.FORMA_PAG_NO = FORMA_DE_PAGAMENTO.ID_FORMA_DE_PAGAMENTO ");
         str.AppendLine(" left join HOTEIS on FICHAS.HOTEL_FICHA = HOTEIS.ID_HOTEL ");
         str.AppendLine(" where ");
-        str.AppendLine(" DATA = @DATA ");
-        str.AppendLine(" and OS_ADC_NO is not null ");
+        str.AppendLine(" OS_ADC_NO = @OS_ADC_NO ");
+        //str.AppendLine(" and OS_ADC_NO is not null ");
         str.AppendLine(" group by ID_SERV_AD_FICHA, ID_FICHA, HORA, NOME_HOTEL, APARTAMENTO_FICHA,PASSEIO_SERV_ADC, FORMA_DE_PAGAMENTO, VOUCHER ");
 
         cmd.CommandText = str.ToString();
 
         SqlParameter parameter = new SqlParameter();
-        parameter.ParameterName = "@DATA";
-        parameter.Value = strData;
+        parameter.ParameterName = "@OS_ADC_NO";
+        parameter.Value = strOSNo;
         cmd.Parameters.Add(parameter);
 
         conn.Open();
@@ -722,11 +722,11 @@ public class FichasListagem
         }
 
         return xList;
-    
+
     }
 
-    public static List<FichasListagem> GetFichasTransferOut(string strCriterio)
-    { 
+    public static List<FichasListagem> GetFiltroFichasPasseio(string strData, string Passeio, string Prestador, string Vendedor)
+    {
         List<FichasListagem> xList = new List<FichasListagem>();
 
         SqlCommand cmd = new SqlCommand();
@@ -735,7 +735,116 @@ public class FichasListagem
         cmd.Connection = conn;
         StringBuilder str = new StringBuilder();
 
-        DateTime DataOS = Convert.ToDateTime(strCriterio);
+
+        str.AppendLine(" select ID_SERV_AD_FICHA, ID_FICHA, HORA, ");
+        str.AppendLine(" ISNULL(NOME_HOTEL, '---') AS HOTEL, APARTAMENTO_FICHA, ");
+        str.AppendLine(" PASSEIO_SERV_ADC, ");
+        str.AppendLine(" count(ID_PASSAGEIRO) as QUANT_PAX, ");
+        str.AppendLine(" dbo.getpax(FICHAS.ID_FICHA) AS NOME_PASSAGEIRO, ");
+        str.AppendLine(" FORMA_DE_PAGAMENTO, ");
+        str.AppendLine(" ISNULL(VOUCHER, '---') AS VOUCHER ");
+        str.AppendLine(" from SERV_AD_FICHA ");
+        str.AppendLine(" inner join FICHAS ");
+        str.AppendLine(" on SERV_AD_FICHA.FICHA_NO = FICHAS.ID_FICHA ");
+        str.AppendLine(" left join SERV_ADC on SERV_AD_FICHA.SERV_AD_NO = SERV_ADC.ID_SERV_ADC ");
+        str.AppendLine(" left join PASSAGEIROS ON FICHAS.ID_FICHA = PASSAGEIROS.FICHA_NO ");
+        str.AppendLine(" left join FORMA_DE_PAGAMENTO on SERV_AD_FICHA.FORMA_PAG_NO = FORMA_DE_PAGAMENTO.ID_FORMA_DE_PAGAMENTO ");
+        str.AppendLine(" left join HOTEIS on FICHAS.HOTEL_FICHA = HOTEIS.ID_HOTEL ");
+        str.AppendLine(" left join OS_ADC on SERV_AD_FICHA.OS_ADC_NO = OS_ADC.ID_OS_ADC ");
+        str.AppendLine(" where ");
+        str.AppendLine(" DATA_OS_ADC = @DATA_OS_ADC ");
+        str.AppendLine(" and OS_ADC_NO is not null ");
+        
+
+        if (Passeio != "0")
+        {
+            str.AppendLine(" AND SERV_AD_NO = @PASSEIO ");
+        }
+        if (Prestador != "0")
+        {
+            str.AppendLine(" AND FEITO_POR_NO = @PRESTADOR ");
+        }
+        if (Vendedor != "0")
+        {
+            str.AppendLine(" AND VENDEDOR_NO = @VENDEDOR ");
+        }
+
+        str.AppendLine(" group by ID_SERV_AD_FICHA, ID_FICHA, HORA, NOME_HOTEL, APARTAMENTO_FICHA,PASSEIO_SERV_ADC, FORMA_DE_PAGAMENTO, VOUCHER ");
+
+        cmd.CommandText = str.ToString();
+
+        SqlParameter parameter = new SqlParameter();
+        parameter.ParameterName = "@DATA_OS_ADC";
+        parameter.Value = strData;
+        cmd.Parameters.Add(parameter);        
+
+        if (Passeio != "0")
+        {
+            SqlParameter parameter3 = new SqlParameter();
+            parameter3.ParameterName = "@PASSEIO";
+            parameter3.Value = Passeio;
+            cmd.Parameters.Add(parameter3);
+        }
+
+        if (Prestador != "0")
+        {
+            SqlParameter parameter4 = new SqlParameter();
+            parameter4.ParameterName = "@PRESTADOR";
+            parameter4.Value = Prestador;
+            cmd.Parameters.Add(parameter4);
+        }
+
+        if (Vendedor != "0")
+        {
+            SqlParameter parameter5 = new SqlParameter();
+            parameter5.ParameterName = "@VENDEDOR";
+            parameter5.Value = Vendedor;
+            cmd.Parameters.Add(parameter5);
+        }
+        
+        
+        //cmd.CommandText = str.ToString();
+
+        //SqlParameter parameter = new SqlParameter();
+        //parameter.ParameterName = "@DATA";
+        //parameter.Value = strData;
+        //cmd.Parameters.Add(parameter);
+
+        conn.Open();
+
+        SqlDataReader reader = cmd.ExecuteReader();
+
+        while (reader.Read())
+        {
+            FichasListagem FichaListagem = new FichasListagem();
+            FichaListagem.ID_SERV_AD_FICHA = Convert.ToInt64(reader["ID_SERV_AD_FICHA"]);
+            FichaListagem.FICHA_NO = Convert.ToInt64(reader["ID_FICHA"]);
+            //FichaListagem.PASSEIO_NO = Convert.ToInt64(reader["SERV_AD_NO"]);
+            FichaListagem.HORA = reader["HORA"].ToString();
+            FichaListagem.HOTEL = reader["HOTEL"].ToString();
+            FichaListagem.APTO = reader["APARTAMENTO_FICHA"].ToString();
+            FichaListagem.PASSEIO = reader["PASSEIO_SERV_ADC"].ToString();
+            FichaListagem.QUANT_PAX = reader["QUANT_PAX"].ToString();
+            FichaListagem.PAX = reader["NOME_PASSAGEIRO"].ToString();
+            FichaListagem.FORMA_PAG = reader["FORMA_DE_PAGAMENTO"].ToString();
+            FichaListagem.VOUCHER = reader["VOUCHER"].ToString();
+            xList.Add(FichaListagem);
+        }
+
+        return xList;
+    }
+
+    public static List<FichasListagem> GetFichasTransferOut(string strCriterio, string strTipo)
+    {
+        List<FichasListagem> xList = new List<FichasListagem>();
+
+        SqlCommand cmd = new SqlCommand();
+        SqlConnection conn = new SqlConnection();
+        conn.ConnectionString = ConfigurationManager.ConnectionStrings["LairaWebDB"].ConnectionString;
+        cmd.Connection = conn;
+        StringBuilder str = new StringBuilder();
+
+        //DateTime DataOS = Convert.ToDateTime(strCriterio);
 
         str.AppendLine(" select SAIDA_DO_HOTEL_FICHA, AEROPORTO_SAIDA_FICHA, ");
         str.AppendLine(" SIGLA_VOO, VOO_SAIDA_HORA_FICHA, ");
@@ -751,21 +860,55 @@ public class FichasListagem
         str.AppendLine(" LEFT JOIN PRESTADORES ON ORDEM_SERV.FEITO_POR_NO = PRESTADORES.ID_PRESTADOR ");
         str.AppendLine(" where ");
         str.AppendLine(" OS_SAIDA  is not null ");
-        str.AppendLine(" and ORDEM_SERV.DATA = @DATA ");
+
+        if (strTipo == "D")
+        {
+            str.AppendLine(" and ORDEM_SERV.DATA = @DATA ");
+        }
+
+        if (strTipo == "F")
+        {
+            str.AppendLine(" and ID_FICHA = @ID_FICHA ");
+        }
+
+        if (strTipo == "E")
+        {
+            str.AppendLine(" and COD_EXCURSAO_FICHA = @COD_EXCURSAO_FICHA ");
+        }
 
         cmd.CommandText = str.ToString();
-        
-        SqlParameter parameter = new SqlParameter();
-        parameter.ParameterName = "@DATA";
-        parameter.Value = DataOS;
-        cmd.Parameters.Add(parameter);
+
+        if (strTipo == "D")
+        {
+            DateTime DataOS = Convert.ToDateTime(strCriterio);
+            SqlParameter parameter = new SqlParameter();
+            parameter.ParameterName = "@DATA";
+            parameter.Value = DataOS;
+            cmd.Parameters.Add(parameter);
+        }
+
+        if (strTipo == "F")
+        {
+            SqlParameter parameter1 = new SqlParameter();
+            parameter1.ParameterName = "@ID_FICHA";
+            parameter1.Value = strCriterio;
+            cmd.Parameters.Add(parameter1);
+        }
+
+        if (strTipo == "E")
+        {
+            SqlParameter parameter2 = new SqlParameter();
+            parameter2.ParameterName = "@COD_EXCURSAO_FICHA";
+            parameter2.Value = strCriterio;
+            cmd.Parameters.Add(parameter2);
+        }
 
         conn.Open();
 
         SqlDataReader reader = cmd.ExecuteReader();
 
         while (reader.Read())
-        {            
+        {
             FichasListagem FichaListagem = new FichasListagem();
             FichaListagem.HORA = reader["SAIDA_DO_HOTEL_FICHA"].ToString();
             FichaListagem.AEROPORTO = reader["AEROPORTO_SAIDA_FICHA"].ToString();
@@ -842,5 +985,5 @@ public class FichasListagem
 
         return xList;
     }
-    
+
 }

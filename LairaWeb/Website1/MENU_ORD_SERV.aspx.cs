@@ -30,7 +30,7 @@ public partial class MENU_ORD_SERV : System.Web.UI.Page
         //if (txtDataRelatorio.Text != "")        
         if (ddlSelecione.SelectedValue == "T")
         {
-            Response.Redirect("LISTAR_ORDEM_SERV.aspx?Tipo=" + ddlTipoRel.SelectedValue.ToString().Substring(0) + "&Data=" + txtDataRelatorio.Text);
+            Response.Redirect("RELATORIO_ORDEM_SERVICO.aspx?Tipo=" + ddlTipoRel.SelectedValue.ToString().Substring(0) + "&Data=" + txtDataRelatorio.Text + "&ReportType=DateRpt");
         }
         else
         {
@@ -42,7 +42,18 @@ public partial class MENU_ORD_SERV : System.Web.UI.Page
     {
         if (txtOSNo.Text != "")
         {
-            Response.Redirect("RELATORIO_ORDEM_SERVICO.aspx?No=" + txtOSNo.Text);
-        }        
+            string OS_NO = txtOSNo.Text.Trim();
+            double Num;
+            bool isNum = double.TryParse(OS_NO, out Num);
+            if (isNum)
+            {
+                Response.Redirect("RELATORIO_ORDEM_SERVICO.aspx?No=" + OS_NO + "&ReportType=NumberRpt");
+            }
+            else
+            {
+                // mesage box "you gotta put only numbers"
+                // no records found asp gridview
+            }
+        }
     }
 }

@@ -35,11 +35,11 @@ public partial class GERAR_ORDEM_SERV_ADC : System.Web.UI.Page
     {
         
         // POPULATE PASSEIOS DROP DOWN LIST
-        ServInclusos si = new ServInclusos();
-        List<ServInclusos> detailsPass = si.GetServInclusosCombo();
-        ddlPasseios.DataTextField = "SERVICO";
+        ServAdc p = new ServAdc();
+        List<ServAdc> detailsPasseio = p.GetServAdcCombo();
+        ddlPasseios.DataTextField = "PASSEIO";
         ddlPasseios.DataValueField = "ID";
-        ddlPasseios.DataSource = detailsPass;
+        ddlPasseios.DataSource = detailsPasseio;
         ddlPasseios.DataBind();
 
         // POPULATE SERVICO FEITO POR DROP DOWN LIST
@@ -80,7 +80,7 @@ public partial class GERAR_ORDEM_SERV_ADC : System.Web.UI.Page
 
         StringBuilder str = new StringBuilder();
         str.AppendLine(" INSERT INTO [OS_ADC] ");
-        str.AppendLine(" ([DATA] ");
+        str.AppendLine(" ([DATA_OS_ADC] ");
         str.AppendLine(" ,[FEITO_POR_NO] ");
         str.AppendLine(" ,[OBS] ");
         str.AppendLine(" ,[MOTORISTA_NO] ");

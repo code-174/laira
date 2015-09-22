@@ -13,10 +13,10 @@ public partial class GERAR_COMUNICADO_PASSEIO : System.Web.UI.Page
         if (!IsPostBack)
         {
             LoadCombos();
-            txtData.Text = DateTime.Now.ToString("d", CultureInfo.CreateSpecificCulture("pt-BR"));
-            string DataOS;
-            DataOS = txtData.Text;
-            LoadGrid(DataOS);
+            //txtData.Text = DateTime.Now.ToString("d", CultureInfo.CreateSpecificCulture("pt-BR"));
+            //string DataOS;
+            //DataOS = txtData.Text;
+            //LoadGrid(DataOS);
         }
     }
     void LoadCombos()
@@ -47,17 +47,24 @@ public partial class GERAR_COMUNICADO_PASSEIO : System.Web.UI.Page
 
     }
 
-    private void LoadGrid(string DataOS)
+    private void LoadGrid(string strData, string Passeio, string Prestador, string Vendedor)
     {
-        GridView1.DataSource = FichasListagem.GetFichasPasseio(DataOS);
+        //GridView1.DataSource = FichasListagem.GetFichasPasseio(DataOS);
+        //GridView1.DataBind();
+
+        GridView1.DataSource = FichasListagem.GetFiltroFichasPasseio(strData, Passeio, Prestador, Vendedor);
         GridView1.DataBind();
     }
     protected void lnkProcessar_Click(object sender, EventArgs e)
     {
-        string DataOS;
-        DataOS = txtData.Text;
-        LoadGrid(DataOS);
-
+        if (txtData.Text != "")
+        {
+            string strData = txtData.Text.Trim();
+            string Passeio = ddlPasseio.SelectedValue;
+            string Prestador = ddlPrestador.SelectedValue;
+            string Vendedor = ddlVendedor.SelectedValue;
+            LoadGrid(strData, Passeio, Prestador, Vendedor);
+        }
     }
     protected void lnkSelecionarTodas_Click(object sender, EventArgs e)
     {
@@ -66,5 +73,25 @@ public partial class GERAR_COMUNICADO_PASSEIO : System.Web.UI.Page
     protected void lnkEnviarEmail_Click(object sender, EventArgs e)
     {
         // TO DO
+    }
+
+    protected void lnkLocalizar_Click(object sender, EventArgs e)
+    {
+        if (txtOSNo.Text != "")
+        {
+            string strOSNo = txtOSNo.Text.Trim();
+            double Num;
+            bool isNum = double.TryParse(strOSNo, out Num);
+            if (isNum)
+            {
+                GridView1.DataSource = FichasListagem.GetFichasPasseio(strOSNo);
+                GridView1.DataBind();
+            }
+            else
+            {
+                // mesage box "you gotta put only numbers"
+                // no records found asp gridview
+            }
+        }
     }
 }
