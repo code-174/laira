@@ -211,13 +211,13 @@ public class Fichas
         {
             str.AppendLine(" update FICHAS ");
             str.AppendLine(" set OS_CHEGADA = @OS_NO ");
-            str.AppendLine(" where ID_FICHA = @FICHA_NO "); 
+            str.AppendLine(" where ID_FICHA = @FICHA_NO ");
         }
         else
         {
             str.AppendLine(" update FICHAS ");
             str.AppendLine(" set OS_SAIDA = @OS_NO ");
-            str.AppendLine(" where ID_FICHA = @FICHA_NO "); 
+            str.AppendLine(" where ID_FICHA = @FICHA_NO ");
         }
 
         cmd.CommandText = str.ToString();
@@ -234,6 +234,34 @@ public class Fichas
         conn.Close();
         conn.Dispose();
 
+    }
+
+    public void UpdateFaturaFicha(Int64 FATURA_NO, Int64 FICHA_NO)
+    {
+        SqlCommand cmd = new SqlCommand();
+        SqlConnection conn = new SqlConnection();
+        conn.ConnectionString = ConfigurationManager.ConnectionStrings["LairaWebDB"].ConnectionString;
+        cmd.Connection = conn;
+        StringBuilder str = new StringBuilder();
+
+        str.AppendLine(" update FICHAS ");
+        str.AppendLine(" set FATURA_NO = @FATURA_NO ");
+        str.AppendLine(" where ID_FICHA = @FICHA_NO ");
+
+
+        cmd.CommandText = str.ToString();
+        cmd.CommandType = CommandType.Text;
+        cmd.Parameters.Add(new SqlParameter("@FATURA_NO", SqlDbType.BigInt)).Value = FATURA_NO;
+        cmd.Parameters.Add(new SqlParameter("@FICHA_NO", SqlDbType.BigInt)).Value = FICHA_NO;
+
+        conn.Open();
+
+        cmd.ExecuteNonQuery();
+
+        cmd.Dispose();
+        cmd = null;
+        conn.Close();
+        conn.Dispose();
     }
 
 }

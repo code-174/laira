@@ -94,7 +94,7 @@ public partial class GERAR_ORDEM_SERV_ADC : System.Web.UI.Page
         str.AppendLine(" ,@E )");
         cmd.CommandText = str.ToString();
         cmd.CommandType = CommandType.Text;
-        cmd.Parameters.Add(new SqlParameter("@A", SqlDbType.Date)).Value = txtDataServico.Text.Trim();
+        cmd.Parameters.Add(new SqlParameter("@A", SqlDbType.NChar)).Value = txtDataServico.Text.Trim();
         cmd.Parameters.Add(new SqlParameter("@B", SqlDbType.BigInt)).Value = Convert.ToInt64(ddlServicoFeitoPor.SelectedValue.ToString());
         cmd.Parameters.Add(new SqlParameter("@C", SqlDbType.NChar)).Value = txtObs.Text.Trim();
         cmd.Parameters.Add(new SqlParameter("@D", SqlDbType.BigInt)).Value = Convert.ToInt64(ddlMotorista.SelectedValue.ToString());

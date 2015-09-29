@@ -6,40 +6,127 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="Server">
     <div class="container-fluid">
         <fieldset>
-            <legend id="Titulo" runat="server">Emitir Fatura</legend>
+            <legend id="Titulo" runat="server" style="font-weight: bold">Emitir Fatura</legend>
             <form id="Form1" class="form form-horizontal col-md-6" runat="server">
             <div class="panel panel-success">
                 <div class="panel-heading">
-                    <strong>Critérios</strong>
+                    <strong>Faturar serviços com os critérios:</strong>
                 </div>
                 <div class="panel-body">
                     <div class="form-group">
-                        <label for="txtDataServico" class="control-label col-md-4">
-                            Data dos Serviços</label>
+                        <label for="txtDataInicio" class="control-label col-md-2">
+                            De</label>
                         <div class="col-md-3">
-                            <asp:TextBox ID="txtDataServico" runat="server" class="form-control"></asp:TextBox>
+                            <asp:TextBox ID="txtDataInicio" runat="server" class="form-control"></asp:TextBox>
+                        </div>
+                        <label for="txtDataFim" class="control-label col-md-1">
+                            Até</label>
+                        <div class="col-md-3">
+                            <asp:TextBox ID="txtDataFim" runat="server" class="form-control"></asp:TextBox>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="ddlPasseios" class="control-label col-md-4">
-                            Passeios</label>
-                        <div class="col-md-5">
-                            <asp:DropDownList ID="ddlPasseios" runat="server" class="form-control">
+                        <label for="ddlAgencia" class="control-label col-md-2">
+                            Agência</label>
+                        <div class="col-md-4">
+                            <asp:DropDownList ID="ddlAgencia" runat="server" class="form-control" AppendDataBoundItems="true">
+                                <asp:ListItem Value="0">Selecione</asp:ListItem>
                             </asp:DropDownList>
                         </div>
-                    </div>
-                    <!-- / DDL TIPO SERVICO-->
-                    <div class="button-group col-md-offset-4">
-                        <asp:LinkButton ID="lnkProcessarCriterios" class="btn btn-success" runat="server"
-                            OnClick="lnkProcessarCriterios_Click"><span class="glyphicon glyphicon-ok">
+                        <div class="col-md-4">
+                            <asp:LinkButton ID="lnkProcessar" class="btn btn-success" runat="server" OnClick="lnkProcessar_Click"><span class="glyphicon glyphicon-ok">
                         </span> Processar</asp:LinkButton>
+                        </div>
                     </div>
-                    <!-- / BUTTON PROCESSAR-->
                 </div>
             </div>
-            <!-- / PANEL CRITERIOS-->
-            <asp:GridView ID="GridView1" class="table table-bordered" runat="server"
-                AutoGenerateColumns="false" GridLines="none">
+            <!-- /PANEL CRITERIOS-->
+            <div class="panel panel-success" id="panNaoFaturados" runat="server" visible="true">
+                <div class="panel-heading">
+                    <strong>Lista de serviços não faturados:</strong>
+                </div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <label for="txtDataInicio2" class="control-label col-md-2">
+                            De</label>
+                        <div class="col-md-3">
+                            <asp:TextBox ID="txtDataInicio2" runat="server" class="form-control"></asp:TextBox>
+                        </div>
+                        <label for="txtDataFim2" class="control-label col-md-1">
+                            Até</label>
+                        <div class="col-md-3">
+                            <asp:TextBox ID="txtDataFim2" runat="server" class="form-control"></asp:TextBox>
+                        </div>
+                        <div class="col-md-3">
+                            <asp:LinkButton ID="LinkButton1" class="btn btn-success" runat="server" OnClick="lnkProcessar_Click"><span class="glyphicon glyphicon-ok">
+                        </span> Processar</asp:LinkButton>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /PANEL NAO FATURADOS-->
+            <div class="panel panel-success" id="panDadosAdc" runat="server" visible="false">
+                <div class="panel-heading">
+                    <strong>Dados adicionais:</strong>
+                </div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <label for="txtDataEmissao" class="control-label col-md-3">
+                            Data Emissão</label>
+                        <div class="col-md-3">
+                            <asp:TextBox ID="txtDataEmissao" runat="server" class="form-control"></asp:TextBox>
+                        </div>
+                        <label for="txtVencimento" class="control-label col-md-2">
+                            Vencimento</label>
+                        <div class="col-md-3">
+                            <asp:TextBox ID="txtVencimento" runat="server" class="form-control"></asp:TextBox>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="txtValorFatura" class="control-label col-md-3">
+                            Valor da Fatura</label>
+                        <div class="col-md-3">
+                            <asp:TextBox ID="txtValorFatura" runat="server" class="form-control"></asp:TextBox>
+                        </div>
+                        <label for="txtQtdPax" class="control-label col-md-2">
+                            Qtd. Pax</label>
+                        <div class="col-md-3">
+                            <asp:TextBox ID="txtQtdPax" runat="server" class="form-control"></asp:TextBox>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="txtFaturaNo" class="control-label col-md-3">
+                            Nº Faturamento</label>
+                        <div class="col-md-3">
+                            <asp:TextBox ID="txtFaturaNo" runat="server" class="form-control"></asp:TextBox>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="txtOBS" class="control-label col-md-3">
+                            OBS</label>
+                        <div class="col-md-8">
+                            <%--<textarea id="txtOBS" runat="server" class="form-control" rows="3"></textarea>--%>
+                            <asp:TextBox ID="txtOBS" runat="server" class="form-control"></asp:TextBox>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /PANEL NAO FATURADOS-->
+            <asp:GridView ID="grvQuantidade" runat="server" class="table table-bordered" AutoGenerateColumns="false"
+                GridLines="none" HeaderStyle-CssClass="bg-primary"  DataKeyNames="AGENCIA_NO" OnRowCommand="grvQuantidade_RowCommand">
+                <Columns>
+                    <asp:BoundField DataField="NOME_AGENCIA" HeaderText="Agência" />
+                    <asp:BoundField DataField="QUANT_FICHA" HeaderText="Total de Serviços" />
+                    <asp:TemplateField HeaderText="">
+                        <ItemTemplate>
+                            <asp:LinkButton ID="lnkFaturar" CommandName="Faturar" CommandArgument='<%# Container.DataItemIndex %>' class="btn btn-success" runat="server"><span class="glyphicon glyphicon-ok">
+                        </span> Gerar Fatura</asp:LinkButton>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                </Columns>
+            </asp:GridView>
+            <asp:GridView ID="GridView1" class="table table-bordered" runat="server" AutoGenerateColumns="false"
+                GridLines="none" DataKeyNames="FICHA_NO">
                 <Columns>
                     <asp:TemplateField>
                         <ItemTemplate>
@@ -53,16 +140,7 @@
                                     Excursão
                                 </th>
                                 <th>
-                                    Vôo
-                                </th>
-                                <th>
-                                    Aer.
-                                </th>
-                                <th>
                                     Valor Unit.
-                                </th>
-                                <th>
-                                    Pax
                                 </th>
                                 <th>
                                     Quant. Pax
@@ -73,7 +151,7 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <asp:CheckBox ID="chkFicha" runat="server" />
+                                    <asp:CheckBox ID="chkSelect" runat="server" />
                                 </td>
                                 <td>
                                     <%#Eval("FICHA_NO")%>
@@ -82,20 +160,13 @@
                                     <%#Eval("COD_EXCURSAO")%>
                                 </td>
                                 <td>
-                                    <%#Eval("VOO")%>
-                                </td>
-                                <td>
-                                    <%#Eval("AEROPORTO")%>
-                                </td>
-                                <td>
-                                </td>
-                                <td>
-                                    <%#Eval("PAX")%>
+                                    <%#Eval("VALOR_UNIT")%>
                                 </td>
                                 <td>
                                     <%#Eval("QUANT_PAX")%>
                                 </td>
                                 <td>
+                                 <%# Convert.ToDouble(DataBinder.Eval(Container.DataItem, "VALOR_UNIT")) * Convert.ToDouble(DataBinder.Eval(Container.DataItem, "QUANT_PAX"))%>
                                 </td>
                             </tr>
                         </ItemTemplate>
@@ -128,6 +199,11 @@
                     </asp:TemplateField>
                 </Columns>
             </asp:GridView>
+            <div class="col-md-3">
+                <asp:LinkButton ID="lnkConfirmar" class="btn btn-warning" runat="server" OnClick="lnkConfirmar_Click"
+                    Visible="false"><span class="glyphicon glyphicon-ok">
+                        </span> Confirmar</asp:LinkButton>
+            </div>
             <%--<div class="btn-group btn-group-justified">
         <asp:LinkButton ID="lnkImprimir" runat="server" OnClientClick="javascript:CallPrint('divPrint');"
             class="btn btn-info">Imprimir</asp:LinkButton>

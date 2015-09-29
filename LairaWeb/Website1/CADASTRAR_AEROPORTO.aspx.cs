@@ -9,26 +9,24 @@ using System.Data.SqlClient;
 using System.Text;
 using System.Configuration;
 
-public partial class INCLUIR_AEROPORTO : System.Web.UI.Page
+public partial class CADASTRAR_AEROPORTO : System.Web.UI.Page
 {
-
-    bool VerificarCampos()
+    protected void Page_Load(object sender, EventArgs e)
     {
-        if (txtNomeAeroporto.Text.Trim() == "")
-        {
-            return false;
-        }
-        else if (txtSiglaAeroporto.Text.Trim() == "")
-        {
-            return false;
-        }
+        string Filtro = Request.QueryString["Filtro"];
 
-        return true;
+        if (Filtro.Trim().ToString() != "")
+        {
+            Aeroportos c = new Aeroportos();
+            List<Aeroportos> l = c.GetAeroportosByID(Filtro);
+
+            foreach (var item in l)
+            {
+                txtNomeAeroporto.Text = l[0].NOME;
+                txtSiglaAeroporto.Text = l[0].CODIGO;
+            }
+        }
     }
-
-
-
-
     protected void lnkAdAeroporto_Click(object sender, EventArgs e)
     {
         if (VerificarCampos())
@@ -76,6 +74,19 @@ public partial class INCLUIR_AEROPORTO : System.Web.UI.Page
         {
             Page.ClientScript.RegisterClientScriptBlock(this.Page.GetType(), "Alerta", "<script language='javascript'>window.alert('Favor preencher os campos!');</script>", false);
         }
+    }
+    bool VerificarCampos()
+    {
+        if (txtNomeAeroporto.Text.Trim() == "")
+        {
+            return false;
+        }
+        else if (txtSiglaAeroporto.Text.Trim() == "")
+        {
+            return false;
+        }
+
+        return true;
     }
     protected void lnkVoltar_Click(object sender, EventArgs e)
     {

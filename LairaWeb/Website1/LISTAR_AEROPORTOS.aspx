@@ -26,9 +26,25 @@
                 </div>
             </div>
             <div id="divPrint">
-                <asp:GridView ID="grvData" runat="server" class="table table-hover" 
-                    GridLines="None" HeaderStyle-CssClass="bg-primary">                    
+                <asp:GridView ID="grvDatax" runat="server" class="table table-hover" GridLines="None" 
+                    HeaderStyle-CssClass="bg-primary">
                 </asp:GridView>
+
+
+                 <asp:GridView ID="grvData" runat="server" class="table table-bordered" AutoGenerateColumns="false" 
+                GridLines="none" HeaderStyle-CssClass="bg-primary"  DataKeyNames="ID" OnRowCommand="grvData_RowCommand">
+                <Columns>
+                    <asp:BoundField DataField="CODIGO" HeaderText="Sigla" />
+                    <asp:BoundField DataField="NOME" HeaderText="Nome" />
+                    <asp:TemplateField HeaderText="">
+                        <ItemTemplate>
+                            <asp:LinkButton ID="lnkEditar" CommandName="Editar" CommandArgument='<%# Container.DataItemIndex %>' class="btn btn-success" runat="server"><span class="glyphicon glyphicon-ok">
+                        </span> Editar</asp:LinkButton>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                </Columns>
+            </asp:GridView>
+
             </div>
             <div class="btn-group btn-group-justified">
                 <asp:LinkButton ID="lnkNew" runat="server" OnClick="lnkNew_Click" class="btn btn-primary">Adicionar Aeroporto</asp:LinkButton>

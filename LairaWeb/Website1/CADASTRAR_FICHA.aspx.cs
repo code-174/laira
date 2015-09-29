@@ -8,6 +8,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Text;
 using System.Configuration;
+using System.Collections;
 
 public partial class CADASTRAR_FICHA : System.Web.UI.Page
 {
@@ -38,6 +39,7 @@ public partial class CADASTRAR_FICHA : System.Web.UI.Page
 
         grvData.DataSource = dt;
         grvData.DataBind();
+
 
     }
     void GridServIn()
@@ -199,7 +201,7 @@ public partial class CADASTRAR_FICHA : System.Web.UI.Page
                 str.AppendLine(" ,[AEROPORTO_CHEGADA_FICHA] ");
                 str.AppendLine(" ,[AEROPORTO_SAIDA_FICHA] ");
                 str.AppendLine(" ,[COD_EXCURSAO_FICHA] ");
-                str.AppendLine(" ,[AGENCIA_FICHA] ");
+                str.AppendLine(" ,[AGENCIA_NO] ");
                 str.AppendLine(" ,[RECIBO_FICHA] ");
                 str.AppendLine(" ,[HOTEL_FICHA] ");
                 str.AppendLine(" ,[APARTAMENTO_FICHA] ");
@@ -785,6 +787,7 @@ public partial class CADASTRAR_FICHA : System.Web.UI.Page
 
                     rowIndex++;
                 }
+               
             }
         }
     }
@@ -804,7 +807,9 @@ public partial class CADASTRAR_FICHA : System.Web.UI.Page
         AddNewRowToGrid();
     }
 
-    protected void lnkExcluirServAd_Click(object sender, EventArgs e) 
+
+
+    protected void lnkExcluirServAd_Click(object sender, EventArgs e)
     {
         // TO DO
     }
@@ -815,6 +820,8 @@ public partial class CADASTRAR_FICHA : System.Web.UI.Page
     protected void lnkExcluirPAX_Click(object sender, EventArgs e)
     {
         // TO DO
+
+
     }
 
     private void SetPreviousDataServIn()
@@ -878,6 +885,39 @@ public partial class CADASTRAR_FICHA : System.Web.UI.Page
                 }
             }
         }
+    }
+
+    //
+
+    protected void OnRowDataBound(object sender, GridViewRowEventArgs e)
+    {
+        if (e.Row.RowType == DataControlRowType.DataRow)
+        {
+           // TextBox box = (TextBox)e.Row.FindControl("txtNome");
+            // string item = box.Text;
+
+            foreach (LinkButton button in e.Row.Cells[6].Controls.OfType<LinkButton>())
+            {
+                if (button.CommandName == "Delete")
+                {
+                    button.Attributes["onclick"] = "if(!confirm('Confirma excluir PAX ?')){ return false; };";
+                }
+            }
+            //SetPreviousData();
+        }
+    }
+
+
+    protected void OnRowDeleting(object sender, GridViewDeleteEventArgs e)
+    {
+        int index = Convert.ToInt32(e.RowIndex);
+        DataTable dt = ViewState["CurrentTable1"] as DataTable;
+        dt.Rows[index].Delete();
+        ViewState["CurrentTable1"] = dt;
+        SetPreviousData();
+        grvData.DataSource = dt;
+        grvData.DataBind();
+        
     }
 
 

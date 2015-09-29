@@ -37,6 +37,7 @@ public partial class CADASTRAR_VOO : System.Web.UI.Page
 
         return true;
     }
+
     protected void lnkAdVoo_Click(object sender, EventArgs e)
     {
         if (VerificarCampos())
@@ -93,7 +94,10 @@ public partial class CADASTRAR_VOO : System.Web.UI.Page
         }
     }
 
+    protected void Page_Load(object sender, EventArgs e)
+    {
 
+    }
 
     protected void lnkVoltar_Click(object sender, EventArgs e)
     {

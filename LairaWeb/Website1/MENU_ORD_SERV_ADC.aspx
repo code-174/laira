@@ -66,9 +66,10 @@
                             <asp:DropDownList ID="ddlPrestador" runat="server" class="form-control">
                             </asp:DropDownList>
                         </div>
-                        <asp:LinkButton ID="lnkRelatorioPrestador" class="btn btn-success" runat="server"
-                            OnClick="lnkRelatorioPrestador_Click"><span class="glyphicon glyphicon-ok">
-                        </span></asp:LinkButton>
+                        <div class="button-group col-md-offset-3">
+                        <asp:LinkButton ID="lnkRelatorioPrestador" class="btn btn-success" runat="server" OnClick="lnkRelatorioPrestador_Click"><span class="glyphicon glyphicon-ok">
+                        </span> Filtrar</asp:LinkButton>
+                    </div>
                     </div>
                 </div>
             </div>

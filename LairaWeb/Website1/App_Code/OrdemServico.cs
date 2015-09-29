@@ -17,6 +17,8 @@ public class OrdemServico
     public string TIPO_OS { get; set; }
     public string DATA { get; set; }
     public string FEITO_POR { get; set; }
+    public string VALOR_SERVICO { get; set; }
+    public string VALOR_ESTAC { get; set; }
     public string OBS_OS { get; set; }
     public string MOTORISTA { get; set; }
     public string GUIA { get; set; }
@@ -122,8 +124,9 @@ public class OrdemServico
         StringBuilder str = new StringBuilder();
 
 
-        str.AppendLine(" select ID_ORDEM_SERV, TIPO_SERVICO, DATA, NOME_PRESTADOR AS FEITO_POR, OBS_ORDEM_SERV ");
-        //str.AppendLine(" MOTORISTA_NO, GUIA_NO ");
+        str.AppendLine(" select ID_ORDEM_SERV, TIPO_SERVICO, DATA, NOME_PRESTADOR AS FEITO_POR, OBS_ORDEM_SERV, ");
+        str.AppendLine(" MOTORISTA_NO, GUIA_NO, ");
+        str.AppendLine(" VALOR_SERVICO, VALOR_ESTAC ");
         //str.AppendLine(" dbo.getpax(FICHAS.ID_FICHA) AS NOME_PASSAGEIRO, ");
         //str.AppendLine(" ISNULL(NOME_HOTEL, '---') AS HOTEL, APARTAMENTO_FICHA ");
         str.AppendLine(" from ORDEM_SERV ");
@@ -153,8 +156,10 @@ public class OrdemServico
             OS.DATA = reader["DATA"].ToString();
             OS.FEITO_POR = reader["FEITO_POR"].ToString();
             OS.OBS_OS = reader["OBS_ORDEM_SERV"].ToString();
-            //OS.MOTORISTA = reader["SIGLA_VOO"].ToString();
-            //OS.GUIA = reader["NOME_PASSAGEIRO"].ToString();               
+            OS.MOTORISTA = reader["MOTORISTA_NO"].ToString();
+            OS.GUIA = reader["GUIA_NO"].ToString();
+            OS.VALOR_SERVICO = reader["VALOR_SERVICO"].ToString();
+            OS.VALOR_ESTAC = reader["VALOR_ESTAC"].ToString();
             xList.Add(OS);
         }
 

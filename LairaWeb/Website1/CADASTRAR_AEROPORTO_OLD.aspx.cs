@@ -9,27 +9,16 @@ using System.Data.SqlClient;
 using System.Text;
 using System.Configuration;
 
-
-public partial class CADASTRAR_VENDEDOR : System.Web.UI.Page
+public partial class INCLUIR_AEROPORTO : System.Web.UI.Page
 {
 
     bool VerificarCampos()
     {
-        if (txtCodigo.Text.Trim() == "")
+        if (txtNomeAeroporto.Text.Trim() == "")
         {
             return false;
         }
-        else if (txtNome.Text.Trim() == "")
-        {
-            return false;
-        }
-
-        else if (txtCodigo.Text.Trim() == "")
-        {
-            return false;
-        }
-
-        else if (txtCelular.Text.Trim() == "")
+        else if (txtSiglaAeroporto.Text.Trim() == "")
         {
             return false;
         }
@@ -37,7 +26,8 @@ public partial class CADASTRAR_VENDEDOR : System.Web.UI.Page
         return true;
     }
 
-    protected void lnkVendedor_Click(object sender, EventArgs e)
+    
+    protected void lnkAdAeroporto_Click(object sender, EventArgs e)
     {
         if (VerificarCampos())
         {
@@ -51,23 +41,17 @@ public partial class CADASTRAR_VENDEDOR : System.Web.UI.Page
                 cmd.Connection = conn;
 
                 StringBuilder str = new StringBuilder();
-                str.AppendLine(" INSERT INTO [VENDEDORES] ");
-                str.AppendLine(" ([CODIGO_VENDEDOR] ");
-                str.AppendLine(" ,[NOME_VENDEDOR] ");
-                str.AppendLine(" ,[TELEFONE_VENDEDOR] ");
-                str.AppendLine(" ,[CELULAR_VENDEDOR] ");
+                str.AppendLine(" INSERT INTO [AEROPORTOS] ");
+                str.AppendLine(" ([NOME_AEROPORTO] ");
+                str.AppendLine(" ,[CODIGO_AEROPORTO] ");
                 str.AppendLine(" )");
                 str.AppendLine(" VALUES ");
                 str.AppendLine(" (@A ");
-                str.AppendLine(" ,@B ");
-                str.AppendLine(" ,@C ");
-                str.AppendLine(" ,@D )");
+                str.AppendLine(" ,@B )");
                 cmd.CommandText = str.ToString();
                 cmd.CommandType = CommandType.Text;
-                cmd.Parameters.Add(new SqlParameter("@A", SqlDbType.NChar)).Value = txtCodigo.Text.Trim();
-                cmd.Parameters.Add(new SqlParameter("@B", SqlDbType.NChar)).Value = txtNome.Text.Trim();
-                cmd.Parameters.Add(new SqlParameter("@C", SqlDbType.NChar)).Value = txtTelefone.Text.Trim();
-                cmd.Parameters.Add(new SqlParameter("@D", SqlDbType.NChar)).Value = txtCelular.Text.Trim();
+                cmd.Parameters.Add(new SqlParameter("@A", SqlDbType.NChar)).Value = txtNomeAeroporto.Text.Trim();
+                cmd.Parameters.Add(new SqlParameter("@B", SqlDbType.NChar)).Value = txtSiglaAeroporto.Text.Trim();
                 conn.Open();
                 cmd.ExecuteNonQuery();
                 cmd.Dispose();
@@ -81,7 +65,8 @@ public partial class CADASTRAR_VENDEDOR : System.Web.UI.Page
             catch (Exception ex)
             {
                 throw ex;
-                //this.ShowAlert(ex.Message);
+
+                //Response.Write("<script type='text/javascript'>alert('ERRO:', + ex.Message.ToString());</script>");
             }
         }
 
@@ -91,13 +76,30 @@ public partial class CADASTRAR_VENDEDOR : System.Web.UI.Page
         }
     }
 
-    protected void Page_Load(object sender, EventArgs e)
-    {
-
-    }
+ 
+      
 
     protected void lnkVoltar_Click(object sender, EventArgs e)
     {
         Response.Redirect("MENU_ADMINISTRACAO.aspx");
+    }
+
+    protected void Page_Load(object sender, EventArgs e)
+    {      
+            string Filtro = Request.QueryString["Filtro"];
+
+            if (Filtro.Trim().ToString() != "")
+            {
+                Aeroportos c = new Aeroportos();
+                List<Aeroportos> l = c.GetAeroportosByID(Filtro);
+
+                foreach (var item in l)
+                {
+                    txtNomeAeroporto.Text = c.NOME;
+                    txtSiglaAeroporto.Text = c.CODIGO;
+                }
+            }
+
+        
     }
 }

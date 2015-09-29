@@ -6,7 +6,8 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="Server">
     <div class="container-fluid">
         <fieldset>
-            <legend id="Titulo" runat="server" style="font-weight: bold">Relatório de Ordens de Serviços</legend>
+            <legend id="Titulo" runat="server" style="font-weight: bold">Relatório de Ordens de
+                Serviços</legend>
             <form id="Form2" class="form form-horizontal col-md-6" runat="server">
             <div class="panel panel-success">
                 <div class="panel-heading">
@@ -51,12 +52,11 @@
                                 <asp:ListItem Value="0">Todos</asp:ListItem>
                             </asp:DropDownList>
                         </div>
-                    
-                    <div class="col-md-4">
-                        <asp:LinkButton ID="lnkProcessar" class="btn btn-success" runat="server" OnClick="lnkProcessar_Click"><span class="glyphicon glyphicon-ok">
+                        <div class="col-md-4">
+                            <asp:LinkButton ID="lnkProcessar" class="btn btn-success" runat="server" OnClick="lnkProcessar_Click"><span class="glyphicon glyphicon-ok">
                         </span> Filtrar Dados</asp:LinkButton>
-                    </div>
-                    <!-- / BUTTON PROCESSAR-->
+                        </div>
+                        <!-- / BUTTON PROCESSAR-->
                     </div>
                 </div>
             </div>
@@ -72,19 +72,18 @@
                         <div class="col-md-3">
                             <asp:TextBox ID="txtOSNo" runat="server" class="form-control"></asp:TextBox>
                         </div>
-                   
-                    <div class="button-group col-md-3">
-                        <asp:LinkButton ID="lnkLocalizar" class="btn btn-success" runat="server" OnClick="lnkLocalizar_Click"><span class="glyphicon glyphicon-ok">
+                        <div class="button-group col-md-3">
+                            <asp:LinkButton ID="lnkLocalizar" class="btn btn-success" runat="server" OnClick="lnkLocalizar_Click"><span class="glyphicon glyphicon-ok">
                         </span> 
                         Localizar</asp:LinkButton>
+                        </div>
+                        <!-- / BUTTON LOCALIZAR-->
                     </div>
-                    <!-- / BUTTON LOCALIZAR-->
-                     </div>
                 </div>
             </div>
             <!-- /PANEL LOCALIZAR-->
-            <asp:GridView ID="GridView1" class="table table-bordered" runat="server"
-                AutoGenerateColumns="false" ShowHeader="false">
+            <asp:GridView ID="GridView1" class="table table-bordered" runat="server" AutoGenerateColumns="false"
+                ShowHeader="false" DataKeyNames="ID_OS" OnRowCommand="GridView1_RowCommand">
                 <Columns>
                     <asp:TemplateField>
                         <ItemTemplate>
@@ -106,6 +105,8 @@
                                 <th>
                                     OBS
                                 </th>
+                                <th>
+                                </th>
                             </tr>
                             <tr>
                                 <td>
@@ -125,6 +126,12 @@
                                 </td>
                                 <td>
                                     <%#Eval("OBS_OS")%>
+                                </td>
+                                <td>
+                                    <asp:LinkButton ID="lnkAlterarOS" CommandName="AlterarOS" CommandArgument='<%# Container.DataItemIndex %>'
+                                        class="btn btn-success" runat="server"><span class="glyphicon glyphicon-ok">
+                        </span> 
+                        Alterar OS</asp:LinkButton>
                                 </td>
                             </tr>
                         </ItemTemplate>

@@ -95,4 +95,14 @@ public partial class RELATORIO_ORDEM_SERVICO : System.Web.UI.Page
             }
         }
     }
+    protected void GridView1_RowCommand(object sender, GridViewCommandEventArgs e)
+    {
+        if (e.CommandName == "AlterarOS")
+        {
+            int indexRow = Convert.ToInt32(e.CommandArgument);
+            string strOSNo = GridView1.DataKeys[indexRow].Value.ToString();
+
+            Response.Redirect("ALTERAR_OS.aspx?OSNo=" + strOSNo);
+        }
+    }
 }

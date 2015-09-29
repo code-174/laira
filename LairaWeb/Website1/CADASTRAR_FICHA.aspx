@@ -8,7 +8,7 @@
     <div class="container-fluid">
         <fieldset>
             <legend>Cadastrar Ficha</legend>
-            <form id="Form1" class="form-horizontal" runat="server">            
+            <form id="Form1" class="form-horizontal" runat="server">
             <div class="form-group col-md-3">
                 <label for="txtCodFicha" class="control-label col-md-6">
                     Código da Ficha</label>
@@ -42,37 +42,37 @@
                 <label for="ddlVooChegada" class="control-label col-md-6">
                     Voo Chegada</label>
                 <div class="col-md-6">
-                    <asp:DropDownList ID="ddlVooChegada" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlVooChegada_Change" class="form-control">
+                    <asp:DropDownList ID="ddlVooChegada" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlVooChegada_Change"
+                        class="form-control">
                     </asp:DropDownList>
                 </div>
-                
             </div>
             <!-- Voo Saída -->
             <div class="form-group col-md-3">
                 <label for="ddlVooSaida" class="control-label col-md-6">
                     Voo Saída</label>
                 <div class="col-md-6">
-                    <asp:DropDownList ID="ddlVooSaida" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlVooSaida_Change"  class="form-control">
+                    <asp:DropDownList ID="ddlVooSaida" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlVooSaida_Change"
+                        class="form-control">
                     </asp:DropDownList>
-                </div>                
+                </div>
             </div>
             <div class="row">
             </div>
             <div class="form-group col-md-3">
-            <label for="txtVooHoraChegada" class="control-label col-md-6">
+                <label for="txtVooHoraChegada" class="control-label col-md-6">
                     Hora Chegada</label>
                 <div class="col-md-6">
                     <asp:TextBox ID="txtVooHoraChegada" runat="server" class="form-control"></asp:TextBox>
                 </div>
-                </div>
-                <div class="form-group col-md-3">
+            </div>
+            <div class="form-group col-md-3">
                 <label for="txtVooHoraSaida" class="control-label col-md-6">
                     Hora Saída</label>
                 <div class="col-md-6">
                     <asp:TextBox ID="txtVooHoraSaida" runat="server" class="form-control"></asp:TextBox>
                 </div>
-                </div>
-
+            </div>
             <div class="row">
             </div>
             <div class="form-group col-md-3">
@@ -141,178 +141,186 @@
             </div>
             <div class="row">
             </div>
-            <div class="form-group col-md-4">
+           <%-- <div class="form-group col-md-4">
                  <label class="sr-only" for="txtObs">
                             Observações</label>
-                <asp:TextBox ID="txtObs" TextMode="MultiLine" Width="745px" placeholder="Observações" runat="server"></asp:TextBox>
+            <asp:TextBox ID="txtObs" TextMode="MultiLine" Width="745px" placeholder="Observações" runat="server"></asp:TextBox>--%>
+            <div class="form-group col-md-6">
+                <%--<label for="txtOBS" class="control-label col-md-3">
+                    OBS</label>--%>
+                    <label class="sr-only" for="txtObs">
+                            Observações</label>
+                <div class="col-md-10 col-md-offset-1">
+                    <textarea id="txtObs" runat="server" class="form-control" rows="3" placeholder="Observações"></textarea>
+                </div>
             </div>
-
             <div class="row">
             </div>
-            
-
             <%--Passageiros(&nbsp;<asp:ImageButton runat="server" ImageUrl="~/Figuras/AddPAX.gif" />&nbsp;clique
             aqui para adicionar pax)--%>
-
             <div class="panel panel-primary">
                 <div class="panel-heading">
                     <strong>Passageiros</strong></div>
                 <div class="panel-body">
-            <asp:GridView ID="grvData" runat="server" ShowFooter="true" AutoGenerateColumns="false" 
+                    <asp:GridView ID="grvData" runat="server" ShowFooter="true" AutoGenerateColumns="false" OnRowDeleting="OnRowDeleting" OnRowDataBound = "OnRowDataBound"
                         class="table table-hover table-bordered" GridLines="None">
-                <Columns>
-                    <asp:BoundField DataField="#" HeaderText="#" />
-                    <asp:TemplateField HeaderText="Nome">
-                        <ItemTemplate>
-                            <asp:TextBox ID="txtNome" runat="server"></asp:TextBox>
-                        </ItemTemplate>
-                    </asp:TemplateField>
-                    <asp:TemplateField HeaderText="Identidade">
-                        <ItemTemplate>
-                            <asp:TextBox ID="txtIdentidade" runat="server"></asp:TextBox>
-                        </ItemTemplate>
-                    </asp:TemplateField>
-                    <asp:TemplateField HeaderText="Orgao Exp">
-                        <ItemTemplate>
-                            <asp:TextBox ID="txtOrgao" runat="server"></asp:TextBox>
-                        </ItemTemplate>
-                    </asp:TemplateField>
-                    <asp:TemplateField HeaderText="Telefone">
-                        <ItemTemplate>
-                            <asp:TextBox ID="txtTelefone" runat="server"></asp:TextBox>
-                        </ItemTemplate>
-                    </asp:TemplateField>
-                    <asp:TemplateField HeaderText="Obs">
-                        <ItemTemplate>
-                            <asp:TextBox ID="txtObs" runat="server"></asp:TextBox>
-                        </ItemTemplate>
-                    </asp:TemplateField>
-                    <asp:TemplateField HeaderText="">
-                        <ItemTemplate>
-                                <asp:LinkButton ID="lnkExcluirPAX" runat="server" class="btn btn-danger" OnClick="lnkExcluirPAX_Click">
+                        <Columns>
+                            <asp:BoundField DataField="#" Visible="false" HeaderText="#" />
+                            <asp:TemplateField HeaderText="Nome">
+                                <ItemTemplate>
+                                    <asp:TextBox ID="txtNome" runat="server"></asp:TextBox>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="Identidade">
+                                <ItemTemplate>
+                                    <asp:TextBox ID="txtIdentidade" runat="server"></asp:TextBox>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="Orgao Exp">
+                                <ItemTemplate>
+                                    <asp:TextBox ID="txtOrgao" runat="server"></asp:TextBox>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="Telefone">
+                                <ItemTemplate>
+                                    <asp:TextBox ID="txtTelefone" runat="server"></asp:TextBox>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="Obs">
+                                <ItemTemplate>
+                                    <asp:TextBox ID="txtObs" runat="server"></asp:TextBox>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="">
+                                <ItemTemplate>
+                                    <asp:LinkButton ID="lnkExcluirPAX" CommandName="Delete"  runat="server" class="btn btn-danger">
                                 <span class="glyphicon glyphicon-remove"></span>
-                                </asp:LinkButton>
-                        </ItemTemplate>
-                        <FooterStyle HorizontalAlign="Right" />
-                        <FooterTemplate>
-                        <asp:LinkButton ID="ButtonAdd" runat="server" OnClick="ButtonAdd_Click" class="btn btn-success">Adicionar PAX</asp:LinkButton>                            
-                        </FooterTemplate>
-                    </asp:TemplateField>
-                </Columns>
-            </asp:GridView>
+                                    </asp:LinkButton>
+                                </ItemTemplate>
+                                <FooterStyle HorizontalAlign="Right" />
+                                <FooterTemplate>
+                                    <asp:LinkButton ID="ButtonAdd" runat="server" OnClick="ButtonAdd_Click" class="btn btn-success">Adicionar PAX</asp:LinkButton>
+                                </FooterTemplate>
+                            </asp:TemplateField>
+                        </Columns>
+                    </asp:GridView>
+                </div>
             </div>
+            <div class="row">
             </div>
-            <div class="row"> </div>
             <div class="panel panel-primary">
                 <div class="panel-heading">
                     <strong>Serviços Inclusos</strong></div>
-                <div class="panel-body">          
-            <asp:GridView ID="grvServIn" runat="server" ShowFooter="true" AutoGenerateColumns="false"
-                OnRowDataBound="RowDataBound1" class="table table-hover table-bordered" GridLines="None">
-                <Columns>
-                    <asp:BoundField DataField="#" HeaderText="#" />
-                    <asp:TemplateField HeaderText="Local">
-                        <ItemTemplate>
-                            <asp:DropDownList ID="ddlLocal" runat="server">
-                            </asp:DropDownList>
-                        </ItemTemplate>
-                    </asp:TemplateField>
-                    <asp:TemplateField HeaderText="Valor">
-                        <ItemTemplate>
-                            <asp:TextBox ID="txtValor" runat="server"></asp:TextBox>
-                        </ItemTemplate>
-                    </asp:TemplateField>
-                    <asp:TemplateField HeaderText="Pagamento">
-                        <ItemTemplate>
-                            <asp:DropDownList ID="ddlPagamento1" runat="server"></asp:DropDownList>
-                        </ItemTemplate>
-                    </asp:TemplateField>
-                    <asp:TemplateField HeaderText="">
-                        <ItemTemplate>
-                            <asp:LinkButton ID="lnkExcluirServIn" runat="server" class="btn btn-danger" OnClick="lnkExcluirServIn_Click">
+                <div class="panel-body">
+                    <asp:GridView ID="grvServIn" runat="server" ShowFooter="true" AutoGenerateColumns="false"
+                        OnRowDataBound="RowDataBound1" class="table table-hover table-bordered" GridLines="None">
+                        <Columns>
+                            <asp:BoundField DataField="#" HeaderText="#" />
+                            <asp:TemplateField HeaderText="Local">
+                                <ItemTemplate>
+                                    <asp:DropDownList ID="ddlLocal" runat="server">
+                                    </asp:DropDownList>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="Valor">
+                                <ItemTemplate>
+                                    <asp:TextBox ID="txtValor" runat="server"></asp:TextBox>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="Pagamento">
+                                <ItemTemplate>
+                                    <asp:DropDownList ID="ddlPagamento1" runat="server">
+                                    </asp:DropDownList>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="">
+                                <ItemTemplate>
+                                    <asp:LinkButton ID="lnkExcluirServIn" runat="server" class="btn btn-danger" OnClick="lnkExcluirServIn_Click">
                                 <span class="glyphicon glyphicon-remove"></span>
-                                </asp:LinkButton>
-                        </ItemTemplate>
-                        <FooterStyle HorizontalAlign="Right" />
-                        <FooterTemplate>
-                        <asp:LinkButton ID="ButtonAddServIn" runat="server" OnClick="ButtonAddServIn_Click" class="btn btn-success">Adicionar Serviço</asp:LinkButton>                         
-                        </FooterTemplate>
-                    </asp:TemplateField>
-                </Columns>
-            </asp:GridView>
-              </div>
-              </div>
-             
-            <div class="row" ></div>
+                                    </asp:LinkButton>
+                                </ItemTemplate>
+                                <FooterStyle HorizontalAlign="Right" />
+                                <FooterTemplate>
+                                    <asp:LinkButton ID="ButtonAddServIn" runat="server" OnClick="ButtonAddServIn_Click"
+                                        class="btn btn-success">Adicionar Serviço</asp:LinkButton>
+                                </FooterTemplate>
+                            </asp:TemplateField>
+                        </Columns>
+                    </asp:GridView>
+                </div>
+            </div>
+            <div class="row">
+            </div>
             <div class="panel panel-primary">
                 <div class="panel-heading">
                     <strong>Serviços Adicionais</strong></div>
-                <div class="panel-body">          
-                <asp:GridView  ID="grvServAd" runat="server" ShowFooter="true" AutoGenerateColumns="false"
-                    OnRowDataBound="RowDataBound2" class="table table-hover table-bordered" GridLines="None">
-                    <Columns>
-                        <asp:BoundField DataField="#" HeaderText="#" />
-                        <asp:TemplateField HeaderText="Voucher">
-                            <ItemTemplate>
-                                <asp:TextBox ID="txtVoucher" Width="80px" runat="server"></asp:TextBox>
-                            </ItemTemplate>
-                        </asp:TemplateField>
-                        <asp:TemplateField HeaderText="Passeio">
-                            <ItemTemplate>
-                                <asp:DropDownList ID="ddlPasseio" runat="server">
-                                </asp:DropDownList>
-                            </ItemTemplate>
-                        </asp:TemplateField>
-                        <asp:TemplateField HeaderText="Vendedor">
-                            <ItemTemplate>
-                                <asp:DropDownList ID="ddlVendedor" Width="90px" runat="server">
-                                </asp:DropDownList>
-                            </ItemTemplate>
-                        </asp:TemplateField>
-                        <asp:TemplateField HeaderText="Valor">
-                            <ItemTemplate>
-                                <asp:TextBox ID="txtValor2" Width="90px" runat="server"></asp:TextBox>
-                            </ItemTemplate>
-                        </asp:TemplateField>
-                        <asp:TemplateField HeaderText="Data">
-                            <ItemTemplate>
-                                <asp:TextBox ID="txtData" Width="90px" runat="server"></asp:TextBox>
-                            </ItemTemplate>
-                        </asp:TemplateField>
-                        <asp:TemplateField HeaderText="Hora">
-                            <ItemTemplate>
-                                <asp:TextBox ID="txtHora" Width="90px" runat="server"></asp:TextBox>
-                            </ItemTemplate>
-                        </asp:TemplateField>
-                        <asp:TemplateField HeaderText="Pagamento">
-                            <ItemTemplate>
-                                <asp:DropDownList ID="ddlPagamento2" Width="90px" runat="server">
-                                </asp:DropDownList>
-                            </ItemTemplate>
-                        </asp:TemplateField>
-                        <asp:TemplateField HeaderText="Status">
-                            <ItemTemplate>
-                                <asp:DropDownList ID="ddlStatus" Width="90px" runat="server">
-                                </asp:DropDownList>
-                            </ItemTemplate>
-                        </asp:TemplateField>
-                        <asp:TemplateField HeaderText="">
-                            <ItemTemplate>
-                                <%--<asp:ImageButton ID="lnkExcluirServIn" runat="server" CommandName="Excluir" ImageUrl="~/Figuras/btn_Delete.gif"
+                <div class="panel-body">
+                    <asp:GridView ID="grvServAd" runat="server" ShowFooter="true" AutoGenerateColumns="false"
+                        OnRowDataBound="RowDataBound2" class="table table-hover table-bordered" GridLines="None">
+                        <Columns>
+                            <asp:BoundField DataField="#" HeaderText="#" />
+                            <asp:TemplateField HeaderText="Voucher">
+                                <ItemTemplate>
+                                    <asp:TextBox ID="txtVoucher" Width="80px" runat="server"></asp:TextBox>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="Passeio">
+                                <ItemTemplate>
+                                    <asp:DropDownList ID="ddlPasseio" runat="server">
+                                    </asp:DropDownList>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="Vendedor">
+                                <ItemTemplate>
+                                    <asp:DropDownList ID="ddlVendedor" Width="90px" runat="server">
+                                    </asp:DropDownList>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="Valor">
+                                <ItemTemplate>
+                                    <asp:TextBox ID="txtValor2" Width="90px" runat="server"></asp:TextBox>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="Data">
+                                <ItemTemplate>
+                                    <asp:TextBox ID="txtData" Width="90px" runat="server"></asp:TextBox>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="Hora">
+                                <ItemTemplate>
+                                    <asp:TextBox ID="txtHora" Width="90px" runat="server"></asp:TextBox>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="Pagamento">
+                                <ItemTemplate>
+                                    <asp:DropDownList ID="ddlPagamento2" Width="90px" runat="server">
+                                    </asp:DropDownList>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="Status">
+                                <ItemTemplate>
+                                    <asp:DropDownList ID="ddlStatus" Width="90px" runat="server">
+                                    </asp:DropDownList>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="">
+                                <ItemTemplate>
+                                    <%--<asp:ImageButton ID="lnkExcluirServIn" runat="server" CommandName="Excluir" ImageUrl="~/Figuras/btn_Delete.gif"
                                     ToolTip="Excluir a linha" />--%>
-                                <asp:LinkButton ID="lnkExcluirServAd" runat="server" class="btn btn-danger" OnClick="lnkExcluirServAd_Click">
+                                    <asp:LinkButton ID="lnkExcluirServAd" runat="server" class="btn btn-danger" OnClick="lnkExcluirServAd_Click">
                                 <span class="glyphicon glyphicon-remove"></span>
-                                </asp:LinkButton>
-                            </ItemTemplate>
-                            <FooterStyle HorizontalAlign="Right" />
-                            <FooterTemplate>
-                                <asp:LinkButton ID="ButtonAddServAd" runat="server" OnClick="ButtonAddServAd_Click" class="btn btn-success">Adicionar Serviço</asp:LinkButton>
-                            </FooterTemplate>
-                        </asp:TemplateField>
-                    </Columns>
-                </asp:GridView>
+                                    </asp:LinkButton>
+                                </ItemTemplate>
+                                <FooterStyle HorizontalAlign="Right" />
+                                <FooterTemplate>
+                                    <asp:LinkButton ID="ButtonAddServAd" runat="server" OnClick="ButtonAddServAd_Click"
+                                        class="btn btn-success">Adicionar Serviço</asp:LinkButton>
+                                </FooterTemplate>
+                            </asp:TemplateField>
+                        </Columns>
+                    </asp:GridView>
+                </div>
             </div>
-            </div>            
             <asp:LinkButton ID="btnAdFicha" runat="server" OnClick="btnAdFicha_Click" class="btn btn-primary">Adicionar Ficha</asp:LinkButton>
             &nbsp;<asp:LinkButton ID="btnVoltar" runat="server" OnClick="btnVoltar_Click" class="btn btn-warning">Voltar</asp:LinkButton>
             </form>
