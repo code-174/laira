@@ -37,6 +37,14 @@
                     </div>
                 </div>
             </div>
+            <div class="btn-group btn-group-justified">
+                <asp:LinkButton ID="lnkSelecionarTodas" runat="server" OnClick="lnkSelecionarTodas_Click"
+                    class="btn btn-primary">Selecionar Todas</asp:LinkButton>
+                <asp:LinkButton ID="lnkImprimir" runat="server" OnClientClick="javascript:CallPrint('divPrint');"
+                    class="btn btn-info">Imprimir</asp:LinkButton>
+                <asp:LinkButton ID="lnkEnviarEmail" runat="server" OnClick="lnkEnviarEmail_Click"
+                    class="btn btn-warning">Enviar Por Email</asp:LinkButton>
+            </div>
             <asp:GridView ID="GridView1" class="table table-bordered" runat="server" AutoGenerateColumns="false"
                 GridLines="none" HeaderStyle-CssClass="bg-primary" EmptyDataRowStyle-BackColor="Yellow"
                 EmptyDataText="Nao existem fichas para a Data informada!" DataKeyNames="ID_SERV_AD_FICHA">
@@ -55,10 +63,10 @@
                     <asp:BoundField DataField="PAX" HeaderText="Pax" />
                     <asp:BoundField DataField="HOTEL" HeaderText="Hotel" />
                     <asp:BoundField DataField="APTO" HeaderText="Apto" />
-                    <asp:BoundField DataField="PRESTADOR" HeaderText="Realizado por" />                    
+                    <asp:BoundField DataField="PRESTADOR" HeaderText="Realizado por" />
                     <asp:BoundField DataField="OS_NO" HeaderText="OS" />
                 </Columns>
-                </asp:GridView>
+            </asp:GridView>
             </form>
         </fieldset>
     </div>

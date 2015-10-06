@@ -9,56 +9,41 @@ using System.Data.SqlClient;
 using System.Text;
 using System.Configuration;
 
-public partial class ALTERAR_OS : System.Web.UI.Page
+public partial class ALTERAR_OS_ADC : System.Web.UI.Page
 {
     protected string strOSID;
-    protected string strTipoOS;
     protected void Page_Load(object sender, EventArgs e)
     {
         string strOSNo = Request.QueryString["OSNo"];
         strOSID = strOSNo;
         if (!IsPostBack)
-        {   
-            Titulo.InnerText = "Alterar OS Nr." + " " + strOSNo;
+        {
+            Titulo.InnerText = "Alterar OS (Passeios) Nr." + " " + strOSNo;
 
             LoadCombos();
 
-            List<OrdemServico> l = OrdemServico.GetOSByNo(strOSNo);
 
-            string TipoOS = "";
+            string strTipo = "N";
+            List<OrdemServAdc> l = OrdemServAdc.GetOSAdc(strOSNo, strTipo);
+
+            string strTipoOS = "";
             foreach (var item in l)
             {
-                TipoOS = l[0].TIPO_OS;
                 ddlServicoFeitoPor.SelectedValue = l[0].FEITO_POR;
-                txtValorServico.Text = l[0].VALOR_SERVICO;
-                txtValorEstacionamento.Text = l[0].VALOR_ESTAC;
                 txtObs.Text = l[0].OBS_OS;
                 ddlMotorista.SelectedValue = l[0].MOTORISTA;
                 ddlGuia.SelectedValue = l[0].GUIA;
             }
 
-            strTipoOS = TipoOS;
-
             LoadGrid(strOSNo, strTipoOS);
         }
     }
-
     private void LoadGrid(string strOSNo, string strTipoOS)
     {
         Int64 ID_OS = Convert.ToInt64(strOSNo);
-        GridView1.DataSource = FichasListagem.GetRelatorioFichasOS(ID_OS, strTipoOS);
+        GridView1.DataSource = FichasListagem.GetRelatorioFichasOSAdc(ID_OS);
         GridView1.DataBind();
     }
-
-    protected void GridView1_RowDataBound(object sender, GridViewRowEventArgs e)
-    {
-        //if (e.Row.RowType == DataControlRowType.Header)
-        //{
-        //    e.Row.Cells[8].Visible = false;
-        //    e.Row.Cells[9].Visible = false;
-        //}
-    }
-
     void LoadCombos()
     {
         // POPULATE SERVICO FEITO POR DROP DOWN LIST
@@ -85,7 +70,6 @@ public partial class ALTERAR_OS : System.Web.UI.Page
         ddlGuia.DataSource = detailsGui;
         ddlGuia.DataBind();
     }
-
     protected void lnkProcessar_Click(object sender, EventArgs e)
     {
         // TO DO VERIFICAR CAMPOS
@@ -96,25 +80,22 @@ public partial class ALTERAR_OS : System.Web.UI.Page
 
         StringBuilder str = new StringBuilder();
 
-        str.AppendLine(" update ORDEM_SERV ");
+        str.AppendLine(" update OS_ADC ");
         str.AppendLine(" set FEITO_POR_NO = @FEITO_POR_NO, ");
-        str.AppendLine(" VALOR_SERVICO = @VALOR_SERVICO, ");
-        str.AppendLine(" VALOR_ESTAC = @VALOR_ESTAC, ");
-        str.AppendLine(" OBS_ORDEM_SERV = @OBS_ORDEM_SERV, ");
+        str.AppendLine(" OBS = @OBS, ");
         str.AppendLine(" MOTORISTA_NO = @MOTORISTA_NO, ");
         str.AppendLine(" GUIA_NO = @GUIA_NO ");
-        str.AppendLine(" where ID_ORDEM_SERV = @ID_ORDEM_SERV ");
+        str.AppendLine(" where ID_OS_ADC = @ID_OS_ADC ");
 
         cmd.CommandText = str.ToString();
         cmd.CommandType = CommandType.Text;
         cmd.Parameters.Add(new SqlParameter("@FEITO_POR_NO", SqlDbType.BigInt)).Value = Convert.ToInt64(ddlServicoFeitoPor.SelectedValue.ToString());
-        cmd.Parameters.Add(new SqlParameter("@VALOR_SERVICO", SqlDbType.Money)).Value = txtValorServico.Text.Trim();
-        cmd.Parameters.Add(new SqlParameter("@VALOR_ESTAC", SqlDbType.Money)).Value = txtValorEstacionamento.Text.Trim();
-        cmd.Parameters.Add(new SqlParameter("@OBS_ORDEM_SERV", SqlDbType.NChar)).Value = txtObs.Text.Trim();
+        cmd.Parameters.Add(new SqlParameter("@OBS", SqlDbType.NChar)).Value = txtObs.Text.Trim();
         cmd.Parameters.Add(new SqlParameter("@MOTORISTA_NO", SqlDbType.BigInt)).Value = Convert.ToInt64(ddlMotorista.SelectedValue.ToString());
         cmd.Parameters.Add(new SqlParameter("@GUIA_NO", SqlDbType.BigInt)).Value = Convert.ToInt64(ddlGuia.SelectedValue.ToString());
-        cmd.Parameters.Add(new SqlParameter("@ID_ORDEM_SERV", SqlDbType.BigInt)).Value = Convert.ToInt64(strOSID);
+        cmd.Parameters.Add(new SqlParameter("@ID_OS_ADC", SqlDbType.BigInt)).Value = Convert.ToInt64(strOSID);
 
+       
         conn.Open();
         cmd.ExecuteNonQuery();
         cmd.Dispose();
@@ -123,23 +104,24 @@ public partial class ALTERAR_OS : System.Web.UI.Page
         conn.Dispose();
 
         
-         //Select the checkboxes from the GridView control
+
+        // Select the checkboxes from the GridView control
         for (int i = 0; i < GridView1.Rows.Count; i++)
         {
             GridViewRow row = GridView1.Rows[i];
-            bool isChecked = ((CheckBox)row.FindControl("chkSelect")).Checked;
+            bool isChecked = ((CheckBox)row.FindControl("chkSelect")).Checked;            
 
             if (!isChecked)
             {
-                Int64 FICHA_NO = Convert.ToInt64(GridView1.Rows[i].Cells[1].Text);
-                RemoveFichaOS(FICHA_NO, strTipoOS);
-            }
+                Int64 SERV_ADC_FICHA_NO = Convert.ToInt64(GridView1.DataKeys[row.RowIndex].Value);
+                UpdateServAdFicha(SERV_ADC_FICHA_NO);
+            }           
         }
-    }
+    }    
 
-    void RemoveFichaOS(Int64 FICHA_NO, string strTipoOS)
+    void UpdateServAdFicha(Int64 SERV_ADC_FICHA_NO)
     {
-        Fichas c = new Fichas();
-        c.RemoveFichaOS(FICHA_NO, strTipoOS);
+        ServAdFicha c = new ServAdFicha();
+        c.UpdateServAdFicha(SERV_ADC_FICHA_NO);
     }
 }

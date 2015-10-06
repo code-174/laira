@@ -71,8 +71,8 @@ public class OrdemServAdc
         //DateTime DataOS = Convert.ToDateTime(strData);
 
 
-        str.AppendLine(" select ID_OS_ADC, DATA_OS_ADC, NOME_PRESTADOR AS FEITO_POR, OBS ");
-        //str.AppendLine(" MOTORISTA_NO, GUIA_NO ");
+        str.AppendLine(" select ID_OS_ADC, DATA_OS_ADC, NOME_PRESTADOR AS FEITO_POR, OBS, ");
+        str.AppendLine(" MOTORISTA_NO, GUIA_NO ");
         //str.AppendLine(" dbo.getpax(FICHAS.ID_FICHA) AS NOME_PASSAGEIRO, ");
         //str.AppendLine(" ISNULL(NOME_HOTEL, '---') AS HOTEL, APARTAMENTO_FICHA ");
         str.AppendLine(" from OS_ADC ");
@@ -108,8 +108,8 @@ public class OrdemServAdc
             OS.DATA = reader["DATA_OS_ADC"].ToString();
             OS.FEITO_POR = reader["FEITO_POR"].ToString();
             OS.OBS_OS = reader["OBS"].ToString();
-            //OS.MOTORISTA = reader["SIGLA_VOO"].ToString();
-            //OS.GUIA = reader["NOME_PASSAGEIRO"].ToString();               
+            OS.MOTORISTA = reader["MOTORISTA_NO"].ToString();
+            OS.GUIA = reader["GUIA_NO"].ToString();               
             xList.Add(OS);
         }
 

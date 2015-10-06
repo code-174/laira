@@ -49,16 +49,13 @@
                     </div>
                 </div>
                 <div class="btn-group btn-group-justified">
-                    <asp:LinkButton ID="lnkCadastrarFicha" runat="server"  OnClick="lnkCadastrarFicha_Click"
+                    <asp:LinkButton ID="lnkCadastrarFicha" runat="server" OnClick="lnkCadastrarFicha_Click"
                         class="btn btn-info">Adicionar 
                         Ficha</asp:LinkButton>
                     <asp:LinkButton ID="lnkVoltar" runat="server" OnClick="lnkVoltar_Click" class="btn btn-warning">Voltar</asp:LinkButton>
                 </div>
             </div>
             <div id="divPrint">
-                <%--<asp:GridView ID="grvData" runat="server" class="table table-hover" 
-                    GridLines="None">
-                </asp:GridView>--%>
                 <asp:GridView ID="GridView1" class="table table-bordered" runat="server" AutoGenerateColumns="false"
                     OnRowDataBound="GridView1_RowDataBound" GridLines="none" BorderWidth="0" ShowHeader="false">
                     <Columns>

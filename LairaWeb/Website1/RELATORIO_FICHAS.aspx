@@ -56,9 +56,7 @@
                 </div>
             </div>
             <div id="divPrint">
-                <%--<asp:GridView ID="grvData" runat="server" class="table table-hover" 
-                    GridLines="None">
-                </asp:GridView>--%>
+                <link rel="stylesheet" href="Styles/bootstrap.min.css" type="text/css" media="all" />
                 <asp:GridView ID="GridView1" class="table table-bordered" runat="server" AutoGenerateColumns="false"
                     OnRowDataBound="GridView1_RowDataBound" GridLines="none" HeaderStyle-CssClass="bg-primary">
                     <Columns>

@@ -26,6 +26,7 @@
                 </div>
             </div>
             <div id="divPrint">
+            <link rel="stylesheet" href="Styles/bootstrap.min.css" type="text/css" media="all" />
                 <asp:GridView ID="grvData" runat="server" class="table table-hover" 
                     GridLines="None">
                 </asp:GridView>

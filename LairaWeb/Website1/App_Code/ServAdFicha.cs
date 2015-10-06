@@ -85,12 +85,9 @@ public class ServAdFicha
         cmd.Connection = conn;
         StringBuilder str = new StringBuilder();
 
-
         str.AppendLine(" update SERV_AD_FICHA ");
         str.AppendLine(" set OS_ADC_NO = @OSADC_NO ");
         str.AppendLine(" where ID_SERV_AD_FICHA = @SERV_ADC_FICHA_NO ");
-        
-            
 
         cmd.CommandText = str.ToString();
         cmd.CommandType = CommandType.Text;
@@ -106,5 +103,31 @@ public class ServAdFicha
         conn.Close();
         conn.Dispose();
 
+    }
+
+    public void UpdateServAdFicha(Int64 SERV_ADC_FICHA_NO)
+    {
+        SqlCommand cmd = new SqlCommand();
+        SqlConnection conn = new SqlConnection();
+        conn.ConnectionString = ConfigurationManager.ConnectionStrings["LairaWebDB"].ConnectionString;
+        cmd.Connection = conn;
+        StringBuilder str = new StringBuilder();
+
+        str.AppendLine(" update SERV_AD_FICHA ");
+        str.AppendLine(" set OS_ADC_NO = NULL ");
+        str.AppendLine(" where ID_SERV_AD_FICHA = @SERV_ADC_FICHA_NO ");
+
+        cmd.CommandText = str.ToString();
+        cmd.CommandType = CommandType.Text;
+        cmd.Parameters.Add(new SqlParameter("@SERV_ADC_FICHA_NO", SqlDbType.BigInt)).Value = SERV_ADC_FICHA_NO;
+
+        conn.Open();
+
+        cmd.ExecuteNonQuery();
+
+        cmd.Dispose();
+        cmd = null;
+        conn.Close();
+        conn.Dispose();
     }
 }

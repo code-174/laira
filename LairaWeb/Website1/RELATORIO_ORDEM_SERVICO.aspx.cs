@@ -105,4 +105,18 @@ public partial class RELATORIO_ORDEM_SERVICO : System.Web.UI.Page
             Response.Redirect("ALTERAR_OS.aspx?OSNo=" + strOSNo);
         }
     }
+
+    protected void lnkSelectAll_Click(object sender, EventArgs e)
+    {
+        for (int i = 0; i < GridView1.Rows.Count; i++)
+        {
+            GridViewRow row = GridView1.Rows[i];
+            ((CheckBox)row.FindControl("chkSelect")).Checked = true;
+        }
+    }
+
+    protected void lnkVoltar_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("MENU_ORD_SERV.aspx");
+    }
 }

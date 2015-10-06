@@ -91,8 +91,9 @@
                 <asp:LinkButton ID="lnkEnviarEmail" runat="server" OnClick="lnkEnviarEmail_Click"
                     class="btn btn-warning">Enviar Por Email</asp:LinkButton>
             </div>
-            <div class-"form-group">
+            <div class="form-group">
             <!-- / BUTTON GROUP-->
+
             <asp:GridView ID="GridView1" class="table table-bordered" runat="server" AutoGenerateColumns="false"
                 GridLines="none" HeaderStyle-CssClass="bg-primary" EmptyDataRowStyle-BackColor="Yellow"
                 EmptyDataText="Nao existem fichas para a Data informada!" DataKeyNames="ID_SERV_AD_FICHA">

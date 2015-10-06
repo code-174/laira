@@ -62,11 +62,21 @@ public partial class MENU_ORD_SERV_ADC : System.Web.UI.Page
     }
     
     protected void lnkLocalizar_Click(object sender, EventArgs e)
-    {
+    {        
         if (txtOSNo.Text != "")
         {
             string strOSNo = txtOSNo.Text.Trim();
-            Response.Redirect("RELATORIO_OS_ADC.aspx?OSNo=" + strOSNo + "&ReportType=NumberRpt");
+            double Num;
+            bool isNum = double.TryParse(strOSNo, out Num);
+            if (isNum)
+            {
+                Response.Redirect("RELATORIO_OS_ADC.aspx?OSNo=" + strOSNo + "&ReportType=NumberRpt");
+            }
+            else
+            {
+                // mesage box "you gotta put only numbers"
+                // no records found asp gridview
+            }
         }
     }
    

@@ -50,7 +50,11 @@ public partial class GERAR_COMUNICADO_TRANSFER : System.Web.UI.Page
     }
     protected void lnkSelecionarTodas_Click(object sender, EventArgs e)
     {
-        // TO DO
+        for (int i = 0; i < GridView1.Rows.Count; i++)
+        {
+            GridViewRow row = GridView1.Rows[i];
+            ((CheckBox)row.FindControl("chkSelect")).Checked = true;
+        }
     }
     protected void lnkEnviarEmail_Click(object sender, EventArgs e)
     {

@@ -37,18 +37,25 @@ public partial class MENU_FICHAS : System.Web.UI.Page
    
     protected void lnkLocalizar_Click(object sender, EventArgs e)
     {
-
-        if (ddlLocalizar.SelectedValue == "F")
+        if (txtCriterio.Text.Trim() != "0")
         {
-            // TO DO ALTERAR FICHA POR NUMERO DA FICHA
-            //Response.Redirect("LISTAR_FICHAS.aspx?Codigo=5" + "&Data=" + txtChave.Text);
-        }
+            if (ddlLocalizar.SelectedValue == "F")
+            {
+                // TO DO ALTERAR FICHA POR NUMERO DA FICHA
+                Response.Redirect("ALTERAR_FICHA.aspx?FichaNo=" + txtCriterio.Text);
+            }
 
+            else
+            {
+                // TO DO ALTERAR FICHA POR CODIGO DA EXCURSAO
+                //Response.Redirect("LISTAR_FICHAS.aspx?Codigo=6" + "&Data=" + txtChave.Text);
+            }
+        }
         else
         {
-            // TO DO ALTERAR FICHA POR CODIGO DA EXCURSAO
-            //Response.Redirect("LISTAR_FICHAS.aspx?Codigo=6" + "&Data=" + txtChave.Text);
+            //MSG: PLEASE INSERT A NUMBER
         }
+        
 
     }
 

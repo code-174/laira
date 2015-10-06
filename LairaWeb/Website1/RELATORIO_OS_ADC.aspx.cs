@@ -19,7 +19,7 @@ public partial class RELATORIO_OS_ADC : System.Web.UI.Page
             {
                 string strCriterio = Request.QueryString["Data"];
                 string strTipo = "D";
-                GridReport(strCriterio, strTipo);                
+                GridReport(strCriterio, strTipo);
             }
             else if (ReportType == "FilterRpt")
             {
@@ -36,7 +36,7 @@ public partial class RELATORIO_OS_ADC : System.Web.UI.Page
                 string strTipo = "N";
                 GridReport(strCriterio, strTipo);
             }
-            
+
         }
     }
 
@@ -78,35 +78,28 @@ public partial class RELATORIO_OS_ADC : System.Web.UI.Page
     {
         GridView1.DataSource = FichasOSAdc.FiltroOSAdc(DataIni, DataFin, Passeio, Prestador, Vendedor);
         GridView1.DataBind();
-    }   
-
-    bool VerificarCampos()
-    {
-        if (txtDataInicio.Text.Trim() == "")
-        {
-            return false;
-        }
-        else
-        {
-            return true;
-        }
     }
 
     protected void lnkProcessar_Click(object sender, EventArgs e)
     {
-        if (VerificarCampos())
+        if (txtDataInicio.Text.Trim() != "")
         {
             string strDataIni = txtDataInicio.Text.Trim();
+            string strPasseio = ddlPasseio.SelectedValue;
+            string strPrestador = ddlPrestador.SelectedValue;
+            string strVendedor = ddlVendedor.SelectedValue;
+            string strDataFin = "";
+
             if (txtDataFim.Text == "")
             {
-                string strDataFin = strDataIni;
-                Response.Redirect("RELATORIO_OS_ADC.aspx?DataIni=" + strDataIni + "&DataFin=" + strDataFin + "&Passeio=" + ddlPasseio.SelectedValue + "&Prestador=" + ddlPrestador.SelectedValue + "&Vendedor=" + ddlVendedor.SelectedValue + "&ReportType=FilterRpt");
+                strDataFin = strDataIni;
             }
             else
             {
-                string strDataFin = txtDataFim.Text.Trim();
-                Response.Redirect("RELATORIO_OS_ADC.aspx?DataIni=" + strDataIni + "&DataFin=" + strDataFin + "&Passeio=" + ddlPasseio.SelectedValue + "&Prestador=" + ddlPrestador.SelectedValue + "&Vendedor=" + ddlVendedor.SelectedValue + "&ReportType=FilterRpt");
+                strDataFin = txtDataFim.Text.Trim();
             }
+
+            GridReportFilter(strDataIni, strDataFin, strPasseio, strPrestador, strVendedor);
         }
     }
 
@@ -114,8 +107,40 @@ public partial class RELATORIO_OS_ADC : System.Web.UI.Page
     {
         if (txtOSNo.Text != "")
         {
-            string strOSNo = txtOSNo.Text.Trim();
-            Response.Redirect("RELATORIO_OS_ADC.aspx?OSNo=" + strOSNo + "&ReportType=NumberRpt");
+            string OS_NO = txtOSNo.Text.Trim();
+            double Num;
+            bool isNum = double.TryParse(OS_NO, out Num);
+            if (isNum)
+            {
+                string strTipo = "N";
+                GridReport(OS_NO, strTipo);
+            }
+            else
+            {
+                // mesage box "you gotta put only numbers"
+                // no records found asp gridview
+            }
         }
+    }
+
+    protected void GridView1_RowCommand(object sender, GridViewCommandEventArgs e)
+    {
+        if (e.CommandName == "AlterarOS")
+        {
+            int indexRow = Convert.ToInt32(e.CommandArgument);
+            string strOSNo = GridView1.DataKeys[indexRow].Value.ToString();
+
+            Response.Redirect("ALTERAR_OS_ADC.aspx?OSNo=" + strOSNo);
+        }
+    }
+
+    protected void lnkSelectAll_Click(object sender, EventArgs e)
+    {
+        // TO DO
+    }
+
+    protected void lnkVoltar_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("MENU_ORD_SERV_ADC.aspx");
     }
 }

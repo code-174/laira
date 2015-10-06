@@ -166,7 +166,7 @@ public class FichasListagem
             return xList;
         }
 
-    }
+    }    
 
     public static List<FichasListagem> FiltroFichasListagem(string strSelected, string strTipo, string strCriterio)
     {

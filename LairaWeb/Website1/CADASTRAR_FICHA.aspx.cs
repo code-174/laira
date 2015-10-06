@@ -176,12 +176,8 @@ public partial class CADASTRAR_FICHA : System.Web.UI.Page
     }
     protected void btnAdFicha_Click(object sender, EventArgs e)
     {
-
-
         if (VerificarCampos())
         {
-
-
             try
             {
                 SqlCommand cmd = new SqlCommand();
@@ -663,7 +659,7 @@ public partial class CADASTRAR_FICHA : System.Web.UI.Page
         }
 
         //Set Previous Data on Postbacks
-        SetPreviousDataServIn();
+        SetPreviousDataServIn();        
     }
     private void AddNewRowToGridServAd()
     {
@@ -713,7 +709,7 @@ public partial class CADASTRAR_FICHA : System.Web.UI.Page
         }
 
         //Set Previous Data on Postbacks
-        SetPreviousDataServAd();
+        SetPreviousDataServAd();        
     }
 
     private void AddNewRowToGrid()
@@ -760,6 +756,7 @@ public partial class CADASTRAR_FICHA : System.Web.UI.Page
 
         //Set Previous Data on Postbacks
         SetPreviousData();
+        //Page.SetFocus(grvServIn);
     }
     private void SetPreviousData()
     {
@@ -787,7 +784,7 @@ public partial class CADASTRAR_FICHA : System.Web.UI.Page
 
                     rowIndex++;
                 }
-               
+
             }
         }
     }
@@ -893,7 +890,7 @@ public partial class CADASTRAR_FICHA : System.Web.UI.Page
     {
         if (e.Row.RowType == DataControlRowType.DataRow)
         {
-           // TextBox box = (TextBox)e.Row.FindControl("txtNome");
+            // TextBox box = (TextBox)e.Row.FindControl("txtNome");
             // string item = box.Text;
 
             foreach (LinkButton button in e.Row.Cells[6].Controls.OfType<LinkButton>())
@@ -910,17 +907,72 @@ public partial class CADASTRAR_FICHA : System.Web.UI.Page
 
     protected void OnRowDeleting(object sender, GridViewDeleteEventArgs e)
     {
-        int index = Convert.ToInt32(e.RowIndex);
-        DataTable dt = ViewState["CurrentTable1"] as DataTable;
-        dt.Rows[index].Delete();
-        ViewState["CurrentTable1"] = dt;
-        SetPreviousData();
-        grvData.DataSource = dt;
-        grvData.DataBind();
-        
+        if (ViewState["CurrentTable1"] != null)
+        {
+            DataTable dt = (DataTable)ViewState["CurrentTable1"];
+            DataRow drCurrentRow = null;
+            int rowIndex = Convert.ToInt32(e.RowIndex);
+            if (dt.Rows.Count > 1)
+            {
+                dt.Rows.Remove(dt.Rows[rowIndex]);
+                drCurrentRow = dt.NewRow();
+                ViewState["CurrentTable1"] = dt;
+                grvData.DataSource = dt;
+                grvData.DataBind();
+
+                for (int i = 0; i < grvData.Rows.Count - 1; i++)
+                {
+                    grvData.Rows[i].Cells[0].Text = Convert.ToString(i + 1);
+                }
+                SetPreviousData();
+            }
+        }
     }
+    protected void grvServIn_OnRowDeleting(object sender, GridViewDeleteEventArgs e)
+    {
+        if (ViewState["CurrentTable2"] != null)
+        {
+            DataTable dt = (DataTable)ViewState["CurrentTable2"];
+            DataRow drCurrentRow = null;
+            int rowIndex = Convert.ToInt32(e.RowIndex);
+            if (dt.Rows.Count > 1)
+            {
+                dt.Rows.Remove(dt.Rows[rowIndex]);
+                drCurrentRow = dt.NewRow();
+                ViewState["CurrentTable2"] = dt;
+                grvServIn.DataSource = dt;
+                grvServIn.DataBind();
 
+                for (int i = 0; i < grvServIn.Rows.Count - 1; i++)
+                {
+                    grvServIn.Rows[i].Cells[0].Text = Convert.ToString(i + 1);
+                }
+                SetPreviousDataServIn();
+            }
+        }
+    }
+    protected void grvServAd_OnRowDeleting(object sender, GridViewDeleteEventArgs e)
+    {
+        if (ViewState["CurrentTable3"] != null)
+        {
+            DataTable dt = (DataTable)ViewState["CurrentTable3"];
+            DataRow drCurrentRow = null;
+            int rowIndex = Convert.ToInt32(e.RowIndex);
+            if (dt.Rows.Count > 1)
+            {
+                dt.Rows.Remove(dt.Rows[rowIndex]);
+                drCurrentRow = dt.NewRow();
+                ViewState["CurrentTable3"] = dt;
+                grvServAd.DataSource = dt;
+                grvServAd.DataBind();
 
-
+                for (int i = 0; i < grvServAd.Rows.Count - 1; i++)
+                {
+                    grvServAd.Rows[i].Cells[0].Text = Convert.ToString(i + 1);
+                }
+                SetPreviousDataServAd();
+            }
+        }
+    }
 }
 
