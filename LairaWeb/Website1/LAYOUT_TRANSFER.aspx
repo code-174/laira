@@ -42,7 +42,7 @@
                 <div class="panel-body">
                     <div class="col-md-12">
                         <h5>
-                            Comunicamos que o traslado dos Srs. será no dia 06/09/2015 , às 13:00:00 . Favor
+                            Comunicamos que o traslado dos Srs. será no dia <asp:TextBox ID="txtData" runat="server" class="form-control">Data</asp:TextBox> , às 13:00:00 . Favor
                             aguardar na recepção do hotel. Em caso de dúvidas ou discordâncias de horários de
                             transfer com relação ao horário do vôo impresso em seu voucher, favor chamar: Horário
                             comercial : (21) 2577-6678 ou 24h : (21) 98304-1000 / (21) 97675-0117

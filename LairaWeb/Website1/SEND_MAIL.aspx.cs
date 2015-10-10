@@ -45,7 +45,7 @@ public partial class SEND_MAIL : System.Web.UI.Page
         var fromAddress = new MailAddress("XXX@XX.XXX", "NOME");
 
         // Read the file and display it line by line.
-        Security x = new Security();
+        Security2 x = new Security2();
         string fromPassword = x.Password;
         var toAddress = new MailAddress(SendTo.Text, SendTo.Text);
 
@@ -87,7 +87,7 @@ public partial class SEND_MAIL : System.Web.UI.Page
 
 }
 
-public class Security
+public class Security2
 {
     private string strPassword = "SENHA"; //
     public string Password

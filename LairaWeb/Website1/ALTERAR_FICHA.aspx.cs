@@ -12,47 +12,78 @@ using System.Collections;
 
 public partial class ALTERAR_FICHA : System.Web.UI.Page
 {
-    protected string strFichaID;
+    //protected string strFichaID;
     protected void Page_Load(object sender, EventArgs e)
     {
-        string strFichaNo = Request.QueryString["FichaNo"];
-        strFichaID = strFichaNo;
         if (!IsPostBack)
         {
-            Titulo.InnerText = "Alterar Ficha Nr." + " " + strFichaNo;
+            string strTipo = Request.QueryString["Tipo"];
+            string strFichaNo = "";
 
-            LoadCombos();
-
-            List<Fichas> l = Fichas.GetFichaByNo(strFichaNo);
-
-
-            foreach (var item in l)
+            if (strTipo == "F")
             {
-                txtDataChegada.Text = l[0].DATA_CHEGADA;
-                txtDataSaida.Text = l[0].DATA_SAIDA;
-                ddlVooChegada.SelectedValue = l[0].VOO_CHEGADA;
-                ddlVooSaida.SelectedValue = l[0].VOO_SAIDA;
-                txtVooHoraChegada.Text = l[0].VOO_CHEGADA_HORA;
-                txtVooHoraSaida.Text = l[0].VOO_SAIDA_HORA;
-                txtAeroportoChegada.Text = l[0].AEROPORTO_CHEGADA;
-                txtAeroportoSaida.Text = l[0].AEROPORTO_SAIDA;
-                txtCodExcursao.Text = l[0].COD_EXCURSAO;
-                ddlAgencia.SelectedValue = l[0].AGENCIA_NO;
-                txtRecibo.Text = l[0].RECIBO_FICHA;
-                ddlHotel.SelectedValue = l[0].HOTEL;
-                txtApartamento.Text = l[0].APTO;
-                txtSaidaHotel.Text = l[0].SAIDA_DO_HOTEL;
-                txtObs.Text = l[0].OBS;
+                strFichaNo = Request.QueryString["Criterio"];                
+            }
+            else
+            {
+                string strCodExc = Request.QueryString["Criterio"];
+                Int64 IDFicha = GetFichaNo(strCodExc);
+                strFichaNo = Convert.ToString(IDFicha);
             }
 
-            GridPAX();
-            GridServIn();
-            GridServAd();
+            InitializePage(strFichaNo);
 
-            LoadGridPaxFirst(strFichaNo);
-            LoadGridServInFirst(strFichaNo);
-            LoadGridServAdFirst(strFichaNo);
+        }
+    }
 
+    void InitializePage(string strFichaNo)
+    {
+        Titulo.InnerText = "Alterar Ficha Nr." + " " + strFichaNo;
+
+        LoadCombos();
+
+        FillTextBoxes(strFichaNo);
+
+        GridPAX();
+        GridServIn();
+        GridServAd();
+
+        LoadGridPaxFirst(strFichaNo);
+        LoadGridServInFirst(strFichaNo);
+        LoadGridServAdFirst(strFichaNo);
+
+    }
+
+    Int64 GetFichaNo(string strCodExc)
+    {
+        Int64 retorno = 0;
+
+        Fichas c = new Fichas();
+        retorno = c.GetFichaNo(strCodExc);
+        return retorno;
+    }
+
+    void FillTextBoxes(string strFichaNo)
+    {
+        List<Fichas> l = Fichas.GetFichaByNo(strFichaNo);
+
+        foreach (var item in l)
+        {
+            txtDataChegada.Text = l[0].DATA_CHEGADA;
+            txtDataSaida.Text = l[0].DATA_SAIDA;
+            ddlVooChegada.SelectedValue = l[0].VOO_CHEGADA;
+            ddlVooSaida.SelectedValue = l[0].VOO_SAIDA;
+            txtVooHoraChegada.Text = l[0].VOO_CHEGADA_HORA;
+            txtVooHoraSaida.Text = l[0].VOO_SAIDA_HORA;
+            txtAeroportoChegada.Text = l[0].AEROPORTO_CHEGADA;
+            txtAeroportoSaida.Text = l[0].AEROPORTO_SAIDA;
+            txtCodExcursao.Text = l[0].COD_EXCURSAO;
+            ddlAgencia.SelectedValue = l[0].AGENCIA_NO;
+            txtRecibo.Text = l[0].RECIBO_FICHA;
+            ddlHotel.SelectedValue = l[0].HOTEL;
+            txtApartamento.Text = l[0].APTO;
+            txtSaidaHotel.Text = l[0].SAIDA_DO_HOTEL;
+            txtObs.Text = l[0].OBS;
         }
     }
 
@@ -201,7 +232,7 @@ public partial class ALTERAR_FICHA : System.Web.UI.Page
                 box5.Text = dt.Rows[i]["Obs"].ToString();
                 box6.ID = "lnkExcluirPAX";
 
-                rowIndex++;                
+                rowIndex++;
             }
         }
 
@@ -352,12 +383,67 @@ public partial class ALTERAR_FICHA : System.Web.UI.Page
 
     protected void ButtonAddServIn_Click(object sender, EventArgs e)
     {
-        AddNewRowToGridServIn();
+        bool ValidTextbox = false;
+        foreach (GridViewRow row in grvServIn.Rows)
+        {
+            TextBox txt = row.FindControl("txtValor") as TextBox;
+            string TextCheck = txt.Text.Trim();
+            decimal Num;
+            bool isNum = decimal.TryParse(TextCheck, out Num);
+
+            if (!string.IsNullOrEmpty(txt.Text) && isNum)
+            {
+                ValidTextbox = true;
+            }
+            else
+            {
+                ValidTextbox = false;            
+                break;
+            }
+        }
+
+        if (ValidTextbox)
+        {
+            AddNewRowToGridServIn();
+        }
+        else
+        {
+            Page.ClientScript.RegisterClientScriptBlock(this.Page.GetType(), "Alerta", "<script language='javascript'>window.alert('Favor preencher o campo Valor');</script>", false);
+        }
+
     }
 
     protected void ButtonAddServAd_Click(object sender, EventArgs e)
     {
-        AddNewRowToGridServAd();
+        bool ValidTextbox = false;
+        foreach (GridViewRow row in grvServAd.Rows)
+        {
+            TextBox txt = row.FindControl("txtValor2") as TextBox;
+            string TextCheck = txt.Text.Trim();
+            decimal Num;
+            bool isNum = decimal.TryParse(TextCheck, out Num);
+
+            if (!string.IsNullOrEmpty(txt.Text) && isNum)
+            {
+                ValidTextbox = true;
+            }
+            else
+            {
+                ValidTextbox = false;
+                break;
+            }
+        }
+
+        if (ValidTextbox)
+        {
+            AddNewRowToGridServAd();
+        }
+        else
+        {
+            Page.ClientScript.RegisterClientScriptBlock(this.Page.GetType(), "Alerta", "<script language='javascript'>window.alert('Favor preencher o campo Valor');</script>", false);
+        }
+
+        
     }
 
     private void AddNewRowToGrid()
@@ -814,6 +900,76 @@ public partial class ALTERAR_FICHA : System.Web.UI.Page
             txtAeroportoSaida.Text = reader.GetString(1);
         }
 
+
+    }
+
+    string getValorServIn(string strLocalNo)
+    {
+        SqlCommand cmd = new SqlCommand();
+        SqlConnection conn = new SqlConnection();
+        conn.ConnectionString = ConfigurationManager.ConnectionStrings["LairaWebDB"].ConnectionString;
+        cmd.Connection = conn;
+        StringBuilder str = new StringBuilder();
+        str.AppendLine(" select PRECO_SERV_INCLUSO from SERV_INCLUSO ");
+        str.AppendLine(" where ID_SERV_INCLUSO = " + strLocalNo);
+        cmd.CommandText = str.ToString();
+        conn.Open();
+        SqlDataReader reader = cmd.ExecuteReader();
+
+        decimal decPreco = 0;
+        while (reader.Read())
+        {
+            decPreco = reader.GetDecimal(0);
+        }
+        string strPreco = Convert.ToString(decPreco);
+        return strPreco;
+    }
+
+    string getValorServAd(string strPasseioNo)
+    {
+        SqlCommand cmd = new SqlCommand();
+        SqlConnection conn = new SqlConnection();
+        conn.ConnectionString = ConfigurationManager.ConnectionStrings["LairaWebDB"].ConnectionString;
+        cmd.Connection = conn;
+        StringBuilder str = new StringBuilder();
+        str.AppendLine(" select PRECO_SERV_ADC from SERV_ADC ");
+        str.AppendLine(" where ID_SERV_ADC = " + strPasseioNo);
+        cmd.CommandText = str.ToString();
+        conn.Open();
+        SqlDataReader reader = cmd.ExecuteReader();
+
+        decimal decPreco = 0;
+        while (reader.Read())
+        {
+            decPreco = reader.GetDecimal(0);
+        }
+        string strPreco = Convert.ToString(decPreco);
+        return strPreco;
+    }
+
+    protected void ddlLocal_Change(object sender, EventArgs e)
+    {
+        DropDownList ddl = (DropDownList)sender;
+        GridViewRow row = (GridViewRow)ddl.Parent.Parent;
+
+        string strLocalNo = ddl.SelectedValue.ToString();
+
+        string strValor = getValorServIn(strLocalNo);
+
+        ((TextBox)row.FindControl("txtValor")).Text = strValor;
+
+    }
+
+    protected void ddlPasseio_Change(object sender, EventArgs e)
+    {
+        DropDownList ddl = (DropDownList)sender;
+        GridViewRow row = (GridViewRow)ddl.NamingContainer;
+
+        string strPasseioNo = ddl.SelectedValue.ToString();
+
+        string strValor = getValorServAd(strPasseioNo);
+
+        ((TextBox)row.FindControl("txtValor2")).Text = strValor;
 
     }
 

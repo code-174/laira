@@ -29,7 +29,7 @@ public class Fichas
     public string RECIBO_FICHA { get; set; }
     public string HOTEL { get; set; }
     public string APTO { get; set; }
-    public string SAIDA_DO_HOTEL { get; set; }    
+    public string SAIDA_DO_HOTEL { get; set; }
     public string OBS { get; set; }
     #endregion
 
@@ -107,6 +107,34 @@ public class Fichas
         str.AppendLine(" select MAX(ID_FICHA) from FICHAS ");
         cmd.CommandText = str.ToString();
         conn.Open();
+        SqlDataReader reader = cmd.ExecuteReader();
+
+        Int64 retorno = 0;
+        while (reader.Read())
+        {
+            retorno = reader.GetInt64(0);
+        }
+
+        return retorno;
+    }
+
+    public Int64 GetFichaNo(string strCodExc)
+    {
+        SqlCommand cmd = new SqlCommand();
+        SqlConnection conn = new SqlConnection();
+        conn.ConnectionString = ConfigurationManager.ConnectionStrings["LairaWebDB"].ConnectionString;
+        cmd.Connection = conn;
+        StringBuilder str = new StringBuilder();
+
+        str.AppendLine(" select (ID_FICHA) from FICHAS ");
+        str.AppendLine(" where COD_EXCURSAO_FICHA = @COD_EXCURSAO_FICHA ");
+
+        cmd.CommandText = str.ToString();
+        cmd.CommandType = CommandType.Text;
+        cmd.Parameters.Add(new SqlParameter("@COD_EXCURSAO_FICHA", SqlDbType.BigInt)).Value = strCodExc;
+
+        conn.Open();
+
         SqlDataReader reader = cmd.ExecuteReader();
 
         Int64 retorno = 0;
@@ -216,6 +244,65 @@ public class Fichas
         cmd = null;
         conn.Close();
         conn.Dispose();
+    }
+
+
+
+    public static List<FichasListagem> GetFichaInfo(string FichaNo)
+    {
+        //agni
+        List<FichasListagem> xList = new List<FichasListagem>();
+
+        SqlCommand cmd = new SqlCommand();
+        SqlConnection conn = new SqlConnection();
+        conn.ConnectionString = ConfigurationManager.ConnectionStrings["LairaWebDB"].ConnectionString;
+        cmd.Connection = conn;
+        StringBuilder str = new StringBuilder();
+
+        str.AppendLine(" select ID_SERV_AD_FICHA, ID_FICHA, HORA, ");
+        str.AppendLine(" ISNULL(NOME_HOTEL, '---') AS HOTEL, APARTAMENTO_FICHA, ");
+        str.AppendLine(" PASSEIO_SERV_ADC, ");
+        str.AppendLine(" dbo.getpax(FICHAS.ID_FICHA) AS NOME_PASSAGEIRO, ");
+        str.AppendLine(" FORMA_DE_PAGAMENTO, ");
+        str.AppendLine(" ISNULL(VOUCHER, '---') AS VOUCHER ");
+        str.AppendLine(" from SERV_AD_FICHA ");
+        str.AppendLine(" inner join FICHAS ");
+        str.AppendLine(" on SERV_AD_FICHA.FICHA_NO = FICHAS.ID_FICHA ");
+        str.AppendLine(" left join SERV_ADC on SERV_AD_FICHA.SERV_AD_NO = SERV_ADC.ID_SERV_ADC ");
+        str.AppendLine(" left join PASSAGEIROS ON FICHAS.ID_FICHA = PASSAGEIROS.FICHA_NO ");
+        str.AppendLine(" left join FORMA_DE_PAGAMENTO on SERV_AD_FICHA.FORMA_PAG_NO = FORMA_DE_PAGAMENTO.ID_FORMA_DE_PAGAMENTO ");
+        str.AppendLine(" left join HOTEIS on FICHAS.HOTEL_FICHA = HOTEIS.ID_HOTEL ");
+        str.AppendLine(" left join OS_ADC on SERV_AD_FICHA.OS_ADC_NO = OS_ADC.ID_OS_ADC ");
+        str.AppendLine(" where ");
+        str.AppendLine(" ID_FICHA  = @ID_FICHA ");
+
+        cmd.CommandText = str.ToString();
+
+        SqlParameter parameter = new SqlParameter();
+        parameter.ParameterName = "@ID_FICHA";
+        parameter.Value = FichaNo;
+        cmd.Parameters.Add(parameter);
+
+        conn.Open();
+
+        SqlDataReader reader = cmd.ExecuteReader();
+
+        while (reader.Read())
+        {
+            FichasListagem FichaListagem = new FichasListagem();
+            FichaListagem.ID_SERV_AD_FICHA = Convert.ToInt64(reader["ID_SERV_AD_FICHA"]);
+            FichaListagem.FICHA_NO = Convert.ToInt64(reader["ID_FICHA"]);
+            FichaListagem.HORA = reader["HORA"].ToString();
+            FichaListagem.HOTEL = reader["HOTEL"].ToString();
+            FichaListagem.APTO = reader["APARTAMENTO_FICHA"].ToString();
+            FichaListagem.PASSEIO = reader["PASSEIO_SERV_ADC"].ToString();
+            FichaListagem.PAX = reader["NOME_PASSAGEIRO"].ToString();
+            FichaListagem.FORMA_PAG = reader["FORMA_DE_PAGAMENTO"].ToString();
+            FichaListagem.VOUCHER = reader["VOUCHER"].ToString();
+            xList.Add(FichaListagem);
+        }
+
+        return xList;
     }
 
 }

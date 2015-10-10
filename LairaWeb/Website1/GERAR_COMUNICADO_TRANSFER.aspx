@@ -47,7 +47,7 @@
             </div>
             <asp:GridView ID="GridView1" class="table table-bordered" runat="server" AutoGenerateColumns="false"
                 GridLines="none" HeaderStyle-CssClass="bg-primary" EmptyDataRowStyle-BackColor="Yellow"
-                EmptyDataText="Nao existem fichas para a Data informada!" DataKeyNames="ID_SERV_AD_FICHA">
+                EmptyDataText="Nao existem fichas para a Data informada!" DataKeyNames="DATA">
                 <Columns>
                     <asp:TemplateField>
                         <ItemTemplate>
@@ -67,6 +67,8 @@
                     <asp:BoundField DataField="OS_NO" HeaderText="OS" />
                 </Columns>
             </asp:GridView>
+            <asp:TextBox ID="EmailSentTo" BorderColor="Transparent" TextMode="MultiLine" runat="server"
+                    Visible="false"></asp:TextBox>
             </form>
         </fieldset>
     </div>

@@ -29,6 +29,41 @@ public class Hoteis
 		// TODO: Add constructor logic here
 		//
 	}
+
+
+    public string GetEmailHotelByFicha (string FichaNo  )
+    {
+        List<Fichas> xList = new List<Fichas>();
+
+        SqlCommand cmd = new SqlCommand();
+        SqlConnection conn = new SqlConnection();
+        conn.ConnectionString = ConfigurationManager.ConnectionStrings["LairaWebDB"].ConnectionString;
+        cmd.Connection = conn;
+        StringBuilder str = new StringBuilder();
+
+        str.AppendLine(" select ISNULL(EMAIL_HOTEL ,'-') as EMAIL_HOTEL ");
+        str.AppendLine(" from FICHAS F INNER JOIN HOTEIS H ON F.HOTEL_FICHA = H.ID_HOTEL ");
+        str.AppendLine(" WHERE ");
+        str.AppendLine(" ID_FICHA  = @ID_FICHA ");
+
+        cmd.CommandText = str.ToString();
+
+        SqlParameter parameter = new SqlParameter();
+        parameter.ParameterName = "@ID_FICHA";
+        parameter.Value = FichaNo;
+        cmd.Parameters.Add(parameter);
+
+        conn.Open();
+
+        SqlDataReader reader = cmd.ExecuteReader();
+         string EMAIL ="";
+        while (reader.Read())
+        {
+           EMAIL = reader["EMAIL_HOTEL"].ToString();
+        }
+
+        return EMAIL;
+    }
     /// <summary>
     /// Retornar Lista de Vendedores
     /// </summary>

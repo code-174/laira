@@ -11,149 +11,149 @@
             <form id="Form1" class="form" runat="server">
             <%--<div class="panel panel-default col-md-10">
                 <div class="panel-body">--%>
-                    <div class="form-group col-md-3">
-                        <label for="txtCodFicha" class="control-label col-md-6">
-                            Código da Ficha</label>
-                        <div class="col-md-6">
-                            <asp:TextBox ID="txtCodFicha" runat="server" class="form-control"></asp:TextBox>
-                        </div>
-                    </div>
-                    <div class="row">
-                    </div>
-                    <div class="form-group col-md-3">
-                        <!--tamanho do text box e do label-->
-                        <label for="txtDataChegada" class="control-label col-md-6">
-                            Data Chegada</label>
-                        <!--tamanho do label-->
-                        <div class="col-md-6">
-                            <!--tamanho do text box-->
-                            <asp:TextBox ID="txtDataChegada" runat="server" class="form-control"></asp:TextBox>
-                        </div>
-                    </div>
-                    <div class="form-group col-md-3">
-                        <label for="txtDataSaida" class="control-label col-md-6">
-                            Data Saída</label>
-                        <div class="col-md-6">
-                            <asp:TextBox ID="txtDataSaida" runat="server" class="form-control"></asp:TextBox>
-                        </div>
-                    </div>
-                    <div class="row">
-                    </div>
-                    <!-- Voo Chegada -->
-                    <div class="form-group col-md-3">
-                        <label for="ddlVooChegada" class="control-label col-md-6">
-                            Voo Chegada</label>
-                        <div class="col-md-6">
-                            <asp:DropDownList ID="ddlVooChegada" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlVooChegada_Change"
-                                class="form-control">
-                            </asp:DropDownList>
-                        </div>
-                    </div>
-                    <!-- Voo Saída -->
-                    <div class="form-group col-md-3">
-                        <label for="ddlVooSaida" class="control-label col-md-6">
-                            Voo Saída</label>
-                        <div class="col-md-6">
-                            <asp:DropDownList ID="ddlVooSaida" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlVooSaida_Change"
-                                class="form-control">
-                            </asp:DropDownList>
-                        </div>
-                    </div>
-                    <div class="row">
-                    </div>
-                    <div class="form-group col-md-3">
-                        <label for="txtVooHoraChegada" class="control-label col-md-6">
-                            Hora Chegada</label>
-                        <div class="col-md-6">
-                            <asp:TextBox ID="txtVooHoraChegada" runat="server" class="form-control"></asp:TextBox>
-                        </div>
-                    </div>
-                    <div class="form-group col-md-3">
-                        <label for="txtVooHoraSaida" class="control-label col-md-6">
-                            Hora Saída</label>
-                        <div class="col-md-6">
-                            <asp:TextBox ID="txtVooHoraSaida" runat="server" class="form-control"></asp:TextBox>
-                        </div>
-                    </div>
-                    <div class="row">
-                    </div>
-                    <div class="form-group col-md-3">
-                        <label for="txtAeroportoChegada" class="control-label col-md-6">
-                            Aer. Chegada</label>
-                        <div class="col-md-6">
-                            <asp:TextBox ID="txtAeroportoChegada" runat="server" class="form-control"></asp:TextBox>
-                        </div>
-                    </div>
-                    <div class="form-group col-md-3">
-                        <label for="txtAeroportoSaida" class="control-label col-md-6">
-                            Aer. Saída</label>
-                        <div class="col-md-6">
-                            <asp:TextBox ID="txtAeroportoSaida" runat="server" class="form-control"></asp:TextBox>
-                        </div>
-                    </div>
-                    <div class="row">
-                    </div>
-                    <div class="form-group col-md-3">
-                        <label for="txtCodExcursao" class="control-label col-md-6">
-                            Cód. Excursão</label>
-                        <div class="col-md-6">
-                            <asp:TextBox ID="txtCodExcursao" runat="server" class="form-control"></asp:TextBox>
-                        </div>
-                    </div>
-                    <div class="form-group col-md-3">
-                        <label for="ddlAgencia" class="control-label col-md-6">
-                            Agência</label>
-                        <div class="col-md-6">
-                            <asp:DropDownList ID="ddlAgencia" runat="server" class="form-control">
-                            </asp:DropDownList>
-                        </div>
-                    </div>
-                    <div class="row">
-                    </div>
-                    <div class="form-group col-md-3">
-                        <label for="txtRecibo" class="control-label col-md-6">
-                            Recibo</label>
-                        <div class="col-md-6">
-                            <asp:TextBox ID="txtRecibo" runat="server" class="form-control"></asp:TextBox>
-                        </div>
-                    </div>
-                    <div class="form-group col-md-3">
-                        <label for="ddlHotel" class="control-label col-md-6">
-                            Hotel</label>
-                        <div class="col-md-6">
-                            <asp:DropDownList ID="ddlHotel" runat="server" class="form-control">
-                            </asp:DropDownList>
-                        </div>
-                    </div>
-                    <div class="row">
-                    </div>
-                    <div class="form-group col-md-3">
-                        <label for="txtApartamento" class="control-label col-md-6">
-                            Apartamento</label>
-                        <div class="col-md-6">
-                            <asp:TextBox ID="txtApartamento" runat="server" class="form-control"></asp:TextBox>
-                        </div>
-                    </div>
-                    <div class="form-group col-md-3">
-                        <label for="txtSaidaHotel" class="control-label col-md-6">
-                            Saída do Hotel</label>
-                        <div class="col-md-6">
-                            <asp:TextBox ID="txtSaidaHotel" runat="server" class="form-control"></asp:TextBox>
-                        </div>
-                    </div>
-                    <div class="row">
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label class="sr-only" for="txtObs">
-                            Observações</label>
-                        <div class="col-md-10 col-md-offset-1">
-                            <asp:TextBox ID="txtObs" runat="server" TextMode="multiline" class="form-control"
-                                placeholder="Observações"></asp:TextBox>
-                        </div>
-                    </div>
-                    <div>
-                    </div>
-              <%--  </div>
+            <div class="form-group col-md-3">
+                <label for="txtCodFicha" class="control-label col-md-6">
+                    Código da Ficha</label>
+                <div class="col-md-6">
+                    <asp:TextBox ID="txtCodFicha" runat="server" class="form-control"></asp:TextBox>
+                </div>
+            </div>
+            <div class="row">
+            </div>
+            <div class="form-group col-md-3">
+                <!--tamanho do text box e do label-->
+                <label for="txtDataChegada" class="control-label col-md-6">
+                    Data Chegada</label>
+                <!--tamanho do label-->
+                <div class="col-md-6">
+                    <!--tamanho do text box-->
+                    <asp:TextBox ID="txtDataChegada" runat="server" class="form-control"></asp:TextBox>
+                </div>
+            </div>
+            <div class="form-group col-md-3">
+                <label for="txtDataSaida" class="control-label col-md-6">
+                    Data Saída</label>
+                <div class="col-md-6">
+                    <asp:TextBox ID="txtDataSaida" runat="server" class="form-control"></asp:TextBox>
+                </div>
+            </div>
+            <div class="row">
+            </div>
+            <!-- Voo Chegada -->
+            <div class="form-group col-md-3">
+                <label for="ddlVooChegada" class="control-label col-md-6">
+                    Voo Chegada</label>
+                <div class="col-md-6">
+                    <asp:DropDownList ID="ddlVooChegada" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlVooChegada_Change"
+                        class="form-control">
+                    </asp:DropDownList>
+                </div>
+            </div>
+            <!-- Voo Saída -->
+            <div class="form-group col-md-3">
+                <label for="ddlVooSaida" class="control-label col-md-6">
+                    Voo Saída</label>
+                <div class="col-md-6">
+                    <asp:DropDownList ID="ddlVooSaida" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlVooSaida_Change"
+                        class="form-control">
+                    </asp:DropDownList>
+                </div>
+            </div>
+            <div class="row">
+            </div>
+            <div class="form-group col-md-3">
+                <label for="txtVooHoraChegada" class="control-label col-md-6">
+                    Hora Chegada</label>
+                <div class="col-md-6">
+                    <asp:TextBox ID="txtVooHoraChegada" runat="server" class="form-control"></asp:TextBox>
+                </div>
+            </div>
+            <div class="form-group col-md-3">
+                <label for="txtVooHoraSaida" class="control-label col-md-6">
+                    Hora Saída</label>
+                <div class="col-md-6">
+                    <asp:TextBox ID="txtVooHoraSaida" runat="server" class="form-control"></asp:TextBox>
+                </div>
+            </div>
+            <div class="row">
+            </div>
+            <div class="form-group col-md-3">
+                <label for="txtAeroportoChegada" class="control-label col-md-6">
+                    Aer. Chegada</label>
+                <div class="col-md-6">
+                    <asp:TextBox ID="txtAeroportoChegada" runat="server" class="form-control"></asp:TextBox>
+                </div>
+            </div>
+            <div class="form-group col-md-3">
+                <label for="txtAeroportoSaida" class="control-label col-md-6">
+                    Aer. Saída</label>
+                <div class="col-md-6">
+                    <asp:TextBox ID="txtAeroportoSaida" runat="server" class="form-control"></asp:TextBox>
+                </div>
+            </div>
+            <div class="row">
+            </div>
+            <div class="form-group col-md-3">
+                <label for="txtCodExcursao" class="control-label col-md-6">
+                    Cód. Excursão</label>
+                <div class="col-md-6">
+                    <asp:TextBox ID="txtCodExcursao" runat="server" class="form-control"></asp:TextBox>
+                </div>
+            </div>
+            <div class="form-group col-md-3">
+                <label for="ddlAgencia" class="control-label col-md-6">
+                    Agência</label>
+                <div class="col-md-6">
+                    <asp:DropDownList ID="ddlAgencia" runat="server" class="form-control">
+                    </asp:DropDownList>
+                </div>
+            </div>
+            <div class="row">
+            </div>
+            <div class="form-group col-md-3">
+                <label for="txtRecibo" class="control-label col-md-6">
+                    Recibo</label>
+                <div class="col-md-6">
+                    <asp:TextBox ID="txtRecibo" runat="server" class="form-control"></asp:TextBox>
+                </div>
+            </div>
+            <div class="form-group col-md-3">
+                <label for="ddlHotel" class="control-label col-md-6">
+                    Hotel</label>
+                <div class="col-md-6">
+                    <asp:DropDownList ID="ddlHotel" runat="server" class="form-control">
+                    </asp:DropDownList>
+                </div>
+            </div>
+            <div class="row">
+            </div>
+            <div class="form-group col-md-3">
+                <label for="txtApartamento" class="control-label col-md-6">
+                    Apartamento</label>
+                <div class="col-md-6">
+                    <asp:TextBox ID="txtApartamento" runat="server" class="form-control"></asp:TextBox>
+                </div>
+            </div>
+            <div class="form-group col-md-3">
+                <label for="txtSaidaHotel" class="control-label col-md-6">
+                    Saída do Hotel</label>
+                <div class="col-md-6">
+                    <asp:TextBox ID="txtSaidaHotel" runat="server" class="form-control"></asp:TextBox>
+                </div>
+            </div>
+            <div class="row">
+            </div>
+            <div class="form-group col-md-6">
+                <label class="sr-only" for="txtObs">
+                    Observações</label>
+                <div class="col-md-10 col-md-offset-1">
+                    <asp:TextBox ID="txtObs" runat="server" TextMode="multiline" class="form-control"
+                        placeholder="Observações"></asp:TextBox>
+                </div>
+            </div>
+            <div>
+            </div>
+            <%--  </div>
             </div>--%>
             <div class="form-group col-md-11">
                 <div class="panel panel-primary">
@@ -226,7 +226,9 @@
                                         <asp:BoundField DataField="#" Visible="false" HeaderText="#" />
                                         <asp:TemplateField HeaderText="Local">
                                             <ItemTemplate>
-                                                <asp:DropDownList ID="ddlLocal" Width="200px" runat="server">
+                                                <asp:DropDownList ID="ddlLocal" runat="server" AutoPostBack="true" 
+                                                    OnSelectedIndexChanged="ddlLocal_Change"
+                                                    Width="200px">
                                                 </asp:DropDownList>
                                             </ItemTemplate>
                                         </asp:TemplateField>
@@ -279,8 +281,10 @@
                                         </asp:TemplateField>
                                         <asp:TemplateField HeaderText="Passeio">
                                             <ItemTemplate>
-                                                <asp:DropDownList ID="ddlPasseio" Width="200px" runat="server">
-                                                </asp:DropDownList>
+                                                <asp:DropDownList ID="ddlPasseio" runat="server" 
+                                                    AutoPostBack="true" OnSelectedIndexChanged="ddlPasseio_Change" 
+                                                    Width="200px">
+                                            </asp:DropDownList>
                                             </ItemTemplate>
                                         </asp:TemplateField>
                                         <asp:TemplateField HeaderText="Vendedor">

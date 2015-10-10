@@ -80,41 +80,39 @@
                 </div>
             </div>
             <!-- /PANEL LOCALIZAR-->
-
-
-
             <div class="btn-group btn-group-justified">
                 <asp:LinkButton ID="lnkSelecionarTodas" runat="server" OnClick="lnkSelecionarTodas_Click"
                     class="btn btn-primary">Selecionar Todas</asp:LinkButton>
-                <asp:LinkButton ID="lnkImprimir" runat="server" OnClientClick="javascript:CallPrint('divPrint');"
+                <asp:LinkButton ID="lnkImprimir" runat="server" OnClick="lnkImprimir_Click"
                     class="btn btn-info">Imprimir</asp:LinkButton>
                 <asp:LinkButton ID="lnkEnviarEmail" runat="server" OnClick="lnkEnviarEmail_Click"
                     class="btn btn-warning">Enviar Por Email</asp:LinkButton>
             </div>
             <div class="form-group">
-            <!-- / BUTTON GROUP-->
-
-            <asp:GridView ID="GridView1" class="table table-bordered" runat="server" AutoGenerateColumns="false"
-                GridLines="none" HeaderStyle-CssClass="bg-primary" EmptyDataRowStyle-BackColor="Yellow"
-                EmptyDataText="Nao existem fichas para a Data informada!" DataKeyNames="ID_SERV_AD_FICHA">
-                <Columns>
-                    <asp:TemplateField>
-                        <ItemTemplate>
-                            <asp:CheckBox ID="chkSelect" runat="server" />
-                        </ItemTemplate>
-                    </asp:TemplateField>
-                    <asp:BoundField DataField="FICHA_NO" HeaderText="FICHA" />
-                    <asp:BoundField DataField="HORA" HeaderText="Hora" />
-                    <asp:BoundField DataField="HOTEL" HeaderText="Hotel" />
-                    <asp:BoundField DataField="APTO" HeaderText="Apto" />
-                    <asp:BoundField DataField="PASSEIO" HeaderText="Passeio" />
-                    <asp:BoundField DataField="QUANT_PAX" HeaderText="Quant. Pax" />
-                    <asp:BoundField DataField="PAX" HeaderText="Pax" />
-                    <asp:BoundField DataField="FORMA_PAG" HeaderText="Forma Pag." />
-                    <asp:BoundField DataField="VOUCHER" HeaderText="Voucher" />
-                </Columns>
-            </asp:GridView>
-            <!-- / GRIDVIEW1-->
+                <!-- / BUTTON GROUP-->
+                <asp:GridView ID="GridView1" class="table table-bordered" runat="server" AutoGenerateColumns="false"
+                    GridLines="none" HeaderStyle-CssClass="bg-primary" EmptyDataRowStyle-BackColor="Yellow"
+                    EmptyDataText="Nao existem fichas para a Data informada!" DataKeyNames="ID_SERV_AD_FICHA">
+                    <Columns>
+                        <asp:TemplateField>
+                            <ItemTemplate>
+                                <asp:CheckBox ID="chkSelect" runat="server" />
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:BoundField DataField="FICHA_NO" HeaderText="FICHA" />
+                        <asp:BoundField DataField="HORA" HeaderText="Hora" />
+                        <asp:BoundField DataField="HOTEL" HeaderText="Hotel" />
+                        <asp:BoundField DataField="APTO" HeaderText="Apto" />
+                        <asp:BoundField DataField="PASSEIO" HeaderText="Passeio" />
+                        <asp:BoundField DataField="QUANT_PAX" HeaderText="Quant. Pax" />
+                        <asp:BoundField DataField="PAX" HeaderText="Pax" />
+                        <asp:BoundField DataField="FORMA_PAG" HeaderText="Forma Pag." />
+                        <asp:BoundField DataField="VOUCHER" HeaderText="Voucher" />
+                    </Columns>
+                </asp:GridView>
+                <asp:TextBox ID="EmailSentTo" BorderColor="Transparent" TextMode="MultiLine" runat="server"
+                    Visible="false"></asp:TextBox>
+                <!-- / GRIDVIEW1-->
             </div>
             </form>
         </fieldset>

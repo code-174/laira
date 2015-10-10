@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true"
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SiteLogon.master" AutoEventWireup="true"
     CodeFile="LAYOUT_COMUNICADO.aspx.cs" Inherits="LAYOUT_COMUNICADO" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="Server">

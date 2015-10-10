@@ -961,7 +961,8 @@ public class FichasListagem
         str.AppendLine(" ID_FICHA, COD_EXCURSAO_FICHA, ");
         str.AppendLine(" dbo.getpax(FICHAS.ID_FICHA) AS NOME_PASSAGEIRO, ");
         str.AppendLine(" ISNULL(NOME_HOTEL, '---') AS HOTEL, ");
-        str.AppendLine(" APARTAMENTO_FICHA, OS_SAIDA, NOME_PRESTADOR ");
+        str.AppendLine(" APARTAMENTO_FICHA, OS_SAIDA, NOME_PRESTADOR, ");
+        str.AppendLine(" ORDEM_SERV.DATA as OS_DATA ");
         str.AppendLine(" from FICHAS ");
         str.AppendLine(" inner join ORDEM_SERV ");
         str.AppendLine(" on FICHAS.OS_SAIDA = ORDEM_SERV.ID_ORDEM_SERV ");
@@ -1031,6 +1032,7 @@ public class FichasListagem
             FichaListagem.APTO = reader["APARTAMENTO_FICHA"].ToString();
             FichaListagem.OS_NO = reader["OS_SAIDA"].ToString();
             FichaListagem.PRESTADOR = reader["NOME_PRESTADOR"].ToString();
+            FichaListagem.DATA = reader["OS_DATA"].ToString();
 
             xList.Add(FichaListagem);
         }

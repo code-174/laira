@@ -106,7 +106,7 @@
                             OBS</label>
                         <div class="col-md-8">
                             <%--<textarea id="txtOBS" runat="server" class="form-control" rows="3"></textarea>--%>
-                            <asp:TextBox ID="txtOBS" runat="server" class="form-control"></asp:TextBox>
+                            <asp:TextBox ID="txtOBS" runat="server" TextMode="multiline" class="form-control"></asp:TextBox>
                         </div>
                     </div>
                 </div>
@@ -126,7 +126,7 @@
                 </Columns>
             </asp:GridView>
             <asp:GridView ID="GridView1" class="table table-bordered" runat="server" AutoGenerateColumns="false"
-                GridLines="none" DataKeyNames="FICHA_NO">
+                GridLines="none" ShowHeader="false" DataKeyNames="FICHA_NO">
                 <Columns>
                     <asp:TemplateField>
                         <ItemTemplate>

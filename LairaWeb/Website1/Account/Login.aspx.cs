@@ -9,14 +9,29 @@ public partial class Account_Login : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-      //  RegisterHyperLink.NavigateUrl = "Register.aspx?ReturnUrl=" + HttpUtility.UrlEncode(Request.QueryString["ReturnUrl"]);
+       // Session["USUARIO_USUARIO"] = "-";
+        //  RegisterHyperLink.NavigateUrl = "Register.aspx?ReturnUrl=" + HttpUtility.UrlEncode(Request.QueryString["ReturnUrl"]);
     }
 
     protected void btnOK_Click(object sender, EventArgs e)
     {
         if (VerificarCampos())
         {
-            Response.Redirect("../MENU_FICHAS.aspx");
+            UsuariosSistema X = new UsuariosSistema();
+            string UsuarioExiste = X.UserExists(UserName.Text.Trim(), Password.Text.Trim());
+
+
+            if (UsuarioExiste != "-")
+            {
+                Session["USUARIO_USUARIO"] = UserName.Text.Trim();
+                Response.Redirect("../MENU_FICHAS.aspx");
+            }
+            else
+            {
+                Session["USUARIO_USUARIO"] = "-";
+                Response.Write("<script type='text/javascript'>alert('Login inexistente!!!');</script>");
+
+            }
         }
 
     }

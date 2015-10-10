@@ -6,6 +6,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="Server">
     <div class="container-fluid">
         <fieldset>
+       
             <legend><strong>Fichas</strong></legend>
             <form id="Form1" class="form col-md-4" runat="server">
             <div class="well">

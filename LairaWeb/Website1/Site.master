@@ -59,7 +59,8 @@
         <li><a href="MENU_ADMINISTRACAO.aspx">Administração</a></li>
 
         <li><a href="Logout.aspx">Sair</a></li>
-      </ul>
+      </ul><br />
+       <asp:Label ID="USUARIO_USUARIO" style="color: White;" runat=server></asp:Label>
     </div>
   </div>
 </div>  

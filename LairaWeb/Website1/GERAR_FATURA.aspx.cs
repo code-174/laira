@@ -14,6 +14,8 @@ using System.Configuration;
 public partial class GERAR_FATURA : System.Web.UI.Page
 {
     public double SumValorUnitario = 0;
+    public decimal ValorFatura = 0;
+    public Int32 QuantPax = 0;
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!IsPostBack)
@@ -37,7 +39,7 @@ public partial class GERAR_FATURA : System.Web.UI.Page
     }    
 
     protected void GridView2_RowDataBound(object sender, GridViewRowEventArgs e)
-    {
+    {        
         if (e.Row.RowType == DataControlRowType.DataRow)
         {
             SumValorUnitario += Convert.ToDouble(DataBinder.Eval(e.Row.DataItem, "PRECO"));

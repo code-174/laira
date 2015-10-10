@@ -582,6 +582,76 @@ public partial class CADASTRAR_FICHA : System.Web.UI.Page
         }
     }
 
+    string getValorServIn(string strLocalNo)
+    {
+        SqlCommand cmd = new SqlCommand();
+        SqlConnection conn = new SqlConnection();
+        conn.ConnectionString = ConfigurationManager.ConnectionStrings["LairaWebDB"].ConnectionString;
+        cmd.Connection = conn;
+        StringBuilder str = new StringBuilder();
+        str.AppendLine(" select PRECO_SERV_INCLUSO from SERV_INCLUSO ");
+        str.AppendLine(" where ID_SERV_INCLUSO = " + strLocalNo);
+        cmd.CommandText = str.ToString();
+        conn.Open();
+        SqlDataReader reader = cmd.ExecuteReader();
+
+        decimal decPreco = 0;
+        while (reader.Read())
+        {
+            decPreco = reader.GetDecimal(0);
+        }
+        string strPreco = Convert.ToString(decPreco);
+        return strPreco;
+    }
+
+    string getValorServAd(string strPasseioNo)
+    {
+        SqlCommand cmd = new SqlCommand();
+        SqlConnection conn = new SqlConnection();
+        conn.ConnectionString = ConfigurationManager.ConnectionStrings["LairaWebDB"].ConnectionString;
+        cmd.Connection = conn;
+        StringBuilder str = new StringBuilder();
+        str.AppendLine(" select PRECO_SERV_ADC from SERV_ADC ");
+        str.AppendLine(" where ID_SERV_ADC = " + strPasseioNo);
+        cmd.CommandText = str.ToString();
+        conn.Open();
+        SqlDataReader reader = cmd.ExecuteReader();
+
+        decimal decPreco = 0;
+        while (reader.Read())
+        {
+            decPreco = reader.GetDecimal(0);
+        }
+        string strPreco = Convert.ToString(decPreco);
+        return strPreco;
+    }
+
+    protected void ddlLocal_Change(object sender, EventArgs e)
+    {
+        DropDownList ddl = (DropDownList)sender;
+        GridViewRow row = (GridViewRow)ddl.Parent.Parent;
+
+        string strLocalNo = ddl.SelectedValue.ToString();
+
+        string strValor = getValorServIn(strLocalNo);
+
+        ((TextBox)row.FindControl("txtValor")).Text = strValor;
+
+    }
+
+    protected void ddlPasseio_Change(object sender, EventArgs e)
+    {
+        DropDownList ddl = (DropDownList)sender;
+        GridViewRow row = (GridViewRow)ddl.NamingContainer;
+
+        string strPasseioNo = ddl.SelectedValue.ToString();
+
+        string strValor = getValorServAd(strPasseioNo);
+
+        ((TextBox)row.FindControl("txtValor2")).Text = strValor;
+
+    }
+
     void LoadCombos()
     {
 
@@ -804,23 +874,6 @@ public partial class CADASTRAR_FICHA : System.Web.UI.Page
         AddNewRowToGrid();
     }
 
-
-
-    protected void lnkExcluirServAd_Click(object sender, EventArgs e)
-    {
-        // TO DO
-    }
-    protected void lnkExcluirServIn_Click(object sender, EventArgs e)
-    {
-        // TO DO
-    }
-    protected void lnkExcluirPAX_Click(object sender, EventArgs e)
-    {
-        // TO DO
-
-
-    }
-
     private void SetPreviousDataServIn()
     {
         int rowIndex = 0;
@@ -883,8 +936,6 @@ public partial class CADASTRAR_FICHA : System.Web.UI.Page
             }
         }
     }
-
-    //
 
     protected void OnRowDataBound(object sender, GridViewRowEventArgs e)
     {

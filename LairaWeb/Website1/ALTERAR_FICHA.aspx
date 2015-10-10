@@ -140,11 +140,15 @@
             </div>
             <div class="row">
             </div>
-            <label class="sr-only" for="txtObsFicha">
-                Observações</label>
-            <div class="col-md-10 col-md-offset-1">
-                <asp:TextBox ID="txtObs" runat="server" class="form-control" Rows="3" placeholder="Observações"></asp:TextBox>
-            </div>
+            <div class="form-group col-md-6">
+                        <label class="sr-only" for="txtObs">
+                            Observações</label>
+                        <div class="col-md-10 col-md-offset-1">
+                            <asp:TextBox ID="txtObs" runat="server" TextMode="multiline" class="form-control"
+                                placeholder="Observações"></asp:TextBox>
+                        </div>
+                    </div>
+            
             <div class="row">
             </div>
             <div class="panel panel-primary">
@@ -215,7 +219,9 @@
                                     <asp:BoundField DataField="#" Visible="false" HeaderText="#" />
                                     <asp:TemplateField HeaderText="Local">
                                         <ItemTemplate>
-                                            <asp:DropDownList ID="ddlLocal" Width="200px" runat="server">
+                                            <asp:DropDownList ID="ddlLocal" runat="server" 
+                                            AutoPostBack="true" OnSelectedIndexChanged="ddlLocal_Change"
+                                            Width="200px">
                                             </asp:DropDownList>
                                         </ItemTemplate>
                                     </asp:TemplateField>
@@ -268,7 +274,9 @@
                                     </asp:TemplateField>
                                     <asp:TemplateField HeaderText="Passeio">
                                         <ItemTemplate>
-                                            <asp:DropDownList ID="ddlPasseio" Width="200px" runat="server">
+                                            <asp:DropDownList ID="ddlPasseio" runat="server" 
+                                            AutoPostBack="true" OnSelectedIndexChanged="ddlPasseio_Change" 
+                                            Width="200px">
                                             </asp:DropDownList>
                                         </ItemTemplate>
                                     </asp:TemplateField>

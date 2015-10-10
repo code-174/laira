@@ -12,6 +12,7 @@ public partial class MENU_FICHAS : System.Web.UI.Page
     {
         if (!IsPostBack)
         {
+           
             //txtDataRelatorio.Text = DateTime.Now.ToString("d", CultureInfo.CreateSpecificCulture("pt-BR"));
             //txtDataFicha.Text = DateTime.Now.ToString("d", CultureInfo.CreateSpecificCulture("pt-BR"));
         }
@@ -37,25 +38,36 @@ public partial class MENU_FICHAS : System.Web.UI.Page
    
     protected void lnkLocalizar_Click(object sender, EventArgs e)
     {
-        if (txtCriterio.Text.Trim() != "0")
+        bool ValidTextbox = false;
+        string TextCheck = txtCriterio.Text.Trim();
+        double Num;
+        bool isNum = double.TryParse(TextCheck, out Num);
+
+        if (!string.IsNullOrEmpty(txtCriterio.Text) && isNum)
+        {
+            ValidTextbox = true;
+        }
+        else
+        {
+            ValidTextbox = false;            
+        }
+
+        if (ValidTextbox)
         {
             if (ddlLocalizar.SelectedValue == "F")
             {
-                // TO DO ALTERAR FICHA POR NUMERO DA FICHA
-                Response.Redirect("ALTERAR_FICHA.aspx?FichaNo=" + txtCriterio.Text);
+                Response.Redirect("ALTERAR_FICHA.aspx?Criterio=" + txtCriterio.Text + "&Tipo=F");
             }
 
             else
             {
-                // TO DO ALTERAR FICHA POR CODIGO DA EXCURSAO
-                //Response.Redirect("LISTAR_FICHAS.aspx?Codigo=6" + "&Data=" + txtChave.Text);
+                Response.Redirect("ALTERAR_FICHA.aspx?Criterio=" + txtCriterio.Text + "&Tipo=C");
             }
         }
         else
         {
-            //MSG: PLEASE INSERT A NUMBER
-        }
-        
+            Page.ClientScript.RegisterClientScriptBlock(this.Page.GetType(), "Alerta", "<script language='javascript'>window.alert('Favor preencher o campo somente com números');</script>", false);
+        }      
 
     }
 
