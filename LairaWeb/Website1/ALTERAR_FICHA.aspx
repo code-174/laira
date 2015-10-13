@@ -141,14 +141,20 @@
             <div class="row">
             </div>
             <div class="form-group col-md-6">
-                        <label class="sr-only" for="txtObs">
-                            Observações</label>
-                        <div class="col-md-10 col-md-offset-1">
-                            <asp:TextBox ID="txtObs" runat="server" TextMode="multiline" class="form-control"
-                                placeholder="Observações"></asp:TextBox>
-                        </div>
-                    </div>
-            
+                <label class="sr-only" for="txtObs">
+                    Observações</label>
+                <div class="col-md-10 col-md-offset-1">
+                    <asp:TextBox ID="txtObs" runat="server" TextMode="multiline" class="form-control"
+                        placeholder="Observações"></asp:TextBox>
+                </div>
+            </div>
+            <div class="button-group col-md-offset-3">
+                <asp:LinkButton ID="lnkSave" class="btn btn-warning" runat="server" OnClick="lnkSave_Click"><span class="glyphicon glyphicon-ok">
+                        </span> Salvar Alterações</asp:LinkButton>
+            </div>
+            <!-- / BUTTON PROCESSAR-->
+
+
             <div class="row">
             </div>
             <div class="panel panel-primary">
@@ -212,16 +218,20 @@
                 <div class="panel-body">
                     <asp:UpdatePanel ID="UpdatePanel2" runat="server">
                         <ContentTemplate>
-                            <asp:GridView ID="grvServIn" runat="server" ShowFooter="true" AutoGenerateColumns="false"
+                            <asp:GridView ID="grvServIn" runat="server" AutoGenerateColumns="false" ShowFooter="true"
                                 class="table table-hover table-bordered" GridLines="None" OnRowDataBound="RowDataBound1"
-                                OnRowDeleting="grvServIn_OnRowDeleting">
+                                OnRowDeleting="grvServIn_RowDeleting" OnRowUpdating="grvServIn_RowUpdating">
                                 <Columns>
-                                    <asp:BoundField DataField="#" Visible="false" HeaderText="#" />
+                                    <%--<asp:BoundField DataField="#" Visible="false" HeaderText="#" />--%>
+                                    <asp:TemplateField HeaderStyle-CssClass="DisplayNone" ItemStyle-CssClass="DisplayNone">
+                                        <ItemTemplate>
+                                            <asp:TextBox ID="txtServInID" runat="server"></asp:TextBox>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
                                     <asp:TemplateField HeaderText="Local">
                                         <ItemTemplate>
-                                            <asp:DropDownList ID="ddlLocal" runat="server" 
-                                            AutoPostBack="true" OnSelectedIndexChanged="ddlLocal_Change"
-                                            Width="200px">
+                                            <asp:DropDownList ID="ddlLocal" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlLocal_Change"
+                                                Width="200px">
                                             </asp:DropDownList>
                                         </ItemTemplate>
                                     </asp:TemplateField>
@@ -238,15 +248,17 @@
                                     </asp:TemplateField>
                                     <asp:TemplateField HeaderText="">
                                         <ItemTemplate>
+                                            <asp:LinkButton ID="lnkUpdateServIn" CommandName="Update" runat="server" class="btn btn-success">
+                                <span class="glyphicon glyphicon-ok"></span>
+                                            </asp:LinkButton>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:TemplateField HeaderText="">
+                                        <ItemTemplate>
                                             <asp:LinkButton ID="lnkExcluirServIn" CommandName="Delete" runat="server" class="btn btn-danger">
                                 <span class="glyphicon glyphicon-remove"></span>
                                             </asp:LinkButton>
                                         </ItemTemplate>
-                                        <FooterStyle HorizontalAlign="Right" />
-                                        <FooterTemplate>
-                                            <asp:LinkButton ID="ButtonAddServIn" runat="server" OnClick="ButtonAddServIn_Click"
-                                                class="btn btn-success">Adicionar Serviço</asp:LinkButton>
-                                        </FooterTemplate>
                                     </asp:TemplateField>
                                 </Columns>
                             </asp:GridView>
@@ -264,9 +276,15 @@
                         <ContentTemplate>
                             <asp:GridView ID="grvServAd" runat="server" ShowFooter="true" AutoGenerateColumns="false"
                                 class="table table-hover table-bordered" GridLines="None" OnRowDataBound="RowDataBound2"
-                                OnRowDeleting="grvServAd_OnRowDeleting">
+                                OnRowDeleting="grvServAd_RowDeleting" 
+                                OnRowUpdating="grvServAd_RowUpdating">
                                 <Columns>
-                                    <asp:BoundField DataField="#" Visible="false" HeaderText="#" />
+                                    <%--<asp:BoundField DataField="#" Visible="false" HeaderText="#" />--%>
+                                    <asp:TemplateField HeaderStyle-CssClass="DisplayNone" ItemStyle-CssClass="DisplayNone">
+                                        <ItemTemplate>
+                                            <asp:TextBox ID="txtServAdID" runat="server"></asp:TextBox>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
                                     <asp:TemplateField HeaderText="Voucher">
                                         <ItemTemplate>
                                             <asp:TextBox ID="txtVoucher" Width="80px" runat="server"></asp:TextBox>
@@ -274,9 +292,8 @@
                                     </asp:TemplateField>
                                     <asp:TemplateField HeaderText="Passeio">
                                         <ItemTemplate>
-                                            <asp:DropDownList ID="ddlPasseio" runat="server" 
-                                            AutoPostBack="true" OnSelectedIndexChanged="ddlPasseio_Change" 
-                                            Width="200px">
+                                            <asp:DropDownList ID="ddlPasseio" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlPasseio_Change"
+                                                Width="200px">
                                             </asp:DropDownList>
                                         </ItemTemplate>
                                     </asp:TemplateField>
@@ -315,15 +332,17 @@
                                     </asp:TemplateField>
                                     <asp:TemplateField HeaderText="">
                                         <ItemTemplate>
+                                            <asp:LinkButton ID="lnkUpdateServAd" CommandName="Update" runat="server" class="btn btn-success">
+                                <span class="glyphicon glyphicon-ok"></span>
+                                            </asp:LinkButton>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:TemplateField HeaderText="">
+                                        <ItemTemplate>
                                             <asp:LinkButton ID="lnkExcluirServAd" CommandName="Delete" runat="server" class="btn btn-danger">
                                 <span class="glyphicon glyphicon-remove"></span>
                                             </asp:LinkButton>
                                         </ItemTemplate>
-                                        <FooterStyle HorizontalAlign="Right" />
-                                        <FooterTemplate>
-                                            <asp:LinkButton ID="ButtonAddServAd" runat="server" OnClick="ButtonAddServAd_Click"
-                                                class="btn btn-success">Adicionar Serviço</asp:LinkButton>
-                                        </FooterTemplate>
                                     </asp:TemplateField>
                                 </Columns>
                             </asp:GridView>
