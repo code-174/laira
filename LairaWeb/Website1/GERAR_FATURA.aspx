@@ -105,7 +105,6 @@
                         <label for="txtOBS" class="control-label col-md-3">
                             OBS</label>
                         <div class="col-md-8">
-                            <%--<textarea id="txtOBS" runat="server" class="form-control" rows="3"></textarea>--%>
                             <asp:TextBox ID="txtOBS" runat="server" TextMode="multiline" class="form-control"></asp:TextBox>
                         </div>
                     </div>
@@ -113,22 +112,66 @@
             </div>
             <!-- /PANEL NAO FATURADOS-->
             <asp:GridView ID="grvQuantidade" runat="server" class="table table-bordered" AutoGenerateColumns="false"
-                GridLines="none" HeaderStyle-CssClass="bg-primary"  DataKeyNames="AGENCIA_NO" OnRowCommand="grvQuantidade_RowCommand">
+                GridLines="none" HeaderStyle-CssClass="bg-primary" DataKeyNames="AGENCIA_NO"
+                OnRowCommand="grvQuantidade_RowCommand">
                 <Columns>
                     <asp:BoundField DataField="NOME_AGENCIA" HeaderText="Agência" />
                     <asp:BoundField DataField="QUANT_FICHA" HeaderText="Total de Serviços" />
                     <asp:TemplateField HeaderText="">
                         <ItemTemplate>
-                            <asp:LinkButton ID="lnkFaturar" CommandName="Faturar" CommandArgument='<%# Container.DataItemIndex %>' class="btn btn-success" runat="server"><span class="glyphicon glyphicon-ok">
+                            <asp:LinkButton ID="lnkFaturar" CommandName="Faturar" CommandArgument='<%# Container.DataItemIndex %>'
+                                class="btn btn-success" runat="server"><span class="glyphicon glyphicon-ok">
                         </span> Gerar Fatura</asp:LinkButton>
                         </ItemTemplate>
                     </asp:TemplateField>
                 </Columns>
             </asp:GridView>
             <asp:GridView ID="GridView1" class="table table-bordered" runat="server" AutoGenerateColumns="false"
-                GridLines="none" ShowHeader="false" DataKeyNames="FICHA_NO">
+                GridLines="none" HeaderStyle-CssClass="bg-primary" DataKeyNames="FICHA_NO, AGENCIA_NO" OnRowDataBound="GridView1_RowDataBound">
                 <Columns>
                     <asp:TemplateField>
+                        <ItemTemplate>
+                            <asp:CheckBox ID="chkSelect" runat="server" />
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                    <asp:BoundField DataField="FICHA_NO" HeaderText="Ficha" />
+                    <asp:BoundField DataField="COD_EXCURSAO" HeaderText="Cód. Excursão" />
+                    <asp:BoundField DataField="VALOR_UNIT" HeaderText="Valor Unit." />
+                    <asp:BoundField DataField="QUANT_PAX" HeaderText="Quant. Pax" />
+                    <asp:TemplateField HeaderText="Valor Total">
+                        <ItemTemplate>
+                            <asp:Label ID="lblValorTotal" runat="server"></asp:Label>
+                        </ItemTemplate>
+                    </asp:TemplateField>                   
+                    <asp:TemplateField>
+                        <ItemTemplate>
+                            <tr>
+                                <td colspan="100%">
+                                    <asp:GridView ID="GridView2" class="table table-hover" runat="server" AutoGenerateColumns="false"
+                                        DataSource='<%# Bind("ServicosInclusos") %>' GridLines="none" OnRowDataBound="GridView2_RowDataBound"
+                                        ShowFooter="true" FooterStyle-BackColor="#eeeeee">
+                                        <Columns>
+                                            <asp:BoundField DataField="SERV_IN" HeaderText="Serviços Inclusos" />
+                                            <asp:BoundField DataField="PRECO" HeaderText="Valor" />
+                                        </Columns>
+                                    </asp:GridView>
+                                </td>
+                            </tr>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                </Columns>
+            </asp:GridView>
+            <div class="col-md-3">
+                <asp:LinkButton ID="lnkConfirmar" class="btn btn-warning" runat="server" OnClick="lnkConfirmar_Click"
+                    Visible="false"><span class="glyphicon glyphicon-ok">
+                        </span> Confirmar</asp:LinkButton>
+            </div>
+            <%--<div class="btn-group btn-group-justified">
+        <asp:LinkButton ID="lnkImprimir" runat="server" OnClientClick="javascript:CallPrint('divPrint');"
+            class="btn btn-info">Imprimir</asp:LinkButton>
+        <asp:LinkButton ID="lnkVoltar" runat="server" OnClick="lnkVoltar_Click" class="btn btn-warning">Voltar</asp:LinkButton>
+    </div>--%>
+            <%--<asp:TemplateField>
                         <ItemTemplate>
                             <tr class="bg-primary">
                                 <th>
@@ -167,48 +210,11 @@
                                 </td>
                                 <td>
                                  <%# Convert.ToDouble(DataBinder.Eval(Container.DataItem, "VALOR_UNIT")) * Convert.ToDouble(DataBinder.Eval(Container.DataItem, "QUANT_PAX"))%>
-                                </td>
+                                </td>                                
                             </tr>
                         </ItemTemplate>
-                    </asp:TemplateField>
-                    <%--<asp:BoundField DataField="ficha_no" HeaderText="ficha" />
-                        <asp:BoundField DataField="cod_excursao" HeaderText="cód. excursão" />
-                        <asp:BoundField DataField="data" HeaderText="data" />
-                        <asp:BoundField DataField="hora" HeaderText="hora" />
-                        <asp:BoundField DataField="aeroporto" HeaderText="aer" />
-                        <asp:BoundField DataField="voo" HeaderText="vôo" />
-                        <asp:BoundField DataField="quant_pax" HeaderText="quant. pax" />
-                        <asp:BoundField DataField="pax" HeaderText="pax" />
-                        <asp:BoundField DataField="hotel" HeaderText="hotel" />
-                        <asp:BoundField DataField="apto" HeaderText="apto" />--%>
-                    <asp:TemplateField>
-                        <ItemTemplate>
-                            <tr>
-                                <td colspan="100%">
-                                    <asp:GridView ID="GridView2" class="table table-hover" runat="server" AutoGenerateColumns="false"
-                                        DataSource='<%# Bind("ServicosInclusos") %>' GridLines="none" OnRowDataBound="GridView2_RowDataBound"
-                                        ShowFooter="true">
-                                        <Columns>
-                                            <asp:BoundField DataField="SERV_IN" HeaderText="Serviços Inclusos" />
-                                            <asp:BoundField DataField="PRECO" HeaderText="Valor" />
-                                        </Columns>
-                                    </asp:GridView>
-                                </td>
-                            </tr>
-                        </ItemTemplate>
-                    </asp:TemplateField>
-                </Columns>
-            </asp:GridView>
-            <div class="col-md-3">
-                <asp:LinkButton ID="lnkConfirmar" class="btn btn-warning" runat="server" OnClick="lnkConfirmar_Click"
-                    Visible="false"><span class="glyphicon glyphicon-ok">
-                        </span> Confirmar</asp:LinkButton>
-            </div>
-            <%--<div class="btn-group btn-group-justified">
-        <asp:LinkButton ID="lnkImprimir" runat="server" OnClientClick="javascript:CallPrint('divPrint');"
-            class="btn btn-info">Imprimir</asp:LinkButton>
-        <asp:LinkButton ID="lnkVoltar" runat="server" OnClick="lnkVoltar_Click" class="btn btn-warning">Voltar</asp:LinkButton>
-    </div>--%>
+                    </asp:TemplateField>--%>
+            <asp:LinkButton ID="lnkVoltar" runat="server" OnClick="lnkVoltar_Click" class="btn btn-warning">Voltar</asp:LinkButton>
             </form>
         </fieldset>
     </div>

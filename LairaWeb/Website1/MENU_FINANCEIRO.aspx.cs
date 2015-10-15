@@ -24,7 +24,26 @@ public partial class MENU_FINANCEIRO : System.Web.UI.Page
     }
     protected void lnkProcessar_Click(object sender, EventArgs e)
     {
-        //Response.Redirect("LISTAR_ORDEM_SERV.aspx?Codigo=5" + "&Data=" + txtChave.Text);
+        if (!string.IsNullOrEmpty(txtDataInicio.Text))
+        {
+            if (ddlSelecione.SelectedValue == "B")
+            {
+                Response.Redirect("FATURA_BAIXAR.aspx?Criterio=" + txtDataInicio.Text + "&Tipo=F");
+            }
+
+            else if (ddlSelecione.SelectedValue == "R")
+            {
+                
+            }
+            else if (ddlSelecione.SelectedValue == "I")
+            {
+                
+            }            
+        }
+        else
+        {
+            Page.ClientScript.RegisterClientScriptBlock(this.Page.GetType(), "Alerta", "<script language='javascript'>window.alert('Favor preencher o campo data');</script>", false);
+        }      
     }
     protected void lnkLocalizar_Click(object sender, EventArgs e)
     {

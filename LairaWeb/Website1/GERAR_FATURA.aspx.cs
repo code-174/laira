@@ -13,9 +13,11 @@ using System.Configuration;
 
 public partial class GERAR_FATURA : System.Web.UI.Page
 {
-    public double SumValorUnitario = 0;
-    public decimal ValorFatura = 0;
-    public Int32 QuantPax = 0;
+    public double SumValorUnitario;
+    public decimal ValorFatura;
+    public Int32 TotalPax;
+    public decimal ValorTotal;
+    public Int64 AgenciaNo;
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!IsPostBack)
@@ -36,10 +38,10 @@ public partial class GERAR_FATURA : System.Web.UI.Page
         ddlAgencia.DataValueField = "ID";
         ddlAgencia.DataSource = details;
         ddlAgencia.DataBind();
-    }    
+    }
 
     protected void GridView2_RowDataBound(object sender, GridViewRowEventArgs e)
-    {        
+    {
         if (e.Row.RowType == DataControlRowType.DataRow)
         {
             SumValorUnitario += Convert.ToDouble(DataBinder.Eval(e.Row.DataItem, "PRECO"));
@@ -78,7 +80,7 @@ public partial class GERAR_FATURA : System.Web.UI.Page
                 grvQuantidade.Visible = false;
                 panDadosAdc.Visible = true;
                 lnkConfirmar.Visible = true;
-                 
+
                 GridView1.DataSource = FichasListagem.FiltroFichasFatura(strDataIni, strDataFin, strAgencia);
                 GridView1.DataBind();
 
@@ -90,45 +92,75 @@ public partial class GERAR_FATURA : System.Web.UI.Page
     protected void lnkConfirmar_Click(object sender, EventArgs e)
     {
         // TO DO VERIFICAR CAMPOS
-        SqlCommand cmd = new SqlCommand();
-        SqlConnection conn = new SqlConnection();
-        conn.ConnectionString = ConfigurationManager.ConnectionStrings["LairaWebDB"].ConnectionString;
-        cmd.Connection = conn;
+        Int64 Agencia = GetCheckedValues();
 
-        StringBuilder str = new StringBuilder();
-        str.AppendLine(" INSERT INTO [FATURAS] ");
-        str.AppendLine(" ([DATA_EMISSAO] ");
-        str.AppendLine(" ,[VENCIMENTO] ");
-        str.AppendLine(" ,[QUANT_PAX] ");
-        str.AppendLine(" ,[VALOR] ");
-        str.AppendLine(" ,[OBS_FATURA] ");
-        str.AppendLine(" )");
-        str.AppendLine(" VALUES ");
-        str.AppendLine(" (@A ");
-        str.AppendLine(" ,@B ");
-        str.AppendLine(" ,@C ");
-        str.AppendLine(" ,@D ");
-        str.AppendLine(" ,@E )");
-        cmd.CommandText = str.ToString();
-        cmd.CommandType = CommandType.Text;
-        cmd.Parameters.Add(new SqlParameter("@A", SqlDbType.Date)).Value = txtDataEmissao.Text.Trim();
-        cmd.Parameters.Add(new SqlParameter("@B", SqlDbType.Date)).Value = txtVencimento.Text.Trim();
-        cmd.Parameters.Add(new SqlParameter("@C", SqlDbType.BigInt)).Value = txtQtdPax.Text.Trim();
-        cmd.Parameters.Add(new SqlParameter("@D", SqlDbType.Money)).Value = txtValorFatura.Text.Trim();
-        cmd.Parameters.Add(new SqlParameter("@E", SqlDbType.NVarChar)).Value = txtOBS.Text.Trim();
-        conn.Open();
-        cmd.ExecuteNonQuery();
-        cmd.Dispose();
-        cmd = null;
-        conn.Close();
-        conn.Dispose();
+        try
+        {
+            SqlCommand cmd = new SqlCommand();
+            SqlConnection conn = new SqlConnection();
+            conn.ConnectionString = ConfigurationManager.ConnectionStrings["LairaWebDB"].ConnectionString;
+            cmd.Connection = conn;
 
-        System.Threading.Thread.Sleep(1000);
+            StringBuilder str = new StringBuilder();
+            str.AppendLine(" INSERT INTO [FATURAS] ");
+            str.AppendLine(" ([DATA_EMISSAO] ");
+            str.AppendLine(" ,[VENCIMENTO] ");
+            str.AppendLine(" ,[QUANT_PAX] ");
+            str.AppendLine(" ,[VALOR] ");
+            str.AppendLine(" ,[OBS_FATURA] ");
+            str.AppendLine(" ,[AGENCIA_NO] ");
+            str.AppendLine(" )");
+            str.AppendLine(" VALUES ");
+            str.AppendLine(" (@A ");
+            str.AppendLine(" ,@B ");
+            str.AppendLine(" ,@C ");
+            str.AppendLine(" ,@D ");
+            str.AppendLine(" ,@E ");
+            str.AppendLine(" ,@F )");
+            cmd.CommandText = str.ToString();
+            cmd.CommandType = CommandType.Text;
+            cmd.Parameters.Add(new SqlParameter("@A", SqlDbType.Date)).Value = txtDataEmissao.Text.Trim();
+            cmd.Parameters.Add(new SqlParameter("@B", SqlDbType.Date)).Value = txtVencimento.Text.Trim();
+            cmd.Parameters.Add(new SqlParameter("@C", SqlDbType.BigInt)).Value = txtQtdPax.Text.Trim();
+            cmd.Parameters.Add(new SqlParameter("@D", SqlDbType.Money)).Value = txtValorFatura.Text.Trim();
+            cmd.Parameters.Add(new SqlParameter("@E", SqlDbType.NVarChar)).Value = txtOBS.Text.Trim();
+            cmd.Parameters.Add(new SqlParameter("@F", SqlDbType.BigInt)).Value = Agencia;
+            conn.Open();
+            cmd.ExecuteNonQuery();
+            cmd.Dispose();
+            cmd = null;
+            conn.Close();
+            conn.Dispose();
 
-        Int64 FATURA_NO = getLastFatura();
+            System.Threading.Thread.Sleep(1000);
 
-        System.Threading.Thread.Sleep(1000);
+            Int64 FATURA_NO = getLastFatura();
 
+            System.Threading.Thread.Sleep(1000);
+
+            // Select the checkboxes from the GridView control
+            for (int i = 0; i < GridView1.Rows.Count; i++)
+            {
+                GridViewRow row = GridView1.Rows[i];
+                bool isChecked = ((CheckBox)row.FindControl("chkSelect")).Checked;
+
+                if (isChecked)
+                {
+                    Int64 FICHA_NO = Convert.ToInt64(GridView1.DataKeys[row.RowIndex].Values[0]);
+                    InserirFaturaNo(FATURA_NO, FICHA_NO);
+                }
+            }
+        }
+        catch (Exception)
+        {
+
+            throw;
+        }
+
+    }
+
+    Int64 GetCheckedValues()
+    {
         // Select the checkboxes from the GridView control
         for (int i = 0; i < GridView1.Rows.Count; i++)
         {
@@ -137,12 +169,23 @@ public partial class GERAR_FATURA : System.Web.UI.Page
 
             if (isChecked)
             {
-                Int64 FICHA_NO = Convert.ToInt64(GridView1.DataKeys[row.RowIndex].Value);
-                InserirFaturaNo(FATURA_NO, FICHA_NO);
+                decimal ValorUnitario = Convert.ToDecimal(GridView1.Rows[i].Cells[3].Text);
+                Int32 QuantPax = Convert.ToInt32(GridView1.Rows[i].Cells[4].Text);
+                ValorTotal = (QuantPax * ValorUnitario);
+                GridView1.Rows[i].Cells[5].Text = ValorTotal.ToString();
+                ValorFatura += ValorTotal;
+                TotalPax += QuantPax;
+                AgenciaNo = Convert.ToInt64(GridView1.DataKeys[row.RowIndex].Values[1].ToString());
             }
         }
+
+        txtValorFatura.Text = ValorFatura.ToString();
+        txtQtdPax.Text = TotalPax.ToString();
+
+        return AgenciaNo;
+
     }
-        
+
     Int64 getLastFatura()
     {
         Int64 retorno = 0;
@@ -159,7 +202,7 @@ public partial class GERAR_FATURA : System.Web.UI.Page
         c.UpdateFaturaFicha(FATURA_NO, FICHA_NO);
     }
 
-     protected void grvQuantidade_RowCommand(object sender, GridViewCommandEventArgs e)
+    protected void grvQuantidade_RowCommand(object sender, GridViewCommandEventArgs e)
     {
         if (e.CommandName == "Faturar")
         {
@@ -178,5 +221,28 @@ public partial class GERAR_FATURA : System.Web.UI.Page
             GridView1.DataSource = FichasListagem.FiltroFichasFatura(strDataIni, strDataFin, strAgencia);
             GridView1.DataBind();
         }
+    }
+
+    protected void GridView1_RowDataBound(object sender, GridViewRowEventArgs e)
+    {
+        if (e.Row.RowType == DataControlRowType.DataRow)
+        {
+            decimal ValorUnitario = Convert.ToDecimal(DataBinder.Eval(e.Row.DataItem, "VALOR_UNIT"));
+            Int32 QuantPax = Convert.ToInt32(DataBinder.Eval(e.Row.DataItem, "QUANT_PAX"));
+            ValorTotal = (QuantPax * ValorUnitario);
+            e.Row.Cells[5].Text = ValorTotal.ToString();
+            ValorFatura += ValorTotal;
+            TotalPax += QuantPax;
+        }
+
+        txtValorFatura.Text = ValorFatura.ToString();
+        txtQtdPax.Text = TotalPax.ToString();
+
+    }
+
+
+    protected void lnkVoltar_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("MENU_FINANCEIRO.aspx");
     }
 }

@@ -34,7 +34,7 @@
                         <asp:LinkButton ID="lnkGerarOS" class="btn btn-success" runat="server" OnClick="lnkGerarOS_Click"><span class="glyphicon glyphicon-ok">
                         </span> Gerar OS</asp:LinkButton>
                     </div>
-                    <!-- / BUTTON PROCESSAR-->
+                    <!-- / BUTTON GERAR OS-->
                 </div>
             </div>
             <!-- /PANEL GERAR-->

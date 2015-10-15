@@ -16,7 +16,7 @@ public class FichasListagem
     public Int64 FICHA_NO { get; set; }
     public Int64 ID_SERV_AD_FICHA { get; set; }
     public Int64 PASSEIO_NO { get; set; }
-    public Int64 AGENCIA_NO { get; set; }
+    public string AGENCIA_NO { get; set; }
     public string COD_EXCURSAO { get; set; }
     public string DATA { get; set; }
     public string HORA { get; set; }
@@ -683,11 +683,10 @@ public class FichasListagem
         cmd.Connection = conn;
         StringBuilder str = new StringBuilder();
 
-        str.AppendLine(" select ID_FICHA, COD_EXCURSAO_FICHA, ");
-        str.AppendLine(" count(ID_PASSAGEIRO) as QUANT_PAX, ");
-        str.AppendLine(" sum(VALOR) as VALOR_UNIT ");
+        str.AppendLine(" select ID_FICHA, COD_EXCURSAO_FICHA, AGENCIA_NO, ");
+        str.AppendLine(" sum(VALOR) as VALOR_UNIT, ");
+        str.AppendLine(" (SELECT COUNT(ID_PASSAGEIRO) AS P FROM PASSAGEIROS WHERE FICHA_NO = ID_FICHA) AS QUANT_PAX ");
         str.AppendLine(" from FICHAS ");
-        str.AppendLine(" LEFT JOIN PASSAGEIROS ON FICHAS.ID_FICHA = PASSAGEIROS.FICHA_NO ");
         str.AppendLine(" LEFT JOIN SERV_IN_FICHA ON FICHAS.ID_FICHA = SERV_IN_FICHA.FICHA_NO ");
         str.AppendLine(" where ");
         str.AppendLine(" FATURA_NO  is null ");
@@ -697,7 +696,7 @@ public class FichasListagem
         }
         
         str.AppendLine(" and AGENCIA_NO = @AGENCIA_NO ");
-        str.AppendLine(" group by ID_FICHA, COD_EXCURSAO_FICHA ");
+        str.AppendLine(" group by ID_FICHA, COD_EXCURSAO_FICHA, AGENCIA_NO ");
 
         cmd.CommandText = str.ToString();
 
@@ -728,6 +727,7 @@ public class FichasListagem
             FichasListagem FichaListagem = new FichasListagem();
             FichaListagem.FICHA_NO = Convert.ToInt64(reader["ID_FICHA"]);
             FichaListagem.COD_EXCURSAO = reader["COD_EXCURSAO_FICHA"].ToString();
+            FichaListagem.AGENCIA_NO = reader["AGENCIA_NO"].ToString();
             FichaListagem.QUANT_PAX = reader["QUANT_PAX"].ToString();
             FichaListagem.VALOR_UNIT = reader["VALOR_UNIT"].ToString();
             xList.Add(FichaListagem);
@@ -765,7 +765,7 @@ public class FichasListagem
         {
             FichasListagem FichaListagem = new FichasListagem();
             FichaListagem.NOME_AGENCIA = reader["NOME_AGENCIA"].ToString();
-            FichaListagem.AGENCIA_NO = Convert.ToInt64(reader["AGENCIA_NO"]);
+            FichaListagem.AGENCIA_NO = reader["AGENCIA_NO"].ToString();
             FichaListagem.QUANT_FICHA = reader["QUANT_FICHA"].ToString();
             xList.Add(FichaListagem);
         }

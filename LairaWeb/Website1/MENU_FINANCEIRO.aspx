@@ -66,12 +66,16 @@
                             <label for="ddlAgencia" class="control-label col-md-3">
                                 Agência</label>
                             <div class="col-md-6">
-                                <asp:DropDownList ID="ddlAgencia" runat="server" class="form-control">
+                                <asp:DropDownList ID="ddlAgencia" runat="server" class="form-control" AppendDataBoundItems="true">
+                                <asp:ListItem Value="0">Todas</asp:ListItem>
                                 </asp:DropDownList>
                             </div>
-                            <asp:LinkButton ID="lnkProcessar" class="btn btn-success btn-sm" runat="server" OnClick="lnkProcessar_Click"><span class="glyphicon glyphicon-arrow-right">
-                        </span></asp:LinkButton>
                         </div>
+                        <div class="button-group col-md-offset-3">
+                            <asp:LinkButton ID="lnkProcessar" class="btn btn-success" runat="server" OnClick="lnkProcessar_Click"><span class="glyphicon glyphicon-ok">
+                        </span> Processar</asp:LinkButton>
+                        </div>
+                        <!-- / BUTTON PROCESSAR-->
                     </div>
                 </div>
                 <div class="panel panel-default">
