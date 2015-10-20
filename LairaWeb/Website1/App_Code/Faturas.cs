@@ -14,6 +14,7 @@ public class Faturas
 {
     #region Propriedades
     public Int64 ID_FATURA { get; set; }
+    public string AGENCIA { get; set; }
     public string DATA_EMISSAO { get; set; }
     public string VENCIMENTO { get; set; }
     public string QUANT_PAX { get; set; }
@@ -52,7 +53,7 @@ public class Faturas
         return retorno;
     }
 
-    public static List<Faturas> GetFaturas(string strTipo, string strData, string strAgencia)
+    public static List<Faturas> GetFaturas(string DataIni, string DataFin, string Tipo, string Agencia)
     {
         List<Faturas> xList = new List<Faturas>();
 
@@ -62,31 +63,52 @@ public class Faturas
         cmd.Connection = conn;
         StringBuilder str = new StringBuilder();
 
+        //DateTime DataOS = Convert.ToDateTime(strData);
+        DateTime DataI = Convert.ToDateTime(DataIni);
+        DateTime DataF = Convert.ToDateTime(DataFin);
+
 
         str.AppendLine(" select ID_FATURA, DATA_EMISSAO, VENCIMENTO, ");
-        str.AppendLine(" QUANT_PAX, VALOR, OBS_FATURA, ");
-        str.AppendLine(" DATA_PG, VALOR_PG ");
-        str.AppendLine(" from FATURAS ");        
+        str.AppendLine(" QUANT_PAX, VALOR, OBS_FATURA, NOME_AGENCIA, ");
+        str.AppendLine(" DATA_PAG, ISNULL(VALOR_PAG, 0) as VALOR_PAG  ");
+        str.AppendLine(" from FATURAS ");
+        str.AppendLine(" LEFT JOIN AGENCIAS ON FATURAS.AGENCIA_NO = AGENCIAS.ID_AGENCIA ");      
         str.AppendLine(" WHERE ");
-        str.AppendLine(" DATA_  = @DATA_CHEGADA_FICHA ");
-        str.AppendLine(" and OS_CHEGADA is not null ");
 
-
-        if (strAgencia != "0")
+        if (Tipo == "V")
         {
-            str.AppendLine(" AND AGENCIA = @AGENCIA ");
+            str.AppendLine(" VENCIMENTO between @DATA_INI and @DATA_FIN ");
         }
 
+        if (Tipo == "E")
+        {
+            str.AppendLine(" DATA_EMISSAO between @DATA_INI and @DATA_FIN ");
+        }
 
-
-
-
+        if (Agencia != "0")
+        {
+            str.AppendLine(" AND AGENCIA_NO = @AGENCIA_NO ");
+        }
+        
         cmd.CommandText = str.ToString();
 
         SqlParameter parameter = new SqlParameter();
-        parameter.ParameterName = "@DATA_CHEGADA_FICHA";
-        parameter.Value = strData;
+        parameter.ParameterName = "@DATA_INI";
+        parameter.Value = DataI;
         cmd.Parameters.Add(parameter);
+
+        SqlParameter parameter2 = new SqlParameter();
+        parameter2.ParameterName = "@DATA_FIN";
+        parameter2.Value = DataF;
+        cmd.Parameters.Add(parameter2);
+
+        if (Agencia != "0")
+        {
+            SqlParameter parameter5 = new SqlParameter();
+            parameter5.ParameterName = "@AGENCIA_NO";
+            parameter5.Value = Agencia;
+            cmd.Parameters.Add(parameter5);
+        }
 
         conn.Open();
 
@@ -96,6 +118,7 @@ public class Faturas
         {
             Faturas Fatura = new Faturas();
             Fatura.ID_FATURA = Convert.ToInt64(reader["ID_FATURA"]);
+            Fatura.AGENCIA = reader["NOME_AGENCIA"].ToString();
             Fatura.DATA_EMISSAO = reader["DATA_EMISSAO"].ToString();
             Fatura.VENCIMENTO = reader["VENCIMENTO"].ToString();
             Fatura.QUANT_PAX = reader["QUANT_PAX"].ToString();
@@ -110,4 +133,5 @@ public class Faturas
 
         return xList;
     }
+    
 }

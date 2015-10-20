@@ -86,7 +86,7 @@
                     <strong>Localizar</strong>
                 </div>
                 <div class="panel-body">
-                    <div class="form-group form-horizontal">
+                    <div class="form-group">
                         <label for="txtOSNo" class="control-label col-md-3">
                             Número</label>
                         <div class="col-md-4">

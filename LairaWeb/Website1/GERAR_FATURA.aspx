@@ -127,7 +127,8 @@
                 </Columns>
             </asp:GridView>
             <asp:GridView ID="GridView1" class="table table-bordered" runat="server" AutoGenerateColumns="false"
-                GridLines="none" HeaderStyle-CssClass="bg-primary" DataKeyNames="FICHA_NO, AGENCIA_NO" OnRowDataBound="GridView1_RowDataBound">
+                GridLines="none" HeaderStyle-CssClass="bg-primary" DataKeyNames="FICHA_NO, AGENCIA_NO"
+                OnRowDataBound="GridView1_RowDataBound">
                 <Columns>
                     <asp:TemplateField>
                         <ItemTemplate>
@@ -142,7 +143,7 @@
                         <ItemTemplate>
                             <asp:Label ID="lblValorTotal" runat="server"></asp:Label>
                         </ItemTemplate>
-                    </asp:TemplateField>                   
+                    </asp:TemplateField>
                     <asp:TemplateField>
                         <ItemTemplate>
                             <tr>
@@ -166,6 +167,29 @@
                     Visible="false"><span class="glyphicon glyphicon-ok">
                         </span> Confirmar</asp:LinkButton>
             </div>
+            <div class="modal fade" id="SaveOk">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title">
+                                Confirmação</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p>
+                                Registro salvo com sucesso.</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">
+                                Fechar</button>
+                        </div>
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+            </div>
+            <!-- /.modal -->
             <%--<div class="btn-group btn-group-justified">
         <asp:LinkButton ID="lnkImprimir" runat="server" OnClientClick="javascript:CallPrint('divPrint');"
             class="btn btn-info">Imprimir</asp:LinkButton>

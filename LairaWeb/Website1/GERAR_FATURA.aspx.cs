@@ -150,6 +150,12 @@ public partial class GERAR_FATURA : System.Web.UI.Page
                     InserirFaturaNo(FATURA_NO, FICHA_NO);
                 }
             }
+
+            //Response.Write("Registro salvo com sucesso.");
+            //Page.ClientScript.RegisterClientScriptBlock(this.Page.GetType(), "Alerta", "<script language='javascript'>window.alert('Registro salvo com sucesso!');</script>", false);
+            //ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal();", true);
+            Page.ClientScript.RegisterClientScriptBlock(this.Page.GetType(), "Pop", "openModal();", true);
+
         }
         catch (Exception)
         {

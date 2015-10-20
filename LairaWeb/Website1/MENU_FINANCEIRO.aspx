@@ -57,8 +57,8 @@
                                 Tipo</label>
                             <div class="col-md-6">
                                 <asp:DropDownList ID="ddlTipo" runat="server" class="form-control">
-                                    <asp:ListItem Value="ven">Vencimento</asp:ListItem>
-                                    <asp:ListItem Value="emi">Emissão</asp:ListItem>
+                                    <asp:ListItem Value="V">Vencimento</asp:ListItem>
+                                    <asp:ListItem Value="E">Emissão</asp:ListItem>
                                 </asp:DropDownList>
                             </div>
                         </div>
@@ -79,21 +79,36 @@
                     </div>
                 </div>
                 <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <strong>Localizar</strong>
-                    </div>
-                    <div class="panel-body">
-                        <div class="form-group">
-                            <label for="txtChave" class="control-label col-md-2">
-                                Número</label>
-                            <div class="col-md-4">
-                                <asp:TextBox ID="txtChave" runat="server" class="form-control"></asp:TextBox>
+                <div class="panel-heading">
+                    <strong>Localizar</strong>
+                </div>
+                <div class="panel-body">
+                 <div class="form-group">
+                            <label for="ddlSelecione2" class="control-label col-md-3">
+                                Selecione</label>
+                            <div class="col-md-6">
+                                <asp:DropDownList ID="ddlSelecione2" runat="server" class="form-control">
+                                    <asp:ListItem Value="B">Baixar</asp:ListItem>
+                                    <asp:ListItem Value="R">Relatórios</asp:ListItem>
+                                    <asp:ListItem Value="I">Imprimir</asp:ListItem>
+                                </asp:DropDownList>
                             </div>
-                            <asp:LinkButton ID="lnkLocalizar" class="btn btn-success btn-sm" runat="server" OnClick="lnkLocalizar_Click"><span class="glyphicon glyphicon-arrow-right">
-                        </span></asp:LinkButton>
+                        </div>
+                    <div class="form-group">
+                        <label for="txtFaturaNo" class="control-label col-md-3">
+                            Número</label>
+                        <div class="col-md-4">
+                            <asp:TextBox ID="txtFaturaNo" runat="server" class="form-control"></asp:TextBox>
                         </div>
                     </div>
+                    <div class="button-group col-md-offset-3">
+                        <asp:LinkButton ID="lnkLocalizar" class="btn btn-success" runat="server" OnClick="lnkLocalizar_Click"><span class="glyphicon glyphicon-ok">
+                        </span> Localizar</asp:LinkButton>
+                    </div>
+                    <!-- / BUTTON PROCESSAR-->
                 </div>
+            </div>
+            <!-- /PANEL LOCALIZAR-->
             </div>
             </form>
         </fieldset>
