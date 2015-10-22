@@ -81,22 +81,24 @@
                 </div>
             </div>
             <!-- /PANEL LOCALIZAR-->
-            <asp:GridView ID="GridView1" class="table table-bordered" runat="server" AutoGenerateColumns="false"
-                GridLines="none" HeaderStyle-CssClass="bg-primary" EmptyDataRowStyle-BackColor="Yellow"
-                EmptyDataText="Nao existem fichas para a Data informada!" 
-                ShowFooter="True" FooterStyle-BackColor="#eeeeee" 
-                onrowdatabound="GridView1_RowDataBound">
-                <Columns>
-                    <asp:BoundField DataField="ID_FATURA" HeaderText="Fatura" />
-                    <asp:BoundField DataField="AGENCIA" HeaderText="Agência" />
-                    <asp:BoundField DataField="DATA_EMISSAO" HeaderText="Emissão" />
-                    <asp:BoundField DataField="VENCIMENTO" HeaderText="Vencimento" />
-                    <asp:BoundField DataField="QUANT_PAX" HeaderText="Quant. Pax" />
-                    <asp:BoundField DataField="VALOR" HeaderText="Valor" />
-                    <asp:BoundField DataField="DATA_PAG" HeaderText="Data Pag." />
-                    <asp:BoundField DataField="VALOR_PAG" HeaderText="Valor Pag." />
-                </Columns>
-            </asp:GridView>
+            <div id="divPrint">
+                <link rel="stylesheet" href="Styles/bootstrap.min.css" type="text/css" media="all" />
+                <asp:GridView ID="GridView1" class="table table-bordered" runat="server" AutoGenerateColumns="false"
+                    GridLines="none" HeaderStyle-CssClass="bg-primary" EmptyDataRowStyle-BackColor="Yellow"
+                    EmptyDataText="Nao existem fichas para a Data informada!" ShowFooter="True" FooterStyle-BackColor="#eeeeee"
+                    OnRowDataBound="GridView1_RowDataBound">
+                    <Columns>
+                        <asp:BoundField DataField="ID_FATURA" HeaderText="Fatura" />
+                        <asp:BoundField DataField="AGENCIA" HeaderText="Agência" />
+                        <asp:BoundField DataField="DATA_EMISSAO" HeaderText="Emissão" />
+                        <asp:BoundField DataField="VENCIMENTO" HeaderText="Vencimento" />
+                        <asp:BoundField DataField="QUANT_PAX" HeaderText="Quant. Pax" />
+                        <asp:BoundField DataField="VALOR" HeaderText="Valor" />
+                        <asp:BoundField DataField="DATA_PAG" HeaderText="Data Pag." />
+                        <asp:BoundField DataField="VALOR_PAG" HeaderText="Valor Pag." />
+                    </Columns>
+                </asp:GridView>
+            </div>
             </form>
         </fieldset>
     </div>

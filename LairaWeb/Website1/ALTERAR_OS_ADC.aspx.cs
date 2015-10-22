@@ -11,22 +11,20 @@ using System.Configuration;
 
 public partial class ALTERAR_OS_ADC : System.Web.UI.Page
 {
-    protected string strOSID;
+    protected string OSNo;
     protected void Page_Load(object sender, EventArgs e)
-    {
-        string strOSNo = Request.QueryString["OSNo"];
-        strOSID = strOSNo;
+    {  
         if (!IsPostBack)
         {
+            string strOSNo = Request.QueryString["OSNo"];
+
             Titulo.InnerText = "Alterar OS (Passeios) Nr." + " " + strOSNo;
 
             LoadCombos();
 
-
             string strTipo = "N";
             List<OrdemServAdc> l = OrdemServAdc.GetOSAdc(strOSNo, strTipo);
-
-            string strTipoOS = "";
+            
             foreach (var item in l)
             {
                 ddlServicoFeitoPor.SelectedValue = l[0].FEITO_POR;
@@ -35,10 +33,17 @@ public partial class ALTERAR_OS_ADC : System.Web.UI.Page
                 ddlGuia.SelectedValue = l[0].GUIA;
             }
 
-            LoadGrid(strOSNo, strTipoOS);
+            LoadGrid(strOSNo);
+
+            ViewState["OSNo"] = strOSNo; 
+        }
+
+        if (ViewState["OSNo"] != null)
+        {
+            OSNo = ViewState["OSNo"].ToString();
         }
     }
-    private void LoadGrid(string strOSNo, string strTipoOS)
+    private void LoadGrid(string strOSNo)
     {
         Int64 ID_OS = Convert.ToInt64(strOSNo);
         GridView1.DataSource = FichasListagem.GetRelatorioFichasOSAdc(ID_OS);
@@ -93,7 +98,7 @@ public partial class ALTERAR_OS_ADC : System.Web.UI.Page
         cmd.Parameters.Add(new SqlParameter("@OBS", SqlDbType.NChar)).Value = txtObs.Text.Trim();
         cmd.Parameters.Add(new SqlParameter("@MOTORISTA_NO", SqlDbType.BigInt)).Value = Convert.ToInt64(ddlMotorista.SelectedValue.ToString());
         cmd.Parameters.Add(new SqlParameter("@GUIA_NO", SqlDbType.BigInt)).Value = Convert.ToInt64(ddlGuia.SelectedValue.ToString());
-        cmd.Parameters.Add(new SqlParameter("@ID_OS_ADC", SqlDbType.BigInt)).Value = Convert.ToInt64(strOSID);
+        cmd.Parameters.Add(new SqlParameter("@ID_OS_ADC", SqlDbType.BigInt)).Value = Convert.ToInt64(OSNo);
 
        
         conn.Open();

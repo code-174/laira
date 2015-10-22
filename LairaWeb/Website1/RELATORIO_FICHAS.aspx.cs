@@ -53,7 +53,11 @@ public partial class RELATORIO_FICHAS : System.Web.UI.Page
     }
     protected void lnkSelectAll_Click(object sender, EventArgs e)
     {
-        // TO DO
+        for (int i = 0; i < GridView1.Rows.Count; i++)
+        {
+            GridViewRow row = GridView1.Rows[i];
+            ((CheckBox)row.FindControl("chkSelect")).Checked = true;
+        }
     }
 
     protected void lnkProcessar_Click(object sender, EventArgs e)

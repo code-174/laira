@@ -77,14 +77,15 @@ public class FichasListagem
             str.AppendLine(" ISNULL(NOME_HOTEL, '---') AS HOTEL, APARTAMENTO_FICHA, ");
             str.AppendLine(" OS_CHEGADA, NOME_PRESTADOR ");
             str.AppendLine(" from FICHAS ");
-            str.AppendLine(" inner join ORDEM_SERV ");
-            str.AppendLine(" on FICHAS.OS_CHEGADA = ORDEM_SERV.ID_ORDEM_SERV ");
+            //str.AppendLine(" inner join ORDEM_SERV ");
+            //str.AppendLine(" on FICHAS.OS_CHEGADA = ORDEM_SERV.ID_ORDEM_SERV ");
+            str.AppendLine(" LEFT JOIN ORDEM_SERV ON FICHAS.OS_CHEGADA = ORDEM_SERV.ID_ORDEM_SERV ");
             str.AppendLine(" LEFT JOIN PRESTADORES ON ORDEM_SERV.FEITO_POR_NO = PRESTADORES.ID_PRESTADOR ");
             str.AppendLine(" LEFT JOIN VOOS ON FICHAS.VOO_CHEGADA_FICHA = VOOS.ID_VOO ");
             str.AppendLine(" LEFT JOIN HOTEIS ON FICHAS.HOTEL_FICHA = HOTEIS.ID_HOTEL ");
             str.AppendLine(" WHERE ");
             str.AppendLine(" DATA_CHEGADA_FICHA  = @DATA_CHEGADA_FICHA ");
-            str.AppendLine(" and OS_CHEGADA is not null ");
+           // str.AppendLine(" and OS_CHEGADA is not null ");
 
             cmd.CommandText = str.ToString();
 
@@ -125,14 +126,15 @@ public class FichasListagem
             str.AppendLine(" ISNULL(NOME_HOTEL, '---') AS HOTEL, APARTAMENTO_FICHA, ");
             str.AppendLine(" OS_SAIDA, NOME_PRESTADOR ");
             str.AppendLine(" from FICHAS ");
-            str.AppendLine(" inner join ORDEM_SERV ");
-            str.AppendLine(" on FICHAS.OS_SAIDA = ORDEM_SERV.ID_ORDEM_SERV ");
+            //str.AppendLine(" inner join ORDEM_SERV ");
+            //str.AppendLine(" on FICHAS.OS_SAIDA = ORDEM_SERV.ID_ORDEM_SERV ");
+            str.AppendLine(" LEFT JOIN ORDEM_SERV ON FICHAS.OS_SAIDA = ORDEM_SERV.ID_ORDEM_SERV ");
             str.AppendLine(" LEFT JOIN PRESTADORES ON ORDEM_SERV.FEITO_POR_NO = PRESTADORES.ID_PRESTADOR ");
             str.AppendLine(" LEFT JOIN VOOS ON FICHAS.VOO_SAIDA_FICHA = VOOS.ID_VOO ");
             str.AppendLine(" LEFT JOIN HOTEIS ON FICHAS.HOTEL_FICHA = HOTEIS.ID_HOTEL ");
             str.AppendLine(" WHERE ");
             str.AppendLine(" DATA_SAIDA_FICHA  = @DATA_SAIDA_FICHA ");
-            str.AppendLine(" and OS_SAIDA is not null ");
+            //str.AppendLine(" and OS_SAIDA is not null ");
 
             cmd.CommandText = str.ToString();
 
@@ -186,13 +188,14 @@ public class FichasListagem
             str.AppendLine(" ISNULL(NOME_HOTEL, '---') AS HOTEL, APARTAMENTO_FICHA, ");
             str.AppendLine(" OS_CHEGADA, NOME_PRESTADOR ");
             str.AppendLine(" from FICHAS ");
-            str.AppendLine(" inner join ORDEM_SERV ");
-            str.AppendLine(" on FICHAS.OS_CHEGADA = ORDEM_SERV.ID_ORDEM_SERV ");
+            //str.AppendLine(" inner join ORDEM_SERV ");
+            //str.AppendLine(" on FICHAS.OS_CHEGADA = ORDEM_SERV.ID_ORDEM_SERV ");
+            str.AppendLine(" LEFT JOIN ORDEM_SERV ON FICHAS.OS_CHEGADA = ORDEM_SERV.ID_ORDEM_SERV ");
             str.AppendLine(" LEFT JOIN PRESTADORES ON ORDEM_SERV.FEITO_POR_NO = PRESTADORES.ID_PRESTADOR ");
             str.AppendLine(" LEFT JOIN VOOS ON FICHAS.VOO_CHEGADA_FICHA = VOOS.ID_VOO ");
             str.AppendLine(" LEFT JOIN HOTEIS ON FICHAS.HOTEL_FICHA = HOTEIS.ID_HOTEL ");
             str.AppendLine(" WHERE ");
-            str.AppendLine(" OS_CHEGADA is not null and ");
+            //str.AppendLine(" OS_CHEGADA is not null and ");
 
             if (strSelected == "F")
             {
@@ -251,13 +254,14 @@ public class FichasListagem
             str.AppendLine(" ISNULL(NOME_HOTEL, '---') AS HOTEL, APARTAMENTO_FICHA, ");
             str.AppendLine(" OS_SAIDA, NOME_PRESTADOR ");
             str.AppendLine(" from FICHAS ");
-            str.AppendLine(" inner join ORDEM_SERV ");
-            str.AppendLine(" on FICHAS.OS_SAIDA = ORDEM_SERV.ID_ORDEM_SERV ");
+            //str.AppendLine(" inner join ORDEM_SERV ");
+            //str.AppendLine(" on FICHAS.OS_SAIDA = ORDEM_SERV.ID_ORDEM_SERV ");
+            str.AppendLine(" LEFT JOIN ORDEM_SERV ON FICHAS.OS_SAIDA = ORDEM_SERV.ID_ORDEM_SERV ");
             str.AppendLine(" LEFT JOIN PRESTADORES ON ORDEM_SERV.FEITO_POR_NO = PRESTADORES.ID_PRESTADOR ");
             str.AppendLine(" LEFT JOIN VOOS ON FICHAS.VOO_SAIDA_FICHA = VOOS.ID_VOO ");
             str.AppendLine(" LEFT JOIN HOTEIS ON FICHAS.HOTEL_FICHA = HOTEIS.ID_HOTEL ");
             str.AppendLine(" WHERE ");
-            str.AppendLine(" OS_SAIDA is not null and ");
+            //str.AppendLine(" OS_SAIDA is not null and ");
 
             if (strSelected == "F")
             {

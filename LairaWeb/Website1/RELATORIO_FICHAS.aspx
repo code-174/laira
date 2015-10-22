@@ -48,49 +48,65 @@
                         </div>
                     </div>
                 </div>
-                <div class="btn-group btn-group-justified">
-                    <asp:LinkButton ID="lnkSelectAll" runat="server" OnClick="lnkSelectAll_Click" class="btn btn-info">Selecionar Todos</asp:LinkButton>
-                    <asp:LinkButton ID="lnkImprimir" runat="server" OnClientClick="javascript:CallPrint('divPrint');"
-                        class="btn btn-primary">Imprimir</asp:LinkButton>
-                    <asp:LinkButton ID="lnkVoltar" runat="server" OnClick="lnkVoltar_Click" class="btn btn-warning">Voltar</asp:LinkButton>
-                </div>
+                <asp:ScriptManager ID="ScriptManager1" runat="server" />
+                <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                    <ContentTemplate>
+                        <div class="form-group">
+                            <div class="btn-group btn-group-justified">
+                                <asp:LinkButton ID="lnkSelectAll" runat="server" OnClick="lnkSelectAll_Click" class="btn btn-info">Selecionar Todos</asp:LinkButton>
+                                <asp:LinkButton ID="lnkImprimir" runat="server" OnClientClick="javascript:CallPrint('divPrint');"
+                                    class="btn btn-primary">Imprimir</asp:LinkButton>
+                                <asp:LinkButton ID="lnkVoltar" runat="server" OnClick="lnkVoltar_Click" class="btn btn-warning">Voltar</asp:LinkButton>
+                            </div>
+                        </div>
+                        <div id="divPrint">
+                            <link rel="stylesheet" href="Styles/bootstrap.min.css" type="text/css" media="all" />
+                            <div class="form-group">
+                                <asp:GridView ID="GridView1" class="table table-bordered" runat="server" AutoGenerateColumns="false"
+                                    OnRowDataBound="GridView1_RowDataBound" GridLines="none" HeaderStyle-CssClass="bg-primary">
+                                    <Columns>
+                                        <asp:TemplateField HeaderStyle-CssClass="bg-primary">
+                                            <ItemTemplate>
+                                                <asp:CheckBox ID="chkSelect" runat="server" />
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:BoundField DataField="HORA" HeaderText="Hora" />
+                                        <asp:BoundField DataField="AEROPORTO" HeaderText="Aer" />
+                                        <asp:BoundField DataField="VOO" HeaderText="Vôo" />
+                                        <asp:BoundField DataField="FICHA_NO" HeaderText="Ficha" />
+                                        <asp:BoundField DataField="COD_EXCURSAO" HeaderText="Cód. Excursão" />
+                                        <asp:BoundField DataField="PAX" HeaderText="Pax" />
+                                        <asp:BoundField DataField="HOTEL" HeaderText="Hotel" />
+                                        <asp:BoundField DataField="PRESTADOR" HeaderText="Realizado Por" />
+                                        <asp:BoundField DataField="OS_NO" HeaderText="Nr. OS" />
+                                        <asp:TemplateField>
+                                            <ItemTemplate>
+                                                <tr>
+                                                    <td colspan="100%">
+                                                        <asp:GridView ID="GridView2" class="table table-hover" runat="server" AutoGenerateColumns="false"
+                                                            DataSource='<%# Bind("ServicosInclusos") %>' GridLines="none">
+                                                            <Columns>
+                                                                <asp:BoundField DataField="SERV_IN" HeaderText="Serviços Inclusos" />
+                                                                <asp:BoundField DataField="PRECO" HeaderText="Valor" />
+                                                                <asp:BoundField DataField="FORMA_PAG" HeaderText="Forma Pag." />
+                                                            </Columns>
+                                                        </asp:GridView>
+                                                    </td>
+                                                </tr>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                    </Columns>
+                                </asp:GridView>
+                            </div>
+                        </div>
+                    </ContentTemplate>
+                </asp:UpdatePanel>
             </div>
-            <div id="divPrint">
-                <link rel="stylesheet" href="Styles/bootstrap.min.css" type="text/css" media="all" />
-                <asp:GridView ID="GridView1" class="table table-bordered" runat="server" AutoGenerateColumns="false"
-                    OnRowDataBound="GridView1_RowDataBound" GridLines="none" HeaderStyle-CssClass="bg-primary">
-                    <Columns>
-                        <asp:TemplateField HeaderStyle-CssClass="bg-primary">
-                            <ItemTemplate>
-                                <asp:CheckBox ID="chkSelect" runat="server" />
-                            </ItemTemplate>
-                        </asp:TemplateField>
-                        <asp:BoundField DataField="HORA" HeaderText="Hora" />
-                        <asp:BoundField DataField="AEROPORTO" HeaderText="Aer" />
-                        <asp:BoundField DataField="VOO" HeaderText="Vôo" />
-                        <asp:BoundField DataField="FICHA_NO" HeaderText="Ficha" />
-                        <asp:BoundField DataField="COD_EXCURSAO" HeaderText="Cód. Excursão" />
-                        <asp:BoundField DataField="PAX" HeaderText="Pax" />
-                        <asp:BoundField DataField="HOTEL" HeaderText="Hotel" />
-                        <asp:BoundField DataField="PRESTADOR" HeaderText="Realizado Por" />
-                        <asp:BoundField DataField="OS_NO" HeaderText="Nr. OS" />
-                        <asp:TemplateField>
-                            <ItemTemplate>
-                                <tr>
-                                    <td colspan="100%">
-                                        <asp:GridView ID="GridView2" class="table table-hover" runat="server" AutoGenerateColumns="false"
-                                            DataSource='<%# Bind("ServicosInclusos") %>' GridLines="none">
-                                            <Columns>
-                                                <asp:BoundField DataField="SERV_IN" HeaderText="Serviços Inclusos" />
-                                                <asp:BoundField DataField="PRECO" HeaderText="Valor" />
-                                                <asp:BoundField DataField="FORMA_PAG" HeaderText="Forma Pag." />
-                                            </Columns>
-                                        </asp:GridView>
-                                    </td>
-                                </tr>
-                            </ItemTemplate>
-                        </asp:TemplateField>
-                        <%--<asp:TemplateField>
+            </form>
+        </fieldset>
+    </div>
+</asp:Content>
+<%--<asp:TemplateField>
                     <ItemTemplate>
                         <tr>
                             <td colspan="100%">
@@ -109,10 +125,3 @@
                         </tr>
                     </ItemTemplate>
                 </asp:TemplateField>--%>
-                    </Columns>
-                </asp:GridView>
-            </div>
-            </form>
-        </fieldset>
-    </div>
-</asp:Content>

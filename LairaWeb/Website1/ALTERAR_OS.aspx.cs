@@ -11,24 +11,24 @@ using System.Configuration;
 
 public partial class ALTERAR_OS : System.Web.UI.Page
 {
-    protected string strOSID;
-    protected string strTipoOS;
+    protected string OSNo;
+    protected string TipoOS;
     protected void Page_Load(object sender, EventArgs e)
-    {
-        string strOSNo = Request.QueryString["OSNo"];
-        strOSID = strOSNo;
+    {        
         if (!IsPostBack)
-        {   
+        {
+            string strOSNo = Request.QueryString["OSNo"];
+            
             Titulo.InnerText = "Alterar OS Nr." + " " + strOSNo;
 
             LoadCombos();
 
             List<OrdemServico> l = OrdemServico.GetOSByNo(strOSNo);
 
-            string TipoOS = "";
+            string strTipoOS = "";
             foreach (var item in l)
             {
-                TipoOS = l[0].TIPO_OS;
+                strTipoOS = l[0].TIPO_OS;
                 ddlServicoFeitoPor.SelectedValue = l[0].FEITO_POR;
                 txtValorServico.Text = l[0].VALOR_SERVICO;
                 txtValorEstacionamento.Text = l[0].VALOR_ESTAC;
@@ -37,10 +37,22 @@ public partial class ALTERAR_OS : System.Web.UI.Page
                 ddlGuia.SelectedValue = l[0].GUIA;
             }
 
-            strTipoOS = TipoOS;
-
             LoadGrid(strOSNo, strTipoOS);
+
+            ViewState["OSNo"] = strOSNo; 
+            ViewState["TipoOS"] = strTipoOS;            
         }
+
+        if (ViewState["OSNo"] != null)
+        {
+            OSNo = ViewState["OSNo"].ToString();
+        }
+
+        if (ViewState["TipoOS"] != null)
+        {
+            TipoOS = ViewState["TipoOS"].ToString();
+        }
+
     }
 
     private void LoadGrid(string strOSNo, string strTipoOS)
@@ -113,7 +125,7 @@ public partial class ALTERAR_OS : System.Web.UI.Page
         cmd.Parameters.Add(new SqlParameter("@OBS_ORDEM_SERV", SqlDbType.NChar)).Value = txtObs.Text.Trim();
         cmd.Parameters.Add(new SqlParameter("@MOTORISTA_NO", SqlDbType.BigInt)).Value = Convert.ToInt64(ddlMotorista.SelectedValue.ToString());
         cmd.Parameters.Add(new SqlParameter("@GUIA_NO", SqlDbType.BigInt)).Value = Convert.ToInt64(ddlGuia.SelectedValue.ToString());
-        cmd.Parameters.Add(new SqlParameter("@ID_ORDEM_SERV", SqlDbType.BigInt)).Value = Convert.ToInt64(strOSID);
+        cmd.Parameters.Add(new SqlParameter("@ID_ORDEM_SERV", SqlDbType.BigInt)).Value = Convert.ToInt64(OSNo);
 
         conn.Open();
         cmd.ExecuteNonQuery();
@@ -132,14 +144,14 @@ public partial class ALTERAR_OS : System.Web.UI.Page
             if (!isChecked)
             {
                 Int64 FICHA_NO = Convert.ToInt64(GridView1.Rows[i].Cells[1].Text);
-                RemoveFichaOS(FICHA_NO, strTipoOS);
+                RemoveFichaOS(FICHA_NO);
             }
         }
     }
 
-    void RemoveFichaOS(Int64 FICHA_NO, string strTipoOS)
+    void RemoveFichaOS(Int64 FICHA_NO)
     {
         Fichas c = new Fichas();
-        c.RemoveFichaOS(FICHA_NO, strTipoOS);
+        c.RemoveFichaOS(FICHA_NO, TipoOS);
     }
 }
